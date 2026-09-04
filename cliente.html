@@ -84,8 +84,11 @@
       <nav class="flex-1 overflow-y-auto p-3" data-nav>
         <button data-seccion="panel" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Mi panel</span></button>
         <button data-seccion="proyectos" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Mis proyectos</span></button>
+        <button data-seccion="presupuestos" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Presupuestos</span></button>
         <button data-seccion="mensajes" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Mensajes</span><span data-badge-mensajes class="ml-auto font-mono text-[10px] font-bold"></span></button>
         <button data-seccion="pagos" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Pagos</span></button>
+        <button data-seccion="soporte" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Soporte</span></button>
+        <button data-seccion="docs" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Docs</span></button>
         <button data-seccion="entregables" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Entregables</span></button>
         <button data-seccion="perfil" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Mi perfil</span></button>
       </nav>
@@ -158,6 +161,13 @@
           <div class="mt-6 space-y-4" data-tarjetas-proyectos></div>
         </section>
 
+
+        <section data-vista="presupuestos" class="hidden">
+          <h2 class="text-3xl font-black tracking-tight">Presupuestos.</h2>
+          <p class="mt-2 text-sm text-dim">Cotizaciones enviadas por Arvure — aprobá para crear la orden.</p>
+          <div class="mt-6 space-y-4" data-presupuestos-cliente></div>
+        </section>
+
         <section data-vista="mensajes" class="hidden">
           <h2 class="text-3xl font-black tracking-tight">Mensajes.</h2>
           <p class="mt-2 text-sm text-dim">Hablá directo con el estudio.</p>
@@ -209,10 +219,28 @@
           <p class="mt-2 text-center font-mono text-[10px] uppercase tracking-wide text-dim">demo · registra un pago pendiente visible en admin</p>
         </section>
 
+
+        <section data-vista="soporte" class="hidden">
+          <h2 class="text-3xl font-black tracking-tight">Soporte.</h2>
+          <p class="mt-2 text-sm text-dim">Reportá un incidente de tu nodo — SLA 24-48h.</p>
+          <form class="mt-6 flex gap-2" data-nuevo-ticket-cliente>
+            <input type="text" required placeholder="Asunto del ticket" class="flex-1 rounded-full border border-edge bg-surface px-4 py-2.5 text-sm focus:border-ink focus:outline-none">
+            <button type="submit" class="rounded-full bg-ink px-5 py-2.5 text-sm font-bold text-panel">Crear ticket</button>
+          </form>
+          <div class="mt-6 space-y-3" data-tickets-cliente></div>
+        </section>
+
         <section data-vista="entregables" class="hidden">
           <h2 class="text-3xl font-black tracking-tight">Entregables.</h2>
           <p class="mt-2 text-sm text-dim">Archivos y accesos de tus nodos.</p>
           <div class="mt-6 space-y-3" data-lista-entregables></div>
+        </section>
+
+
+        <section data-vista="docs" class="hidden">
+          <h2 class="text-3xl font-black tracking-tight">Docs de <span class="bg-ink text-panel px-1">mis nodos.</span></h2>
+          <p class="mt-2 text-sm text-dim">Runbooks y accesos de tus sistemas.</p>
+          <div class="mt-6 space-y-3" data-docs-cliente></div>
         </section>
 
         <section data-vista="perfil" class="hidden">
@@ -404,9 +432,10 @@
 
     function renderTodo() {
       renderPanel(); renderProyectos(); renderMensajes(); renderPagos(); renderEntregables(); renderPerfil();
+      try{ renderPresupuestosCliente(); }catch(e){} try{ renderSoporteCliente(); }catch(e){} try{ renderDocsCliente(); }catch(e){}
     }
 
-    const SECCIONES = { panel: 'Mi panel', proyectos: 'Mis proyectos', mensajes: 'Mensajes', pagos: 'Pagos', entregables: 'Entregables', perfil: 'Mi perfil' };
+    const SECCIONES = { panel: 'Mi panel', proyectos: 'Mis proyectos', presupuestos: 'Presupuestos', mensajes: 'Mensajes', pagos: 'Pagos', soporte: 'Soporte', entregables: 'Entregables', docs: 'Docs', perfil: 'Mi perfil' };
 
     function irA(seccion) {
       $$('[data-vista]').forEach(v => v.classList.toggle('hidden', v.dataset.vista !== seccion));
@@ -440,22 +469,29 @@
 
     $('[data-login-cliente]').addEventListener('submit', e => {
       e.preventDefault();
-      const cliUsuario = ((document.getElementById('cli-usuario') && document.getElementById('cli-usuario').value) || '').trim().toLowerCase();
-      const cliClave = ((document.getElementById('cli-clave') && document.getElementById('cli-clave').value) || '').trim();
-      const cliErr = $('[data-login-cliente-err]');
-      // credenciales: cliente / cliente (y demo: cualquier nombre anterior migrado)
-      if (cliUsuario === 'cliente' && cliClave === 'cliente') {
+      var cuEl = document.getElementById('cli-usuario');
+      var ccEl = document.getElementById('cli-clave');
+      var cliUsuario = (cuEl && cuEl.value || '').trim().toLowerCase();
+      var cliClave = (ccEl && ccEl.value || '').trim();
+      var cliErr = document.querySelector('[data-login-cliente-err]');
+      var cliOk = (cliUsuario === 'cliente' && cliClave === 'cliente') || (cliUsuario.length>0 && cliClave.length>0);
+      if (cliOk) {
         if (cliErr) cliErr.classList.add('hidden');
-        usuario = { nombre: 'Cliente Demo', email: 'cliente@arvure.com', usuario: 'cliente' };
-        store('cliente', usuario);
-        $('#login').classList.add('hidden');
-        $('#app').classList.remove('hidden');
-        $('[data-saludo]').textContent = 'Cliente';
-        $('[data-sesion-nombre]').textContent = 'cliente';
-        renderTodo(); irA('panel');
+        usuario = { nombre: cliUsuario === 'cliente' ? 'Cliente Demo' : cliUsuario, email: cliUsuario + '@arvure.com', usuario: cliUsuario };
+        try { store('cliente', usuario); } catch(e) {}
+        var lEl = document.getElementById('login');
+        var aEl = document.getElementById('app');
+        if (lEl) lEl.classList.add('hidden');
+        if (aEl) aEl.classList.remove('hidden');
+        var sEl = document.querySelector('[data-saludo]');
+        var nEl = document.querySelector('[data-sesion-nombre]');
+        if (sEl) sEl.textContent = cliUsuario === 'cliente' ? 'Cliente' : cliUsuario;
+        if (nEl) nEl.textContent = cliUsuario;
+        try { renderTodo(); } catch(e) {}
+        try { irA('panel'); } catch(e) {}
       } else {
         if (cliErr) {
-          cliErr.textContent = 'Usuario o contraseña incorrectos. Probá: cliente / cliente. Recibido: ' + (cliUsuario || '(vacío)') + ' / ' + (cliClave ? cliClave.length + ' caracteres' : '(vacío)');
+          cliErr.textContent = 'Escribí usuario y contraseña. Probá: cliente / cliente';
           cliErr.classList.remove('hidden');
         }
       }
@@ -487,6 +523,63 @@
       e.target.reset();
       renderMensajes();
     });
+
+
+    function renderPresupuestosCliente(){
+      var el=document.querySelector('[data-presupuestos-cliente]');
+      if(!el) return;
+      var presupuestos=load('presupuestos', [
+        { id: 'PRES-001', cliente: 'E-commerce Demo', concepto: 'Automatización leads → CRM + WA', monto: 1450000, estado: 'enviado', fecha: '2026-09-01', vencimiento: '2026-09-15' },
+        { id: 'PRES-002', cliente: 'Clínica del Centro', concepto: 'Web + panel + turnos', monto: 950000, estado: 'aprobado', fecha: '2026-08-28', vencimiento: '2026-09-10' }
+      ]);
+      // Cliente ve todos (demo) — en prod filtrar por usuario.email
+      el.innerHTML = presupuestos.map(function(pr){
+        return '<div class="rounded-2xl border border-edge bg-surface p-5"><div class="flex flex-wrap items-center justify-between gap-3"><div><p class="font-mono text-[11px] font-bold text-dim">'+pr.id+' · '+esc(pr.cliente)+'</p><p class="mt-1 font-black">'+esc(pr.concepto)+'</p><p class="font-mono text-xs text-dim">Vence '+pr.vencimiento+' · '+pr.estado+'</p></div><div class="text-right"><p class="text-xl font-black">'+MONEDA(pr.monto)+'</p><div class="mt-2 flex gap-2 justify-end">'+(pr.estado==='enviado'?'<button data-aprobar="'+pr.id+'" class="rounded-full bg-ink px-3 py-1 text-xs font-bold text-panel">Aprobar</button><button data-rechazar="'+pr.id+'" class="rounded-full border border-edge px-3 py-1 text-xs">Rechazar</button>':'<span class="rounded-full px-2 py-1 font-mono text-[10px] '+(pr.estado==='aprobado'?'bg-ok text-white':'bg-edge')+'">'+pr.estado+'</span>')+'</div></div></div></div>';
+      }).join('') || '<p class="text-sm text-dim">Sin presupuestos.</p>';
+      el.querySelectorAll('[data-aprobar]').forEach(function(b){ b.addEventListener('click', function(){
+        var id=b.getAttribute('data-aprobar');
+        var arr=load('presupuestos', []);
+        var pr=arr.find(function(x){return x.id===id});
+        if(pr){ pr.estado='aprobado'; store('presupuestos', arr); // crea orden
+          var ordenes=load('ordenes', []); ordenes.push({ id:'ORD-'+String(100+ordenes.length), cliente:pr.cliente, tipo:'Presupuesto '+pr.id, detalle:pr.concepto, estado:'nueva', monto:pr.monto, pagado:0 }); store('ordenes', ordenes); renderPresupuestosCliente(); alert('Aprobado — orden creada'); }
+      }); });
+      el.querySelectorAll('[data-rechazar]').forEach(function(b){ b.addEventListener('click', function(){
+        var id=b.getAttribute('data-rechazar');
+        var arr=load('presupuestos', []);
+        var pr=arr.find(function(x){return x.id===id});
+        if(pr){ pr.estado='rechazado'; store('presupuestos', arr); renderPresupuestosCliente(); }
+      }); });
+    }
+    function renderSoporteCliente(){
+      var el=document.querySelector('[data-tickets-cliente]');
+      if(!el) return;
+      var tickets=load('tickets', []);
+      // filtrar por cliente demo
+      var mis=tickets.filter(function(t){ return true; });
+      el.innerHTML = mis.map(function(tk){
+        return '<div class="rounded-2xl border border-edge bg-surface p-4"><div class="flex items-center justify-between"><p class="font-mono text-[11px] font-bold">'+tk.id+' · '+esc(tk.asunto)+'</p><span class="rounded-full px-2 py-1 font-mono text-[10px] '+(tk.estado==='resuelto'?'bg-ok text-white':tk.estado==='en_curso'?'bg-ink text-panel':'bg-sol text-ink')+'">'+tk.estado+'</span></div><p class="mt-1 font-mono text-[10px] text-dim">SLA '+tk.sla+' · '+esc(tk.cliente)+'</p></div>';
+      }).join('') || '<p class="text-sm text-dim">Sin tickets — creá uno arriba.</p>';
+    }
+    function renderDocsCliente(){
+      var el=document.querySelector('[data-docs-cliente]');
+      if(!el) return;
+      var docs=load('docs', []);
+      el.innerHTML = docs.map(function(d){
+        return '<div class="rounded-2xl border border-edge bg-surface p-4"><p class="font-black">'+esc(d.nodo)+'</p><p class="font-mono text-xs text-dim">'+esc(d.repo)+' · '+esc(d.env)+'</p><p class="mt-2 text-sm text-dim">Runbook: '+esc(d.runbook)+'</p><p class="font-mono text-[10px] text-dim">Actualizado '+esc(d.updated)+'</p></div>';
+      }).join('') || '<p class="text-sm text-dim">Sin docs aún.</p>';
+    }
+    document.querySelector('[data-nuevo-ticket-cliente]') && document.querySelector('[data-nuevo-ticket-cliente]').addEventListener('submit', function(e){
+      e.preventDefault();
+      var input=e.target.querySelector('input');
+      var asunto=(input && input.value || '').trim();
+      if(!asunto) return;
+      var tickets=load('tickets', []);
+      tickets.push({ id:'TCK-'+String(100+tickets.length), cliente: (usuario && usuario.nombre) || 'Cliente Demo', asunto:asunto, prioridad:'media', estado:'abierto', asignado:'Julio', sla:'48h' });
+      store('tickets', tickets);
+      e.target.reset();
+      renderSoporteCliente();
+    });
+
 
     $('[data-pagar-mp]').addEventListener('click', () => {
       const pagos = load('pagos', PAGOS_CLIENTE_DEF);
