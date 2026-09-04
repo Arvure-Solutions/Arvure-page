@@ -103,6 +103,7 @@
         <button data-seccion="blog" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Blog</span><span data-badge-blog class="ml-auto font-mono text-[10px] font-bold"></span></button>
         <button data-seccion="clientes" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Clientes</span></button>
         <button data-seccion="agenda" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Agenda Kanban</span></button>
+        <button data-seccion="tiempos" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Tiempos</span><span data-badge-tiempos class="ml-auto font-mono text-[10px] font-bold"></span></button>
         <button data-seccion="docs" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Docs & Handovers</span></button>
         <button data-seccion="config" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Configuración</span></button>
       </nav>
@@ -471,6 +472,79 @@
           </div>
         </section>
 
+
+
+        <section data-vista="tiempos" class="hidden">
+          <div class="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <h2 class="text-3xl font-black tracking-tight">Tiempos <span class="bg-ink text-panel px-1">por persona.</span></h2>
+              <p class="mt-2 text-sm text-dim">Chelo / Fede / Julio — por nodo y cliente. Start/Stop + carga manual. Métricas de esfuerzo.</p>
+            </div>
+            <div class="flex gap-2">
+              <button class="rounded-full border border-edge bg-surface px-4 py-2 text-sm font-bold hover:border-ink" data-export-tiempos>Exportar CSV</button>
+              <button class="rounded-full bg-ink px-5 py-2.5 text-sm font-bold text-panel" data-nuevo-tiempo>+ Carga manual</button>
+            </div>
+          </div>
+
+          <!-- Selector usuario activo -->
+          <div class="mt-6 flex flex-wrap items-center gap-3 rounded-2xl border border-edge bg-surface p-4">
+            <span class="font-mono text-[11px] font-bold uppercase tracking-wide text-dim">Activo:</span>
+            <div class="flex gap-2" data-tiempos-usuarios>
+              <button data-usuario="Julio" class="rounded-full border border-ink bg-ink px-4 py-2 font-mono text-xs font-bold text-panel">Julio</button>
+              <button data-usuario="Chelo" class="rounded-full border border-edge bg-panel px-4 py-2 font-mono text-xs font-bold text-dim">Chelo</button>
+              <button data-usuario="Fede" class="rounded-full border border-edge bg-panel px-4 py-2 font-mono text-xs font-bold text-dim">Fede</button>
+            </div>
+            <span class="ml-auto font-mono text-xs text-dim">Hoy: <strong class="text-ink" data-tiempos-hoy>—</strong> · Semana: <strong class="text-ink" data-tiempos-semana>—</strong></span>
+          </div>
+
+          <!-- Timer -->
+          <div class="mt-4 grid gap-4 lg:grid-cols-3">
+            <div class="lg:col-span-2 rounded-2xl border border-edge bg-surface p-6">
+              <h3 class="font-black">Timer</h3>
+              <div class="mt-4 grid gap-3 sm:grid-cols-3">
+                <select data-timer-nodo class="rounded-xl border border-edge bg-panel px-3 py-2.5 text-sm focus:border-ink focus:outline-none">
+                  <option value="">Elegí nodo…</option>
+                  <option>Nodo CRM + WA</option>
+                  <option>Web Institucional</option>
+                  <option>App-Super</option>
+                  <option>Scraping</option>
+                  <option>Docs</option>
+                  <option>Reunión</option>
+                </select>
+                <input data-timer-cliente type="text" placeholder="Cliente (opcional)" class="rounded-xl border border-edge bg-panel px-3 py-2.5 text-sm focus:border-ink focus:outline-none">
+                <input data-timer-nota type="text" placeholder="Nota" class="rounded-xl border border-edge bg-panel px-3 py-2.5 text-sm focus:border-ink focus:outline-none">
+              </div>
+              <div class="mt-4 flex gap-3">
+                <button class="flex-1 rounded-full bg-ink px-6 py-3 text-sm font-bold text-panel" data-timer-start>▶ Start</button>
+                <button class="flex-1 rounded-full border border-edge bg-panel px-6 py-3 text-sm font-bold text-dim" data-timer-stop>■ Stop</button>
+              </div>
+              <div class="mt-4 rounded-xl border border-edge bg-panel p-4" data-timer-activo>
+                <p class="font-mono text-[11px] font-bold uppercase tracking-wide text-dim">Activo</p>
+                <p class="mt-1 text-sm text-dim" data-timer-activo-txt>Ninguno — dale Start</p>
+                <p class="mt-1 font-mono text-2xl font-black" data-timer-crono>00:00:00</p>
+              </div>
+            </div>
+            <div class="rounded-2xl border border-edge bg-surface p-6">
+              <h3 class="font-black">Métricas</h3>
+              <div class="mt-4 space-y-3" data-tiempos-metricas></div>
+              <div class="mt-6 rounded-xl border border-edge bg-panel p-4">
+                <p class="font-mono text-[11px] font-bold uppercase tracking-wide text-dim">Embed Toggl / Clockify (opcional)</p>
+                <p class="mt-2 text-xs leading-relaxed text-dim">Si usan Toggl, pegá el <strong class="text-ink">API Token</strong> (Profile → API Token) y sincronizamos. O embebemos el tracker via iframe.</p>
+                <input data-toggl-token type="text" placeholder="API Token Toggl (opcional)" class="mt-3 w-full rounded-xl border border-edge bg-surface px-3 py-2 text-xs focus:border-ink focus:outline-none">
+                <div class="mt-3 flex gap-2">
+                  <button class="rounded-full border border-edge px-3 py-1.5 font-mono text-[11px] font-bold" data-toggl-sync>Sincronizar</button>
+                  <button class="rounded-full border border-edge px-3 py-1.5 font-mono text-[11px]" data-toggl-iframe>Ver Toggl iframe</button>
+                </div>
+                <div class="mt-3 hidden rounded-xl border border-edge bg-white p-2" data-toggl-embed>
+                  <iframe src="https://track.toggl.com/timer" class="h-64 w-full rounded-lg border-0" loading="lazy"></iframe>
+                  <p class="mt-2 font-mono text-[10px] text-dim">Requiere login en Toggl. Si prefieren Clockify: https://clockify.me/tracker</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 overflow-x-auto rounded-2xl border border-edge bg-surface" data-tabla-tiempos></div>
+        </section>
 
         <section data-vista="docs" class="hidden">
           <div class="flex flex-wrap items-end justify-between gap-4">
@@ -1207,10 +1281,10 @@
 
     function renderTodo() {
       renderOrdenes(); renderPagos(); renderClientes(); renderHilos(); renderKPIs(); renderGrafico(); renderEntregas(); renderCatalogo(); renderBlog(); renderSuscriptores();
-      try{ renderPresupuestos(); }catch(e){} try{ renderFacturacion(); }catch(e){} try{ renderSoporte(); }catch(e){} try{ renderDocs(); }catch(e){} try{ renderKanban(); }catch(e){}
+      try{ renderPresupuestos(); }catch(e){} try{ renderFacturacion(); }catch(e){} try{ renderSoporte(); }catch(e){} try{ renderDocs(); }catch(e){} try{ renderKanban(); }catch(e){} try{ renderTiempos(); }catch(e){}
     }
 
-    const SECCIONES = { dashboard: 'Dashboard', contenido: 'Contenido modular', catalogo: 'Catálogo de soluciones', importar: 'Importador masivo', ordenes: 'Órdenes de trabajo', presupuestos: 'Presupuestos', pagos: 'Pagos', facturacion: 'Facturación', mensajes: 'Mensajes', soporte: 'Soporte', blog: 'Blog', clientes: 'Clientes', agenda: 'Agenda Kanban', docs: 'Docs & Handovers', config: 'Configuración' };
+    const SECCIONES = { dashboard: 'Dashboard', contenido: 'Contenido modular', catalogo: 'Catálogo de soluciones', importar: 'Importador masivo', ordenes: 'Órdenes de trabajo', presupuestos: 'Presupuestos', pagos: 'Pagos', facturacion: 'Facturación', mensajes: 'Mensajes', soporte: 'Soporte', blog: 'Blog', clientes: 'Clientes', agenda: 'Agenda Kanban', tiempos: 'Tiempos', docs: 'Docs & Handovers', config: 'Configuración' };
 
     function irA(seccion) {
       $$('[data-vista]').forEach(v => v.classList.toggle('hidden', v.dataset.vista !== seccion));
@@ -1680,6 +1754,140 @@
       var csv='id,cliente,monto,tipo,cae,vencimiento,estado\n'+facturas.map(function(f){return f.id+','+f.cliente+','+f.monto+','+f.tipo+','+f.cae+','+f.vencimiento+','+f.estado}).join('\n');
       var blob=new Blob([csv],{type:'text/csv'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='facturas.csv'; a.click(); URL.revokeObjectURL(a.href);
     });
+
+
+
+    // === TIEMPOS POR PERSONA ===
+    var TIEMPOS_DEF = [
+      { id: 'TM-001', usuario: 'Julio', nodo: 'Web Institucional', cliente: 'Clínica del Centro', inicio: Date.now()-2*3600000, fin: Date.now()-1*3600000, duracionMin: 60, fecha: new Date().toISOString().slice(0,10), nota: 'Home + casos' },
+      { id: 'TM-002', usuario: 'Chelo', nodo: 'Nodo CRM + WA', cliente: 'E-commerce Demo', inicio: Date.now()-5*3600000, fin: Date.now()-3*3600000, duracionMin: 120, fecha: new Date().toISOString().slice(0,10), nota: 'WAHA + Supabase' },
+      { id: 'TM-003', usuario: 'Fede', nodo: 'App-Super', cliente: 'Mercado Norte', inicio: Date.now()-8*3600000, fin: Date.now()-7*3600000, duracionMin: 45, fecha: new Date().toISOString().slice(0,10), nota: 'Scraping' }
+    ];
+    var tiempos = load('tiempos', TIEMPOS_DEF);
+    var usuarioActivo = load('tiempos_usuario_activo', 'Julio');
+    var timerActivo = load('timer_activo', null);
+    var timerInterval = null;
+
+    function fmtHoras(min){ var h=Math.floor(min/60); var m=min%60; return h+'h '+(m<10?'0':'')+m+'m'; }
+    function fmtCrono(ms){ var s=Math.floor(ms/1000); var h=Math.floor(s/3600); s%=3600; var m=Math.floor(s/60); s%=60; return String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0'); }
+
+    function renderTiempos(){
+      var elTabla=document.querySelector('[data-tabla-tiempos]');
+      if(!elTabla) return;
+      // usuario activo UI
+      document.querySelectorAll('[data-tiempos-usuarios] button').forEach(function(b){
+        var u=b.getAttribute('data-usuario');
+        var activo=u===usuarioActivo;
+        b.className = activo ? 'rounded-full border border-ink bg-ink px-4 py-2 font-mono text-xs font-bold text-panel' : 'rounded-full border border-edge bg-panel px-4 py-2 font-mono text-xs font-bold text-dim';
+      });
+      // hoy/semana
+      var hoy=new Date().toISOString().slice(0,10);
+      var hoyMin=tiempos.filter(function(x){return x.fecha===hoy}).reduce(function(a,x){return a+x.duracionMin},0);
+      var semanaMin=tiempos.reduce(function(a,x){return a+x.duracionMin},0);
+      var elHoy=document.querySelector('[data-tiempos-hoy]'); if(elHoy) elHoy.textContent=fmtHoras(hoyMin);
+      var elSem=document.querySelector('[data-tiempos-semana]'); if(elSem) elSem.textContent=fmtHoras(semanaMin);
+      // métricas por persona
+      var porUsuario={ Julio:0, Chelo:0, Fede:0 };
+      tiempos.forEach(function(x){ if(porUsuario[x.usuario]!=null) porUsuario[x.usuario]+=x.duracionMin; else porUsuario[x.usuario]=(porUsuario[x.usuario]||0)+x.duracionMin; });
+      var total=Object.values(porUsuario).reduce(function(a,b){return a+b},0)||1;
+      var metEl=document.querySelector('[data-tiempos-metricas]');
+      if(metEl){
+        metEl.innerHTML = Object.keys(porUsuario).map(function(u){
+          var min=porUsuario[u];
+          var pct=Math.round(min/total*100);
+          return '<div><div class="flex justify-between font-mono text-[11px]"><span class="font-bold">'+u+'</span><span class="text-dim">'+fmtHoras(min)+' · '+pct+'%</span></div><div class="mt-1 h-2 w-full rounded-full bg-edge"><div class="h-2 rounded-full bg-ink" style="width:'+pct+'%"></div></div></div>';
+        }).join('');
+      }
+      // tabla
+      elTabla.innerHTML='<table class="w-full text-sm"><thead><tr class="text-left font-mono text-[10px] font-bold uppercase tracking-wide text-dim"><th class="px-5 py-3">Fecha</th><th class="px-5 py-3">Usuario</th><th class="px-5 py-3">Nodo</th><th class="px-5 py-3">Cliente</th><th class="px-5 py-3">Duración</th><th class="px-5 py-3">Nota</th><th class="px-5 py-3"></th></tr></thead><tbody>'+
+        tiempos.slice().reverse().map(function(r){
+          return '<tr class="border-t border-edge"><td class="px-5 py-3 font-mono text-xs">'+r.fecha+'</td><td class="px-5 py-3"><span class="rounded-full border border-edge px-2 py-1 font-mono text-[10px] font-bold">'+esc(r.usuario)+'</span></td><td class="px-5 py-3 font-bold">'+esc(r.nodo)+'</td><td class="px-5 py-3 text-dim">'+esc(r.cliente||'-')+'</td><td class="px-5 py-3 font-mono text-xs font-bold">'+fmtHoras(r.duracionMin)+'</td><td class="px-5 py-3 text-xs text-dim">'+esc(r.nota||'')+'</td><td class="px-5 py-3"><button data-borrar-tiempo="'+r.id+'" class="font-mono text-[10px] text-play">×</button></td></tr>';
+        }).join('')+'</tbody></table>';
+      elTabla.querySelectorAll('[data-borrar-tiempo]').forEach(function(b){
+        b.addEventListener('click', function(){
+          var id=b.getAttribute('data-borrar-tiempo');
+          tiempos=tiempos.filter(function(x){return x.id!==id});
+          store('tiempos', tiempos);
+          renderTiempos();
+          try{ renderKPIs(); }catch(e){}
+        });
+      });
+      // badge
+      var badge=document.querySelector('[data-badge-tiempos]');
+      if(badge) badge.textContent = tiempos.length ? tiempos.length : '';
+      // timer activo UI
+      var activoTxt=document.querySelector('[data-timer-activo-txt]');
+      var cronoEl=document.querySelector('[data-timer-crono]');
+      if(timerActivo){
+        if(activoTxt) activoTxt.textContent = timerActivo.usuario + ' · ' + timerActivo.nodo + (timerActivo.cliente ? ' · '+timerActivo.cliente : '');
+        if(timerInterval) clearInterval(timerInterval);
+        timerInterval=setInterval(function(){
+          if(!timerActivo || !cronoEl) return;
+          cronoEl.textContent = fmtCrono(Date.now()-timerActivo.inicio);
+        }, 1000);
+      } else {
+        if(activoTxt) activoTxt.textContent='Ninguno — dale Start';
+        if(cronoEl) cronoEl.textContent='00:00:00';
+        if(timerInterval) clearInterval(timerInterval);
+      }
+    }
+    document.querySelectorAll('[data-tiempos-usuarios] button').forEach(function(b){
+      b.addEventListener('click', function(){
+        usuarioActivo=b.getAttribute('data-usuario');
+        store('tiempos_usuario_activo', usuarioActivo);
+        renderTiempos();
+      });
+    });
+    document.querySelector('[data-timer-start]') && document.querySelector('[data-timer-start]').addEventListener('click', function(){
+      if(timerActivo){ alert('Ya hay un timer activo — dale Stop primero'); return; }
+      var nodoEl=document.querySelector('[data-timer-nodo]');
+      var cliEl=document.querySelector('[data-timer-cliente]');
+      var notaEl=document.querySelector('[data-timer-nota]');
+      var nodo=nodoEl && nodoEl.value || '';
+      if(!nodo){ alert('Elegí un nodo'); return; }
+      var cliente=cliEl && cliEl.value || '';
+      var nota=notaEl && notaEl.value || '';
+      timerActivo={ id:'TM-'+String(100+tiempos.length), usuario: usuarioActivo, nodo:nodo, cliente:cliente, nota:nota, inicio: Date.now(), fecha: new Date().toISOString().slice(0,10) };
+      store('timer_activo', timerActivo);
+      renderTiempos();
+    });
+    document.querySelector('[data-timer-stop]') && document.querySelector('[data-timer-stop]').addEventListener('click', function(){
+      if(!timerActivo) return;
+      var fin=Date.now();
+      var durMin=Math.max(1, Math.round((fin - timerActivo.inicio)/60000));
+      tiempos.push({ id: timerActivo.id, usuario: timerActivo.usuario, nodo: timerActivo.nodo, cliente: timerActivo.cliente, inicio: timerActivo.inicio, fin: fin, duracionMin: durMin, fecha: timerActivo.fecha, nota: timerActivo.nota });
+      store('tiempos', tiempos);
+      timerActivo=null;
+      store('timer_activo', null);
+      var notaEl=document.querySelector('[data-timer-nota]'); if(notaEl) notaEl.value='';
+      renderTiempos();
+      try{ renderKPIs(); }catch(e){}
+    });
+    document.querySelector('[data-nuevo-tiempo]') && document.querySelector('[data-nuevo-tiempo]').addEventListener('click', function(){
+      var nodo=prompt('Nodo'); if(!nodo) return;
+      var min=parseInt(prompt('Minutos','60')||'0');
+      if(!min) return;
+      var cliente=prompt('Cliente','')||'';
+      tiempos.push({ id:'TM-'+String(100+tiempos.length), usuario: usuarioActivo, nodo:nodo, cliente:cliente, inicio: Date.now()-min*60000, fin: Date.now(), duracionMin: min, fecha: new Date().toISOString().slice(0,10), nota: '' });
+      store('tiempos', tiempos);
+      renderTiempos();
+    });
+    document.querySelector('[data-export-tiempos]') && document.querySelector('[data-export-tiempos]').addEventListener('click', function(){
+      var csv='id,usuario,nodo,cliente,duracionMin,fecha,nota\n'+tiempos.map(function(r){return r.id+','+r.usuario+','+r.nodo+','+r.cliente+','+r.duracionMin+','+r.fecha+','+(r.nota||'')}).join('\n');
+      var blob=new Blob([csv],{type:'text/csv'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='tiempos.csv'; a.click(); URL.revokeObjectURL(a.href);
+    });
+    document.querySelector('[data-toggl-iframe]') && document.querySelector('[data-toggl-iframe]').addEventListener('click', function(){
+      var emb=document.querySelector('[data-toggl-embed]');
+      if(emb) emb.classList.toggle('hidden');
+    });
+    document.querySelector('[data-toggl-sync]') && document.querySelector('[data-toggl-sync]').addEventListener('click', function(){
+      var tokenEl=document.querySelector('[data-toggl-token]');
+      var token=tokenEl && tokenEl.value.trim() || '';
+      if(!token){ alert('Pegá tu API Token de Toggl (Profile → API Token)'); return; }
+      alert('Demo: con token '+token.slice(0,4)+'**** sincronizaría vía Toggl Reports API y volcaría en fabrica_tiempos. Avísame y lo conecto real.');
+    });
+    // Restaurar timer al cargar
+    (function(){ var t=load('timer_activo', null); if(t){ timerActivo=t; } })();
 
 
     const _origIrA = irA;
