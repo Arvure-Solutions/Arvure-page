@@ -255,7 +255,7 @@
   <script>
     const MONEDA = n => '$ ' + n.toLocaleString('es-AR');
     const store = (k, v) => localStorage.setItem('fabrica_' + k, JSON.stringify(v));
-    const load = (k, d) => { try { const v = JSON.parse(localStorage.getItem('fabrica_' + k)); return v ?? d; } catch { return d; } };
+    const load = (k, d) => { try { const v = JSON.parse(localStorage.getItem('fabrica_' + k)); return v != null ? v : d; } catch { return d; } };
 
     const ORDENES_CLIENTE_DEF = [
       { id: 'ORD-024', cliente: 'Prof. Ríos', tipo: 'App', detalle: 'App interna — panel + API de turnos y pagos.', estado: 'revision', monto: 620000, pagado: 620000 },
@@ -440,8 +440,8 @@
 
     $('[data-login-cliente]').addEventListener('submit', e => {
       e.preventDefault();
-      const cliUsuario = ($('#cli-usuario')?.value || '').trim().toLowerCase();
-      const cliClave = ($('#cli-clave')?.value || '').trim();
+      const cliUsuario = ((document.getElementById('cli-usuario') && document.getElementById('cli-usuario').value) || '').trim().toLowerCase();
+      const cliClave = ((document.getElementById('cli-clave') && document.getElementById('cli-clave').value) || '').trim();
       const cliErr = $('[data-login-cliente-err]');
       // credenciales: cliente / cliente (y demo: cualquier nombre anterior migrado)
       if (cliUsuario === 'cliente' && cliClave === 'cliente') {
@@ -460,7 +460,7 @@
         }
       }
     });
-    document.querySelector('[data-reset-cliente]')?.addEventListener('click', () => { localStorage.removeItem('fabrica_cliente'); location.reload(); });
+    var _rc=document.querySelector('[data-reset-cliente]'); if(_rc) _rc.addEventListener('click', () => { localStorage.removeItem('fabrica_cliente'); location.reload(); });
     const previo = load('cliente', null);
     if (previo) {
       usuario = previo;

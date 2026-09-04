@@ -657,7 +657,7 @@
     ];
 
     const store = (k, v) => localStorage.setItem('fabrica_' + k, JSON.stringify(v));
-    const load = (k, d) => { try { const v = JSON.parse(localStorage.getItem('fabrica_' + k)); return v ?? d; } catch { return d; } };
+    const load = (k, d) => { try { const v = JSON.parse(localStorage.getItem('fabrica_' + k)); return v != null ? v : d; } catch { return d; } };
 
     let ordenes = load('ordenes', ORDENES_DEFECTO);
     let pagos = load('pagos', PAGOS_DEFECTO);
@@ -1179,13 +1179,13 @@
     });
     $('[data-cerrar-menu]').addEventListener('click', () => { $('#menu-movil').classList.add('hidden'); $('#menu-movil').classList.remove('flex'); });
     $('[data-salir]').addEventListener('click', () => { localStorage.removeItem('fabrica_admin'); location.reload(); });
-    document.querySelector('[data-reset-admin]')?.addEventListener('click', () => { localStorage.removeItem('fabrica_admin'); location.reload(); });
-    document.querySelector('[data-demo-admin]')?.addEventListener('click', () => { store('admin', { sesion: true, usuario: 'julio' }); $('#login').classList.add('hidden'); $('#app').classList.remove('hidden'); renderTodo(); irA('dashboard'); });
+    var _ra=document.querySelector('[data-reset-admin]'); if(_ra) _ra.addEventListener('click', () => { localStorage.removeItem('fabrica_admin'); location.reload(); });
+    var _da=document.querySelector('[data-demo-admin]'); if(_da) _da.addEventListener('click', () => { store('admin', { sesion: true, usuario: 'julio' }); $('#login').classList.add('hidden'); $('#app').classList.remove('hidden'); renderTodo(); irA('dashboard'); });
 
     $('[data-login-admin]').addEventListener('submit', e => {
       e.preventDefault();
-      const usuario = ($('#usuario-admin')?.value || '').trim().toLowerCase();
-      const clave = ($('#clave-admin')?.value || '').trim();
+      const usuario = ((document.getElementById('usuario-admin') && document.getElementById('usuario-admin').value) || '').trim().toLowerCase();
+      const clave = ((document.getElementById('clave-admin') && document.getElementById('clave-admin').value) || '').trim();
       const err = $('[data-login-err]');
       // credenciales: julio / Noetinger26
       // debug: muestra qué se recibió si falla (sin exponer clave completa)
@@ -1355,7 +1355,7 @@
       cont.innerHTML = ordenSecciones.map((o, idx) => {
         const id = typeof o === 'string' ? o : o.id;
         const visible = typeof o === 'string' ? true : o.visible !== false;
-        const nombre = (window.SECCIONES_DEFECTO.find(s => s.id === id)?.nombre) || JSON.parse(localStorage.getItem('fabrica_custom_nombres')||'{}')[id] || id;
+        const nombre = ((window.SECCIONES_DEFECTO.find(function(s){return s.id===id}) && window.SECCIONES_DEFECTO.find(function(s){return s.id===id}).nombre)) || JSON.parse(localStorage.getItem('fabrica_custom_nombres')||'{}')[id] || id;
         const isHero = id === 'inicio';
         return seccionCardHTML(id, nombre, idx, visible, isHero);
       }).join('') + `<button type="button" class="w-full rounded-full border border-dashed border-edge bg-surface px-4 py-2.5 text-sm font-bold text-dim transition hover:border-ink hover:text-ink" data-agregar-seccion>+ Agregar sección</button>`;
@@ -1404,12 +1404,12 @@
           r.onload = ev => { document.getElementById('h-imagen').value = ev.target.result; const pr = document.getElementById('h-preview'); pr.src = ev.target.result; pr.classList.remove('hidden'); renderPreview(); };
           r.readAsDataURL(file);
         });
-        cont.querySelector('[data-hero-reset]')?.addEventListener('click', () => { localStorage.removeItem('fabrica_hero'); hero = structuredClone(window.HERO_DEFECTO); renderEditoresOrden(); renderPreview(); alert('Hero restaurado.'); });
+        var _hr=cont.querySelector('[data-hero-reset]'); if(_hr) _hr.addEventListener('click', () => { localStorage.removeItem('fabrica_hero'); hero = structuredClone(window.HERO_DEFECTO); renderEditoresOrden(); renderPreview(); alert('Hero restaurado.'); });
       }
       cont.querySelectorAll('[data-orden-up]').forEach(b => b.addEventListener('click', () => { const i = parseInt(b.dataset.ordenUp); if (i>0) { const tmp = ordenSecciones[i-1]; ordenSecciones[i-1]=ordenSecciones[i]; ordenSecciones[i]=tmp; renderEditoresOrden(); renderPreview(); } }));
       cont.querySelectorAll('[data-orden-down]').forEach(b => b.addEventListener('click', () => { const i = parseInt(b.dataset.ordenDown); if (i<ordenSecciones.length-1) { const tmp = ordenSecciones[i+1]; ordenSecciones[i+1]=ordenSecciones[i]; ordenSecciones[i]=tmp; renderEditoresOrden(); renderPreview(); } }));
       cont.querySelectorAll('[data-orden-vis]').forEach(b => b.addEventListener('click', () => { const i = parseInt(b.dataset.ordenVis); const o = ordenSecciones[i]; if (typeof o === 'string') ordenSecciones[i] = { id: o, visible: false }; else o.visible = !o.visible; renderEditoresOrden(); renderPreview(); }));
-      cont.querySelector('[data-agregar-seccion]')?.addEventListener('click', () => {
+      var _as=cont.querySelector('[data-agregar-seccion]'); if(_as) _as.addEventListener('click', () => {
         const nombre = prompt('Nombre de la nueva sección');
         if (!nombre) return;
         const id = nombre.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
@@ -1431,13 +1431,13 @@
     function renderOrdenLista(){ renderEditoresOrden(); }
     renderEditoresOrden();
     function renderPreview(){
-      const b = document.querySelector('#h-badge')?.value.trim() || hero.badge;
-      const t1 = document.querySelector('#h-t1')?.value.trim() || hero.titulo1;
-      const t2 = document.querySelector('#h-t2')?.value.trim() || hero.titulo2;
-      const pa = document.querySelector('#h-parrafo')?.value.trim() || hero.parrafo;
-      const b1 = document.querySelector('#h-b1')?.value.trim() || hero.boton1;
-      const b2 = document.querySelector('#h-b2')?.value.trim() || hero.boton2;
-      const ej = document.querySelector('#h-ejes')?.value.trim() || hero.ejes;
+      const b = ((document.querySelector('#h-badge') && document.querySelector('#h-badge').value) || '').trim() || hero.badge;
+      const t1 = ((document.querySelector('#h-t1') && document.querySelector('#h-t1').value) || '').trim() || hero.titulo1;
+      const t2 = ((document.querySelector('#h-t2') && document.querySelector('#h-t2').value) || '').trim() || hero.titulo2;
+      const pa = ((document.querySelector('#h-parrafo') && document.querySelector('#h-parrafo').value) || '').trim() || hero.parrafo;
+      const b1 = ((document.querySelector('#h-b1') && document.querySelector('#h-b1').value) || '').trim() || hero.boton1;
+      const b2 = ((document.querySelector('#h-b2') && document.querySelector('#h-b2').value) || '').trim() || hero.boton2;
+      const ej = ((document.querySelector('#h-ejes') && document.querySelector('#h-ejes').value) || '').trim() || hero.ejes;
       const rb = document.querySelector('[data-preview-badge]'); if (rb) rb.textContent = b;
       const rt1 = document.querySelector('[data-preview-t1]'); if (rt1) rt1.textContent = t1;
       const rt2 = document.querySelector('[data-preview-t2]'); if (rt2) rt2.textContent = t2;
@@ -1449,7 +1449,7 @@
       if (cont) cont.innerHTML = ordenSecciones.map((o, i) => {
         const id = typeof o === 'string' ? o : o.id;
         const visible = typeof o === 'string' ? true : o.visible !== false;
-        const nombre = (window.SECCIONES_DEFECTO.find(s => s.id === id)?.nombre) || JSON.parse(localStorage.getItem('fabrica_custom_nombres')||'{}')[id] || id;
+        const nombre = ((window.SECCIONES_DEFECTO.find(function(s){return s.id===id}) && window.SECCIONES_DEFECTO.find(function(s){return s.id===id}).nombre)) || JSON.parse(localStorage.getItem('fabrica_custom_nombres')||'{}')[id] || id;
         return `<div class="rounded-xl border ${visible ? 'border-edge' : 'border-dashed opacity-40'} bg-panel px-2 py-1.5 text-xs ${!visible?'opacity-50':''}">
           <div class="flex items-center justify-between gap-1">
             <span class="truncate font-medium"><span class="font-mono text-[10px] font-bold text-dim">${String(i+1).padStart(2,'0')}</span> ${nombre}</span>
