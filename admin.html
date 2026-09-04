@@ -72,6 +72,7 @@
         <button type="submit" class="w-full rounded-full bg-ink px-6 py-3 text-sm font-bold text-panel transition hover:bg-black">Entrar →</button>
       </form>
       <p class="mt-4 text-center font-mono text-[11px] uppercase tracking-[0.2em] text-dim">usuario: julio · acceso restringido</p>
+      <p class="mt-2 text-center"><button type="button" data-reset-admin class="font-mono text-[10px] underline text-dim hover:text-ink">¿No entra? Limpiar sesión y recargar</button></p>
     </div>
   </div>
 
@@ -1177,13 +1178,15 @@
     });
     $('[data-cerrar-menu]').addEventListener('click', () => { $('#menu-movil').classList.add('hidden'); $('#menu-movil').classList.remove('flex'); });
     $('[data-salir]').addEventListener('click', () => { localStorage.removeItem('fabrica_admin'); location.reload(); });
+    document.querySelector('[data-reset-admin]')?.addEventListener('click', () => { localStorage.removeItem('fabrica_admin'); location.reload(); });
 
     $('[data-login-admin]').addEventListener('submit', e => {
       e.preventDefault();
       const usuario = ($('#usuario-admin')?.value || '').trim().toLowerCase();
-      const clave = $('#clave-admin')?.value || '';
+      const clave = ($('#clave-admin')?.value || '').trim();
       const err = $('[data-login-err]');
       // credenciales: julio / Noetinger26
+      // debug: muestra qué se recibió si falla (sin exponer clave completa)
       if (usuario === 'julio' && clave === 'Noetinger26') {
         if (err) err.classList.add('hidden');
         store('admin', { sesion: true, usuario: 'julio' });
@@ -1191,7 +1194,10 @@
         $('#app').classList.remove('hidden');
         renderTodo(); irA('dashboard');
       } else {
-        if (err) err.classList.remove('hidden');
+        if (err) {
+          err.textContent = 'Usuario o contraseña incorrectos. Probá: usuario julio / clave Noetinger26 (N mayúscula). Recibido: ' + (usuario || '(vacío)') + ' / ' + (clave ? clave.length + ' caracteres' : '(vacío)');
+          err.classList.remove('hidden');
+        }
         $('#clave-admin').focus();
       }
     });
