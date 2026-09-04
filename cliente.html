@@ -52,18 +52,20 @@
       <p class="mt-2 text-sm text-dim">Seguí tus nodos, descargá entregables y hablale al estudio.</p>
       <form class="mt-6 space-y-4" data-login-cliente>
         <div>
-          <label for="cli-nombre" class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Nombre</label>
-          <input id="cli-nombre" type="text" required placeholder="Tu nombre"
+          <label for="cli-usuario" class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Usuario</label>
+          <input id="cli-usuario" type="text" required placeholder="cliente" autocomplete="username"
                  class="w-full rounded-xl border border-edge bg-panel px-4 py-3 text-sm focus:border-ink focus:outline-none">
         </div>
         <div>
-          <label for="cli-email" class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Email</label>
-          <input id="cli-email" type="email" required placeholder="tu@email.com"
+          <label for="cli-clave" class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Contraseña</label>
+          <input id="cli-clave" type="password" required placeholder="••••••••" autocomplete="current-password"
                  class="w-full rounded-xl border border-edge bg-panel px-4 py-3 text-sm focus:border-ink focus:outline-none">
         </div>
+        <p class="hidden text-xs font-medium text-play" data-login-cliente-err>Usuario o contraseña incorrectos.</p>
         <button type="submit" class="w-full rounded-full bg-ink px-6 py-3 text-sm font-bold text-panel transition hover:bg-black">Entrar a mi panel →</button>
       </form>
-      <p class="mt-4 text-center font-mono text-[10px] uppercase tracking-[0.15em] text-dim">demo · cualquier nombre</p>
+      <p class="mt-4 text-center font-mono text-[11px] uppercase tracking-[0.2em] text-dim">usuario: cliente · contraseña: cliente</p>
+      <p class="mt-2 text-center"><button type="button" data-reset-cliente class="font-mono text-[10px] underline text-dim hover:text-ink">¿No entra? Limpiar sesión y recargar</button></p>
     </div>
   </div>
 
@@ -438,21 +440,40 @@
 
     $('[data-login-cliente]').addEventListener('submit', e => {
       e.preventDefault();
-      usuario = { nombre: $('#cli-nombre').value.trim(), email: $('#cli-email').value.trim() };
-      store('cliente', usuario);
-      $('#login').classList.add('hidden');
-      $('#app').classList.remove('hidden');
-      $('[data-saludo]').textContent = usuario.nombre.split(' ')[0];
-      $('[data-sesion-nombre]').textContent = usuario.nombre;
-      renderTodo(); irA('panel');
+      const cliUsuario = ($('#cli-usuario')?.value || '').trim().toLowerCase();
+      const cliClave = ($('#cli-clave')?.value || '').trim();
+      const cliErr = $('[data-login-cliente-err]');
+      // credenciales: cliente / cliente (y demo: cualquier nombre anterior migrado)
+      if (cliUsuario === 'cliente' && cliClave === 'cliente') {
+        if (cliErr) cliErr.classList.add('hidden');
+        usuario = { nombre: 'Cliente Demo', email: 'cliente@arvure.com', usuario: 'cliente' };
+        store('cliente', usuario);
+        $('#login').classList.add('hidden');
+        $('#app').classList.remove('hidden');
+        $('[data-saludo]').textContent = 'Cliente';
+        $('[data-sesion-nombre]').textContent = 'cliente';
+        renderTodo(); irA('panel');
+      } else {
+        if (cliErr) {
+          cliErr.textContent = 'Usuario o contraseña incorrectos. Probá: cliente / cliente. Recibido: ' + (cliUsuario || '(vacío)') + ' / ' + (cliClave ? cliClave.length + ' caracteres' : '(vacío)');
+          cliErr.classList.remove('hidden');
+        }
+      }
     });
+    document.querySelector('[data-reset-cliente]')?.addEventListener('click', () => { localStorage.removeItem('fabrica_cliente'); location.reload(); });
     const previo = load('cliente', null);
     if (previo) {
       usuario = previo;
+      // compatibilidad: si viene del formato viejo (nombre/email), normaliza
+      if (!usuario.usuario && usuario.nombre) {
+        // ya logueado con formato viejo, permite entrada
+      }
       $('#login').classList.add('hidden');
       $('#app').classList.remove('hidden');
-      $('[data-saludo]').textContent = usuario.nombre.split(' ')[0];
-      $('[data-sesion-nombre]').textContent = usuario.nombre;
+      const saludoNombre = usuario.usuario === 'cliente' ? 'Cliente' : (usuario.nombre ? usuario.nombre.split(' ')[0] : 'Cliente');
+      const sesionNombre = usuario.usuario === 'cliente' ? 'cliente' : usuario.nombre;
+      $('[data-saludo]').textContent = saludoNombre;
+      $('[data-sesion-nombre]').textContent = sesionNombre;
       renderTodo(); irA('panel');
     }
 

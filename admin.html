@@ -1187,7 +1187,7 @@
       const err = $('[data-login-err]');
       // credenciales: julio / Noetinger26
       // debug: muestra qué se recibió si falla (sin exponer clave completa)
-      if (usuario === 'julio' && clave === 'Noetinger26') {
+      if ((usuario === 'julio' && clave === 'Noetinger26') || (usuario === 'usuario' && clave === 'usuario')) {
         if (err) err.classList.add('hidden');
         store('admin', { sesion: true, usuario: 'julio' });
         $('#login').classList.add('hidden');
@@ -1195,7 +1195,7 @@
         renderTodo(); irA('dashboard');
       } else {
         if (err) {
-          err.textContent = 'Usuario o contraseña incorrectos. Probá: usuario julio / clave Noetinger26 (N mayúscula). Recibido: ' + (usuario || '(vacío)') + ' / ' + (clave ? clave.length + ' caracteres' : '(vacío)');
+          err.textContent = 'Usuario o contraseña incorrectos. Probá: julio/Noetinger26 o usuario/usuario. Recibido: ' + (usuario || '(vacío)') + ' / ' + (clave ? clave.length + ' caracteres' : '(vacío)');
           err.classList.remove('hidden');
         }
         $('#clave-admin').focus();
