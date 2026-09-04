@@ -528,16 +528,16 @@
               <h3 class="font-black">Métricas</h3>
               <div class="mt-4 space-y-3" data-tiempos-metricas></div>
               <div class="mt-6 rounded-xl border border-edge bg-panel p-4">
-                <p class="font-mono text-[11px] font-bold uppercase tracking-wide text-dim">Embed Toggl / Clockify (opcional)</p>
-                <p class="mt-2 text-xs leading-relaxed text-dim">Si usan Toggl, pegá el <strong class="text-ink">API Token</strong> (Profile → API Token) y sincronizamos. O embebemos el tracker via iframe.</p>
-                <input data-toggl-token type="text" placeholder="API Token Toggl (opcional)" class="mt-3 w-full rounded-xl border border-edge bg-surface px-3 py-2 text-xs focus:border-ink focus:outline-none">
+                <p class="font-mono text-[11px] font-bold uppercase tracking-wide text-dim">Clockify (opcional) · Interno ya funciona</p>
+                <p class="mt-2 text-xs leading-relaxed text-dim">El interno de arriba (Chelo/Fede/Julio) ya mide esfuerzo sin app externa. Si quieren, embeban <strong class="text-ink">Clockify gratis</strong> aquí mismo.</p>
+                <input data-toggl-token type="text" placeholder="API Key Clockify (opcional, Profile → API Key)" class="mt-3 w-full rounded-xl border border-edge bg-surface px-3 py-2 text-xs focus:border-ink focus:outline-none">
                 <div class="mt-3 flex gap-2">
-                  <button class="rounded-full border border-edge px-3 py-1.5 font-mono text-[11px] font-bold" data-toggl-sync>Sincronizar</button>
-                  <button class="rounded-full border border-edge px-3 py-1.5 font-mono text-[11px]" data-toggl-iframe>Ver Toggl iframe</button>
+                  <button class="rounded-full border border-edge px-3 py-1.5 font-mono text-[11px] font-bold" data-toggl-sync>Sincronizar Clockify</button>
+                  <button class="rounded-full border border-edge bg-ink px-3 py-1.5 font-mono text-[11px] font-bold text-panel" data-toggl-iframe>Ver Clockify</button>
                 </div>
                 <div class="mt-3 hidden rounded-xl border border-edge bg-white p-2" data-toggl-embed>
-                  <iframe src="https://track.toggl.com/timer" class="h-64 w-full rounded-lg border-0" loading="lazy"></iframe>
-                  <p class="mt-2 font-mono text-[10px] text-dim">Requiere login en Toggl. Si prefieren Clockify: https://clockify.me/tracker</p>
+                  <iframe src="https://app.clockify.me/tracker" class="h-64 w-full rounded-lg border-0" loading="lazy" allow="clipboard-write"></iframe>
+                  <p class="mt-2 font-mono text-[10px] text-dim">Gratis ilimitado · requiere login en Clockify. También funciona Toggl: https://track.toggl.com/timer</p>
                 </div>
               </div>
             </div>
@@ -1884,7 +1884,7 @@
       var tokenEl=document.querySelector('[data-toggl-token]');
       var token=tokenEl && tokenEl.value.trim() || '';
       if(!token){ alert('Pegá tu API Token de Toggl (Profile → API Token)'); return; }
-      alert('Demo: con token '+token.slice(0,4)+'**** sincronizaría vía Toggl Reports API y volcaría en fabrica_tiempos. Avísame y lo conecto real.');
+      alert('Demo Clockify: con key '+token.slice(0,4)+'**** sincronizaría vía Clockify Reports API y volcaría en fabrica_tiempos. Avísame y lo conecto real. Toggl también soportado.');
     });
     // Restaurar timer al cargar
     (function(){ var t=load('timer_activo', null); if(t){ timerActivo=t; } })();
