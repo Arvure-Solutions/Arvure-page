@@ -59,14 +59,19 @@
       <p class="mt-2 text-sm text-dim">Nodos, automatizaciones y sistema operativo de Arvure.</p>
       <form class="mt-6 space-y-4" data-login-admin>
         <div>
-          <label for="clave-admin" class="mb-1 block text-xs font-bold uppercase tracking-[0.15em] text-dim">Clave</label>
-          <input id="clave-admin" type="password" required placeholder="••••••••"
+          <label for="usuario-admin" class="mb-1 block text-xs font-bold uppercase tracking-[0.15em] text-dim">Usuario</label>
+          <input id="usuario-admin" type="text" required placeholder="julio" autocomplete="username"
                  class="w-full rounded-xl border border-edge bg-panel px-4 py-3 text-sm focus:border-ink focus:outline-none">
         </div>
-        <p class="hidden text-xs font-medium text-play" data-login-err>Clave incorrecta.</p>
+        <div>
+          <label for="clave-admin" class="mb-1 block text-xs font-bold uppercase tracking-[0.15em] text-dim">Contraseña</label>
+          <input id="clave-admin" type="password" required placeholder="••••••••" autocomplete="current-password"
+                 class="w-full rounded-xl border border-edge bg-panel px-4 py-3 text-sm focus:border-ink focus:outline-none">
+        </div>
+        <p class="hidden text-xs font-medium text-play" data-login-err>Usuario o contraseña incorrectos.</p>
         <button type="submit" class="w-full rounded-full bg-ink px-6 py-3 text-sm font-bold text-panel transition hover:bg-black">Entrar →</button>
       </form>
-      <p class="mt-4 text-center font-mono text-[11px] uppercase tracking-[0.2em] text-dim">demo · cualquier clave</p>
+      <p class="mt-4 text-center font-mono text-[11px] uppercase tracking-[0.2em] text-dim">usuario: julio · acceso restringido</p>
     </div>
   </div>
 
@@ -1175,10 +1180,20 @@
 
     $('[data-login-admin]').addEventListener('submit', e => {
       e.preventDefault();
-      store('admin', { sesion: true });
-      $('#login').classList.add('hidden');
-      $('#app').classList.remove('hidden');
-      renderTodo(); irA('dashboard');
+      const usuario = ($('#usuario-admin')?.value || '').trim().toLowerCase();
+      const clave = $('#clave-admin')?.value || '';
+      const err = $('[data-login-err]');
+      // credenciales: julio / Noetinger26
+      if (usuario === 'julio' && clave === 'Noetinger26') {
+        if (err) err.classList.add('hidden');
+        store('admin', { sesion: true, usuario: 'julio' });
+        $('#login').classList.add('hidden');
+        $('#app').classList.remove('hidden');
+        renderTodo(); irA('dashboard');
+      } else {
+        if (err) err.classList.remove('hidden');
+        $('#clave-admin').focus();
+      }
     });
     if (load('admin', null)) {
       $('#login').classList.add('hidden');
