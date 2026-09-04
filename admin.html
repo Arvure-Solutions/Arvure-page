@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Panel administrativo — Arvure Estudio Tech">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230A0A0A'/><circle cx='30' cy='30' r='6' fill='white'/><circle cx='70' cy='32' r='5' fill='white'/><circle cx='50' cy='70' r='7' fill='white'/><path d='M30 30 L50 70 L70 32' stroke='white' stroke-width='2' fill='none' opacity='0.9'/></svg>">
+  <title>Admin · Arvure — Estudio Tech</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="catalogo.defaults.js"></script>
+  <script src="contenido.defaults.js"></script>
+  <script src="posts.defaults.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            panel:   '#FFFBF0',
+            surface: '#FFFFFF',
+            edge:    '#E8E0D0',
+            ink:     '#0A0A0A',
+            dim:     '#6B6B6B',
+            lavanda: '#0A0A0A',
+            sol:     '#FFE066',
+            play:    '#FF3B30',
+            ok:      '#0A7F3D',
+            cream:   '#FFFBF0',
+            paper:   '#FFFFFF',
+            line:    '#E8E0D0',
+            muted:   '#6B6B6B',
+          },
+          fontFamily: {
+            serif: ['Inter', 'system-ui', 'sans-serif'],
+            sans:  ['Inter', 'system-ui', 'sans-serif'],
+            mono:  ['JetBrains Mono', 'ui-monospace', 'monospace'],
+          },
+          boxShadow: {
+            glow: '0 1px 3px rgba(10,10,10,0.06), 0 8px 24px rgba(10,10,10,0.04)',
+            card: '0 1px 3px rgba(10,10,10,0.06), 0 8px 24px rgba(10,10,10,0.04)',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    .barra { transition: width .6s ease; }
+    ::selection { background:#0A0A0A; color:#FFFBF0; }
+  </style>
+</head>
+<body class="bg-panel text-ink font-sans antialiased selection:bg-ink selection:text-panel">
+
+  <div id="login" class="fixed inset-0 z-[100] flex items-center justify-center bg-panel/95 px-6 backdrop-blur">
+    <div class="w-full max-w-sm rounded-2xl border border-edge bg-surface p-8 shadow-card">
+      <p class="font-mono text-[11px] uppercase tracking-[0.3em] text-dim flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-ok animate-pulse"></span> Acceso restringido · Estudio Tech</p>
+      <h1 class="mt-3 text-2xl font-black tracking-tight">Panel <span class="bg-ink text-panel px-1.5 py-0.5">admin.</span></h1>
+      <p class="mt-2 text-sm text-dim">Nodos, automatizaciones y sistema operativo de Arvure.</p>
+      <form class="mt-6 space-y-4" data-login-admin>
+        <div>
+          <label for="clave-admin" class="mb-1 block text-xs font-bold uppercase tracking-[0.15em] text-dim">Clave</label>
+          <input id="clave-admin" type="password" required placeholder="••••••••"
+                 class="w-full rounded-xl border border-edge bg-panel px-4 py-3 text-sm focus:border-ink focus:outline-none">
+        </div>
+        <p class="hidden text-xs font-medium text-play" data-login-err>Clave incorrecta.</p>
+        <button type="submit" class="w-full rounded-full bg-ink px-6 py-3 text-sm font-bold text-panel transition hover:bg-black">Entrar →</button>
+      </form>
+      <p class="mt-4 text-center font-mono text-[11px] uppercase tracking-[0.2em] text-dim">demo · cualquier clave</p>
+    </div>
+  </div>
+
+  <div id="app" class="hidden">
+
+    <aside class="fixed inset-y-0 left-0 z-40 hidden w-60 flex-col border-r border-edge bg-surface md:flex">
+      <div class="border-b border-edge px-5 py-5">
+        <a href="index.html" class="flex items-center gap-2">
+          <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-ink text-panel">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="6" cy="6" r="2.2" fill="currentColor"/><circle cx="18" cy="7" r="1.8" fill="currentColor"/><circle cx="12" cy="18" r="2.5" fill="currentColor"/><path d="M6 6 L12 18 L18 7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          </span>
+          <span class="text-sm font-black tracking-tight">ARVURE</span>
+        </a>
+        <p class="mt-1 font-mono text-[10px] uppercase tracking-[0.25em] text-dim">panel admin · estudio tech</p>
+      </div>
+      <nav class="flex-1 overflow-y-auto p-3" data-nav>
+        <button data-seccion="dashboard" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Dashboard</span></button>
+        <button data-seccion="contenido" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Contenido modular</span></button>
+        <button data-seccion="catalogo" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Catálogo de soluciones</span><span data-badge-catalogo class="ml-auto font-mono text-[10px] font-bold text-ink"></span></button>
+        <button data-seccion="importar" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Importador masivo</span><span data-badge-importador class="ml-auto font-mono text-[10px] font-bold"></span></button>
+        <button data-seccion="ordenes" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Órdenes de trabajo</span><span data-badge-ordenes class="ml-auto font-mono text-[10px] font-bold"></span></button>
+        <button data-seccion="pagos" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Pagos</span><span data-badge-pagos class="ml-auto font-mono text-[10px] font-bold"></span></button>
+        <button data-seccion="mensajes" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Mensajes</span><span data-badge-mensajes class="ml-auto font-mono text-[10px] font-bold"></span></button>
+        <button data-seccion="blog" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Blog</span><span data-badge-blog class="ml-auto font-mono text-[10px] font-bold"></span></button>
+        <button data-seccion="clientes" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Clientes</span></button>
+        <button data-seccion="agenda" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Agenda de nodos</span></button>
+        <button data-seccion="config" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Configuración</span></button>
+      </nav>
+      <div class="border-t border-edge p-4">
+        <p class="font-mono text-[10px] uppercase tracking-[0.2em] text-dim">Sesión</p>
+        <p class="mt-1 text-sm font-bold">Julio — <span class="text-dim font-normal">dueño</span></p>
+        <button data-salir class="mt-3 font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-dim transition hover:text-ink">Salir →</button>
+      </div>
+    </aside>
+
+    <div class="md:pl-60">
+
+      <header class="sticky top-0 z-30 flex items-center justify-between border-b border-edge bg-panel/90 px-6 py-3 backdrop-blur">
+        <div class="flex items-center gap-3">
+          <button class="md:hidden text-xl" data-menu aria-label="Menú">☰</button>
+          <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-dim" data-titulo-seccion>Dashboard</p>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="hidden font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-ok sm:flex items-center gap-2">
+            <span class="h-2 w-2 animate-pulse rounded-full bg-ok"></span>
+            Nodos operativos
+          </span>
+          <a href="index.html" class="rounded-full border border-edge bg-surface px-4 py-1.5 font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-dim transition hover:border-ink hover:text-ink">Ver sitio →</a>
+        </div>
+      </header>
+
+      <main class="mx-auto max-w-5xl px-6 py-8">
+
+        <section data-vista="dashboard">
+          <h2 class="text-3xl font-black tracking-tight">Buen día, <span class="bg-ink text-panel px-1">Julio.</span></h2>
+          <p class="mt-2 text-sm text-dim">Estado del estudio al <span data-fecha></span> · sistema de nodos activo.</p>
+
+          <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="rounded-2xl border border-edge bg-surface p-5 shadow-card">
+              <p class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-dim">Ingresos del mes</p>
+              <p class="mt-2 text-2xl font-black" data-kpi-ingresos></p>
+              <p class="mt-1 font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-ok">+18% vs julio</p>
+            </div>
+            <div class="rounded-2xl border border-edge bg-surface p-5 shadow-card">
+              <p class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-dim">Órdenes activas</p>
+              <p class="mt-2 text-2xl font-black" data-kpi-ordenes></p>
+              <p class="mt-1 font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-dim">2 slots disponibles</p>
+            </div>
+            <div class="rounded-2xl border border-edge bg-surface p-5 shadow-card">
+              <p class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-dim">Pagos pendientes</p>
+              <p class="mt-2 text-2xl font-black" data-kpi-pagos></p>
+              <p class="mt-1 font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-play">requieren acción</p>
+            </div>
+            <div class="rounded-2xl border border-edge bg-surface p-5 shadow-card">
+              <p class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-dim">Soluciones</p>
+              <p class="mt-2 text-2xl font-black"><span data-kpi-ideas>3</span> <span class="text-sm font-medium text-dim">en catálogo</span></p>
+              <p class="mt-1 font-mono text-[10px] uppercase tracking-[0.15em] text-dim" data-kpi-vendidas>1 en prod. este mes</p>
+            </div>
+          </div>
+
+          <div class="mt-6 grid gap-4 lg:grid-cols-3">
+            <div class="rounded-2xl border border-edge bg-surface p-6 lg:col-span-2 shadow-card">
+              <div class="flex items-center justify-between">
+                <h3 class="text-lg font-black tracking-tight">Ingresos por mes</h3>
+                <span class="rounded-full border border-edge bg-panel px-2 py-0.5 font-mono text-[10px] font-bold tracking-[0.15em] text-dim">ARS</span>
+              </div>
+              <div class="mt-6 flex h-40 items-end gap-3" data-grafico></div>
+            </div>
+            <div class="rounded-2xl border border-edge bg-surface p-6 shadow-card">
+              <h3 class="text-lg font-black tracking-tight">Capacidad mensual</h3>
+              <p class="mt-2 text-sm text-dim">Máx. 2 sistemas completos por mes.</p>
+              <div class="mt-4 space-y-3">
+                <div class="rounded-xl border border-ink bg-ink p-3 text-panel">
+                  <p class="font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-sol">nodo A · en producción</p>
+                  <p class="mt-1 text-sm font-medium">Automatización + Web — Cliente Demo</p>
+                </div>
+                <div class="rounded-xl border border-dashed border-edge bg-panel p-3">
+                  <p class="font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-dim">nodo B · libre</p>
+                  <p class="mt-1 text-sm text-dim">Slot disponible para próximo sprint</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 rounded-2xl border border-edge bg-surface p-6 shadow-card">
+            <h3 class="text-lg font-black tracking-tight">Últimas órdenes</h3>
+            <div class="mt-4 overflow-x-auto" data-tabla-ordenes-mini></div>
+          </div>
+        </section>
+
+        <section data-vista="ordenes" class="hidden">
+          <div class="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <h2 class="text-3xl font-black tracking-tight">Órdenes de <span class="bg-ink text-panel px-1">trabajo.</span></h2>
+              <p class="mt-2 text-sm text-dim">Automatizaciones, webs y apps en producción.</p>
+            </div>
+            <button class="rounded-full bg-ink px-5 py-2.5 text-sm font-bold text-panel transition hover:bg-black" data-nueva-orden>+ Nueva orden</button>
+          </div>
+          <div class="mt-6 grid gap-2 sm:grid-cols-3" data-filtros-ordenes>
+            <button data-f="todas" class="rounded-full border border-ink bg-ink px-4 py-2 font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-panel">Todas</button>
+            <button data-f="abiertas" class="rounded-full border border-edge bg-surface px-4 py-2 font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-dim transition hover:border-ink hover:text-ink">Abiertas</button>
+            <button data-f="entregadas" class="rounded-full border border-edge bg-surface px-4 py-2 font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-dim transition hover:border-ink hover:text-ink">Entregadas</button>
+          </div>
+          <div class="mt-4 overflow-x-auto rounded-2xl border border-edge bg-surface" data-tabla-ordenes></div>
+        </section>
+
+        <section data-vista="pagos" class="hidden">
+          <h2 class="text-3xl font-black tracking-tight">Pagos de <span class="bg-ink text-panel px-1">clientes.</span></h2>
+          <p class="mt-2 text-sm text-dim">Mercado Pago, PayPal y transferencias.</p>
+          <div class="mt-6 grid gap-4 sm:grid-cols-3">
+            <div class="rounded-2xl border border-edge bg-surface p-5">
+              <p class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-dim">Acreditado / mes</p>
+              <p class="mt-2 text-2xl font-black" data-total-acreditado></p>
+            </div>
+            <div class="rounded-2xl border border-edge bg-surface p-5">
+              <p class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-dim">Pendiente</p>
+              <p class="mt-2 text-2xl font-black" data-total-pendiente></p>
+            </div>
+            <div class="rounded-2xl border border-edge bg-surface p-5">
+              <p class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-dim">Convenio 50/50</p>
+              <p class="mt-2 text-2xl font-black">2 órdenes</p>
+            </div>
+          </div>
+          <div class="mt-6 overflow-x-auto rounded-2xl border border-edge bg-surface" data-tabla-pagos></div>
+          <p class="mt-4 font-mono text-[10px] uppercase tracking-[0.15em] text-dim">Los estados se marcan al recibir la acreditación — mismo criterio que conciliación.</p>
+        </section>
+
+        <section data-vista="mensajes" class="hidden">
+          <h2 class="text-3xl font-black tracking-tight">Mensajes.</h2>
+          <p class="mt-2 text-sm text-dim">Inbox — clientes y equipo.</p>
+          <div class="mt-6 grid gap-4 lg:grid-cols-2">
+            <div class="rounded-2xl border border-edge bg-surface overflow-hidden">
+              <div class="border-b border-edge bg-panel px-5 py-3">
+                <h3 class="font-black">Clientes</h3>
+                <p class="font-mono text-[10px] uppercase tracking-[0.15em] text-dim">salen por WhatsApp si el canal está conectado</p>
+              </div>
+              <div class="max-h-96 space-y-3 overflow-y-auto p-5" data-hilo-cliente></div>
+              <form class="flex gap-2 border-t border-edge bg-panel p-4" data-mensaje-cliente>
+                <input type="text" required placeholder="Escribile al cliente…" class="w-full rounded-full border border-edge bg-surface px-4 py-2.5 text-sm focus:border-ink focus:outline-none">
+                <button type="submit" class="shrink-0 rounded-full bg-ink px-5 py-2.5 text-sm font-bold text-panel transition hover:bg-black">Enviar</button>
+              </form>
+            </div>
+            <div class="rounded-2xl border border-edge bg-surface overflow-hidden">
+              <div class="border-b border-edge bg-panel px-5 py-3">
+                <h3 class="font-black">Equipo</h3>
+                <p class="font-mono text-[10px] uppercase tracking-[0.15em] text-dim">hilo con dev / ops</p>
+              </div>
+              <div class="max-h-96 space-y-3 overflow-y-auto p-5" data-hilo-colega></div>
+              <form class="border-t border-edge bg-panel p-4" data-mensaje-colega>
+                <div class="flex items-center justify-between gap-2">
+                  <label class="flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-[0.1em] text-dim">
+                    <input type="checkbox" class="accent-ink" data-como-colega>
+                    escribir como dev
+                  </label>
+                  <div class="flex gap-2 flex-1 justify-end">
+                    <input type="text" required placeholder="Mensaje interno…" class="w-full max-w-[220px] rounded-full border border-edge bg-surface px-4 py-2.5 text-sm focus:border-ink focus:outline-none" data-input-colega>
+                    <button type="submit" class="shrink-0 rounded-full bg-ink px-5 py-2.5 text-sm font-bold text-panel transition hover:bg-black">Enviar</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <section data-vista="contenido" class="hidden">
+          <h2 class="text-3xl font-black tracking-tight">Contenido <span class="bg-ink text-panel px-1">modular.</span></h2>
+          <p class="mt-2 max-w-xl text-sm text-dim">Editá el hero (título, copete, botones, imagen) y reordená/ocultá secciones. Los cambios se guardan en tu navegador y se ven en la home.</p>
+
+          <div class="mt-8 grid gap-6 lg:grid-cols-3">
+            <div class="lg:col-span-2 space-y-4" data-editores-orden>
+            </div>
+            <div class="rounded-2xl border border-edge bg-surface p-6 lg:sticky lg:top-6 h-fit shadow-card">
+              <h3 class="text-lg font-black tracking-tight">Vista previa en vivo</h3>
+              <p class="mt-1 text-sm text-dim">Se actualiza al escribir.</p>
+              <div id="preview-live" class="mt-4 space-y-3 max-h-[65vh] overflow-auto rounded-xl border border-edge bg-panel p-4">
+                <div class="rounded-xl border border-edge bg-surface p-3">
+                  <p class="font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-dim" data-preview-badge>ESTUDIO TECH</p>
+                  <p class="mt-2 text-lg font-black leading-tight"><span data-preview-t1>Automatizamos</span> <span class="bg-ink text-panel px-1" data-preview-t2>lo que te frena.</span></p>
+                  <p class="mt-2 text-xs leading-relaxed text-dim" data-preview-parrafo>Somos el nodo que conecta...</p>
+                  <div class="mt-3 flex gap-2">
+                    <span class="rounded-full bg-ink px-3 py-1 text-xs font-bold text-panel" data-preview-b1>Empezar proyecto →</span>
+                    <span class="rounded-full border border-edge px-3 py-1 text-xs font-bold" data-preview-b2>Ver soluciones</span>
+                  </div>
+                  <p class="mt-2 font-mono text-[10px] text-dim" data-preview-ejes>NODOS · AUTOMATIZACIONES · WEBS · APPS</p>
+                </div>
+                <div class="space-y-1" data-preview-orden></div>
+              </div>
+              <p class="mt-2 font-mono text-[10px] text-dim">Guardá para verlo en la home.</p>
+            </div>
+          </div>
+        </section>
+
+        <section data-vista="catalogo" class="hidden">
+          <div class="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <h2 class="text-3xl font-black tracking-tight">Catálogo de <span class="bg-ink text-panel px-1">soluciones.</span></h2>
+              <p class="mt-2 text-sm text-dim">Lo que se muestra en la home como “Soluciones”. Los cambios se ven al recargar el sitio.</p>
+            </div>
+            <div class="flex gap-2">
+              <button type="button" class="rounded-full border border-edge bg-surface px-4 py-2 text-sm font-bold text-dim transition hover:border-ink hover:text-ink" data-export-catalogo>Exportar CSV ↓</button>
+              <button class="rounded-full bg-ink px-5 py-2.5 text-sm font-bold text-panel transition hover:bg-black" data-nueva-idea>+ Nueva solución</button>
+            </div>
+          </div>
+          <div class="mt-6 overflow-x-auto rounded-2xl border border-edge bg-surface" data-tabla-catalogo></div>
+          <p class="mt-4 font-mono text-[10px] uppercase tracking-[0.15em] text-dim">id nuevo = sol_XXX · al guardar se sincroniza con index.html (localStorage)</p>
+        </section>
+
+        <section data-vista="importar" class="hidden">
+          <h2 class="text-3xl font-black tracking-tight">Importador masivo.</h2>
+          <p class="mt-2 max-w-xl text-sm text-dim">
+            Pegá tu catálogo completo (CSV, JSON o lista simple), detecta formato y mapeo y lo vuelca al catálogo.
+          </p>
+
+          <div class="mt-6 grid gap-4 lg:grid-cols-2">
+
+            <div class="rounded-2xl border border-edge bg-surface p-6 shadow-card">
+              <p class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-dim">Paso 1 · Pegá tus soluciones</p>
+              <div class="mt-4 flex flex-wrap items-center gap-2">
+                <select data-formato-import class="rounded-full border border-edge bg-panel px-3 py-2 font-mono text-xs font-bold focus:border-ink focus:outline-none">
+                  <option value="auto">Detectar formato</option>
+                  <option value="csv">CSV / Excel (copiar y pegar)</option>
+                  <option value="json">JSON</option>
+                  <option value="lineas">Lista simple (una por línea)</option>
+                </select>
+                <button type="button" class="rounded-full border border-edge bg-surface px-3 py-2 font-mono text-xs font-bold uppercase tracking-wide text-dim transition hover:border-ink hover:text-ink" data-ejemplo-import>Cargar ejemplo</button>
+                <button type="button" class="rounded-full border border-edge bg-surface px-3 py-2 font-mono text-xs font-bold uppercase tracking-wide text-dim transition hover:text-play" data-limpiar-import>Limpiar</button>
+              </div>
+              <textarea data-texto-import rows="12" placeholder='titulo,tipo,estado,precio,imagen,descripcion
+"Automatización leads",automatizacion,disponible,"desde USD 400",https://…,Flujo leads → CRM'
+                        class="mt-4 w-full rounded-xl border border-edge bg-panel px-4 py-3 font-mono text-xs placeholder:text-dim focus:border-ink focus:outline-none"></textarea>
+              <button type="button" class="mt-4 w-full rounded-full bg-ink px-6 py-3 text-sm font-bold text-panel transition hover:bg-black" data-previsualizar-import>
+                Analizar →
+              </button>
+            </div>
+
+            <div class="space-y-4">
+              <div class="rounded-2xl border border-edge bg-surface p-6">
+                <p class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-dim">Paso 2 · Mapeo de columnas</p>
+                <div class="mt-4 space-y-2" data-mapeo-import>
+                  <p class="text-sm text-dim">Pegá los datos y tocá «Analizar» — el mapeo aparece acá.</p>
+                </div>
+              </div>
+              <div class="rounded-2xl border border-edge bg-surface p-6">
+                <p class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-dim">Paso 3 · Previsualización</p>
+                <div class="mt-4 overflow-x-auto" data-preview-import></div>
+                <button type="button" class="mt-4 hidden w-full rounded-full bg-ink px-6 py-3 text-sm font-bold text-panel transition hover:bg-black" data-importar-catalogo></button>
+                <p class="mt-2 font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-ok" data-importar-resumen></p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <section data-vista="blog" class="hidden">
+          <div class="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <h2 class="text-3xl font-black tracking-tight">Blog <span class="bg-ink text-panel px-1">tech.</span></h2>
+              <p class="mt-2 text-sm text-dim">Los posts se publican en blog.html.</p>
+            </div>
+            <button class="rounded-full bg-ink px-5 py-2.5 text-sm font-bold text-panel transition hover:bg-black" data-nuevo-post>+ Nuevo post</button>
+          </div>
+          <div class="mt-6 overflow-x-auto rounded-2xl border border-edge bg-surface" data-tabla-posts></div>
+        </section>
+
+        <section data-vista="clientes" class="hidden">
+          <h2 class="text-3xl font-black tracking-tight">Clientes.</h2>
+          <p class="mt-2 text-sm text-dim">Quiénes confían sus nodos a Arvure.</p>
+          <div class="mt-6 overflow-x-auto rounded-2xl border border-edge bg-surface" data-tabla-clientes></div>
+        </section>
+
+        <section data-vista="agenda" class="hidden">
+          <h2 class="text-3xl font-black tracking-tight">Agenda de <span class="bg-ink text-panel px-1">nodos.</span></h2>
+          <p class="mt-2 text-sm text-dim">Sprints y entregas — cada nodo con su timeline.</p>
+
+          <div class="mt-6 overflow-x-auto rounded-2xl border border-edge bg-surface p-6">
+            <div class="mb-3 flex items-center justify-between font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-dim">
+              <span>Sprints — 2026</span><span>NODOS</span>
+            </div>
+            <div class="relative space-y-5">
+              <span class="absolute left-[13px] top-2 bottom-2 w-px bg-edge" aria-hidden="true"></span>
+              <div class="relative flex items-center gap-4">
+                <span class="z-10 flex h-7 w-7 items-center justify-center rounded-full border-2 border-ink bg-ink font-mono text-[10px] font-black text-panel">A</span>
+                <div class="w-full rounded-xl border border-edge bg-panel px-4 py-3">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <p class="text-sm"><strong class="font-black">Nodo CRM + WhatsApp</strong> <span class="text-dim">· integración · 1 semana</span></p>
+                    <span class="rounded-full bg-ink px-2 py-1 font-mono text-[10px] font-bold uppercase tracking-wide text-panel">en producción · 60%</span>
+                  </div>
+                  <div class="mt-2 h-1.5 w-full rounded-full bg-edge">
+                    <div class="barra h-1.5 w-[60%] rounded-full bg-ink"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="relative flex items-center gap-4">
+                <span class="z-10 flex h-7 w-7 items-center justify-center rounded-full border border-edge bg-panel font-mono text-[10px] font-bold text-dim">B</span>
+                <div class="w-full rounded-xl border border-dashed border-edge px-4 py-3">
+                  <p class="text-sm text-dim">Slot libre — próximo sprint. Máx. 2 nodos en paralelo.</p>
+                </div>
+              </div>
+              <div class="relative flex items-center gap-4">
+                <span class="z-10 flex h-7 w-7 items-center justify-center rounded-full border border-edge bg-panel font-mono text-[10px] font-bold text-dim">W</span>
+                <div class="w-full rounded-xl border border-edge bg-panel px-4 py-3">
+                  <p class="text-sm"><strong class="font-black">Webs en sistema</strong> <span class="text-dim">· 3 proyectos activos</span></p>
+                  <div class="mt-2 flex gap-2 font-mono text-[10px] font-bold uppercase tracking-wide text-dim">
+                    <span class="rounded-full bg-surface border border-edge px-2 py-1">E-commerce · 80%</span>
+                    <span class="rounded-full bg-surface border border-edge px-2 py-1">Landing · 50%</span>
+                    <span class="rounded-full bg-surface border border-edge px-2 py-1">App interna · 30%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 grid gap-4 sm:grid-cols-2">
+            <div class="rounded-2xl border border-edge bg-surface p-6">
+              <h3 class="text-lg font-black tracking-tight">Próximas entregas</h3>
+              <ul class="mt-3 space-y-2 text-sm text-dim" data-entregas></ul>
+            </div>
+            <div class="rounded-2xl border border-edge bg-surface p-6">
+              <h3 class="text-lg font-black tracking-tight">Checklist semanal</h3>
+              <ul class="mt-3 space-y-2 text-sm" data-checklist>
+                <li><label class="flex items-center gap-3"><input type="checkbox" class="accent-ink"> Deploy de nodos</label></li>
+                <li><label class="flex items-center gap-3"><input type="checkbox" class="accent-ink"> Responder leads del sistema</label></li>
+                <li><label class="flex items-center gap-3"><input type="checkbox" class="accent-ink"> Conciliar pagos</label></li>
+                <li><label class="flex items-center gap-3"><input type="checkbox" class="accent-ink"> Cargar solución al catálogo</label></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section data-vista="config" class="hidden">
+          <h2 class="text-3xl font-black tracking-tight">Configuración.</h2>
+
+          <div class="mt-6 grid gap-4 lg:grid-cols-2">
+            <div class="rounded-2xl border border-edge bg-surface p-6">
+              <h3 class="text-lg font-black tracking-tight">Paquetes y precios</h3>
+              <div class="mt-4 space-y-3">
+                <div class="flex items-center justify-between rounded-xl border border-edge bg-panel p-3">
+                  <span class="text-sm font-medium">Automatización · un flujo</span>
+                  <input type="text" value="desde USD 400" class="w-32 rounded-full border border-edge bg-surface px-3 py-1.5 text-right font-mono text-xs font-bold focus:border-ink focus:outline-none">
+                </div>
+                <div class="flex items-center justify-between rounded-xl border border-edge bg-panel p-3">
+                  <span class="text-sm font-medium">Web + nodos</span>
+                  <input type="text" value="desde USD 900" class="w-32 rounded-full border border-edge bg-surface px-3 py-1.5 text-right font-mono text-xs font-bold focus:border-ink focus:outline-none">
+                </div>
+                <div class="flex items-center justify-between rounded-xl border border-edge bg-panel p-3">
+                  <span class="text-sm font-medium">App · sistema completo</span>
+                  <input type="text" value="desde USD 1.500" class="w-32 rounded-full border border-edge bg-surface px-3 py-1.5 text-right font-mono text-xs font-bold focus:border-ink focus:outline-none">
+                </div>
+              </div>
+            </div>
+            <div class="rounded-2xl border border-edge bg-surface p-6">
+              <h3 class="text-lg font-black tracking-tight">Canales y pagos</h3>
+              <div class="mt-4 space-y-3 text-sm">
+                <div class="flex items-center justify-between"><span class="text-dim">WhatsApp</span><span class="font-mono text-xs font-bold">+54 9 353 401-8769</span></div>
+                <div class="flex items-center justify-between"><span class="text-dim">Email</span><span class="font-mono text-xs font-bold">hola@arvure.com</span></div>
+                <div class="flex items-center justify-between"><span class="text-dim">Mercado Pago</span><span class="font-mono text-xs font-bold text-ok">conectado (demo)</span></div>
+                <div class="flex items-center justify-between"><span class="text-dim">Stripe</span><span class="font-mono text-xs font-bold text-ok">conectado (demo)</span></div>
+                <div class="flex items-center justify-between"><span class="text-dim">Nodos activos</span><span class="font-mono text-xs font-bold">6 conectados</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 rounded-2xl border border-edge bg-surface p-6">
+            <div class="flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <h3 class="text-lg font-black tracking-tight">Suscriptores del newsletter</h3>
+                <p class="mt-1 text-sm text-dim">Se suman desde el form de la home.</p>
+              </div>
+              <button class="rounded-full bg-ink px-5 py-2.5 text-sm font-bold text-panel transition hover:bg-black" data-exportar-csv>Exportar CSV ↓</button>
+            </div>
+            <div class="mt-4 overflow-x-auto" data-tabla-suscriptores></div>
+          </div>
+
+          <div class="mt-6 rounded-2xl border border-edge bg-surface p-6">
+            <h3 class="text-lg font-black tracking-tight">Nota de integración</h3>
+            <p class="mt-3 text-sm leading-relaxed text-dim">
+              Esta demo guarda datos en localStorage. Para producción: Supabase/Postgres, n8n webhooks, Mercado Pago Checkout y WhatsApp Cloud API. El layout ya está listo.
+            </p>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <div id="menu-movil" class="fixed inset-0 z-40 hidden flex-col bg-panel/95 p-6 backdrop-blur">
+    <button class="self-end text-2xl text-dim" data-cerrar-menu aria-label="Cerrar">×</button>
+    <nav class="mt-4 space-y-2" data-nav-movil></nav>
+  </div>
+
+  <dialog id="dialogo-nueva-orden" class="w-full max-w-md rounded-2xl border border-edge bg-surface p-0 text-ink backdrop:bg-ink/40">
+    <div class="flex items-center justify-between border-b border-edge px-6 py-4">
+      <span class="text-lg font-black tracking-tight">Nueva orden</span>
+      <button type="button" class="flex h-8 w-8 items-center justify-center rounded-full border border-edge text-xl leading-none transition hover:bg-ink hover:text-panel" data-cerrar-nueva aria-label="Cerrar">×</button>
+    </div>
+    <form class="space-y-4 p-6" data-form-nueva>
+      <div>
+        <label for="no-cliente" class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Cliente</label>
+        <input id="no-cliente" type="text" required class="w-full rounded-xl border border-edge bg-panel px-4 py-3 text-sm focus:border-ink focus:outline-none">
+      </div>
+      <div>
+        <label for="no-tipo" class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Tipo</label>
+        <select id="no-tipo" class="w-full rounded-xl border border-edge bg-panel px-4 py-3 text-sm focus:border-ink focus:outline-none">
+          <option>Automatización</option><option>Página web</option><option>Aplicación</option><option>Integración</option><option>Sistema completo</option>
+        </select>
+      </div>
+      <div>
+        <label for="no-detalle" class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Detalle</label>
+        <textarea id="no-detalle" rows="3" required class="w-full rounded-xl border border-edge bg-panel px-4 py-3 text-sm focus:border-ink focus:outline-none"></textarea>
+      </div>
+      <button type="submit" class="w-full rounded-full bg-ink px-6 py-3 text-sm font-bold text-panel transition hover:bg-black">Crear orden</button>
+    </form>
+  </dialog>
+
+  <dialog id="dialogo-idea" class="w-full max-w-lg rounded-2xl border border-edge bg-surface p-0 text-ink backdrop:bg-ink/40">
+    <div class="flex items-center justify-between border-b border-edge px-6 py-4">
+      <span class="text-lg font-black tracking-tight" data-idea-dialog-titulo>Nueva solución</span>
+      <button type="button" class="flex h-8 w-8 items-center justify-center rounded-full border border-edge text-xl leading-none transition hover:bg-ink hover:text-panel" data-cerrar-idea aria-label="Cerrar">×</button>
+    </div>
+    <form class="space-y-4 p-6" data-form-idea>
+      <input type="hidden" data-i-id>
+      <div>
+        <label for="i-titulo" class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Título</label>
+        <input id="i-titulo" type="text" required class="w-full rounded-xl border border-edge bg-panel px-4 py-3 text-sm focus:border-ink focus:outline-none">
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div>
+          <label for="i-tipo" class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Tipo</label>
+          <select id="i-tipo" class="w-full rounded-xl border border-edge bg-panel px-4 py-3 text-sm focus:border-ink focus:outline-none">
+            <option value="automatizacion">Automatización</option>
+            <option value="web">Web</option>
+            <option value="app">App</option>
+            <option value="nodo">Nodo</option>
+          </select>
+        </div>
+        <div>
+          <label for="i-eje" class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Eje</label>
+          <select id="i-eje" class="w-full rounded-xl border border-edge bg-panel px-4 py-3 text-sm focus:border-ink focus:outline-none">
+            <option value="Automatizaciones">Automatizaciones</option>
+            <option value="Webs">Webs</option>
+            <option value="Apps">Apps</option>
+            <option value="Nodos">Nodos</option>
+          </select>
+        </div>
+        <div>
+          <label for="i-estado" class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Estado</label>
+          <select id="i-estado" class="w-full rounded-xl border border-edge bg-panel px-4 py-3 text-sm focus:border-ink focus:outline-none">
+            <option value="disponible">Disponible</option>
+            <option value="vendida">En producción</option>
+          </select>
+        </div>
+        <div>
+          <label for="i-precio" class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Precio (texto)</label>
+          <input id="i-precio" type="text" placeholder="desde USD 400" class="w-full rounded-xl border border-edge bg-panel px-4 py-3 text-sm focus:border-ink focus:outline-none">
+        </div>
+      </div>
+      <div>
+        <label for="i-imagen-file" class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Imagen (desde tu equipo)</label>
+        <input id="i-imagen-file" type="file" accept="image/*" class="w-full rounded-xl border border-edge bg-panel px-4 py-3 text-sm file:mr-4 file:rounded-full file:border-0 file:bg-ink file:px-4 file:py-1 file:text-sm file:font-bold file:text-panel focus:border-ink focus:outline-none">
+        <input type="hidden" id="i-imagen">
+        <img id="i-preview" alt="Vista previa" class="mt-3 hidden h-32 w-full rounded-xl border border-edge object-cover">
+        <p class="mt-1 font-mono text-[10px] text-dim">Máx. ~2 MB (localStorage).</p>
+      </div>
+      <div>
+        <label for="i-desc" class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Descripción corta (card)</label>
+        <textarea id="i-desc" rows="2" required class="w-full rounded-xl border border-edge bg-panel px-4 py-3 text-sm focus:border-ink focus:outline-none"></textarea>
+      </div>
+      <div>
+        <label for="i-detalle" class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Detalle (modal)</label>
+        <textarea id="i-detalle" rows="3" class="w-full rounded-xl border border-edge bg-panel px-4 py-3 text-sm focus:border-ink focus:outline-none"></textarea>
+      </div>
+      <div class="flex gap-3">
+        <button type="button" class="rounded-full border border-play px-5 py-2.5 text-sm font-bold text-play transition hover:bg-play hover:text-panel" data-idea-borrar>Borrar</button>
+        <button type="submit" class="ml-auto rounded-full bg-ink px-6 py-2.5 text-sm font-bold text-panel transition hover:bg-black">Guardar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="dialogo-post" class="w-full max-w-lg rounded-2xl border border-edge bg-surface p-0 text-ink backdrop:bg-ink/40">
+    <div class="flex items-center justify-between border-b border-edge px-6 py-4">
+      <span class="text-lg font-black tracking-tight" data-post-dialog-titulo>Nuevo post</span>
+      <button type="button" class="flex h-8 w-8 items-center justify-center rounded-full border border-edge text-xl leading-none transition hover:bg-ink hover:text-panel" data-cerrar-post aria-label="Cerrar">×</button>
+    </div>
+    <form class="space-y-4 p-6" data-form-post>
+      <input type="hidden" data-p-id>
+      <div>
+        <label for="p-titulo" class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Título</label>
+        <input id="p-titulo" type="text" required class="w-full rounded-xl border border-edge bg-panel px-4 py-3 text-sm focus:border-ink focus:outline-none">
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label for="p-fecha" class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Fecha</label>
+          <input id="p-fecha" type="date" required class="w-full rounded-xl border border-edge bg-panel px-4 py-3 text-sm focus:border-ink focus:outline-none">
+        </div>
+        <div>
+          <label for="p-etiquetas" class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Etiquetas (coma)</label>
+          <input id="p-etiquetas" type="text" placeholder="automatización, nodos" class="w-full rounded-xl border border-edge bg-panel px-4 py-3 text-sm focus:border-ink focus:outline-none">
+        </div>
+      </div>
+      <div>
+        <label for="p-extracto" class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Extracto (tarjeta del blog)</label>
+        <textarea id="p-extracto" rows="2" required class="w-full rounded-xl border border-edge bg-panel px-4 py-3 text-sm focus:border-ink focus:outline-none"></textarea>
+      </div>
+      <div>
+        <label for="p-cuerpo" class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Cuerpo (párrafos con línea en blanco)</label>
+        <textarea id="p-cuerpo" rows="8" required class="w-full rounded-xl border border-edge bg-panel px-4 py-3 text-sm focus:border-ink focus:outline-none"></textarea>
+      </div>
+      <div class="flex gap-3">
+        <button type="button" class="rounded-full border border-play px-5 py-2.5 text-sm font-bold text-play transition hover:bg-play hover:text-panel" data-post-borrar>Borrar</button>
+        <button type="submit" class="ml-auto rounded-full bg-ink px-6 py-2.5 text-sm font-bold text-panel transition hover:bg-black">Publicar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script>
+    const MONEDA = n => '$ ' + n.toLocaleString('es-AR');
+    const hoy = new Date().toLocaleDateString('es-AR', { day: 'numeric', month: 'long', year: 'numeric' });
+    document.querySelectorAll('[data-fecha]').forEach(el => el.textContent = hoy);
+
+    const ESTADOS_ORDEN = {
+      nueva:      { etiqueta: 'Nueva',        clase: 'text-ink' },
+      produccion: { etiqueta: 'En producción', clase: 'text-ink' },
+      revision:   { etiqueta: 'En revisión', clase: 'text-dim' },
+      entregada:  { etiqueta: 'Entregada',    clase: 'text-ok' },
+      pagada:     { etiqueta: 'Pagada',       clase: 'text-ok' },
+    };
+
+    const ORDENES_DEFECTO = [
+      { id: 'ORD-026', cliente: 'E-commerce Demo', tipo: 'Automatización', detalle: 'Leads → CRM → WhatsApp + dashboard', estado: 'produccion', monto: 1450000, pagado: 725000 },
+      { id: 'ORD-025', cliente: 'Clínica del Centro', tipo: 'Página web', detalle: 'Web + panel + nodo de turnos', estado: 'produccion', monto: 950000, pagado: 475000 },
+      { id: 'ORD-024', cliente: 'Estudio Ríos', tipo: 'App', detalle: 'App interna de gestión + API', estado: 'revision', monto: 620000, pagado: 620000 },
+      { id: 'ORD-023', cliente: 'Mercado Norte', tipo: 'Integración', detalle: 'Scraping + sincronización de stock', estado: 'nueva', monto: 280000, pagado: 0 },
+      { id: 'ORD-022', cliente: 'Estudio Marrón', tipo: 'Sistema completo', detalle: 'Web + automatizaciones + pagos', estado: 'entregada', monto: 780000, pagado: 780000 },
+      { id: 'ORD-021', cliente: 'Logística Sur', tipo: 'Automatización', detalle: 'Nodo logística: pedidos → rutas', estado: 'pagada', monto: 1340000, pagado: 1340000 },
+    ];
+
+    const PAGOS_DEFECTO = [
+      { id: 'PAG-112', orden: 'ORD-025', cliente: 'Clínica del Centro', monto: 475000, metodo: 'Mercado Pago', estado: 'acreditado' },
+      { id: 'PAG-111', orden: 'ORD-026', cliente: 'E-commerce Demo', monto: 725000, metodo: 'Mercado Pago', estado: 'acreditado' },
+      { id: 'PAG-110', orden: 'ORD-023', cliente: 'Mercado Norte', monto: 280000, metodo: 'PayPal', estado: 'pendiente' },
+      { id: 'PAG-109', orden: 'ORD-024', cliente: 'Estudio Ríos', monto: 620000, metodo: 'Transferencia', estado: 'acreditado' },
+      { id: 'PAG-108', orden: 'ORD-021', cliente: 'Logística Sur', monto: 670000, metodo: 'Mercado Pago', estado: 'rechazado' },
+      { id: 'PAG-107', orden: 'ORD-022', cliente: 'Estudio Marrón', monto: 780000, metodo: 'Mercado Pago', estado: 'acreditado' },
+    ];
+
+    const CLIENTES_DEFECTO = [
+      { nombre: 'E-commerce Demo', contacto: 'María L. · wa.me', proyecto: 'Automatización leads', estado: 'activo' },
+      { nombre: 'Clínica del Centro', contacto: 'Dr. Robledo · email', proyecto: 'Web + nodos', estado: 'activo' },
+      { nombre: 'Estudio Ríos', contacto: 'Javier R. · email', proyecto: 'App interna', estado: 'en revisión' },
+      { nombre: 'Mercado Norte', contacto: 'Sofía P. · wa.me', proyecto: 'Integración stock', estado: 'nuevo' },
+      { nombre: 'Estudio Marrón', contacto: 'Lucía M. · email', proyecto: 'Sistema completo', estado: 'entregado' },
+    ];
+
+    const MENSAJES_CLIENTE_DEFECTO = [
+      { de: 'cliente', texto: 'Hola! ¿La automatización de leads también dispara WhatsApp?', hora: '08:12' },
+      { de: 'fabrica', texto: 'Sí — creamos el contacto en tu CRM y dispara WhatsApp en < 2 min con plantilla personalizada.', hora: '09:03' },
+    ];
+    const MENSAJES_COLEGA_DEFECTO = [
+      { de: 'colega', texto: 'Deploy del nodo CRM listo en staging. Falta webhook de WhatsApp.', hora: '10:20' },
+      { de: 'fabrica', texto: 'Perfecto, lo reviso hoy. ¿Podés agregar el retry con cola?', hora: '10:41' },
+    ];
+
+    const store = (k, v) => localStorage.setItem('fabrica_' + k, JSON.stringify(v));
+    const load = (k, d) => { try { const v = JSON.parse(localStorage.getItem('fabrica_' + k)); return v ?? d; } catch { return d; } };
+
+    let ordenes = load('ordenes', ORDENES_DEFECTO);
+    let pagos = load('pagos', PAGOS_DEFECTO);
+    let hiloCliente = load('hilo_cliente', MENSAJES_CLIENTE_DEFECTO);
+    let hiloColega = load('hilo_colega', MENSAJES_COLEGA_DEFECTO);
+    let filtroOrdenes = 'todas';
+    let catalogo = load('catalogo', window.CATALOGO_DEFECTO);
+    // migración tech: si hay ids legacy idea_*, reemplazar
+    if (catalogo.some(c => c.id && c.id.startsWith('idea_'))) {
+      catalogo = window.CATALOGO_DEFECTO.slice();
+      store('catalogo', catalogo);
+    }
+    let posts = load('posts', window.POSTS_DEFECTO);
+    if (posts.some(p => p.slug && p.slug.includes('arco-dramatico'))) {
+      posts = window.POSTS_DEFECTO.slice();
+      store('posts', posts);
+    }
+    let suscriptores = load('suscriptores', []);
+
+    const $ = s => document.querySelector(s);
+    const $$ = s => document.querySelectorAll(s);
+    const esc = s => (s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    function estadoTag(e) {
+      const o = ESTADOS_ORDEN[e] || { etiqueta: e, clase: 'text-dim' };
+      return '<span class="font-mono text-[10px] font-bold uppercase tracking-[0.15em] ' + (o.clase || 'text-dim') + '">' + o.etiqueta + '</span>';
+    }
+
+    function renderOrdenes() {
+      const visibles = ordenes.filter(o => filtroOrdenes === 'todas' ? true : filtroOrdenes === 'abiertas' ? ['nueva','produccion','revision'].includes(o.estado) : ['entregada','pagada'].includes(o.estado));
+      const filas = visibles.map(o => `
+        <tr class="border-t border-edge">
+          <td class="px-5 py-3 font-mono text-xs font-bold text-dim">${o.id}</td>
+          <td class="px-5 py-3"><strong class="font-black">${esc(o.cliente)}</strong><span class="block text-xs text-dim">${esc(o.tipo)}</span></td>
+          <td class="hidden px-5 py-3 text-sm text-dim md:table-cell">${esc(o.detalle)}</td>
+          <td class="px-5 py-3 text-sm font-bold">${MONEDA(o.monto)}</td>
+          <td class="px-5 py-3">${estadoTag(o.estado)}</td>
+          <td class="px-5 py-3 text-right">
+            <button data-avanzar="${o.id}" class="rounded-full border border-edge bg-panel px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-wide hover:border-ink hover:bg-ink hover:text-panel transition">avanzar →</button>
+          </td>
+        </tr>`).join('');
+      const cont = $('[data-tabla-ordenes]');
+      cont.innerHTML = '<table class="w-full text-sm"><thead><tr class="text-left font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-dim"><th class="px-5 py-3">Orden</th><th class="px-5 py-3">Cliente</th><th class="hidden px-5 py-3 md:table-cell">Detalle</th><th class="px-5 py-3">Monto</th><th class="px-5 py-3">Estado</th><th class="px-5 py-3"></th></tr></thead><tbody>' + filas + '</tbody></table>';
+      cont.querySelectorAll('[data-avanzar]').forEach(b => b.addEventListener('click', () => {
+        const o = ordenes.find(x => x.id === b.dataset.avanzar);
+        const paso = { nueva: 'produccion', produccion: 'revision', revision: 'entregada', entregada: 'pagada' };
+        if (paso[o.estado]) { o.estado = paso[o.estado]; store('ordenes', ordenes); renderTodo(); }
+      }));
+
+      const mini = $('[data-tabla-ordenes-mini]');
+      mini.innerHTML = '<table class="w-full text-sm"><thead><tr class="text-left font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-dim"><th class="py-2">Orden</th><th class="py-2">Cliente</th><th class="py-2">Estado</th></tr></thead><tbody>' +
+        ordenes.slice(0, 4).map(o => `<tr class="border-t border-edge"><td class="py-2.5 font-mono text-xs font-bold text-dim">${o.id}</td><td class="py-2.5 font-black">${esc(o.cliente)}</td><td class="py-2.5">${estadoTag(o.estado)}</td></tr>`).join('') + '</tbody></table>';
+      $('[data-badge-ordenes]').textContent = ordenes.filter(o => ['nueva','produccion','revision'].includes(o.estado)).length + ' activas';
+    }
+
+    function renderPagos() {
+      const filas = pagos.map(p => `
+        <tr class="border-t border-edge">
+          <td class="px-5 py-3 font-mono text-xs font-bold text-dim">${p.id}</td>
+          <td class="px-5 py-3 font-black">${esc(p.cliente)}</td>
+          <td class="hidden px-5 py-3 text-sm text-dim sm:table-cell">${p.orden}</td>
+          <td class="px-5 py-3 text-sm font-bold">${MONEDA(p.monto)}</td>
+          <td class="px-5 py-3 font-mono text-[11px] text-dim">${p.metodo}</td>
+          <td class="px-5 py-3">${p.estado === 'acreditado' ? '<span class="font-mono text-[10px] font-bold uppercase tracking-wide text-ok">acreditado</span>' : p.estado === 'pendiente' ? '<button data-pago="${p.id}" class="rounded-full bg-sol px-2 py-1 font-mono text-[10px] font-bold uppercase tracking-wide text-ink hover:bg-yellow-300">pendiente ✓</button>' : '<span class="font-mono text-[10px] font-bold uppercase tracking-wide text-play">rechazado</span>'}</td>
+        </tr>`).join('');
+      const cont = $('[data-tabla-pagos]');
+      cont.innerHTML = '<table class="w-full text-sm"><thead><tr class="text-left font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-dim"><th class="px-5 py-3">Pago</th><th class="px-5 py-3">Cliente</th><th class="hidden px-5 py-3 sm:table-cell">Orden</th><th class="px-5 py-3">Monto</th><th class="px-5 py-3">Método</th><th class="px-5 py-3">Estado</th></tr></thead><tbody>' + filas + '</tbody></table>';
+      cont.querySelectorAll('[data-pago]').forEach(b => b.addEventListener('click', () => {
+        const p = pagos.find(x => x.id === b.dataset.pago);
+        p.estado = 'acreditado'; store('pagos', pagos); renderTodo();
+      }));
+      const acreditado = pagos.filter(p => p.estado === 'acreditado').reduce((a, p) => a + p.monto, 0);
+      const pendiente = pagos.filter(p => p.estado === 'pendiente').reduce((a, p) => a + p.monto, 0);
+      $('[data-total-acreditado]').textContent = MONEDA(acreditado);
+      $('[data-total-pendiente]').textContent = MONEDA(pendiente);
+      $('[data-badge-pagos]').textContent = pendiente ? 'revisar' : '';
+    }
+
+    function renderClientes() {
+      $('[data-tabla-clientes]').innerHTML = '<table class="w-full text-sm"><thead><tr class="text-left font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-dim"><th class="px-5 py-3">Cliente</th><th class="px-5 py-3">Contacto</th><th class="px-5 py-3">Proyecto</th><th class="px-5 py-3">Estado</th></tr></thead><tbody>' +
+        CLIENTES_DEFECTO.map(c => `<tr class="border-t border-edge"><td class="px-5 py-3 font-black">${esc(c.nombre)}</td><td class="px-5 py-3 text-sm text-dim">${esc(c.contacto)}</td><td class="px-5 py-3 text-sm text-dim">${esc(c.proyecto)}</td><td class="px-5 py-3 font-mono text-[10px] font-bold uppercase tracking-wide text-dim">${c.estado}</td></tr>`).join('') + '</tbody></table>';
+    }
+
+    function renderHilos() {
+      const paint = (cont, hilos) => {
+        cont.innerHTML = hilos.map(m => `
+          <div class="flex ${m.de === 'fabrica' ? 'justify-end' : 'justify-start'}">
+            <div class="max-w-[80%] rounded-2xl border ${m.de === 'fabrica' ? 'border-ink bg-ink text-panel' : 'border-edge bg-panel'} px-4 py-2.5">
+              <p class="text-sm">${esc(m.texto)}</p>
+              <p class="mt-1 font-mono text-[10px] uppercase tracking-[0.15em] ${m.de === 'fabrica' ? 'text-panel/60' : 'text-dim'}">${m.de} · ${m.hora}</p>
+            </div>
+          </div>`).join('');
+      };
+      paint($('[data-hilo-cliente]'), hiloCliente);
+      paint($('[data-hilo-colega]'), hiloColega);
+      const noLeidos = hiloCliente.filter(m => m.de === 'cliente').length + hiloColega.filter(m => m.de === 'colega').length;
+      $('[data-badge-mensajes]').textContent = noLeidos ? noLeidos + ' nuevos' : '';
+    }
+
+    function renderKPIs() {
+      const activas = ordenes.filter(o => ['nueva','produccion','revision'].includes(o.estado)).length;
+      const pendiente = pagos.filter(p => p.estado === 'pendiente').length;
+      $('[data-kpi-ordenes]').textContent = activas;
+      $('[data-kpi-pagos]').textContent = pendiente;
+      $('[data-kpi-ingresos]').textContent = MONEDA(pagos.filter(p => p.estado === 'acreditado').reduce((a, p) => a + p.monto, 0));
+    }
+
+    function renderGrafico() {
+      const meses = [ ['Feb', 380], ['Mar', 420], ['Abr', 310], ['May', 540], ['Jun', 980], ['Jul', 1210], ['Ago', 1850] ];
+      const max = 2000;
+      $('[data-grafico]').innerHTML = meses.map(m => `
+        <div class="flex flex-1 flex-col items-center gap-2">
+          <div class="flex h-36 w-full items-end rounded-xl bg-edge">
+            <div class="barra w-full rounded-xl bg-ink" style="height:${(m[1] / max * 100)}%"></div>
+          </div>
+          <span class="font-mono text-[9px] font-bold uppercase tracking-wide text-dim">${m[0]}</span>
+          <span class="font-mono text-[9px] font-bold text-ink">${m[1] >= 1000 ? (m[1] / 1000).toFixed(1) + 'k' : m[1]}</span>
+        </div>`).join('');
+    }
+
+    function renderEntregas() {
+      $('[data-entregas]').innerHTML = [
+        ['25/08', 'Estudio Ríos — app · entrega QA'],
+        ['28/08', 'Demo — nodo automatización leads'],
+        ['31/08', 'Clínica Centro — web + turnos'],
+      ].map(d => `<li class="flex justify-between border-b border-edge pb-2"><span class="font-medium">${d[1]}</span><span class="font-mono text-[10px] font-bold text-ink">${d[0]}</span></li>`).join('');
+    }
+
+    function renderCatalogo() {
+      const filas = catalogo.map(i => `
+        <tr class="border-t border-edge">
+          <td class="px-5 py-3 font-mono text-xs font-bold text-dim">${i.id}</td>
+          <td class="px-5 py-3"><strong class="font-black">${esc(i.titulo)}</strong><span class="block text-xs text-dim">${i.tipo} · ${i.precio ? esc(i.precio) : 'precio a definir'}</span></td>
+          <td class="px-5 py-3 font-mono text-[10px] font-bold uppercase tracking-wide text-dim">${i.eje || ''}</td>
+          <td class="px-5 py-3 font-mono text-[10px] font-bold uppercase tracking-wide ${i.estado === 'vendida' ? 'text-dim' : 'text-ok'}">${i.estado === 'vendida' ? 'en prod.' : 'disponible'}</td>
+          <td class="px-5 py-3 text-right">
+            <button data-editar-idea="${i.id}" class="rounded-full border border-edge bg-panel px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-wide hover:border-ink hover:bg-ink hover:text-panel transition">editar →</button>
+          </td>
+        </tr>`).join('');
+      $('[data-tabla-catalogo]').innerHTML = '<table class="w-full text-sm"><thead><tr class="text-left font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-dim"><th class="px-5 py-3">Solución</th><th class="px-5 py-3">Título</th><th class="px-5 py-3">Eje</th><th class="px-5 py-3">Estado</th><th class="px-5 py-3"></th></tr></thead><tbody>' + filas + '</tbody></table>';
+      $('[data-tabla-catalogo]').querySelectorAll('[data-editar-idea]').forEach(b => b.addEventListener('click', () => abrirIdea(b.dataset.editarIdea)));
+      $('[data-badge-catalogo]').textContent = catalogo.filter(i => i.estado === 'disponible').length + ' disp.';
+      const kpi = $('[data-kpi-ideas]');
+      if (kpi) kpi.textContent = catalogo.length;
+      $('[data-kpi-vendidas]').textContent = catalogo.filter(i => i.estado === 'vendida').length + ' en prod.';
+    }
+
+    let ideaEditando = null;
+    function abrirIdea(id) {
+      const nextNum = String(catalogo.length + 1).padStart(3, '0');
+      const i = catalogo.find(x => x.id === id) || { id: 'sol_' + nextNum, tipo: 'automatizacion', estado: 'disponible', precio: '', imagen: '', detalle: '' };
+      ideaEditando = i;
+      $('[data-idea-dialog-titulo]').textContent = catalogo.some(x => x.id === id) ? 'Editar solución' : 'Nueva solución';
+      $('[data-i-id]').value = i.id;
+      $('#i-titulo').value = i.titulo || '';
+      $('#i-tipo').value = i.tipo || 'automatizacion';
+      $('#i-eje').value = i.eje || 'Automatizaciones';
+      $('#i-estado').value = i.estado || 'disponible';
+      $('#i-precio').value = i.precio || '';
+      $('#i-imagen').value = i.imagen || '';
+      const _prev = $('#i-preview');
+      if (i.imagen) { _prev.src = i.imagen; _prev.classList.remove('hidden'); } else { _prev.classList.add('hidden'); _prev.removeAttribute('src'); }
+      $('#i-imagen-file').value = '';
+      $('#i-desc').value = i.descripcion || '';
+      $('#i-detalle').value = i.detalle || '';
+      $('[data-idea-borrar]').classList.toggle('hidden', !catalogo.some(x => x.id === id));
+      $('#dialogo-idea').showModal();
+    }
+    $('[data-nueva-idea]').addEventListener('click', () => abrirIdea(null));
+    $('[data-cerrar-idea]').addEventListener('click', () => $('#dialogo-idea').close());
+    $('#i-imagen-file').addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (!file) return;
+      if (file.size > 2 * 1024 * 1024) { alert('Imagen muy pesada (máx 2MB)'); e.target.value = ''; return; }
+      const reader = new FileReader();
+      reader.onload = ev => {
+        $('#i-imagen').value = ev.target.result;
+        const preview = $('#i-preview');
+        preview.src = ev.target.result;
+        preview.classList.remove('hidden');
+      };
+      reader.readAsDataURL(file);
+    });
+    $('[data-form-idea]').addEventListener('submit', e => {
+      e.preventDefault();
+      const id = ideaEditando.id;
+      const guardar = {
+        id,
+        tipo: $('#i-tipo').value,
+        eje: $('#i-eje').value,
+        titulo: $('#i-titulo').value.trim(),
+        estado: $('#i-estado').value,
+        precio: $('#i-precio').value.trim(),
+        imagen: $('#i-imagen').value.trim() || IMG_DEFAULT,
+        descripcion: $('#i-desc').value.trim(),
+        detalle: $('#i-detalle').value.trim(),
+      };
+      const idx = catalogo.findIndex(x => x.id === id);
+      if (idx >= 0) catalogo[idx] = guardar; else catalogo.push(guardar);
+      store('catalogo', catalogo);
+      $('#dialogo-idea').close();
+      renderCatalogo();
+    });
+    $('[data-idea-borrar]').addEventListener('click', () => {
+      if (!ideaEditando) return;
+      catalogo = catalogo.filter(x => x.id !== ideaEditando.id);
+      store('catalogo', catalogo);
+      $('#dialogo-idea').close();
+      renderCatalogo();
+    });
+
+    function renderBlog() {
+      const filas = posts.map(p => `
+        <tr class="border-t border-edge">
+          <td class="px-5 py-3 font-mono text-xs font-bold text-dim">${p.fecha}</td>
+          <td class="px-5 py-3"><strong class="font-black">${esc(p.titulo)}</strong><span class="block text-xs text-dim">${(p.etiquetas || []).join(' · ')}</span></td>
+          <td class="px-5 py-3 text-right">
+            <button data-editar-post="${p.id}" class="rounded-full border border-edge bg-panel px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-wide hover:border-ink hover:bg-ink hover:text-panel transition">editar →</button>
+          </td>
+        </tr>`).join('');
+      $('[data-tabla-posts]').innerHTML = '<table class="w-full text-sm"><thead><tr class="text-left font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-dim"><th class="px-5 py-3">Fecha</th><th class="px-5 py-3">Título</th><th class="px-5 py-3"></th></tr></thead><tbody>' + filas + '</tbody></table>';
+      $('[data-tabla-posts]').querySelectorAll('[data-editar-post]').forEach(b => b.addEventListener('click', () => abrirPost(b.dataset.editarPost)));
+      $('[data-badge-blog]').textContent = posts.length + ' publicados';
+    }
+
+    let postEditando = null;
+    function abrirPost(id) {
+      const p = posts.find(x => x.id === id) || { id: 'post_' + String(posts.length + 1).padStart(3, '0'), fecha: new Date().toISOString().slice(0, 10), etiquetas: [] };
+      postEditando = p;
+      $('[data-post-dialog-titulo]').textContent = posts.some(x => x.id === id) ? 'Editar post' : 'Nuevo post';
+      $('[data-p-id]').value = p.id;
+      $('#p-titulo').value = p.titulo || '';
+      $('#p-fecha').value = p.fecha;
+      $('#p-etiquetas').value = (p.etiquetas || []).join(', ');
+      $('#p-extracto').value = p.extracto || '';
+      $('#p-cuerpo').value = p.cuerpo || '';
+      $('[data-post-borrar]').classList.toggle('hidden', !posts.some(x => x.id === id));
+      $('#dialogo-post').showModal();
+    }
+    $('[data-nuevo-post]').addEventListener('click', () => abrirPost(null));
+    $('[data-cerrar-post]').addEventListener('click', () => $('#dialogo-post').close());
+    function slugificar(s) {
+      return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    }
+    $('[data-form-post]').addEventListener('submit', e => {
+      e.preventDefault();
+      const id = postEditando.id;
+      const titulo = $('#p-titulo').value.trim();
+      const guardar = {
+        id,
+        slug: slugificar(titulo) || 'post-' + id,
+        titulo,
+        fecha: $('#p-fecha').value,
+        etiquetas: $('#p-etiquetas').value.split(',').map(s => s.trim()).filter(Boolean),
+        extracto: $('#p-extracto').value.trim(),
+        cuerpo: $('#p-cuerpo').value.trim(),
+      };
+      const idx = posts.findIndex(x => x.id === id);
+      if (idx >= 0) posts[idx] = guardar; else posts.unshift(guardar);
+      store('posts', posts);
+      $('#dialogo-post').close();
+      renderBlog();
+    });
+    $('[data-post-borrar]').addEventListener('click', () => {
+      if (!postEditando) return;
+      posts = posts.filter(x => x.id !== postEditando.id);
+      store('posts', posts);
+      $('#dialogo-post').close();
+      renderBlog();
+    });
+
+    function renderSuscriptores() {
+      const filas = suscriptores.length
+        ? suscriptores.map(s => `<tr class="border-t border-edge"><td class="px-5 py-3 font-medium">${esc(s.email)}</td><td class="px-5 py-3 font-mono text-xs font-bold text-dim">${s.fecha}</td></tr>`).join('')
+        : '<tr class="border-t border-edge"><td class="px-5 py-3 text-sm text-dim" colspan="2">Todavía no hay suscriptores — el form de la home los guarda acá.</td></tr>';
+      $('[data-tabla-suscriptores]').innerHTML = '<table class="w-full text-sm"><thead><tr class="text-left font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-dim"><th class="px-5 py-3">Email</th><th class="px-5 py-3">Fecha</th></tr></thead><tbody>' + filas + '</tbody></table>';
+    }
+    $('[data-exportar-csv]').addEventListener('click', () => {
+      const csv = 'email,fecha\n' + suscriptores.map(s => s.email + ',' + s.fecha).join('\n');
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'suscriptores.csv';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+
+    const CAMPOS_IMPORT = [
+      { k: 'titulo', label: 'Título', alias: ['titulo', 'title', 'nombre', 'producto', 'articulo', 'name', 'item'] },
+      { k: 'tipo', label: 'Tipo', alias: ['tipo', 'type', 'categoria', 'category', 'linea', 'formato'] },
+      { k: 'estado', label: 'Estado', alias: ['estado', 'status', 'disponibilidad', 'availability'] },
+      { k: 'precio', label: 'Precio', alias: ['precio', 'price', 'valor', 'costo', 'importe', 'amount'] },
+      { k: 'imagen', label: 'Imagen (URL)', alias: ['imagen', 'image', 'img', 'foto', 'photo', 'url', 'thumbnail', 'thumb', 'picture'] },
+      { k: 'eje', label: 'Eje', alias: ['eje', 'axis', 'categoria', 'category', 'eje', 'nodo', 'automatizacion', 'web', 'app'] },
+      { k: 'descripcion', label: 'Descripción corta', alias: ['descripcion', 'description', 'resumen', 'excerpt', 'bajada', 'subtitulo'] },
+      { k: 'detalle', label: 'Detalle', alias: ['detalle', 'detalles', 'body', 'contenido', 'content', 'texto', 'cuerpo'] },
+    ];
+    const IMG_DEFAULT = 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=900&auto=format&fit=crop';
+    let datosImport = null;
+    let mapeoImport = {};
+
+    const normalizar = s => (s || '').toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+
+    function parseCSVLine(linea, sep) {
+      const out = [];
+      let cur = '', inQ = false;
+      for (let i = 0; i < linea.length; i++) {
+        const c = linea[i];
+        if (inQ) {
+          if (c === '"') { if (linea[i + 1] === '"') { cur += '"'; i++; } else inQ = false; }
+          else cur += c;
+        } else if (c === '"') inQ = true;
+        else if (c === sep) { out.push(cur); cur = ''; }
+        else cur += c;
+      }
+      out.push(cur);
+      return out.map(s => s.trim());
+    }
+
+    function parseEntrada(texto, modo) {
+      texto = texto.trim();
+      if (!texto) return null;
+      if (modo !== 'csv' && texto.startsWith('[')) {
+        try {
+          const arr = JSON.parse(texto);
+          if (Array.isArray(arr)) {
+            const headers = [...new Set(arr.flatMap(o => Object.keys(o || {})))];
+            return { headers, filas: arr };
+          }
+        } catch {}
+        return null;
+      }
+      const lineas = texto.split(/\r?\n/).filter(l => l.trim());
+      const primera = lineas[0] || '';
+      const sep = [',', ';', '\t'].map(s => ({ s, n: primera.split(s).length - 1 })).sort((a, b) => b.n - a.n)[0];
+      if ((modo === 'csv' || modo === 'auto') && lineas.length > 1 && sep.n >= 1) {
+        const headers = parseCSVLine(primera, sep.s).filter(Boolean);
+        if (!headers.length) return null;
+        const filas = lineas.slice(1).map(l => {
+          const vals = parseCSVLine(l, sep.s);
+          const o = {};
+          headers.forEach((h, i) => o[h] = vals[i] ?? '');
+          return o;
+        });
+        return { headers, filas };
+      }
+      return { headers: ['titulo'], filas: lineas.map(l => ({ titulo: l.replace(/^[-•*]\s*/, '').trim() })) };
+    }
+
+    function autoMapear(headers) {
+      const map = {};
+      CAMPOS_IMPORT.forEach(c => {
+        map[c.k] = headers.find(h => c.alias.includes(normalizar(h))) || null;
+      });
+      if (!map.titulo && headers.length) map.titulo = headers[0];
+      return map;
+    }
+
+    function valorFila(fila, clave) {
+      const v = fila[clave];
+      if (v == null) return '';
+      if (Array.isArray(v)) return v.filter(x => typeof x === 'string').join(', ');
+      if (typeof v === 'object') return '';
+      return String(v).trim();
+    }
+
+    function construirIdea(fila, map) {
+      const idea = { titulo: '', descripcion: '', detalle: '', precio: '', imagen: '', estado: 'disponible', tipo: 'automatizacion', eje: 'Automatizaciones' };
+      CAMPOS_IMPORT.forEach(c => {
+        const v = valorFila(fila, map[c.k]);
+        if (!v) return;
+        if (c.k === 'titulo') idea.titulo = v;
+        else if (c.k === 'precio') idea.precio = v;
+        else if (c.k === 'imagen') idea.imagen = v;
+        else if (c.k === 'estado') idea.estado = /vend|sold|produccion/i.test(normalizar(v)) ? 'vendida' : 'disponible';
+        else if (c.k === 'tipo') {
+          const n = normalizar(v);
+          if (/web/.test(n)) idea.tipo = 'web';
+          else if (/app/.test(n)) idea.tipo = 'app';
+          else if (/nodo/.test(n)) idea.tipo = 'nodo';
+          else idea.tipo = 'automatizacion';
+        }
+        else if (c.k === 'eje') idea.eje = ['Automatizaciones','Webs','Apps','Nodos'].find(x => normalizar(x) === normalizar(v)) || v;
+        else if (c.k === 'descripcion') idea.descripcion = v;
+        else if (c.k === 'detalle') idea.detalle = v;
+      });
+      Object.values(fila).forEach(v => {
+        const s = Array.isArray(v) ? v.join(' ') : String(v ?? '');
+        if (!idea.imagen && /https?:\/\/\S+\.(jpe?g|png|webp|gif)/i.test(s)) idea.imagen = s.match(/https?:\/\/\S+/)[0];
+      });
+      if (!idea.titulo) return null;
+      if (!idea.descripcion) idea.descripcion = idea.titulo;
+      if (!idea.detalle) idea.detalle = idea.descripcion;
+      if (!idea.imagen) idea.imagen = IMG_DEFAULT;
+      return idea;
+    }
+
+    function ideasDesdeImport() {
+      if (!datosImport) return [];
+      return datosImport.filas.map(f => construirIdea(f, mapeoImport)).filter(Boolean);
+    }
+
+    function renderMapeo() {
+      const cont = $('[data-mapeo-import]');
+      cont.innerHTML = CAMPOS_IMPORT.map(c => `
+        <div class="flex items-center justify-between gap-3">
+          <span class="text-sm font-medium text-dim">${c.label}</span>
+          <select data-mapa="${c.k}" class="w-48 rounded-full border border-edge bg-panel px-3 py-2 text-xs font-bold focus:border-ink focus:outline-none">
+            <option value="">— no usar —</option>
+            ${datosImport.headers.map(h => `<option value="${esc(h)}" ${mapeoImport[c.k] === h ? 'selected' : ''}>${esc(h)}</option>`).join('')}
+          </select>
+        </div>`).join('');
+      cont.querySelectorAll('[data-mapa]').forEach(sel => sel.addEventListener('change', () => {
+        mapeoImport[sel.dataset.mapa] = sel.value || null;
+        renderPreview();
+      }));
+    }
+
+    function renderPreview() {
+      const ideas = ideasDesdeImport();
+      const btn = $('[data-importar-catalogo]');
+      $('[data-preview-import]').innerHTML = ideas.length ? '<table class="w-full text-xs"><thead><tr class="text-left font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-dim"><th class="py-2">Título</th><th class="py-2">Tipo</th><th class="py-2">Estado</th><th class="py-2">Precio</th></tr></thead><tbody>' +
+        ideas.slice(0, 8).map(i => `<tr class="border-t border-edge"><td class="py-2 pr-3 font-black">${esc(i.titulo)}</td><td class="py-2 pr-3">${i.tipo}</td><td class="py-2 pr-3 font-mono text-[10px] font-bold uppercase ${i.estado === 'vendida' ? 'text-dim' : 'text-ok'}">${i.estado}</td><td class="py-2">${esc(i.precio) || '—'}</td></tr>`).join('') +
+        (ideas.length > 8 ? `<tr class="border-t border-edge"><td colspan="4" class="py-2 text-dim">… y ${ideas.length - 8} más</td></tr>` : '') + '</tbody></table>'
+        : '<p class="text-sm text-dim">No se detectaron artículos válidos (falta el título).</p>';
+      btn.classList.toggle('hidden', !ideas.length);
+      btn.textContent = 'Importar ' + ideas.length + ' solución' + (ideas.length === 1 ? '' : 'es');
+      $('[data-importar-resumen]').textContent = '';
+      $('[data-badge-importador]').textContent = ideas.length ? ideas.length + ' listos' : '';
+    }
+
+    $('[data-previsualizar-import]').addEventListener('click', () => {
+      datosImport = parseEntrada($('[data-texto-import]').value, $('[data-formato-import]').value);
+      if (!datosImport || !datosImport.filas.length) {
+        $('[data-mapeo-import]').innerHTML = '<p class="text-sm font-medium text-play">No se pudo leer el formato — revisá el texto.</p>';
+        $('[data-preview-import]').innerHTML = '';
+        $('[data-importar-catalogo]').classList.add('hidden');
+        return;
+      }
+      mapeoImport = autoMapear(datosImport.headers);
+      renderMapeo();
+      renderPreview();
+    });
+
+    $('[data-importar-catalogo]').addEventListener('click', () => {
+      const nuevas = ideasDesdeImport();
+      let importadas = 0, duplicadas = 0;
+      nuevas.forEach(n => {
+        if (catalogo.some(i => normalizar(i.titulo) === normalizar(n.titulo))) { duplicadas++; return; }
+        const nums = catalogo.map(i => parseInt((i.id || '').replace(/\D/g, '')) || 0);
+        catalogo.push({ id: 'sol_' + String(Math.max(0, ...nums) + 1).padStart(3, '0'), ...n });
+        importadas++;
+      });
+      store('catalogo', catalogo);
+      renderCatalogo();
+      $('[data-preview-import]').innerHTML = '';
+      $('[data-importar-catalogo]').classList.add('hidden');
+      $('[data-badge-importador]').textContent = '';
+      $('[data-importar-resumen]').textContent = `Listo · importadas ${importadas} · duplicadas ${duplicadas}`;
+    });
+
+    $('[data-ejemplo-import]').addEventListener('click', () => {
+      $('[data-texto-import]').value = 'titulo,tipo,estado,precio,descripcion\n"Automatización leads",automatizacion,disponible,"desde USD 400",Leads → CRM → WhatsApp\n"Web institucional",web,disponible,"desde USD 900",Sitio Next.js + CMS\n"App de pedidos",app,vendida,,App interna para logística';
+      $('[data-formato-import]').value = 'auto';
+    });
+    $('[data-limpiar-import]').addEventListener('click', () => {
+      $('[data-texto-import]').value = '';
+      $('[data-mapeo-import]').innerHTML = '<p class="text-sm text-dim">Pegá los datos y tocá «Analizar» — el mapeo aparece acá.</p>';
+      $('[data-preview-import]').innerHTML = '';
+      $('[data-importar-catalogo]').classList.add('hidden');
+      $('[data-importar-resumen]').textContent = '';
+      $('[data-badge-importador]').textContent = '';
+    });
+
+    $('[data-export-catalogo]').addEventListener('click', () => {
+      const csvEsc = s => { s = String(s ?? ''); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
+      const heads = ['id', 'titulo', 'tipo', 'eje', 'estado', 'precio', 'imagen', 'descripcion', 'detalle'];
+      const csv = heads.join(',') + '\n' + catalogo.map(i => heads.map(h => csvEsc(i[h])).join(',')).join('\n');
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'catalogo.csv';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+
+    function renderTodo() {
+      renderOrdenes(); renderPagos(); renderClientes(); renderHilos(); renderKPIs(); renderGrafico(); renderEntregas(); renderCatalogo(); renderBlog(); renderSuscriptores();
+    }
+
+    const SECCIONES = { dashboard: 'Dashboard', contenido: 'Contenido modular', catalogo: 'Catálogo de soluciones', importar: 'Importador masivo', ordenes: 'Órdenes de trabajo', pagos: 'Pagos', mensajes: 'Mensajes', blog: 'Blog', clientes: 'Clientes', agenda: 'Agenda de nodos', config: 'Configuración' };
+
+    function irA(seccion) {
+      $$('[data-vista]').forEach(v => v.classList.toggle('hidden', v.dataset.vista !== seccion));
+      $('[data-titulo-seccion]').textContent = SECCIONES[seccion];
+      $$('[data-nav] button, [data-nav-movil] button').forEach(b => {
+        const activo = b.dataset.seccion === seccion;
+        b.classList.toggle('bg-ink', activo);
+        b.classList.toggle('text-panel', activo);
+        b.classList.toggle('text-dim', !activo);
+      });
+    }
+
+    $$('[data-nav] button, [data-nav-movil] button').forEach(b => b.addEventListener('click', () => { irA(b.dataset.seccion); $('[data-cerrar-menu]').click(); }));
+
+    $('[data-menu]').addEventListener('click', () => {
+      const nav = $('[data-nav-movil]');
+      nav.innerHTML = '';
+      Object.keys(SECCIONES).forEach(s => {
+        const b = document.createElement('button');
+        b.dataset.seccion = s;
+        b.className = 'block w-full rounded-xl px-3 py-2.5 text-left text-sm font-medium';
+        b.textContent = '▶ ' + SECCIONES[s];
+        b.addEventListener('click', () => { irA(s); $('[data-cerrar-menu]').click(); });
+        nav.appendChild(b);
+      });
+      $('#menu-movil').classList.remove('hidden');
+      $('#menu-movil').classList.add('flex');
+    });
+    $('[data-cerrar-menu]').addEventListener('click', () => { $('#menu-movil').classList.add('hidden'); $('#menu-movil').classList.remove('flex'); });
+    $('[data-salir]').addEventListener('click', () => { localStorage.removeItem('fabrica_admin'); location.reload(); });
+
+    $('[data-login-admin]').addEventListener('submit', e => {
+      e.preventDefault();
+      store('admin', { sesion: true });
+      $('#login').classList.add('hidden');
+      $('#app').classList.remove('hidden');
+      renderTodo(); irA('dashboard');
+    });
+    if (load('admin', null)) {
+      $('#login').classList.add('hidden');
+      $('#app').classList.remove('hidden');
+      renderTodo(); irA('dashboard');
+    }
+
+    $$('[data-filtros-ordenes] button').forEach(b => b.addEventListener('click', () => {
+      filtroOrdenes = b.dataset.f;
+      $$('[data-filtros-ordenes] button').forEach(x => {
+        x.classList.toggle('bg-ink', x === b);
+        x.classList.toggle('text-panel', x === b);
+        x.classList.toggle('border-ink', x === b);
+        x.classList.toggle('bg-surface', x !== b);
+        x.classList.toggle('border-edge', x !== b);
+        x.classList.toggle('text-dim', x !== b);
+      });
+      renderOrdenes();
+    }));
+
+    $('[data-mensaje-cliente]').addEventListener('submit', e => {
+      e.preventDefault();
+      const texto = $('[data-mensaje-cliente] input').value.trim();
+      if (!texto) return;
+      const hora = new Date().toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
+      hiloCliente.push({ de: 'fabrica', texto, hora });
+      store('hilo_cliente', hiloCliente);
+      e.target.reset();
+      renderHilos();
+    });
+
+    $('[data-mensaje-colega]').addEventListener('submit', e => {
+      e.preventDefault();
+      const texto = $('[data-input-colega]').value.trim();
+      if (!texto) return;
+      const de = $('[data-como-colega]').checked ? 'colega' : 'fabrica';
+      const hora = new Date().toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
+      hiloColega.push({ de, texto, hora });
+      store('hilo_colega', hiloColega);
+      e.target.reset();
+      renderHilos();
+    });
+
+    $('[data-nueva-orden]').addEventListener('click', () => $('#dialogo-nueva-orden').showModal());
+    $('[data-cerrar-nueva]').addEventListener('click', () => $('#dialogo-nueva-orden').close());
+    $('[data-form-nueva]').addEventListener('submit', e => {
+      e.preventDefault();
+      const id = 'ORD-' + String(100 + ordenes.length + 1);
+      ordenes.unshift({
+        id, cliente: $('#no-cliente').value.trim(), tipo: $('#no-tipo').value,
+        detalle: $('#no-detalle').value.trim(), estado: 'nueva', monto: 0, pagado: 0,
+      });
+      store('ordenes', ordenes);
+      $('#dialogo-nueva-orden').close();
+      e.target.reset();
+      renderTodo();
+    });
+
+    let hero = load('hero', window.HERO_DEFECTO);
+    let ordenSecciones = load('orden_secciones', window.SECCIONES_DEFECTO);
+
+    function heroFormHTML(){
+      return `<div class="rounded-2xl border border-edge bg-surface p-6 shadow-card">
+              <h3 class="text-lg font-black tracking-tight">Hero — <span class="bg-ink text-panel px-1">inicio</span></h3>
+              <form class="mt-4 space-y-4" data-form-hero>
+                <div>
+                  <label class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Badge</label>
+                  <input id="h-badge" type="text" class="w-full rounded-xl border border-edge bg-panel px-4 py-2.5 text-sm focus:border-ink focus:outline-none">
+                </div>
+                <div class="grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <label class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Título línea 1</label>
+                    <input id="h-t1" type="text" class="w-full rounded-xl border border-edge bg-panel px-4 py-2.5 text-sm focus:border-ink focus:outline-none">
+                  </div>
+                  <div>
+                    <label class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Título línea 2 (acento)</label>
+                    <input id="h-t2" type="text" class="w-full rounded-xl border border-edge bg-panel px-4 py-2.5 text-sm focus:border-ink focus:outline-none">
+                  </div>
+                </div>
+                <div>
+                  <label class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Copete / párrafo</label>
+                  <textarea id="h-parrafo" rows="4" class="w-full rounded-xl border border-edge bg-panel px-4 py-2.5 text-sm focus:border-ink focus:outline-none"></textarea>
+                </div>
+                <div class="grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <label class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Botón 1 texto</label>
+                    <input id="h-b1" type="text" class="w-full rounded-xl border border-edge bg-panel px-4 py-2.5 text-sm focus:border-ink focus:outline-none">
+                  </div>
+                  <div>
+                    <label class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Botón 1 link (#...)</label>
+                    <input id="h-b1l" type="text" class="w-full rounded-xl border border-edge bg-panel px-4 py-2.5 text-sm focus:border-ink focus:outline-none">
+                  </div>
+                </div>
+                <div class="grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <label class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Botón 2 texto</label>
+                    <input id="h-b2" type="text" class="w-full rounded-xl border border-edge bg-panel px-4 py-2.5 text-sm focus:border-ink focus:outline-none">
+                  </div>
+                  <div>
+                    <label class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Botón 2 link</label>
+                    <input id="h-b2l" type="text" class="w-full rounded-xl border border-edge bg-panel px-4 py-2.5 text-sm focus:border-ink focus:outline-none">
+                  </div>
+                </div>
+                <div>
+                  <label class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Línea ejes</label>
+                  <input id="h-ejes" type="text" class="w-full rounded-xl border border-edge bg-panel px-4 py-2.5 text-sm focus:border-ink focus:outline-none">
+                </div>
+                <div>
+                  <label class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Imagen hero</label>
+                  <input id="h-imagen-file" type="file" accept="image/*" class="w-full rounded-xl border border-edge bg-panel px-4 py-2.5 text-sm file:mr-4 file:rounded-full file:border-0 file:bg-ink file:px-4 file:py-1 file:text-sm file:font-bold file:text-panel focus:border-ink focus:outline-none">
+                  <input type="hidden" id="h-imagen">
+                  <img id="h-preview" alt="Vista previa hero" class="mt-3 hidden h-32 w-full rounded-xl border border-edge object-cover">
+                  <p class="mt-1 font-mono text-[10px] text-dim">Dejá vacío para mantener la actual. Máx. ~2 MB.</p>
+                </div>
+                <div class="grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <label class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Figcaption</label>
+                    <input id="h-fig" type="text" class="w-full rounded-xl border border-edge bg-panel px-4 py-2.5 text-sm focus:border-ink focus:outline-none">
+                  </div>
+                  <div>
+                    <label class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Figcaption link</label>
+                    <input id="h-figl" type="text" class="w-full rounded-xl border border-edge bg-panel px-4 py-2.5 text-sm focus:border-ink focus:outline-none">
+                  </div>
+                </div>
+                <div class="flex gap-3">
+                  <button type="button" class="rounded-full border border-edge bg-surface px-4 py-2.5 text-sm font-bold text-dim transition hover:border-ink hover:text-ink" data-hero-reset>Restaurar</button>
+                  <button type="submit" class="ml-auto rounded-full bg-ink px-6 py-2.5 text-sm font-bold text-panel transition hover:bg-black">Guardar hero</button>
+                </div>
+              </form>
+            </div>`;
+    }
+
+    function seccionCardHTML(id, nombre, idx, visible, isHero){
+      if (isHero) return heroFormHTML();
+      return `<div class="rounded-2xl border ${visible ? 'border-edge' : 'border-dashed border-edge opacity-60'} bg-surface p-4">
+        <div class="flex items-center justify-between gap-2">
+          <h4 class="text-base font-black"><span class="font-mono text-xs font-bold text-dim mr-2">${String(idx+1).padStart(2,'0')}</span>${nombre}</h4>
+          <span class="flex items-center gap-1">
+            <button type="button" data-orden-up="${idx}" class="rounded-full border border-edge bg-panel px-2 py-1 font-mono text-xs font-bold ${idx===0?'opacity-30':''}" ${idx===0?'disabled':''}>↑</button>
+            <button type="button" data-orden-down="${idx}" class="rounded-full border border-edge bg-panel px-2 py-1 font-mono text-xs font-bold ${idx===ordenSecciones.length-1?'opacity-30':''}" ${idx===ordenSecciones.length-1?'disabled':''}>↓</button>
+            <button type="button" data-orden-vis="${idx}" class="rounded-full border ${visible ? 'border-ink bg-ink text-panel' : 'border-edge text-dim'} px-2 py-1 font-mono text-xs font-bold">${visible ? '●' : '○'}</button>
+          </span>
+        </div>
+        <p class="mt-2 text-xs text-dim">ID: ${id} · ${visible ? 'visible' : 'oculta'}</p>
+      </div>`;
+    }
+
+    function renderEditoresOrden(){
+      const cont = document.querySelector('[data-editores-orden]');
+      if (!cont) return;
+      cont.innerHTML = ordenSecciones.map((o, idx) => {
+        const id = typeof o === 'string' ? o : o.id;
+        const visible = typeof o === 'string' ? true : o.visible !== false;
+        const nombre = (window.SECCIONES_DEFECTO.find(s => s.id === id)?.nombre) || JSON.parse(localStorage.getItem('fabrica_custom_nombres')||'{}')[id] || id;
+        const isHero = id === 'inicio';
+        return seccionCardHTML(id, nombre, idx, visible, isHero);
+      }).join('') + `<button type="button" class="w-full rounded-full border border-dashed border-edge bg-surface px-4 py-2.5 text-sm font-bold text-dim transition hover:border-ink hover:text-ink" data-agregar-seccion>+ Agregar sección</button>`;
+      const hForm = cont.querySelector('[data-form-hero]');
+      if (hForm) {
+        document.getElementById('h-badge').value = hero.badge || '';
+        document.getElementById('h-t1').value = hero.titulo1 || '';
+        document.getElementById('h-t2').value = hero.titulo2 || '';
+        document.getElementById('h-parrafo').value = (hero.parrafo || '').replace(/<[^>]*>/g, '');
+        document.getElementById('h-b1').value = hero.boton1 || '';
+        document.getElementById('h-b1l').value = hero.boton1link || '';
+        document.getElementById('h-b2').value = hero.boton2 || '';
+        document.getElementById('h-b2l').value = hero.boton2link || '';
+        document.getElementById('h-ejes').value = hero.ejes || '';
+        document.getElementById('h-imagen').value = hero.imagen || '';
+        const prev = document.getElementById('h-preview');
+        if (hero.imagen) { prev.src = hero.imagen; prev.classList.remove('hidden'); } else { prev.classList.add('hidden'); }
+        document.getElementById('h-fig').value = hero.figcaption || '';
+        document.getElementById('h-figl').value = hero.figlink || '';
+        hForm.addEventListener('submit', e => {
+          e.preventDefault();
+          hero = {
+            badge: document.getElementById('h-badge').value.trim(),
+            titulo1: document.getElementById('h-t1').value.trim(),
+            titulo2: document.getElementById('h-t2').value.trim(),
+            parrafo: document.getElementById('h-parrafo').value.trim(),
+            boton1: document.getElementById('h-b1').value.trim(),
+            boton1link: document.getElementById('h-b1l').value.trim(),
+            boton2: document.getElementById('h-b2').value.trim(),
+            boton2link: document.getElementById('h-b2l').value.trim(),
+            ejes: document.getElementById('h-ejes').value.trim(),
+            imagen: document.getElementById('h-imagen').value.trim(),
+            figcaption: document.getElementById('h-fig').value.trim(),
+            figlink: document.getElementById('h-figl').value.trim()
+          };
+          store('hero', hero);
+          alert('Hero guardado. Recargá la home para verlo.');
+          renderPreview();
+        });
+        const fileIn = document.getElementById('h-imagen-file');
+        if (fileIn) fileIn.addEventListener('change', e => {
+          const file = e.target.files[0];
+          if (!file) return;
+          if (file.size > 2*1024*1024) { alert('Imagen muy pesada (máx 2MB)'); e.target.value=''; return; }
+          const r = new FileReader();
+          r.onload = ev => { document.getElementById('h-imagen').value = ev.target.result; const pr = document.getElementById('h-preview'); pr.src = ev.target.result; pr.classList.remove('hidden'); renderPreview(); };
+          r.readAsDataURL(file);
+        });
+        cont.querySelector('[data-hero-reset]')?.addEventListener('click', () => { localStorage.removeItem('fabrica_hero'); hero = structuredClone(window.HERO_DEFECTO); renderEditoresOrden(); renderPreview(); alert('Hero restaurado.'); });
+      }
+      cont.querySelectorAll('[data-orden-up]').forEach(b => b.addEventListener('click', () => { const i = parseInt(b.dataset.ordenUp); if (i>0) { const tmp = ordenSecciones[i-1]; ordenSecciones[i-1]=ordenSecciones[i]; ordenSecciones[i]=tmp; renderEditoresOrden(); renderPreview(); } }));
+      cont.querySelectorAll('[data-orden-down]').forEach(b => b.addEventListener('click', () => { const i = parseInt(b.dataset.ordenDown); if (i<ordenSecciones.length-1) { const tmp = ordenSecciones[i+1]; ordenSecciones[i+1]=ordenSecciones[i]; ordenSecciones[i]=tmp; renderEditoresOrden(); renderPreview(); } }));
+      cont.querySelectorAll('[data-orden-vis]').forEach(b => b.addEventListener('click', () => { const i = parseInt(b.dataset.ordenVis); const o = ordenSecciones[i]; if (typeof o === 'string') ordenSecciones[i] = { id: o, visible: false }; else o.visible = !o.visible; renderEditoresOrden(); renderPreview(); }));
+      cont.querySelector('[data-agregar-seccion]')?.addEventListener('click', () => {
+        const nombre = prompt('Nombre de la nueva sección');
+        if (!nombre) return;
+        const id = nombre.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+        if (!id) return;
+        if (ordenSecciones.some(o => (typeof o === 'string' ? o : o.id) === id)) { alert('Ya existe'); return; }
+        ordenSecciones.push({ id, nombre, visible: true });
+        let customs = JSON.parse(localStorage.getItem('fabrica_custom_nombres') || '{}');
+        customs[id] = nombre;
+        localStorage.setItem('fabrica_custom_nombres', JSON.stringify(customs));
+        renderEditoresOrden(); renderPreview();
+      });
+      ['#h-badge','#h-t1','#h-t2','#h-parrafo','#h-b1','#h-b1l','#h-b2','#h-b2l','#h-ejes','#h-fig','#h-figl'].forEach(sel => {
+        const el = document.getElementById(sel.slice(1));
+        if (el) el.addEventListener('input', renderPreview);
+      });
+    }
+
+    function renderHeroForm(){}
+    function renderOrdenLista(){ renderEditoresOrden(); }
+    renderEditoresOrden();
+    function renderPreview(){
+      const b = document.querySelector('#h-badge')?.value.trim() || hero.badge;
+      const t1 = document.querySelector('#h-t1')?.value.trim() || hero.titulo1;
+      const t2 = document.querySelector('#h-t2')?.value.trim() || hero.titulo2;
+      const pa = document.querySelector('#h-parrafo')?.value.trim() || hero.parrafo;
+      const b1 = document.querySelector('#h-b1')?.value.trim() || hero.boton1;
+      const b2 = document.querySelector('#h-b2')?.value.trim() || hero.boton2;
+      const ej = document.querySelector('#h-ejes')?.value.trim() || hero.ejes;
+      const rb = document.querySelector('[data-preview-badge]'); if (rb) rb.textContent = b;
+      const rt1 = document.querySelector('[data-preview-t1]'); if (rt1) rt1.textContent = t1;
+      const rt2 = document.querySelector('[data-preview-t2]'); if (rt2) rt2.textContent = t2;
+      const rp = document.querySelector('[data-preview-parrafo]'); if (rp) rp.textContent = pa.replace(/<[^>]*>/g, '').slice(0,140) + (pa.length>140?'...':'');
+      const rb1 = document.querySelector('[data-preview-b1]'); if (rb1) rb1.textContent = b1;
+      const rb2 = document.querySelector('[data-preview-b2]'); if (rb2) rb2.textContent = b2;
+      const re = document.querySelector('[data-preview-ejes]'); if (re) re.textContent = ej;
+      const cont = document.querySelector('[data-preview-orden]');
+      if (cont) cont.innerHTML = ordenSecciones.map((o, i) => {
+        const id = typeof o === 'string' ? o : o.id;
+        const visible = typeof o === 'string' ? true : o.visible !== false;
+        const nombre = (window.SECCIONES_DEFECTO.find(s => s.id === id)?.nombre) || JSON.parse(localStorage.getItem('fabrica_custom_nombres')||'{}')[id] || id;
+        return `<div class="rounded-xl border ${visible ? 'border-edge' : 'border-dashed opacity-40'} bg-panel px-2 py-1.5 text-xs ${!visible?'opacity-50':''}">
+          <div class="flex items-center justify-between gap-1">
+            <span class="truncate font-medium"><span class="font-mono text-[10px] font-bold text-dim">${String(i+1).padStart(2,'0')}</span> ${nombre}</span>
+            <span class="shrink-0 rounded-full ${visible?'bg-ink text-panel':'bg-surface border border-edge text-dim'} px-1.5 py-0.5 font-mono text-[9px] font-bold">${visible?'ON':'OFF'}</span>
+          </div>
+        </div>`;
+      }).join('');
+    }
+    ['#h-badge','#h-t1','#h-t2','#h-parrafo','#h-b1','#h-b2','#h-ejes','#h-fig','#h-figl'].forEach(sel => {
+      const el = document.querySelector(sel);
+      if (el) el.addEventListener('input', renderPreview);
+    });
+    renderPreview();
+    const _origIrA = irA;
+    irA = (sec) => { _origIrA(sec); if (sec === 'contenido') { renderEditoresOrden(); renderPreview(); } };
+  </script>
+
+</body>
+</html>

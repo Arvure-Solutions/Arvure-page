@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Blog — Arvure · Automatizaciones, webs y apps. Casos reales de nodos conectados.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230A0A0A'/><circle cx='30' cy='30' r='6' fill='white'/><circle cx='70' cy='32' r='5' fill='white'/><circle cx='50' cy='70' r='7' fill='white'/><path d='M30 30 L50 70 L70 32' stroke='white' stroke-width='2' fill='none' opacity='0.9'/></svg>">
+  <title>Blog · Arvure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="posts.defaults.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#FFFBF0',
+            paper: '#FFFFFF',
+            sand: '#F5EEE0',
+            line: '#E8E0D0',
+            ink: '#0A0A0A',
+            muted: '#6B6B6B',
+            dim: '#9A9A9A',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+          },
+        },
+      },
+    };
+  </script>
+</head>
+<body class="bg-cream text-ink font-sans antialiased selection:bg-ink selection:text-cream">
+
+  <header class="sticky top-0 z-50 border-b border-line bg-cream/80 backdrop-blur-xl">
+    <nav class="mx-auto flex max-w-4xl items-center justify-between px-6 py-4" aria-label="Principal">
+      <a href="index.html" class="flex items-center gap-2">
+        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-ink text-cream">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="6" cy="6" r="2.2" fill="currentColor"/><circle cx="18" cy="7" r="1.8" fill="currentColor"/><circle cx="12" cy="18" r="2.5" fill="currentColor"/><path d="M6 6 L12 18 L18 7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        </span>
+        <span class="text-sm font-black tracking-tight">ARVURE</span>
+        <span class="font-mono text-[10px] tracking-[0.2em] text-muted border-l border-line pl-2 ml-1">BLOG TECH</span>
+      </a>
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="rounded-full border border-line bg-paper px-4 py-2 font-mono text-[11px] font-bold tracking-wide hover:border-ink">Volver al sitio</a>
+        <a href="index.html#contacto" class="rounded-full bg-ink px-4 py-2 text-sm font-bold text-cream hover:bg-black">Hablemos →</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="blog" class="border-b border-line">
+      <div class="mx-auto max-w-4xl px-6 py-12 lg:py-16">
+        <p class="font-mono text-[11px] font-bold tracking-[0.25em] text-muted">BLOG · NODOS & SISTEMAS</p>
+        <h1 class="mt-3 text-4xl font-black leading-[0.9] tracking-[-0.03em] md:text-5xl">
+          Ideas que se
+          <br>
+          <span class="bg-ink text-cream px-2">convierten en sistema.</span>
+        </h1>
+        <p class="mt-4 max-w-lg text-[15px] leading-relaxed text-muted">
+          Casos reales, decisiones de stack y automatizaciones que ahorran horas. Sin humo, con números.
+        </p>
+
+        <div class="mt-10 grid gap-6 md:grid-cols-2" data-lista-posts></div>
+
+        <div data-post-detalle class="hidden">
+          <a href="blog.html" class="font-mono text-[11px] font-bold tracking-wide hover:text-muted">← Volver al blog</a>
+          <article class="mt-6">
+            <p class="font-mono text-[11px] font-bold tracking-wide text-muted" data-post-fecha></p>
+            <h2 class="mt-3 text-3xl font-black leading-tight tracking-tight md:text-4xl" data-post-titulo></h2>
+            <p class="mt-3 font-mono text-[11px] tracking-wide text-muted" data-post-etiquetas></p>
+            <div class="mt-8 space-y-5" data-post-cuerpo></div>
+            <div class="mt-10 rounded-2xl border-2 border-ink bg-ink p-6 text-cream">
+              <p class="text-lg font-black">¿Te sirve para tu operación?</p>
+              <p class="mt-1 text-sm opacity-80">Te armamos el mapa de nodos en 48h — sin costo.</p>
+              <a href="index.html#contacto" class="mt-4 inline-block rounded-full bg-cream px-5 py-2.5 text-sm font-black text-ink hover:bg-white">Hablar con Arvure →</a>
+            </div>
+          </article>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-4xl px-6 py-8">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <a href="index.html" class="flex items-center gap-2 text-sm font-black tracking-tight">
+          ARVURE <span class="font-mono text-[10px] tracking-[0.2em] text-muted font-normal">ESTUDIO TECH</span>
+        </a>
+        <p class="font-mono text-xs text-dim">© <span data-anio>2026</span> Arvure</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const load = (k, d) => { try { const v = JSON.parse(localStorage.getItem('fabrica_' + k)); return v ?? d; } catch { return d; } };
+    const esc = s => (s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    let posts = load('posts', window.POSTS_DEFECTO);
+    if (!localStorage.getItem('fabrica_posts')) localStorage.setItem('fabrica_posts', JSON.stringify(posts));
+    // si vienen posts viejos de fábrica, reemplazar
+    if (posts.some(p => p.slug && p.slug.includes('arco-dramatico'))) {
+      posts = window.POSTS_DEFECTO.slice();
+      localStorage.setItem('fabrica_posts', JSON.stringify(posts));
+    }
+
+    const fechaLarga = f => new Date(f + 'T12:00:00').toLocaleDateString('es-AR', { day: 'numeric', month: 'long', year: 'numeric' });
+    const params = new URLSearchParams(location.search);
+    const slugActual = params.get('post');
+
+    if (slugActual) {
+      const post = posts.find(p => p.slug === slugActual);
+      if (post) {
+        document.querySelector('[data-lista-posts]').classList.add('hidden');
+        document.querySelector('[data-post-detalle]').classList.remove('hidden');
+        document.querySelector('[data-post-fecha]').textContent = fechaLarga(post.fecha);
+        document.querySelector('[data-post-titulo]').textContent = post.titulo;
+        document.querySelector('[data-post-etiquetas]').textContent = (post.etiquetas || []).join(' · ');
+        document.querySelector('[data-post-cuerpo]').innerHTML = post.cuerpo.split(/\n\s*\n/).map(p => '<p class="text-[15px] leading-relaxed text-ink/90">' + esc(p.trim()) + '</p>').join('');
+      } else {
+        location.href = 'blog.html';
+      }
+    } else {
+      const lista = document.querySelector('[data-lista-posts]');
+      lista.innerHTML = posts.map(p => `
+        <a href="blog.html?post=${encodeURIComponent(p.slug)}" class="group flex flex-col rounded-2xl border border-line bg-paper p-6 transition hover:border-ink hover:shadow-lg">
+          <p class="font-mono text-[11px] font-bold tracking-wide text-muted">${fechaLarga(p.fecha)}</p>
+          <h2 class="mt-3 text-xl font-black leading-tight tracking-tight group-hover:text-muted transition">${esc(p.titulo)}</h2>
+          <p class="mt-2 text-sm leading-relaxed text-muted">${esc(p.extracto)}</p>
+          <p class="mt-auto pt-4 font-mono text-[11px] font-bold tracking-wide">Leer →</p>
+        </a>`).join('') || '<p class="text-sm text-muted">Todavía no hay posts.</p>';
+    }
+
+    document.querySelectorAll('[data-anio]').forEach(el => {
+      el.textContent = new Date().getFullYear();
+    });
+  </script>
+
+</body>
+</html>

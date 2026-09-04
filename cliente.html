@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Panel del cliente — Arvure Estudio Tech">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230A0A0A'/><circle cx='30' cy='30' r='6' fill='white'/><circle cx='70' cy='32' r='5' fill='white'/><circle cx='50' cy='70' r='7' fill='white'/><path d='M30 30 L50 70 L70 32' stroke='white' stroke-width='2' fill='none' opacity='0.9'/></svg>">
+  <title>Mi panel · Arvure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            panel: '#FFFBF0',
+            surface: '#FFFFFF',
+            edge: '#E8E0D0',
+            ink: '#0A0A0A',
+            dim: '#6B6B6B',
+            lavanda: '#0A0A0A',
+            sol: '#FFE066',
+            play: '#FF3B30',
+            ok: '#0A7F3D',
+            cream: '#FFFBF0',
+            paper: '#FFFFFF',
+            line: '#E8E0D0',
+            muted: '#6B6B6B',
+          },
+          fontFamily: {
+            serif: ['Inter', 'system-ui', 'sans-serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+          },
+          boxShadow: {
+            card: '0 1px 3px rgba(10,10,10,0.06), 0 8px 24px rgba(10,10,10,0.04)',
+          },
+        },
+      },
+    };
+  </script>
+  <style>.barra { transition: width .6s ease; } ::selection{background:#0A0A0A;color:#FFFBF0;}</style>
+</head>
+<body class="bg-panel text-ink font-sans antialiased selection:bg-ink selection:text-panel">
+
+  <div id="login" class="fixed inset-0 z-[100] flex items-center justify-center bg-panel/95 px-6 backdrop-blur">
+    <div class="w-full max-w-sm rounded-2xl border border-edge bg-surface p-8 shadow-card">
+      <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-dim flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-ok animate-pulse"></span> Clientes · Estudio Tech</p>
+      <h1 class="mt-3 text-2xl font-black tracking-tight">Tu <span class="bg-ink text-panel px-1">panel.</span></h1>
+      <p class="mt-2 text-sm text-dim">Seguí tus nodos, descargá entregables y hablale al estudio.</p>
+      <form class="mt-6 space-y-4" data-login-cliente>
+        <div>
+          <label for="cli-nombre" class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Nombre</label>
+          <input id="cli-nombre" type="text" required placeholder="Tu nombre"
+                 class="w-full rounded-xl border border-edge bg-panel px-4 py-3 text-sm focus:border-ink focus:outline-none">
+        </div>
+        <div>
+          <label for="cli-email" class="mb-1 block text-xs font-bold uppercase tracking-wide text-dim">Email</label>
+          <input id="cli-email" type="email" required placeholder="tu@email.com"
+                 class="w-full rounded-xl border border-edge bg-panel px-4 py-3 text-sm focus:border-ink focus:outline-none">
+        </div>
+        <button type="submit" class="w-full rounded-full bg-ink px-6 py-3 text-sm font-bold text-panel transition hover:bg-black">Entrar a mi panel →</button>
+      </form>
+      <p class="mt-4 text-center font-mono text-[10px] uppercase tracking-[0.15em] text-dim">demo · cualquier nombre</p>
+    </div>
+  </div>
+
+  <div id="app" class="hidden">
+
+    <aside class="fixed inset-y-0 left-0 z-40 hidden w-60 flex-col border-r border-edge bg-surface md:flex">
+      <div class="border-b border-edge px-5 py-5">
+        <a href="index.html" class="flex items-center gap-2">
+          <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-ink text-panel">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="6" cy="6" r="2.2" fill="currentColor"/><circle cx="18" cy="7" r="1.8" fill="currentColor"/><circle cx="12" cy="18" r="2.5" fill="currentColor"/><path d="M6 6 L12 18 L18 7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          </span>
+          <span class="text-sm font-black tracking-tight">ARVURE</span>
+        </a>
+        <p class="mt-1 font-mono text-[10px] uppercase tracking-[0.25em] text-dim">panel cliente · nodos</p>
+      </div>
+      <nav class="flex-1 overflow-y-auto p-3" data-nav>
+        <button data-seccion="panel" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Mi panel</span></button>
+        <button data-seccion="proyectos" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Mis proyectos</span></button>
+        <button data-seccion="mensajes" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Mensajes</span><span data-badge-mensajes class="ml-auto font-mono text-[10px] font-bold"></span></button>
+        <button data-seccion="pagos" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Pagos</span></button>
+        <button data-seccion="entregables" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Entregables</span></button>
+        <button data-seccion="perfil" class="mb-1 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition hover:bg-panel hover:text-ink">▶ <span>Mi perfil</span></button>
+      </nav>
+      <div class="border-t border-edge p-4">
+        <p class="font-mono text-[10px] font-bold uppercase tracking-wide text-dim">Sesión</p>
+        <p class="mt-1 text-sm font-bold" data-sesion-nombre>—</p>
+        <button data-salir class="mt-3 font-mono text-[11px] font-bold uppercase tracking-wide text-dim transition hover:text-ink">Salir →</button>
+      </div>
+    </aside>
+
+    <div class="md:pl-60">
+
+      <header class="sticky top-0 z-30 flex items-center justify-between border-b border-edge bg-panel/90 px-6 py-3 backdrop-blur">
+        <div class="flex items-center gap-3">
+          <button class="md:hidden text-xl" data-menu aria-label="Menú">☰</button>
+          <p class="font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-dim" data-titulo-seccion>Mi panel</p>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="hidden font-mono text-[11px] font-bold uppercase tracking-wide text-ok sm:flex items-center gap-2">
+            <span class="h-2 w-2 animate-pulse rounded-full bg-ok"></span>
+            Tus nodos activos
+          </span>
+          <a href="index.html" class="rounded-full border border-edge bg-surface px-4 py-1.5 font-mono text-[11px] font-bold uppercase tracking-wide text-dim transition hover:border-ink hover:text-ink">Ver sitio →</a>
+        </div>
+      </header>
+
+      <main class="mx-auto max-w-5xl px-6 py-8">
+
+        <section data-vista="panel">
+          <h2 class="text-3xl font-black tracking-tight">Hola, <span class="bg-ink text-panel px-1" data-saludo>—</span></h2>
+          <p class="mt-2 text-sm text-dim">Así van tus nodos en Arvure.</p>
+
+          <div class="mt-8 rounded-2xl border border-edge bg-surface p-6 shadow-card">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <p class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-dim">Proyecto principal</p>
+                <h3 class="mt-1 text-xl font-black" data-proy-nombre></h3>
+              </div>
+              <span class="rounded-full border border-edge bg-panel px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wide" data-proy-estado></span>
+            </div>
+            <div class="mt-5">
+              <div class="flex justify-between font-mono text-[10px] font-bold uppercase tracking-wide text-dim">
+                <span>brief</span><span data-proy-pct></span><span>entrega</span>
+              </div>
+              <div class="mt-2 h-2 w-full rounded-full bg-edge">
+                <div class="barra h-2 rounded-full bg-ink" data-proy-barra style="width:0%"></div>
+              </div>
+              <div class="mt-2 flex justify-between font-mono text-[10px] text-dim">
+                <span>nodo iniciado</span><span data-proy-entrega></span><span>nodo en prod.</span>
+              </div>
+            </div>
+            <p class="mt-4 text-sm text-dim" data-proy-detalle></p>
+          </div>
+
+          <div class="mt-6 grid gap-4 lg:grid-cols-2">
+            <div class="rounded-2xl border border-edge bg-surface p-6 shadow-card">
+              <h3 class="text-lg font-black tracking-tight">Próximos hitos</h3>
+              <ul class="mt-3 space-y-2 text-sm text-dim" data-avances></ul>
+            </div>
+            <div class="rounded-2xl border border-edge bg-surface p-6 shadow-card">
+              <h3 class="text-lg font-black tracking-tight">Avisos del estudio</h3>
+              <ul class="mt-3 space-y-3" data-avisos></ul>
+            </div>
+          </div>
+        </section>
+
+        <section data-vista="proyectos" class="hidden">
+          <h2 class="text-3xl font-black tracking-tight">Mis <span class="bg-ink text-panel px-1">proyectos.</span></h2>
+          <p class="mt-2 text-sm text-dim">Todas tus órdenes con Arvure.</p>
+          <div class="mt-6 space-y-4" data-tarjetas-proyectos></div>
+        </section>
+
+        <section data-vista="mensajes" class="hidden">
+          <h2 class="text-3xl font-black tracking-tight">Mensajes.</h2>
+          <p class="mt-2 text-sm text-dim">Hablá directo con el estudio.</p>
+          <div class="mt-6 grid gap-4 lg:grid-cols-2">
+            <div class="rounded-2xl border border-edge bg-surface overflow-hidden">
+              <div class="border-b border-edge bg-panel px-5 py-3">
+                <h3 class="font-black">Arvure</h3>
+                <p class="font-mono text-[10px] font-bold uppercase tracking-wide text-dim">responde en < 24h</p>
+              </div>
+              <div class="max-h-96 space-y-3 overflow-y-auto p-5" data-hilo-principal></div>
+              <form class="flex gap-2 border-t border-edge bg-panel p-4" data-mensaje-principal>
+                <input type="text" required placeholder="Escribile a Arvure…" class="w-full rounded-full border border-edge bg-surface px-4 py-2.5 text-sm focus:border-ink focus:outline-none">
+                <button type="submit" class="shrink-0 rounded-full bg-ink px-5 py-2.5 text-sm font-bold text-panel transition hover:bg-black">Enviar</button>
+              </form>
+            </div>
+            <div class="rounded-2xl border border-edge bg-surface overflow-hidden">
+              <div class="border-b border-edge bg-panel px-5 py-3">
+                <h3 class="font-black">Dev · updates</h3>
+                <p class="font-mono text-[10px] font-bold uppercase tracking-wide text-dim">avances del equipo (solo lectura)</p>
+              </div>
+              <div class="max-h-96 space-y-3 overflow-y-auto p-5" data-hilo-colega></div>
+              <p class="border-t border-edge bg-panel px-5 py-4 text-xs text-dim">¿Algo quedó corto? Respondé por el hilo principal.</p>
+            </div>
+          </div>
+        </section>
+
+        <section data-vista="pagos" class="hidden">
+          <h2 class="text-3xl font-black tracking-tight">Pagos.</h2>
+          <p class="mt-2 text-sm text-dim">Tu historial y pendientes.</p>
+          <div class="mt-6 grid gap-4 sm:grid-cols-3">
+            <div class="rounded-2xl border border-edge bg-surface p-5">
+              <p class="font-mono text-[11px] font-bold uppercase tracking-wide text-dim">Total pagado</p>
+              <p class="mt-2 text-2xl font-black text-ok" data-total-pagado></p>
+            </div>
+            <div class="rounded-2xl border border-edge bg-surface p-5">
+              <p class="font-mono text-[11px] font-bold uppercase tracking-wide text-dim">Pendiente</p>
+              <p class="mt-2 text-2xl font-black" data-total-pendiente></p>
+            </div>
+            <div class="rounded-2xl border border-edge bg-surface p-5">
+              <p class="font-mono text-[11px] font-bold uppercase tracking-wide text-dim">Convenio</p>
+              <p class="mt-2 text-2xl font-black">50/50</p>
+              <p class="mt-1 font-mono text-[10px] font-bold uppercase tracking-wide text-dim">mitad al iniciar · mitad al entregar</p>
+            </div>
+          </div>
+          <div class="mt-6 overflow-x-auto rounded-2xl border border-edge bg-surface" data-tabla-pagos></div>
+          <button class="mt-4 w-full rounded-full bg-ink px-6 py-3 text-sm font-bold text-panel transition hover:bg-black" data-pagar-mp>
+            Pagar pendiente con Mercado Pago →
+          </button>
+          <p class="mt-2 text-center font-mono text-[10px] uppercase tracking-wide text-dim">demo · registra un pago pendiente visible en admin</p>
+        </section>
+
+        <section data-vista="entregables" class="hidden">
+          <h2 class="text-3xl font-black tracking-tight">Entregables.</h2>
+          <p class="mt-2 text-sm text-dim">Archivos y accesos de tus nodos.</p>
+          <div class="mt-6 space-y-3" data-lista-entregables></div>
+        </section>
+
+        <section data-vista="perfil" class="hidden">
+          <h2 class="text-3xl font-black tracking-tight">Mi <span class="bg-ink text-panel px-1">perfil.</span></h2>
+          <div class="mt-6 grid gap-4 lg:grid-cols-2">
+            <div class="rounded-2xl border border-edge bg-surface p-6">
+              <h3 class="text-lg font-black tracking-tight">Datos</h3>
+              <div class="mt-4 space-y-3 text-sm">
+                <div class="flex justify-between"><span class="text-dim">Nombre</span><span class="font-bold" data-perfil-nombre></span></div>
+                <div class="flex justify-between"><span class="text-dim">Email</span><span class="font-bold" data-perfil-email></span></div>
+                <div class="flex justify-between"><span class="text-dim">Cliente desde</span><span class="text-dim">2026</span></div>
+                <div class="flex justify-between"><span class="text-dim">Canal preferido</span>
+                  <select class="rounded-full border border-edge bg-panel px-3 py-1 font-mono text-xs font-bold focus:border-ink focus:outline-none">
+                    <option>WhatsApp</option><option>Email</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="rounded-2xl border border-edge bg-surface p-6">
+              <h3 class="text-lg font-black tracking-tight">Preferencias</h3>
+              <div class="mt-4 space-y-3 text-sm">
+                <label class="flex items-center gap-3"><input type="checkbox" checked class="accent-ink"> Avisarme por WhatsApp</label>
+                <label class="flex items-center gap-3"><input type="checkbox" checked class="accent-ink"> Recibir casos tech mensuales</label>
+                <label class="flex items-center gap-3"><input type="checkbox" class="accent-ink"> Autorizar caso en portfolio</label>
+              </div>
+              <p class="mt-4 font-mono text-[10px] uppercase tracking-wide text-dim">demo — se guarda en tu navegador</p>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <div id="menu-movil" class="fixed inset-0 z-40 hidden flex-col bg-panel/95 p-6 backdrop-blur">
+    <button class="self-end text-2xl text-dim" data-cerrar-menu aria-label="Cerrar">×</button>
+    <nav class="mt-4 space-y-2" data-nav-movil></nav>
+  </div>
+
+  <script>
+    const MONEDA = n => '$ ' + n.toLocaleString('es-AR');
+    const store = (k, v) => localStorage.setItem('fabrica_' + k, JSON.stringify(v));
+    const load = (k, d) => { try { const v = JSON.parse(localStorage.getItem('fabrica_' + k)); return v ?? d; } catch { return d; } };
+
+    const ORDENES_CLIENTE_DEF = [
+      { id: 'ORD-024', cliente: 'Prof. Ríos', tipo: 'App', detalle: 'App interna — panel + API de turnos y pagos.', estado: 'revision', monto: 620000, pagado: 620000 },
+      { id: 'ORD-999', cliente: 'Prof. Ríos', tipo: 'Automatización', detalle: 'Nodo leads → CRM → WhatsApp para captación.', estado: 'produccion', monto: 520000, pagado: 260000 },
+    ];
+    const PAGOS_CLIENTE_DEF = [
+      { id: 'PAG-109', orden: 'ORD-024', cliente: 'Prof. Ríos', monto: 620000, metodo: 'Transferencia', estado: 'acreditado' },
+    ];
+    const ENTREGABLES_DEF = [
+      { archivo: 'app_ORD-024_v2.zip', pieza: 'App — build staging + repo', estado: 'listo', icono: 'ZIP' },
+      { archivo: 'nodo_leads_v1.json', pieza: 'Flujo n8n — leads → CRM', estado: 'listo', icono: 'JSON' },
+      { archivo: 'manual_nodos.pdf', pieza: 'Manual de nodos y credenciales', estado: 'listo', icono: 'PDF' },
+      { archivo: 'deploy_prod.mp4', pieza: 'Demo deploy producción — en curso', estado: 'en curso', icono: 'MOV' },
+    ];
+
+    let usuario = null;
+    const ESTADOS = {
+      nueva: { t: 'Nueva', c: 'text-ink', pct: 5 },
+      produccion: { t: 'En producción', c: 'text-ink', pct: 55 },
+      revision: { t: 'En revisión', c: 'text-dim', pct: 85 },
+      entregada: { t: 'Entregada', c: 'text-ok', pct: 100 },
+      pagada: { t: 'Pagada', c: 'text-ok', pct: 100 },
+    };
+
+    const $ = s => document.querySelector(s);
+    const $$ = s => document.querySelectorAll(s);
+    const esc = s => (s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    function misOrdenes() {
+      const todas = load('ordenes', ORDENES_CLIENTE_DEF);
+      return todas.filter(o => o.cliente && (o.cliente.toLowerCase().includes('ríos') || o.cliente === 'Prof. Ríos'));
+    }
+    function misPagos() {
+      const todos = load('pagos', PAGOS_CLIENTE_DEF);
+      return todos.filter(p => p.cliente === 'Prof. Ríos');
+    }
+
+    function renderPanel() {
+      const ordenes = misOrdenes();
+      const principal = ordenes.find(o => ['nueva','produccion','revision'].includes(o.estado)) || ordenes[0];
+      if (principal) {
+        const e = ESTADOS[principal.estado] || ESTADOS.nueva;
+        $('[data-proy-nombre]').textContent = principal.tipo + ' · ' + principal.id;
+        const tag = $('[data-proy-estado]');
+        tag.textContent = e.t;
+        tag.className = 'rounded-full border border-edge bg-panel px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wide ' + e.c;
+        $('[data-proy-pct]').textContent = e.pct + '%';
+        $('[data-proy-barra]').style.width = e.pct + '%';
+        $('[data-proy-entrega]').textContent = principal.estado === 'revision' ? 'entrega QA' : 'sprint en curso';
+        $('[data-proy-detalle]').textContent = principal.detalle;
+      }
+      $('[data-avances]').innerHTML = [
+        'Semana 1 — setup nodos + auth',
+        'Semana 2 — automatización leads en staging',
+        'Semana 3 — deploy + capacitación',
+      ].map(a => '<li class="flex items-center gap-3"><span class="h-1.5 w-1.5 rounded-full bg-ink"></span>' + a + '</li>').join('');
+      $('[data-avisos]').innerHTML = [
+        { t: 'Nodo CRM conectado — webhook verificado.', h: 'hace 2 h', c: 'text-ink' },
+        { t: 'Web en staging lista para tu feedback.', h: 'ayer', c: 'text-dim' },
+      ].map(a => '<li class="rounded-xl border border-edge bg-panel p-3 text-sm"><span class="block font-bold ' + a.c + '">' + a.t + '</span><span class="font-mono text-[10px] font-bold uppercase tracking-wide text-dim">' + a.h + '</span></li>').join('');
+    }
+
+    function renderProyectos() {
+      $('[data-tarjetas-proyectos]').innerHTML = misOrdenes().map(o => {
+        const e = ESTADOS[o.estado] || ESTADOS.nueva;
+        return `
+          <article class="rounded-2xl border border-edge bg-surface p-6 shadow-card">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <p class="font-mono text-[11px] font-bold uppercase tracking-wide text-dim">${o.id} · ${esc(o.tipo)}</p>
+                <h3 class="mt-1 text-lg font-black">${esc(o.detalle)}</h3>
+              </div>
+              <span class="rounded-full border border-edge bg-panel px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wide ${e.c}">${e.t}</span>
+            </div>
+            <div class="mt-4">
+              <div class="flex justify-between font-mono text-[10px] font-bold uppercase tracking-wide text-dim">
+                <span>brief</span><span>${e.pct}%</span><span>prod.</span>
+              </div>
+              <div class="mt-2 h-1.5 w-full rounded-full bg-edge">
+                <div class="barra h-1.5 rounded-full bg-ink" style="width:${e.pct}%"></div>
+              </div>
+            </div>
+            <div class="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm">
+              <span class="text-dim">Monto ${MONEDA(o.monto)} · pagado ${MONEDA(o.pagado)}</span>
+              <a href="#entregables" class="rounded-full border border-edge bg-panel px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-wide hover:border-ink hover:bg-ink hover:text-panel transition" data-ir-entregables>Ver entregables →</a>
+            </div>
+          </article>`;
+      }).join('');
+      $$('[data-ir-entregables]').forEach(b => b.addEventListener('click', () => irA('entregables')));
+    }
+
+    function renderMensajes() {
+      const hilo = load('hilo_cliente', [{ de: 'fabrica', texto: 'Hola! Tu nodo de leads ya está en staging — mañana te muestro el flujo.', hora: '09:00' }]);
+      $('[data-hilo-principal]').innerHTML = hilo.map(m => `
+        <div class="flex ${m.de === 'cliente' ? 'justify-end' : 'justify-start'}">
+          <div class="max-w-[80%] rounded-2xl border ${m.de === 'cliente' ? 'border-ink bg-ink text-panel' : 'border-edge bg-panel'} px-4 py-2.5">
+            <p class="text-sm">${esc(m.texto)}</p>
+            <p class="mt-1 font-mono text-[10px] font-bold uppercase tracking-wide ${m.de === 'cliente' ? 'text-panel/60' : 'text-dim'}">${m.de === 'cliente' ? 'vos' : 'Arvure'} · ${m.hora}</p>
+          </div>
+        </div>`).join('') || '<p class="text-sm text-dim">Todavía no hay mensajes.</p>';
+
+      const hiloCol = load('hilo_colega', [
+        { de: 'colega', texto: 'Deploy del nodo listo — webhook verificado.', hora: '11:30' },
+        { de: 'colega', texto: 'Docs de API subidos a entregables.', hora: '12:02' },
+      ]);
+      $('[data-hilo-colega]').innerHTML = hiloCol.map(m => `
+        <div class="flex ${m.de === 'cliente' ? 'justify-end' : 'justify-start'}">
+          <div class="max-w-[80%] rounded-2xl border ${m.de === 'cliente' ? 'border-ink bg-ink text-panel' : 'border-edge bg-panel'} px-4 py-2.5">
+            <p class="text-sm">${esc(m.texto)}</p>
+            <p class="mt-1 font-mono text-[10px] font-bold uppercase tracking-wide ${m.de === 'cliente' ? 'text-panel/60' : 'text-dim'}">${m.de === 'cliente' ? 'vos' : 'dev'} · ${m.hora}</p>
+          </div>
+        </div>`).join('');
+
+      $('[data-badge-mensajes]').textContent = hilo.filter(m => m.de === 'fabrica').length ? 'nuevo' : '';
+    }
+
+    function renderPagos() {
+      const pagos = misPagos();
+      $('[data-total-pagado]').textContent = MONEDA(pagos.filter(p => p.estado === 'acreditado').reduce((a, p) => a + p.monto, 0));
+      const pendiente = pagos.filter(p => p.estado === 'pendiente').reduce((a, p) => a + p.monto, 0) + 260000;
+      $('[data-total-pendiente]').textContent = MONEDA(pendiente);
+      $('[data-tabla-pagos]').innerHTML = '<table class="w-full text-sm"><thead><tr class="text-left font-mono text-[10px] font-bold uppercase tracking-wide text-dim"><th class="px-5 py-3">Pago</th><th class="px-5 py-3">Orden</th><th class="px-5 py-3">Monto</th><th class="px-5 py-3">Método</th><th class="px-5 py-3">Estado</th></tr></thead><tbody>' +
+        pagos.map(p => `<tr class="border-t border-edge"><td class="px-5 py-3 font-mono text-xs font-bold text-dim">${p.id}</td><td class="px-5 py-3 font-mono text-xs font-bold text-dim">${p.orden}</td><td class="px-5 py-3 font-bold">${MONEDA(p.monto)}</td><td class="px-5 py-3 text-sm text-dim">${p.metodo}</td><td class="px-5 py-3 font-mono text-[10px] font-bold uppercase tracking-wide ${p.estado === 'acreditado' ? 'text-ok' : 'text-ink'}">${p.estado}</td></tr>`).join('') + '</tbody></table>';
+    }
+
+    function renderEntregables() {
+      $('[data-lista-entregables]').innerHTML = ENTREGABLES_DEF.map(e => `
+        <div class="flex items-center justify-between gap-4 rounded-2xl border border-edge bg-surface p-4 shadow-card">
+          <div class="flex items-center gap-4">
+            <span class="flex h-11 w-11 items-center justify-center rounded-xl border border-edge bg-panel font-mono text-[10px] font-black text-ink">${e.icono}</span>
+            <div>
+              <p class="text-sm font-bold">${esc(e.pieza)}</p>
+              <p class="font-mono text-[11px] text-dim">${e.archivo}</p>
+            </div>
+          </div>
+          ${e.estado === 'listo'
+            ? '<a href="#" class="shrink-0 rounded-full bg-ink px-4 py-2 font-mono text-[11px] font-bold uppercase tracking-wide text-panel transition hover:bg-black">Descargar ↓</a>'
+            : '<span class="shrink-0 rounded-full bg-sol px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wide text-ink">en curso</span>'}
+        </div>`).join('');
+    }
+
+    function renderPerfil() {
+      $('[data-perfil-nombre]').textContent = usuario ? usuario.nombre : '—';
+      $('[data-perfil-email]').textContent = usuario ? usuario.email : '—';
+    }
+
+    function renderTodo() {
+      renderPanel(); renderProyectos(); renderMensajes(); renderPagos(); renderEntregables(); renderPerfil();
+    }
+
+    const SECCIONES = { panel: 'Mi panel', proyectos: 'Mis proyectos', mensajes: 'Mensajes', pagos: 'Pagos', entregables: 'Entregables', perfil: 'Mi perfil' };
+
+    function irA(seccion) {
+      $$('[data-vista]').forEach(v => v.classList.toggle('hidden', v.dataset.vista !== seccion));
+      $('[data-titulo-seccion]').textContent = SECCIONES[seccion];
+      $$('[data-nav] button, [data-nav-movil] button').forEach(b => {
+        const activo = b.dataset.seccion === seccion;
+        b.classList.toggle('bg-ink', activo);
+        b.classList.toggle('text-panel', activo);
+        b.classList.toggle('text-dim', !activo);
+      });
+    }
+
+    $$('[data-nav] button, [data-nav-movil] button').forEach(b => b.addEventListener('click', () => irA(b.dataset.seccion)));
+
+    $('[data-menu]').addEventListener('click', () => {
+      const nav = $('[data-nav-movil]');
+      nav.innerHTML = '';
+      Object.keys(SECCIONES).forEach(s => {
+        const b = document.createElement('button');
+        b.dataset.seccion = s;
+        b.className = 'block w-full rounded-xl px-3 py-2.5 text-left text-sm font-medium';
+        b.textContent = '▶ ' + SECCIONES[s];
+        b.addEventListener('click', () => { irA(s); $('[data-cerrar-menu]').click(); });
+        nav.appendChild(b);
+      });
+      $('#menu-movil').classList.remove('hidden');
+      $('#menu-movil').classList.add('flex');
+    });
+    $('[data-cerrar-menu]').addEventListener('click', () => { $('#menu-movil').classList.add('hidden'); $('#menu-movil').classList.remove('flex'); });
+    $('[data-salir]').addEventListener('click', () => { localStorage.removeItem('fabrica_cliente'); location.reload(); });
+
+    $('[data-login-cliente]').addEventListener('submit', e => {
+      e.preventDefault();
+      usuario = { nombre: $('#cli-nombre').value.trim(), email: $('#cli-email').value.trim() };
+      store('cliente', usuario);
+      $('#login').classList.add('hidden');
+      $('#app').classList.remove('hidden');
+      $('[data-saludo]').textContent = usuario.nombre.split(' ')[0];
+      $('[data-sesion-nombre]').textContent = usuario.nombre;
+      renderTodo(); irA('panel');
+    });
+    const previo = load('cliente', null);
+    if (previo) {
+      usuario = previo;
+      $('#login').classList.add('hidden');
+      $('#app').classList.remove('hidden');
+      $('[data-saludo]').textContent = usuario.nombre.split(' ')[0];
+      $('[data-sesion-nombre]').textContent = usuario.nombre;
+      renderTodo(); irA('panel');
+    }
+
+    $('[data-mensaje-principal]').addEventListener('submit', e => {
+      e.preventDefault();
+      const texto = $('[data-mensaje-principal] input').value.trim();
+      if (!texto) return;
+      const hilo = load('hilo_cliente', []);
+      hilo.push({ de: 'cliente', texto, hora: new Date().toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' }) });
+      store('hilo_cliente', hilo);
+      e.target.reset();
+      renderMensajes();
+    });
+
+    $('[data-pagar-mp]').addEventListener('click', () => {
+      const pagos = load('pagos', PAGOS_CLIENTE_DEF);
+      const nuevo = { id: 'PAG-' + String(110 + pagos.length), orden: 'ORD-999', cliente: 'Prof. Ríos', monto: 260000, metodo: 'Mercado Pago', estado: 'pendiente' };
+      pagos.push(nuevo);
+      store('pagos', pagos);
+      renderPagos();
+    });
+  </script>
+
+</body>
+</html>

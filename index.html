@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Arvure — estudio tech. Automatizaciones, páginas web y aplicaciones que conectan tus nodos y escalan tu operación.">
+  <title>Arvure — Estudio tech. Automatizamos. Construimos. Conectamos.</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230A0A0A'/><circle cx='30' cy='30' r='6' fill='white'/><circle cx='70' cy='32' r='5' fill='white'/><circle cx='50' cy='70' r='7' fill='white'/><path d='M30 30 L50 70 L70 32' stroke='white' stroke-width='2' fill='none' opacity='0.9'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="catalogo.defaults.js"></script>
+  <script src="contenido.defaults.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#FFFBF0',
+            paper: '#FFFFFF',
+            sand: '#F5EEE0',
+            line: '#E8E0D0',
+            ink: '#0A0A0A',
+            muted: '#6B6B6B',
+            dim: '#9A9A9A',
+            accent: '#0A0A0A',
+          },
+          fontFamily: {
+            sans: ['Inter', 'Space Grotesk', 'system-ui', 'sans-serif'],
+            display: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+          },
+          boxShadow: {
+            card: '0 1px 3px rgba(10,10,10,0.06), 0 8px 24px rgba(10,10,10,0.04)',
+            cardHover: '0 4px 16px rgba(10,10,10,0.08), 0 16px 40px rgba(10,10,10,0.06)',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    ::selection { background: #0A0A0A; color: #FFFBF0; }
+    .grid-dot { background-image: radial-gradient(circle at 1px 1px, #0A0A0A 1px, transparent 0); }
+    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  </style>
+</head>
+<body class="bg-cream text-ink font-sans antialiased">
+
+  <header class="sticky top-0 z-50 border-b border-line bg-cream/80 backdrop-blur-xl">
+    <nav class="mx-auto flex max-w-[1280px] items-center justify-between px-6 py-4 lg:px-8" aria-label="Principal">
+      <a href="#inicio" class="flex items-center gap-3">
+        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-ink text-cream">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="6" cy="6" r="2.5" fill="currentColor"/><circle cx="18" cy="7" r="2" fill="currentColor"/><circle cx="12" cy="18" r="2.8" fill="currentColor"/>
+            <path d="M6 6 L12 18 L18 7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="text-[15px] font-black tracking-[-0.02em]">ARVURE</span>
+        <span class="hidden sm:inline font-mono text-[10px] tracking-[0.2em] text-muted border-l border-line pl-3 ml-1">ESTUDIO TECH</span>
+      </a>
+      <ul class="hidden items-center gap-7 text-[13px] font-medium text-muted md:flex">
+        <li><a class="transition hover:text-ink" href="#ideas">Soluciones</a></li>
+        <li><a class="transition hover:text-ink" href="#proceso-creativo">Stack</a></li>
+        <li><a class="transition hover:text-ink" href="#sobre-nos">Estudio</a></li>
+        <li><a class="transition hover:text-ink" href="#faq">FAQ</a></li>
+        <li><a class="transition hover:text-ink" href="blog.html">Blog</a></li>
+      </ul>
+      <div class="flex items-center gap-2">
+        <a href="#contacto" class="hidden sm:inline-flex rounded-full bg-ink px-5 py-2.5 text-[13px] font-bold text-cream transition hover:bg-black hover:scale-[1.02]">
+          Hablemos →
+        </a>
+        <a href="login.html" class="rounded-full border border-line bg-paper px-4 py-2 font-mono text-[11px] font-medium tracking-[0.15em] text-ink transition hover:border-ink">
+          LOGIN
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section id="inicio" class="relative overflow-hidden border-b border-line">
+      <div class="pointer-events-none absolute inset-0 opacity-[0.03] grid-dot" style="background-size: 24px 24px;"></div>
+      <!-- nodos decorativos fondo -->
+      <svg class="pointer-events-none absolute inset-0 h-full w-full opacity-[0.06]" aria-hidden="true">
+        <g stroke="#0A0A0A" stroke-width="1" fill="none">
+          <line x1="10%" y1="20%" x2="35%" y2="45%"/><line x1="35%" y1="45%" x2="60%" y2="30%"/><line x1="60%" y1="30%" x2="85%" y2="55%"/><line x1="35%" y1="45%" x2="25%" y2="80%"/><line x1="60%" y1="30%" x2="75%" y2="85%"/>
+        </g>
+        <g fill="#0A0A0A">
+          <circle cx="10%" cy="20%" r="3"/><circle cx="35%" cy="45%" r="4"/><circle cx="60%" cy="30%" r="3"/><circle cx="85%" cy="55%" r="2.5"/><circle cx="25%" cy="80%" r="2.5"/><circle cx="75%" cy="85%" r="2.5"/>
+        </g>
+      </svg>
+
+      <div class="relative mx-auto grid max-w-[1280px] gap-10 px-6 py-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-8 lg:py-20">
+
+        <div>
+          <p data-hero-badge class="inline-flex items-center gap-2 rounded-full border border-line bg-paper px-3 py-1.5 font-mono text-[11px] font-medium tracking-[0.2em] text-ink">
+            <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            ESTUDIO TECH · AUTOMATIZACIÓN & PRODUCTO
+          </p>
+
+          <h1 data-hero-titulo class="mt-6 text-[42px] font-black leading-[0.9] tracking-[-0.04em] lg:text-[64px]">
+            Automatizamos
+            <br>
+            <span class="relative inline-block">
+              lo que te frena.
+              <span class="absolute bottom-1 left-0 h-3 w-full bg-[#FFE066] -z-10 opacity-60"></span>
+            </span>
+            <br>
+            <span class="font-black text-ink">Construimos</span>
+            <em class="font-black not-italic"> lo que te escala.</em>
+          </h1>
+
+          <p data-hero-parrafo class="mt-6 max-w-[520px] text-[15px] leading-relaxed text-muted">
+            Somos el nodo que conecta tu operación. <strong class="text-ink font-bold">Automatizaciones, páginas web y aplicaciones</strong> a medida — sin humo, sin plantillas eternas. Sistemas que se hablan entre sí, datos que fluyen, procesos que dejan de depender de vos.
+          </p>
+
+          <div class="mt-8 flex flex-wrap items-center gap-3">
+            <a data-hero-boton1 href="#contacto" class="inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 text-sm font-bold text-cream shadow-card transition hover:bg-black hover:shadow-cardHover">
+              Empezar proyecto →
+            </a>
+            <a data-hero-boton2 href="#ideas" class="inline-flex items-center gap-2 rounded-full border border-line bg-paper px-6 py-3.5 text-sm font-bold text-ink transition hover:border-ink">
+              Ver soluciones
+            </a>
+          </div>
+
+          <div class="mt-8 flex flex-wrap gap-6 border-t border-line pt-6">
+            <div><p class="text-2xl font-black tracking-tight">120+</p><p class="font-mono text-[10px] tracking-[0.2em] text-muted">AUTOMATIZACIONES</p></div>
+            <div><p class="text-2xl font-black tracking-tight">40+</p><p class="font-mono text-[10px] tracking-[0.2em] text-muted">WEBS & APPS</p></div>
+            <div><p class="text-2xl font-black tracking-tight">24h</p><p class="font-mono text-[10px] tracking-[0.2em] text-muted">RESPUESTA PROMEDIO</p></div>
+          </div>
+
+          <p data-hero-ejes class="mt-6 font-mono text-[11px] tracking-[0.2em] text-dim">
+            NODOS · AUTOMATIZACIONES · WEBS · APPS · INTEGRACIONES
+          </p>
+        </div>
+
+        <div class="relative lg:pl-6">
+          <!-- Card sistema nodos -->
+          <div class="relative overflow-hidden rounded-[20px] border border-line bg-paper p-6 shadow-card lg:p-7">
+            <div class="flex items-center justify-between">
+              <span class="flex items-center gap-2 font-mono text-[10px] tracking-[0.2em] text-muted"><span class="h-2 w-2 rounded-full bg-emerald-500"></span> SISTEMA OPERATIVO</span>
+              <span class="rounded-full bg-ink px-2.5 py-1 font-mono text-[10px] font-bold tracking-wide text-cream">LIVE</span>
+            </div>
+
+            <!-- Visual nodos -->
+            <div class="relative mt-6 rounded-2xl border border-line bg-cream p-5 overflow-hidden">
+              <svg viewBox="0 0 400 220" class="w-full h-auto" aria-hidden="true">
+                <!-- conexiones -->
+                <g stroke="#0A0A0A" stroke-width="1.2" opacity="0.15">
+                  <line x1="70" y1="60" x2="180" y2="50"/><line x1="180" y1="50" x2="310" y2="70"/><line x1="70" y1="60" x2="120" y2="150"/><line x1="180" y1="50" x2="200" y2="160"/><line x1="310" y1="70" x2="280" y2="155"/><line x1="120" y1="150" x2="200" y2="160"/><line x1="200" y1="160" x2="280" y2="155"/>
+                  <line x1="70" y1="60" x2="200" y2="160" opacity="0.5" stroke-dasharray="4 4"/>
+                </g>
+                <!-- nodos -->
+                <g>
+                  <g><circle cx="70" cy="60" r="28" fill="white" stroke="#0A0A0A" stroke-width="1.5"/><text x="70" y="64" text-anchor="middle" font-size="11" font-weight="800">CRM</text><text x="70" y="88" text-anchor="middle" font-size="8" fill="#6B6B6B" font-family="monospace">HubSpot</text></g>
+                  <g><circle cx="180" cy="50" r="28" fill="#0A0A0A"/><text x="180" y="54" text-anchor="middle" font-size="11" font-weight="800" fill="white">WEB</text><text x="180" y="78" text-anchor="middle" font-size="8" fill="#6B6B6B" font-family="monospace">Next.js</text></g>
+                  <g><circle cx="310" cy="70" r="28" fill="white" stroke="#0A0A0A" stroke-width="1.5"/><text x="310" y="74" text-anchor="middle" font-size="10" font-weight="800">APP</text><text x="310" y="98" text-anchor="middle" font-size="8" fill="#6B6B6B" font-family="monospace">Mobile</text></g>
+                  <g><circle cx="120" cy="150" r="26" fill="white" stroke="#0A0A0A" stroke-width="1.2"/><text x="120" y="148" text-anchor="middle" font-size="9" font-weight="700">AUTO</text><text x="120" y="158" text-anchor="middle" font-size="8" font-weight="700">MATION</text></g>
+                  <g><circle cx="200" cy="160" r="30" fill="#FFE066" stroke="#0A0A0A" stroke-width="1.5"/><text x="200" y="164" text-anchor="middle" font-size="11" font-weight="900">NODO</text></g>
+                  <g><circle cx="280" cy="155" r="26" fill="white" stroke="#0A0A0A" stroke-width="1.2"/><text x="280" y="159" text-anchor="middle" font-size="9" font-weight="700">DATA</text></g>
+                </g>
+                <!-- pulso -->
+                <circle cx="200" cy="160" r="30" fill="none" stroke="#0A0A0A" stroke-width="1" opacity="0.2">
+                  <animate attributeName="r" values="30;42;30" dur="2.5s" repeatCount="indefinite"/>
+                  <animate attributeName="opacity" values="0.2;0;0.2" dur="2.5s" repeatCount="indefinite"/>
+                </circle>
+              </svg>
+              <div class="mt-3 flex items-center justify-between font-mono text-[10px] tracking-wide text-muted">
+                <span>nodos conectados: 6</span><span class="text-emerald-600 font-bold">● todos operativos</span>
+              </div>
+            </div>
+
+            <div class="mt-5 grid grid-cols-3 gap-3">
+              <div class="rounded-xl border border-line bg-cream px-3 py-3">
+                <p class="font-mono text-[10px] tracking-[0.15em] text-muted">AHORRO</p>
+                <p class="mt-1 text-sm font-black">32h / mes</p>
+              </div>
+              <div class="rounded-xl border border-line bg-cream px-3 py-3">
+                <p class="font-mono text-[10px] tracking-[0.15em] text-muted">UPTIME</p>
+                <p class="mt-1 text-sm font-black">99.9%</p>
+              </div>
+              <div class="rounded-xl bg-ink px-3 py-3 text-cream">
+                <p class="font-mono text-[10px] tracking-[0.15em] opacity-70">INTEGRACIONES</p>
+                <p class="mt-1 text-sm font-black">50+ APIs</p>
+              </div>
+            </div>
+          </div>
+
+          <p class="mt-3 text-center font-mono text-[10px] tracking-[0.2em] text-dim">
+            <a data-hero-fig href="#contacto" class="hover:text-ink transition">ARQUITECTURA DE NODOS · VER CASOS →</a>
+          </p>
+
+          <img data-hero-imagen src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1200&auto=format&fit=crop" alt="" class="hidden" aria-hidden="true">
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TICKER -->
+    <section id="servicios" class="overflow-hidden border-y border-line bg-ink py-3" aria-label="Servicios">
+      <div class="flex w-max animate-[marquee_28s_linear_infinite] gap-8 whitespace-nowrap font-mono text-xs tracking-[0.2em] text-cream">
+        <span>AUTOMATIZACIONES</span><span class="opacity-40">●</span>
+        <span>PÁGINAS WEB</span><span class="opacity-40">●</span>
+        <span>APLICACIONES</span><span class="opacity-40">●</span>
+        <span>INTEGRACIONES</span><span class="opacity-40">●</span>
+        <span>BOTS & IA</span><span class="opacity-40">●</span>
+        <span>SCRAPING</span><span class="opacity-40">●</span>
+        <span>NODOS CONECTADOS</span><span class="opacity-40">●</span>
+        <span>ARGENTINA · REMOTO GLOBAL</span><span class="opacity-40">●</span>
+        <span>AUTOMATIZACIONES</span><span class="opacity-40">●</span>
+        <span>PÁGINAS WEB</span><span class="opacity-40">●</span>
+        <span>APLICACIONES</span><span class="opacity-40">●</span>
+        <span>INTEGRACIONES</span><span class="opacity-40">●</span>
+        <span>BOTS & IA</span><span class="opacity-40">●</span>
+        <span>SCRAPING</span><span class="opacity-40">●</span>
+        <span>NODOS CONECTADOS</span>
+      </div>
+    </section>
+
+    <!-- SOLUCIONES / IDEAS -->
+    <section id="ideas" class="relative border-b border-line bg-paper">
+      <div class="mx-auto max-w-[1280px] px-6 py-16 lg:px-8 lg:py-20">
+        <header class="flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <p class="font-mono text-[11px] font-bold tracking-[0.25em] text-muted">SOLUCIONES · NODOS</p>
+            <h2 class="mt-3 text-[36px] font-black leading-[0.9] tracking-[-0.03em] lg:text-[48px]">
+              Tres formas de
+              <br>
+              <span class="bg-ink text-cream px-2">escalar tu operación.</span>
+            </h2>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <button type="button" data-filtro-eje="Automatizaciones" class="rounded-full border border-line bg-paper px-4 py-2 font-mono text-xs font-bold tracking-wide text-muted transition hover:border-ink hover:text-ink">Automatizaciones</button>
+            <button type="button" data-filtro-eje="Webs" class="rounded-full border border-line bg-paper px-4 py-2 font-mono text-xs font-bold tracking-wide text-muted transition hover:border-ink hover:text-ink">Webs</button>
+            <button type="button" data-filtro-eje="Apps" class="rounded-full border border-line bg-paper px-4 py-2 font-mono text-xs font-bold tracking-wide text-muted transition hover:border-ink hover:text-ink">Apps</button>
+            <button type="button" data-filtro-eje="Nodos" class="rounded-full border border-line bg-paper px-4 py-2 font-mono text-xs font-bold tracking-wide text-muted transition hover:border-ink hover:text-ink">Nodos</button>
+          </div>
+        </header>
+
+        <p class="mt-6 max-w-2xl text-[15px] leading-relaxed text-muted">
+          No vendemos ideas sueltas. Conectamos nodos: tu web, tu CRM, tus planillas, tus canales. Cada proyecto es un sistema que ahorra horas y abre crecimiento.
+        </p>
+
+        <div class="mt-10 grid gap-6 md:grid-cols-3" data-grid-ideas></div>
+
+        <div class="mt-10 flex flex-wrap gap-3">
+          <div class="flex-1 min-w-[280px] rounded-2xl border border-line bg-cream p-6 flex items-center justify-between">
+            <div>
+              <p class="font-mono text-[11px] tracking-[0.2em] text-muted">¿NO SABÉS POR DÓNDE EMPEZAR?</p>
+              <p class="mt-1 text-lg font-black tracking-tight">Auditamos tus procesos gratis.</p>
+            </div>
+            <a href="#contacto" class="hidden sm:inline-flex rounded-full bg-ink px-5 py-2.5 text-sm font-bold text-cream">Agendar audit →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PUNTO DE PARTIDA -> CÓMO TRABAJAMOS -->
+    <section id="punto-de-partida" class="relative border-b border-line bg-cream">
+      <div class="mx-auto grid max-w-[1280px] gap-12 px-6 py-16 lg:grid-cols-2 lg:px-8 lg:py-20">
+        <div>
+          <p class="font-mono text-[11px] font-bold tracking-[0.25em] text-muted">CÓMO TRABAJAMOS</p>
+          <h2 class="mt-3 text-[36px] font-black leading-[0.9] tracking-[-0.03em] lg:text-[44px]">
+            De la idea al
+            <br>
+            <span class="bg-[#FFE066] px-1">sistema en producción.</span>
+          </h2>
+          <p class="mt-6 text-[15px] leading-relaxed text-muted">
+            Sin cascadas eternas. Trabajamos en sprints de 1–2 semanas, con demos reales y nodos que ya funcionan. Ves valor antes de pagar el total.
+          </p>
+          <a href="#contacto" class="mt-6 inline-flex text-sm font-bold underline underline-offset-4 hover:text-muted">Quiero mi roadmap en 48h →</a>
+
+          <div class="mt-10 grid grid-cols-3 gap-4 border-t border-line pt-6">
+            <div><p class="text-xl font-black">7 días</p><p class="font-mono text-[10px] tracking-[0.15em] text-muted">MVP AUTOMATIZACIÓN</p></div>
+            <div><p class="text-xl font-black">2–4 sem</p><p class="font-mono text-[10px] tracking-[0.15em] text-muted">WEB / APP</p></div>
+            <div><p class="text-xl font-black">∞</p><p class="font-mono text-[10px] tracking-[0.15em] text-muted">SOPORTE NODOS</p></div>
+          </div>
+        </div>
+
+        <ol class="space-y-4">
+          <li class="rounded-2xl border border-line bg-paper p-6 shadow-card">
+            <div class="flex items-center gap-3"><span class="flex h-8 w-8 items-center justify-center rounded-full bg-ink text-xs font-black text-cream">01</span><span class="font-mono text-[11px] tracking-[0.2em] text-muted">DISCOVERY</span></div>
+            <h3 class="mt-3 text-lg font-black tracking-tight">Mapeamos tus nodos</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">Relevamos procesos, herramientas y cuellos de botella. Salís con un mapa visual de qué automatizar primero y ROI estimado.</p>
+          </li>
+          <li class="rounded-2xl border border-line bg-paper p-6 shadow-card">
+            <div class="flex items-center gap-3"><span class="flex h-8 w-8 items-center justify-center rounded-full bg-ink text-xs font-black text-cream">02</span><span class="font-mono text-[11px] tracking-[0.2em] text-muted">PROTOTIPO</span></div>
+            <h3 class="mt-3 text-lg font-black tracking-tight">Construimos un nodo funcional</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">Primer automatización o pantalla navegable en días. Validás sin comprometer todo el presupuesto.</p>
+          </li>
+          <li class="rounded-2xl border-2 border-ink bg-paper p-6 shadow-card">
+            <div class="flex items-center gap-3"><span class="flex h-8 w-8 items-center justify-center rounded-full bg-[#FFE066] text-xs font-black text-ink">03</span><span class="font-mono text-[11px] tracking-[0.2em] text-ink font-bold">ESCALADO</span></div>
+            <h3 class="mt-3 text-lg font-black tracking-tight">Conectamos todo el sistema</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted"><strong class="text-ink">La red se enciende:</strong> APIs, webhooks, base de datos y front. Entrega documentada + capacitación.</p>
+          </li>
+        </ol>
+      </div>
+
+      <div class="mx-auto grid max-w-[1280px] gap-6 px-6 pb-16 lg:grid-cols-2 lg:px-8">
+        <div class="rounded-2xl border border-line bg-paper p-7">
+          <p class="font-mono text-[11px] tracking-[0.2em] text-muted">STARTER · AUTOMATIZACIÓN</p>
+          <h3 class="mt-2 text-2xl font-black tracking-tight">Un proceso, cero fricción</h3>
+          <ul class="mt-4 space-y-2 text-sm text-muted">
+            <li>— 1 flujo automatizado (ej: leads → CRM → WhatsApp)</li>
+            <li>— Integración de 2–3 herramientas</li>
+            <li>— Dashboard + alertas</li>
+            <li>— Entrega en 7 días</li>
+          </ul>
+          <p class="mt-6 font-mono text-xs font-bold">Desde USD 400 · una vez</p>
+          <a href="#contacto" class="mt-4 inline-flex rounded-full border border-line px-5 py-2.5 text-sm font-bold hover:border-ink">Cotizar →</a>
+        </div>
+        <div class="rounded-2xl border-2 border-ink bg-ink p-7 text-cream">
+          <p class="font-mono text-[11px] tracking-[0.2em] opacity-60">SISTEMA COMPLETO · WEB + NODOS</p>
+          <h3 class="mt-2 text-2xl font-black tracking-tight text-cream">Tu operación en un solo lugar</h3>
+          <ul class="mt-4 space-y-2 text-sm opacity-80">
+            <li>— Web / App + panel admin</li>
+            <li>— Nodos: pagos, stock, CRM, notificaciones</li>
+            <li>— Automatizaciones + scraping si aplica</li>
+            <li>— Soporte 30 días incluido</li>
+          </ul>
+          <p class="mt-6 font-mono text-xs font-bold text-[#FFE066]">Desde USD 1.200 · 3–4 semanas</p>
+          <a href="#contacto" class="mt-4 inline-flex rounded-full bg-cream px-5 py-2.5 text-sm font-black text-ink hover:bg-white">Empezar ahora →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOBRE NOS -> ESTUDIO -->
+    <section id="sobre-nos" class="relative border-b border-line bg-paper">
+      <div class="mx-auto grid max-w-[1280px] items-center gap-12 px-6 py-16 lg:grid-cols-2 lg:px-8 lg:py-20">
+        <figure class="relative order-2 lg:order-1">
+          <div class="overflow-hidden rounded-[20px] border border-line bg-cream">
+            <div class="flex items-center gap-2 border-b border-line bg-paper px-4 py-3">
+              <span class="h-2.5 w-2.5 rounded-full bg-red-400"></span><span class="h-2.5 w-2.5 rounded-full bg-yellow-400"></span><span class="h-2.5 w-2.5 rounded-full bg-green-400"></span>
+              <span class="ml-auto font-mono text-[10px] tracking-wide text-muted">arvure — nodos.deploy</span>
+            </div>
+            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop" alt="Equipo tech trabajando" class="aspect-[4/3] w-full object-cover">
+            <div class="grid grid-cols-3 divide-x divide-line border-t border-line bg-paper text-center">
+              <div class="py-3"><p class="text-sm font-black">100%</p><p class="font-mono text-[10px] text-muted">A MEDIDA</p></div>
+              <div class="py-3"><p class="text-sm font-black">No-code + Code</p><p class="font-mono text-[10px] text-muted">STACK HÍBRIDO</p></div>
+              <div class="py-3"><p class="text-sm font-black">Remoto</p><p class="font-mono text-[10px] text-muted">ARG → GLOBAL</p></div>
+            </div>
+          </div>
+        </figure>
+
+        <div class="order-1 lg:order-2">
+          <p class="font-mono text-[11px] font-bold tracking-[0.25em] text-muted">ESTUDIO</p>
+          <h2 class="mt-3 text-[36px] font-black leading-[0.9] tracking-[-0.03em] lg:text-[44px]">
+            No somos agencia.
+            <br>
+            Somos tu <span class="underline decoration-[#FFE066] decoration-8 underline-offset-2">equipo tech</span>
+            <br>
+            externo.
+          </h2>
+          <p class="mt-6 text-[15px] leading-relaxed text-muted">
+            Diseñamos y codeamos sistemas que se usan todos los días. Sin plantillas que se rompen al segundo cambio. Cada nodo está pensado para que tu equipo lo opere sin depender de nosotros.
+          </p>
+          <p class="mt-4 text-[15px] leading-relaxed text-muted">
+            Stack híbrido: <strong class="text-ink">Next.js, Python, n8n, Supabase, APIs</strong> — elegimos la herramienta por el problema, no al revés. Si se puede resolver sin código, mejor. Si necesita código, lo hacemos bien.
+          </p>
+          <dl class="mt-8 grid grid-cols-3 gap-4 border-t border-line pt-6">
+            <div><dd class="text-3xl font-black">+50</dd><dd class="font-mono text-[10px] tracking-[0.15em] text-muted">PROYECTOS</dd></div>
+            <div><dd class="text-3xl font-black">4.9/5</dd><dd class="font-mono text-[10px] tracking-[0.15em] text-muted">SATISFACCIÓN</dd></div>
+            <div><dd class="text-3xl font-black">∞</dd><dd class="font-mono text-[10px] tracking-[0.15em] text-muted">NODOS POSIBLES</dd></div>
+          </dl>
+          <div class="mt-8 flex gap-3">
+            <a href="#contacto" class="rounded-full bg-ink px-6 py-3 text-sm font-bold text-cream">Trabajar con nosotros</a>
+            <a href="#proceso-creativo" class="rounded-full border border-line bg-paper px-6 py-3 text-sm font-bold">Ver stack →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESO / STACK -->
+    <section id="proceso-creativo" class="relative border-b border-line bg-cream">
+      <div class="mx-auto max-w-[1280px] px-6 py-16 lg:px-8 lg:py-20">
+        <header class="max-w-2xl">
+          <p class="font-mono text-[11px] font-bold tracking-[0.25em] text-muted">STACK & MÉTODO</p>
+          <h2 class="mt-3 text-[36px] font-black leading-[0.9] tracking-[-0.03em] lg:text-[44px]">
+            Tecnología que
+            <br>
+            <span class="bg-ink text-cream px-2">no te encierra.</span>
+          </h2>
+          <p class="mt-4 text-[15px] leading-relaxed text-muted">Elegimos piezas que podés mantener, escalar y entender. Nada de cajas negras.</p>
+        </header>
+
+        <div class="mt-10 grid gap-6 md:grid-cols-3">
+          <article class="rounded-2xl border border-line bg-paper p-6">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-cream border border-line font-mono text-xs font-bold">01</div>
+            <p class="mt-4 font-mono text-[11px] tracking-[0.15em] text-muted">AUTOMATIZACIÓN</p>
+            <h3 class="mt-2 text-lg font-black tracking-tight">n8n · Zapier · Python · APIs</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">Conectamos lo que ya usás. Sheets, WhatsApp, CRMs, ERPs, bancos. Si tiene API, lo integramos. Si no, lo scrapeamos.</p>
+            <div class="mt-4 flex flex-wrap gap-1.5">
+              <span class="rounded-full border border-line px-2.5 py-1 font-mono text-[10px]">n8n</span><span class="rounded-full border border-line px-2.5 py-1 font-mono text-[10px]">Python</span><span class="rounded-full border border-line px-2.5 py-1 font-mono text-[10px]">Webhooks</span>
+            </div>
+          </article>
+          <article class="rounded-2xl border border-line bg-paper p-6">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-cream border border-line font-mono text-xs font-bold">02</div>
+            <p class="mt-4 font-mono text-[11px] tracking-[0.15em] text-muted">WEB & PRODUCTO</p>
+            <h3 class="mt-2 text-lg font-black tracking-tight">Next.js · Supabase · Tailwind</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">Webs rápidas, SEO-ready, con panel admin real. No WordPress inflado. Código limpio que podés escalar mañana.</p>
+            <div class="mt-4 flex flex-wrap gap-1.5">
+              <span class="rounded-full border border-line px-2.5 py-1 font-mono text-[10px]">Next.js</span><span class="rounded-full border border-line px-2.5 py-1 font-mono text-[10px]">Supabase</span><span class="rounded-full border border-line px-2.5 py-1 font-mono text-[10px]">Vercel</span>
+            </div>
+          </article>
+          <article class="rounded-2xl border-2 border-ink bg-paper p-6">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-ink text-cream font-mono text-xs font-bold">03</div>
+            <p class="mt-4 font-mono text-[11px] tracking-[0.15em] text-ink font-bold">NODOS & DATA</p>
+            <h3 class="mt-2 text-lg font-black tracking-tight">El sistema que se habla</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">Cada pieza es un nodo. Se comunican por eventos, no por copiar y pegar. Tu dato entra una vez y viaja solo.</p>
+            <div class="mt-4 flex flex-wrap gap-1.5">
+              <span class="rounded-full bg-ink px-2.5 py-1 font-mono text-[10px] text-cream">Event-driven</span><span class="rounded-full border border-line px-2.5 py-1 font-mono text-[10px]">Postgres</span><span class="rounded-full border border-line px-2.5 py-1 font-mono text-[10px]">Realtime</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="mt-6 rounded-2xl border border-line bg-paper p-6 flex flex-wrap items-center justify-between gap-4">
+          <p class="text-sm font-bold">¿Tenés un proceso manual que odiás? <span class="font-normal text-muted">Lo automatizamos en 7 días o te decimos que no se puede.</span></p>
+          <a href="#contacto" class="rounded-full bg-ink px-5 py-2.5 text-sm font-bold text-cream">Auditar mi proceso →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRIMER PASO -> PLANES -->
+    <section id="primer-paso" class="relative border-b border-line bg-paper">
+      <div class="mx-auto max-w-[1280px] px-6 py-16 lg:px-8 lg:py-20">
+        <header>
+          <p class="font-mono text-[11px] font-bold tracking-[0.25em] text-muted">PRIMER PASO</p>
+          <h2 class="mt-3 text-[36px] font-black leading-[0.9] tracking-[-0.03em] lg:text-[44px]">
+            Empezar es <span class="bg-[#FFE066] px-1">una charla de 20 min.</span>
+          </h2>
+        </header>
+
+        <ol class="mt-10 grid gap-6 md:grid-cols-4">
+          <li class="rounded-2xl border border-line bg-cream p-6">
+            <span class="font-mono text-xs font-black">01</span>
+            <h3 class="mt-2 text-base font-black">Nos contás el cuello</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">Qué tarea te consume horas, qué sistema no se habla con otro.</p>
+          </li>
+          <li class="rounded-2xl border border-line bg-cream p-6">
+            <span class="font-mono text-xs font-black">02</span>
+            <h3 class="mt-2 text-base font-black">Mapa de nodos</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">Te devolvemos un diagrama + ROI. Sin costo.</p>
+          </li>
+          <li class="rounded-2xl border border-line bg-cream p-6">
+            <span class="font-mono text-xs font-black">03</span>
+            <h3 class="mt-2 text-base font-black">Propuesta cerrada</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">Alcance, tiempo y precio fijo. Sin sorpresas.</p>
+          </li>
+          <li class="rounded-2xl border-2 border-ink bg-ink p-6 text-cream">
+            <span class="font-mono text-xs font-black text-[#FFE066]">04</span>
+            <h3 class="mt-2 text-base font-black text-cream">Shippeamos</h3>
+            <p class="mt-2 text-sm leading-relaxed opacity-80">Demo en días, producción en semanas. Con docs.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="relative border-b border-line bg-cream">
+      <div class="mx-auto max-w-3xl px-6 py-16 lg:py-20">
+        <header class="text-center">
+          <p class="font-mono text-[11px] font-bold tracking-[0.25em] text-muted">FAQ</p>
+          <h2 class="mt-3 text-[36px] font-black leading-tight tracking-[-0.03em] lg:text-[44px]">
+            Preguntas
+            <br>
+            <span class="bg-ink text-cream px-2">frecuentes.</span>
+          </h2>
+        </header>
+
+        <div class="mt-10 space-y-3">
+          <details class="group rounded-2xl border border-line bg-paper transition open:border-ink">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 text-base font-black tracking-tight">¿Cuánto cuesta automatizar? <span class="flex h-7 w-7 items-center justify-center rounded-full border border-line text-lg font-normal transition group-open:rotate-45 group-open:bg-ink group-open:text-cream">+</span></summary>
+            <p class="px-6 pb-6 text-sm leading-relaxed text-muted">Depende del flujo. Una automatización simple (ej: form → CRM → mail) desde USD 400. Un sistema con múltiples nodos desde USD 1.200. Siempre precio cerrado tras el discovery.</p>
+          </details>
+          <details class="group rounded-2xl border border-line bg-paper transition open:border-ink">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 text-base font-black tracking-tight">¿Hacen páginas web con WordPress? <span class="flex h-7 w-7 items-center justify-center rounded-full border border-line text-lg font-normal transition group-open:rotate-45 group-open:bg-ink group-open:text-cream">+</span></summary>
+            <p class="px-6 pb-6 text-sm leading-relaxed text-muted">No. Construimos con Next.js + CMS moderno (o Supabase). Más rápido, más seguro y escalable. Si necesitás WordPress por algún motivo, te lo decimos honestamente.</p>
+          </details>
+          <details class="group rounded-2xl border border-line bg-paper transition open:border-ink">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 text-base font-black tracking-tight">¿Qué es un “nodo”? <span class="flex h-7 w-7 items-center justify-center rounded-full border border-line text-lg font-normal transition group-open:rotate-45 group-open:bg-ink group-open:text-cream">+</span></summary>
+            <p class="px-6 pb-6 text-sm leading-relaxed text-muted">Cada pieza de tu sistema: web, app, bot, planilla, CRM, pasarela. Los conectamos para que el dato fluya solo, sin copiar y pegar. Un cambio en un nodo se refleja en todos.</p>
+          </details>
+          <details class="group rounded-2xl border border-line bg-paper transition open:border-ink">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 text-base font-black tracking-tight">¿Cuánto tarda? <span class="flex h-7 w-7 items-center justify-center rounded-full border border-line text-lg font-normal transition group-open:rotate-45 group-open:bg-ink group-open:text-cream">+</span></summary>
+            <p class="px-6 pb-6 text-sm leading-relaxed text-muted">Automatización: 5–7 días. Landing + automatizaciones: 2 semanas. Web/app con panel: 3–4 semanas. Siempre con entregas parciales.</p>
+          </details>
+          <details class="group rounded-2xl border border-line bg-paper transition open:border-ink">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 text-base font-black tracking-tight">¿Y después quién lo mantiene? <span class="flex h-7 w-7 items-center justify-center rounded-full border border-line text-lg font-normal transition group-open:rotate-45 group-open:bg-ink group-open:text-cream">+</span></summary>
+            <p class="px-6 pb-6 text-sm leading-relaxed text-muted">Te entregamos docs + video + capacitación. Podés operarlo vos o dejarnos el mantenimiento mensual (desde USD 120/mes, sin permanencia).</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section id="newsletter" class="relative border-b border-line bg-paper">
+      <div class="mx-auto max-w-2xl px-6 py-16 text-center lg:py-20">
+        <p class="font-mono text-[11px] font-bold tracking-[0.25em] text-muted">ANTES DE IRTE</p>
+        <h2 class="mt-3 text-[32px] font-black leading-tight tracking-[-0.03em] lg:text-[40px]">
+          Un mail al mes.
+          <br>
+          <span class="bg-[#FFE066] px-1">Cero spam.</span> Puro sistema.
+        </h2>
+        <p class="mx-auto mt-4 max-w-md text-sm leading-relaxed text-muted">
+          Te mandamos un caso real: qué automatizamos, cuánto ahorró y cómo lo hicimos. Para copiar o para pedirnos lo mismo.
+        </p>
+        <form class="mx-auto mt-8 flex max-w-md gap-2" data-newsletter>
+          <label for="newsletter-email" class="sr-only">Tu email</label>
+          <input id="newsletter-email" type="email" required placeholder="tu@email.com"
+                 class="w-full rounded-full border border-line bg-cream px-5 py-3.5 text-sm placeholder:text-dim focus:border-ink focus:outline-none">
+          <button type="submit" class="shrink-0 rounded-full bg-ink px-6 py-3.5 text-sm font-bold text-cream transition hover:bg-black">
+            Sumarme →
+          </button>
+        </form>
+        <p class="mt-3 font-mono text-[10px] tracking-wide text-dim">Sin spam. Te das de baja en un click.</p>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="relative bg-cream">
+      <div class="mx-auto grid max-w-[1280px] gap-12 px-6 py-16 lg:grid-cols-2 lg:px-8 lg:py-20">
+        <div>
+          <p class="font-mono text-[11px] font-bold tracking-[0.25em] text-muted">CONTACTO</p>
+          <h2 class="mt-3 text-[36px] font-black leading-[0.9] tracking-[-0.03em] lg:text-[48px]">
+            Hablemos de
+            <br>
+            tus <span class="bg-ink text-cream px-2">nodos.</span>
+          </h2>
+          <p class="mt-6 max-w-md text-[15px] leading-relaxed text-muted">
+            Contanos qué proceso te duele o qué producto querés lanzar. En 24h tenés un mapa y una propuesta.
+          </p>
+
+          <div class="mt-8 space-y-3">
+            <a href="https://wa.me/5493534018769?text=Hola!%20Quiero%20automatizar%20mi%20operaci%C3%B3n."
+               class="flex items-center justify-between rounded-2xl border border-line bg-paper px-5 py-4 transition hover:border-ink">
+              <span><strong class="text-sm font-black">WhatsApp</strong><span class="block text-sm text-muted">Respuesta en el día · +54 9 353 401-8769</span></span>
+              <span class="flex h-9 w-9 items-center justify-center rounded-full bg-ink text-cream">→</span>
+            </a>
+            <a href="mailto:hola@arvure.com"
+               class="flex items-center justify-between rounded-2xl border border-line bg-paper px-5 py-4 transition hover:border-ink">
+              <span><strong class="text-sm font-black">Email</strong><span class="block text-sm text-muted">hola@arvure.com</span></span>
+              <span class="flex h-9 w-9 items-center justify-center rounded-full bg-paper border border-line">→</span>
+            </a>
+            <div class="flex gap-3">
+              <a href="https://www.youtube.com/@Jcmachadoart" class="flex-1 rounded-2xl border border-line bg-paper px-5 py-3 text-center text-sm font-bold hover:border-ink">YouTube</a>
+              <a href="https://www.tiktok.com/@jcmachadoart" class="flex-1 rounded-2xl border border-line bg-paper px-5 py-3 text-center text-sm font-bold hover:border-ink">TikTok</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-[20px] border border-line bg-paper p-7 shadow-card">
+          <h3 class="text-xl font-black tracking-tight">Contanos tu proyecto</h3>
+          <p class="mt-1 text-sm text-muted">Te respondemos en menos de 24h.</p>
+          <form class="mt-6 space-y-4" data-encargo>
+            <div>
+              <label for="nombre" class="mb-1 block font-mono text-[11px] font-bold tracking-wide text-muted">TU NOMBRE</label>
+              <input id="nombre" name="nombre" type="text" required placeholder="Cómo te llamás"
+                     class="w-full rounded-xl border border-line bg-cream px-4 py-3 text-sm placeholder:text-dim focus:border-ink focus:outline-none">
+            </div>
+            <div>
+              <label for="contacto-usuario" class="mb-1 block font-mono text-[11px] font-bold tracking-wide text-muted">EMAIL O WHATSAPP</label>
+              <input id="contacto-usuario" name="contacto" type="text" required placeholder="Dónde te escribimos"
+                     class="w-full rounded-xl border border-line bg-cream px-4 py-3 text-sm placeholder:text-dim focus:border-ink focus:outline-none">
+            </div>
+            <div>
+              <label for="tipo" class="mb-1 block font-mono text-[11px] font-bold tracking-wide text-muted">¿QUÉ NECESITÁS?</label>
+              <select id="tipo" name="tipo" class="w-full rounded-xl border border-line bg-cream px-4 py-3 text-sm focus:border-ink focus:outline-none">
+                <option>Automatización</option>
+                <option>Página web</option>
+                <option>Aplicación</option>
+                <option>Integración / API</option>
+                <option>Otro / consulta</option>
+              </select>
+            </div>
+            <div>
+              <label for="idea" class="mb-1 block font-mono text-[11px] font-bold tracking-wide text-muted">CONTANOS</label>
+              <textarea id="idea" name="idea" rows="4" required placeholder="Qué proceso querés automatizar o qué producto querés construir..."
+                        class="w-full rounded-xl border border-line bg-cream px-4 py-3 text-sm placeholder:text-dim focus:border-ink focus:outline-none"></textarea>
+            </div>
+            <button type="submit" class="w-full rounded-full bg-ink px-6 py-3.5 text-sm font-black text-cream transition hover:bg-black">
+              Enviar por WhatsApp →
+            </button>
+            <p class="text-center font-mono text-[10px] tracking-wide text-dim">Sin compromiso · Propuesta en 48h</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-[1280px] px-6 py-10 lg:px-8">
+      <div class="flex flex-wrap items-start justify-between gap-8">
+        <div>
+          <a href="#inicio" class="flex items-center gap-2">
+            <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-ink text-cream">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="6" cy="6" r="2.2" fill="currentColor"/><circle cx="18" cy="7" r="1.8" fill="currentColor"/><circle cx="12" cy="18" r="2.5" fill="currentColor"/><path d="M6 6 L12 18 L18 7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            </span>
+            <span class="text-sm font-black tracking-tight">ARVURE</span>
+            <span class="font-mono text-[10px] tracking-[0.2em] text-muted">ESTUDIO TECH</span>
+          </a>
+          <p class="mt-2 text-sm text-muted">Automatizaciones · Webs · Apps · Argentina → Global</p>
+        </div>
+        <nav aria-label="Pie">
+          <ul class="flex flex-wrap gap-6 text-sm font-medium text-muted">
+            <li><a class="hover:text-ink" href="#ideas">Soluciones</a></li>
+            <li><a class="hover:text-ink" href="#proceso-creativo">Stack</a></li>
+            <li><a class="hover:text-ink" href="#sobre-nos">Estudio</a></li>
+            <li><a class="hover:text-ink" href="blog.html">Blog</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="mt-8 border-t border-line pt-6 font-mono text-xs text-dim">
+        © <span data-anio>2026</span> Arvure · Estudio tech · Todos los derechos reservados
+      </p>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/5493534018769?text=Hola!%20Vengo%20de%20la%20web"
+     class="fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-ink text-xl font-bold text-cream shadow-lg transition hover:scale-105"
+     aria-label="Escribinos por WhatsApp">✆</a>
+
+  <dialog id="dialogo-idea" class="w-full max-w-2xl rounded-2xl border border-line bg-paper p-0 text-ink backdrop:bg-ink/60 backdrop:backdrop-blur-sm">
+    <div class="flex items-center justify-between border-b border-line px-6 py-4">
+      <span class="font-mono text-[11px] tracking-[0.2em] text-muted" id="dialogo-etiqueta"></span>
+      <button type="button" class="flex h-8 w-8 items-center justify-center rounded-full border border-line text-xl leading-none transition hover:bg-ink hover:text-cream" data-cerrar-idea aria-label="Cerrar">×</button>
+    </div>
+    <div class="p-6">
+      <img id="dialogo-imagen" src="" alt="" class="aspect-video w-full rounded-xl border border-line object-cover">
+      <h3 id="dialogo-titulo" class="mt-5 text-2xl font-black tracking-tight"></h3>
+      <p id="dialogo-descripcion" class="mt-3 text-sm leading-relaxed text-muted"></p>
+      <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
+        <span class="font-mono text-xs font-bold tracking-wide" id="dialogo-estado"></span>
+        <a href="#contacto" class="rounded-full bg-ink px-5 py-2.5 text-sm font-bold text-cream">Quiero esto →</a>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    const load = (k, d) => { try { const v = JSON.parse(localStorage.getItem('fabrica_' + k)); return v ?? d; } catch { return d; } };
+    const esc = s => (s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    let catalogo = load('catalogo', window.CATALOGO_DEFECTO);
+    // Migración tech 2026-09: si el catálogo es de la era "fábrica de ideas" (ids idea_*), reemplazar por el nuevo catálogo tech
+    if (catalogo.some(c => c.id && c.id.startsWith('idea_'))) {
+      catalogo = window.CATALOGO_DEFECTO.slice();
+      localStorage.setItem('fabrica_catalogo', JSON.stringify(catalogo));
+    }
+    if (!localStorage.getItem('fabrica_catalogo')) localStorage.setItem('fabrica_catalogo', JSON.stringify(catalogo));
+    {
+      const defaults = window.CATALOGO_DEFECTO;
+      const ids = new Set(catalogo.map(i => i.id));
+      defaults.forEach(d => { if (!ids.has(d.id)) catalogo.push(d); });
+      let migrated = false;
+      catalogo.forEach(i => { if (!i.eje) { i.eje = defaults.find(d => d.id === i.id)?.eje || 'Automatizaciones'; migrated = true; } });
+      if (migrated || catalogo.length !== defaults.length) localStorage.setItem('fabrica_catalogo', JSON.stringify(catalogo));
+    }
+    let filtroEje = 'todas';
+    const dialogo = document.getElementById('dialogo-idea');
+
+    function renderIdeas() {
+      const visibles = catalogo.filter(i => filtroEje === 'todas' || i.eje === filtroEje);
+      const grid = document.querySelector('[data-grid-ideas]');
+      grid.innerHTML = visibles.map(i => `
+        <article class="group overflow-hidden rounded-2xl border border-line bg-paper shadow-card transition hover:shadow-cardHover hover:border-ink/20">
+          <button type="button" class="block w-full text-left" data-abrir-idea="${i.id}">
+            <div class="relative overflow-hidden">
+              <img src="${esc(i.imagen)}" alt="${esc(i.titulo)}" class="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-[1.03]">
+              <span class="absolute left-3 top-3 rounded-full bg-cream/90 backdrop-blur px-2.5 py-1 font-mono text-[10px] font-bold tracking-wide border border-line">${esc(i.eje || i.tipo)}</span>
+              <span class="absolute right-3 top-3 rounded-full ${i.estado === 'vendida' ? 'bg-ink text-cream' : 'bg-[#FFE066] text-ink'} px-2.5 py-1 font-mono text-[10px] font-bold tracking-wide">${i.estado === 'vendida' ? 'EN PRODUCCIÓN' : 'DISPONIBLE'}${i.precio ? ' · ' + esc(i.precio) : ''}</span>
+            </div>
+          </button>
+          <div class="p-5">
+            <h3 class="text-lg font-black leading-tight tracking-tight">
+              <button type="button" data-abrir-idea="${i.id}" class="text-left hover:text-muted transition">${esc(i.titulo)}</button>
+            </h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">${esc(i.descripcion)}</p>
+            <p class="mt-4">
+              <button type="button" data-abrir-idea="${i.id}" class="inline-flex items-center gap-1 rounded-full border border-line px-3 py-1.5 font-mono text-[11px] font-bold tracking-wide hover:border-ink hover:bg-ink hover:text-cream transition">Ver detalle →</button>
+            </p>
+          </div>
+        </article>`).join('') || '<p class="col-span-full text-center text-sm text-muted">Sin soluciones en este filtro.</p>';
+      grid.querySelectorAll('[data-abrir-idea]').forEach(boton => {
+        boton.addEventListener('click', () => abrirIdea(boton.dataset.abrirIdea));
+      });
+    }
+
+    function abrirIdea(id) {
+      const idea = catalogo.find(x => x.id === id);
+      if (!idea) return;
+      document.getElementById('dialogo-etiqueta').textContent = idea.id + ' · ' + (idea.eje || idea.tipo);
+      document.getElementById('dialogo-imagen').src = idea.imagen;
+      document.getElementById('dialogo-imagen').alt = idea.titulo;
+      document.getElementById('dialogo-titulo').textContent = idea.titulo;
+      document.getElementById('dialogo-descripcion').textContent = idea.detalle || idea.descripcion;
+      const estado = document.getElementById('dialogo-estado');
+      estado.textContent = (idea.estado === 'vendida' ? 'En producción' : 'Disponible') + (idea.precio ? ' · ' + idea.precio : '');
+      estado.className = 'font-mono text-xs font-bold tracking-wide ' + (idea.estado === 'vendida' ? 'text-muted' : 'text-ink');
+      dialogo.showModal();
+    }
+
+    document.querySelectorAll('[data-filtro-eje]').forEach(boton => {
+      boton.addEventListener('click', () => {
+        filtroEje = filtroEje === boton.dataset.filtroEje ? 'todas' : boton.dataset.filtroEje;
+        document.querySelectorAll('[data-filtro-eje]').forEach(b => {
+          const activo = b.dataset.filtroEje === filtroEje;
+          b.classList.toggle('bg-ink', activo);
+          b.classList.toggle('text-cream', activo);
+          b.classList.toggle('border-ink', activo);
+          b.classList.toggle('bg-paper', !activo);
+          b.classList.toggle('text-muted', !activo);
+          b.classList.toggle('border-line', !activo);
+        });
+        renderIdeas();
+      });
+    });
+
+    document.querySelectorAll('[data-cerrar-idea]').forEach(boton => {
+      boton.addEventListener('click', () => dialogo.close());
+    });
+    dialogo.addEventListener('click', e => {
+      if (e.target === dialogo) dialogo.close();
+    });
+
+    renderIdeas();
+
+    document.querySelectorAll('[data-encargo]').forEach(form => {
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const datos = new FormData(form);
+        const mensaje =
+          'Hola! Soy ' + datos.get('nombre') +
+          ' (contacto: ' + datos.get('contacto') + ').' +
+          ' Necesito: ' + datos.get('tipo') + '.' +
+          ' Detalle: ' + datos.get('idea');
+        window.open('https://wa.me/5493534018769?text=' + encodeURIComponent(mensaje), '_blank');
+      });
+    });
+
+    document.querySelectorAll('[data-newsletter]').forEach(form => {
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const email = form.querySelector('input').value.trim();
+        const lista = load('suscriptores', []);
+        if (!lista.some(s => s.email === email)) {
+          lista.push({ email, fecha: new Date().toISOString().slice(0, 10) });
+          localStorage.setItem('fabrica_suscriptores', JSON.stringify(lista));
+        }
+        const boton = form.querySelector('button');
+        boton.textContent = '¡Sumado! ✓';
+        boton.disabled = true;
+      });
+    });
+
+    document.querySelectorAll('[data-anio]').forEach(el => {
+      el.textContent = new Date().getFullYear();
+    });
+
+    (function(){
+      const load2 = (k, d) => { try { const v = JSON.parse(localStorage.getItem('fabrica_' + k)); return v ?? d; } catch { return d; } };
+      const hero = load2('hero', window.HERO_DEFECTO);
+      const b = document.querySelector('[data-hero-badge]');
+      if (b && hero.badge) b.lastChild.textContent = ' ' + hero.badge;
+      const h1 = document.querySelector('[data-hero-titulo]');
+      if (h1 && hero.titulo1) {
+        const em = h1.querySelector('em');
+        // keep bold structure
+        if (h1.childNodes[0]) h1.childNodes[0].textContent = hero.titulo1 + '\n';
+        if (em) em.textContent = hero.titulo2;
+      }
+      const pa = document.querySelector('[data-hero-parrafo]');
+      if (pa && hero.parrafo) pa.innerHTML = hero.parrafo;
+      const b1 = document.querySelector('[data-hero-boton1]');
+      if (b1) { if (hero.boton1) b1.textContent = hero.boton1; if (hero.boton1link) b1.href = hero.boton1link; }
+      const b2 = document.querySelector('[data-hero-boton2]');
+      if (b2) { if (hero.boton2) b2.textContent = hero.boton2; if (hero.boton2link) b2.href = hero.boton2link; }
+      const ej = document.querySelector('[data-hero-ejes]');
+      if (ej && hero.ejes) ej.textContent = hero.ejes;
+      const img = document.querySelector('[data-hero-imagen]');
+      if (img && hero.imagen) img.src = hero.imagen;
+      const fig = document.querySelector('[data-hero-fig]');
+      if (fig) { if (hero.figcaption) fig.textContent = hero.figcaption; if (hero.figlink) fig.href = hero.figlink; }
+
+      const customs = (() => { try { return JSON.parse(localStorage.getItem('fabrica_custom_nombres')||'{}'); } catch { return {}; } })();
+      Object.keys(customs).forEach(id => {
+        if (!document.getElementById(id)) {
+          const sec = document.createElement('section');
+          sec.id = id;
+          sec.className = 'border-b border-line bg-cream relative';
+          sec.innerHTML = `<div class="mx-auto max-w-[1280px] px-6 py-16 lg:px-8"><p class="font-mono text-[11px] font-bold tracking-[0.2em] text-muted">${customs[id]}</p><h2 class="mt-2 text-3xl font-black tracking-tight">${customs[id]}</h2><p class="mt-4 max-w-xl text-sm leading-relaxed text-muted">Sección agregada desde el admin.</p></div>`;
+          document.querySelector('main').appendChild(sec);
+        }
+      });
+      const orden = load2('orden_secciones', window.SECCIONES_DEFECTO);
+      const main = document.querySelector('main');
+      if (main && Array.isArray(orden)) {
+        const secciones = {};
+        main.querySelectorAll(':scope > section[id]').forEach(s => { secciones[s.id] = s; });
+        const frag = document.createDocumentFragment();
+        orden.forEach(o => {
+          const id = typeof o === 'string' ? o : o.id;
+          const visible = typeof o === 'string' ? true : o.visible !== false;
+          const sec = secciones[id];
+          if (!sec) return;
+          sec.style.display = visible ? '' : 'none';
+          frag.appendChild(sec);
+        });
+        Object.keys(secciones).forEach(id => {
+          if (!orden.some(o => (typeof o === 'string' ? o : o.id) === id)) {
+            frag.appendChild(secciones[id]);
+          }
+        });
+        main.appendChild(frag);
+      }
+    })();
+  </script>
+
+</body>
+</html>
