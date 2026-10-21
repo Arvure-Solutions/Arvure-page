@@ -13,7 +13,9 @@ window.HERO_DEFECTO = {
   boton2link: "#ideas",
   ejes: "NODOS · AUTOMATIZACIONES · WEBS · APPS",
   imagen: "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1200&auto=format&fit=crop",
-  fig: "ARQUITECTURA DE NODOS · VER CASOS →"
+  fig: "ARQUITECTURA DE NODOS · VER CASOS →",
+  figcaption: "Arquitectura de nodos · Ver casos →",
+  figlink: "#casos"
 };
 
 /* Orden de secciones. El hero ("inicio") y la tira de capacidades
