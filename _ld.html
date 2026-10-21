@@ -1,0 +1,1050 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Arvure — Automatizaciones, webs y apps que conectan tu operación</title>
+<meta name="description" content="Arvure es un estudio tech. Construimos automatizaciones, páginas web y aplicaciones a medida: sistemas que conectan tus herramientas y hacen que tu operación escale.">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Arvure — Automatizamos lo que te frena">
+<meta property="og:description" content="Automatizaciones, webs y apps a medida. Sistemas que se hablan entre sí.">
+<meta property="og:type" content="website">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%231D1D1F'/><circle cx='30' cy='31' r='6' fill='white'/><circle cx='70' cy='33' r='5' fill='white'/><circle cx='50' cy='70' r='7' fill='white'/><path d='M30 31 L50 70 L70 33' stroke='white' stroke-width='2' fill='none' opacity='.85'/></svg>">
+
+<link rel="stylesheet" href="styles.css">
+
+<script>document.documentElement.classList.add('js');</script>
+<script src="catalogo.defaults.js"></script>
+<script src="contenido.defaults.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  /* Config mínima para el markup inyectado por el panel de administración.
+     El diseño visible usa styles.css. */
+  tailwind.config = {
+    theme: { extend: {
+      colors: {
+        cream: '#ffffff', paper: '#ffffff', sand: '#f5f5f7',
+        line: 'rgba(0,0,0,.09)', ink: '#1d1d1f',
+        muted: '#6e6e73', dim: '#86868b', accent: '#0071e3'
+      },
+      fontFamily: {
+        sans: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'Inter', 'system-ui', 'sans-serif'],
+        mono: ['ui-monospace', 'SF Mono', 'monospace']
+      }
+    }}
+  };
+</script>
+</head>
+
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     NAV — barra flotante translúcida
+     ══════════════════════════════════════════════════════════════════════ -->
+<header class="nav" id="nav">
+  <nav class="nav__inner" aria-label="Principal">
+    <a href="#inicio" class="nav__brand">
+      <span class="nav__mark" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <circle cx="6" cy="6" r="2.4" fill="currentColor"/>
+          <circle cx="18" cy="7" r="1.9" fill="currentColor"/>
+          <circle cx="12" cy="18" r="2.7" fill="currentColor"/>
+          <path d="M6 6 L12 18 L18 7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span>Arvure</span>
+      <span class="nav__tag">Estudio tech</span>
+    </a>
+
+    <ul class="nav__links">
+      <li><a href="#ideas">Soluciones</a></li>
+      <li><a href="#casos">Capacidades</a></li>
+      <li><a href="#proceso-creativo">Stack</a></li>
+      <li><a href="#sobre-nos">Estudio</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="blog.html">Blog</a></li>
+    </ul>
+
+    <div class="nav__actions">
+      <a href="#contacto" class="btn btn--ink btn--sm">Hablemos</a>
+      <a href="login.html" class="btn btn--ghost btn--sm">Login</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     HERO
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="hero band" id="inicio">
+  <div class="shell">
+
+    <div>
+      <p class="hero__badge" data-hero-badge>
+        <span class="live-dot" aria-hidden="true"></span>
+        Estudio de ingeniería de software · Automatización, web y apps
+      </p>
+
+      <h1 class="display hero__title" data-hero-titulo>
+        Automatizamos <span class="dim" data-hero-l1>lo que te frena.</span><br>
+        <span class="strong" data-hero-l2>Construimos</span> <span data-hero-l3>lo que te escala.</span>
+      </h1>
+    </div>
+
+    <div class="hero__grid">
+      <div>
+        <p class="lead hero__copy" data-hero-parrafo>
+          Automatizaciones, webs y apps a medida, integradas en un solo sistema.
+          Diseñamos la arquitectura, escribimos el código y te entregamos todo:
+          credenciales, documentación y capacitación. Tu operación sigue funcionando
+          aunque nosotros no estemos.
+        </p>
+
+        <div class="hero__cta">
+          <a href="#contacto" class="btn btn--ink" data-hero-boton1>Empezar proyecto</a>
+          <a href="#ideas" class="link-inline" data-hero-boton2>
+            Ver soluciones <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <dl class="hero__stats">
+          <div class="stat">
+            <dt class="stat__n">120+</dt>
+            <dd class="stat__l">Automatizaciones</dd>
+          </div>
+          <div class="stat">
+            <dt class="stat__n">40+</dt>
+            <dd class="stat__l">Webs y apps</dd>
+          </div>
+          <div class="stat">
+            <dt class="stat__n">48 h</dt>
+            <dd class="stat__l">De diagnóstico a propuesta</dd>
+          </div>
+        </dl>
+
+        <p class="hero__ejes" data-hero-ejes>Nodos · Eventos · APIs · Sistemas conectados</p>
+
+        <img data-hero-imagen src="" alt="" class="visually-hidden" aria-hidden="true">
+      </div>
+
+      <div class="hero__panel-wrap">
+        <figure class="hero-panel">
+          <div class="hero-panel__bar">
+            <span class="live-dot" aria-hidden="true"></span>
+            <span>Arquitectura de referencia</span>
+            <span class="chip chip--live">En vivo</span>
+          </div>
+
+          <div class="hero-panel__canvas">
+            <span class="glass-chip">
+              <span class="live-dot" aria-hidden="true"></span>
+              6 nodos conectados
+            </span>
+
+            <svg class="hero-graph" viewBox="0 0 560 430" role="img"
+                 aria-label="Diagrama de seis nodos conectados: CRM, web, app y datos orbitando un nodo central.">
+              <g class="link">
+                <line x1="280" y1="215" x2="104" y2="112"/>
+                <line x1="280" y1="215" x2="456" y2="112"/>
+                <line x1="280" y1="215" x2="112" y2="336"/>
+                <line x1="280" y1="215" x2="450" y2="336"/>
+              </g>
+
+              <circle class="ring" cx="280" cy="215" r="56">
+                <animate attributeName="r" values="52;72;52" dur="3.4s" repeatCount="indefinite"/>
+                <animate attributeName="stroke-opacity" values=".24;0;.24" dur="3.4s" repeatCount="indefinite"/>
+              </circle>
+
+              <g>
+                <circle class="node" cx="104" cy="112" r="42"/>
+                <text class="n-label" x="104" y="109" text-anchor="middle">CRM</text>
+                <text class="n-sub"   x="104" y="126" text-anchor="middle">HubSpot</text>
+              </g>
+              <g>
+                <circle class="node" cx="456" cy="112" r="42"/>
+                <text class="n-label" x="456" y="109" text-anchor="middle">Web</text>
+                <text class="n-sub"   x="456" y="126" text-anchor="middle">Next.js</text>
+              </g>
+              <g>
+                <circle class="node" cx="112" cy="336" r="40"/>
+                <text class="n-label" x="112" y="333" text-anchor="middle">App</text>
+                <text class="n-sub"   x="112" y="350" text-anchor="middle">Mobile</text>
+              </g>
+              <g>
+                <circle class="node" cx="450" cy="336" r="40"/>
+                <text class="n-label" x="450" y="333" text-anchor="middle">Datos</text>
+                <text class="n-sub"   x="450" y="350" text-anchor="middle">Postgres</text>
+              </g>
+
+              <g>
+                <circle class="node--hub" cx="280" cy="215" r="50"/>
+                <text class="n-label n-label--on" x="280" y="212" text-anchor="middle" style="font-size:15px">Nodo</text>
+                <text class="n-sub n-sub--on"   x="280" y="232" text-anchor="middle">Arvure</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="hero-panel__foot">
+            <div class="stat stat--concept"><span class="stat__n">Nodos</span><span class="stat__l">Cada pieza, un sistema</span></div>
+            <div class="stat stat--concept"><span class="stat__n">Eventos</span><span class="stat__l">El dato viaja solo</span></div>
+            <div class="stat stat--concept"><span class="stat__n">APIs</span><span class="stat__l">Lo que ya usás, conectado</span></div>
+          </div>
+        </figure>
+
+        <p class="hero__cap">
+          <a href="#casos" data-hero-fig>Arquitectura de nodos · Ver capacidades →</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     TIRA DE CAPACIDADES
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="strip band" id="servicios" aria-label="Capacidades">
+  <ul class="shell strip__list">
+    <li>Automatizaciones</li>
+    <li>Páginas web</li>
+    <li>Aplicaciones</li>
+    <li>Integraciones</li>
+    <li>Bots &amp; IA</li>
+    <li>Scraping</li>
+    <li>Argentina → Global</li>
+  </ul>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     SOLUCIONES
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="band bay" id="ideas">
+  <div class="shell">
+
+    <div class="split split--wide-left" style="margin-bottom:clamp(40px,5vw,64px)">
+      <div class="reveal">
+        <span class="eyebrow">Soluciones</span>
+        <h2 class="headline" style="margin-top:18px">Problemas concretos,<br>resueltos por completo.</h2>
+      </div>
+      <div class="reveal" data-delay="1" style="align-self:end">
+        <p class="lead">
+          Cada proyecto es un sistema, no un entregable suelto: tu web, tu CRM, tus
+          planillas y tus canales hablando entre sí, con datos que fluyen sin copiar
+          y pegar.
+        </p>
+        <div class="filters" style="margin-top:28px" role="group" aria-label="Filtrar soluciones por eje">
+          <button type="button" data-filtro-eje="todas" aria-pressed="true">Todas</button>
+          <button type="button" data-filtro-eje="Automatizaciones" aria-pressed="false">Automatizaciones</button>
+          <button type="button" data-filtro-eje="Webs" aria-pressed="false">Webs</button>
+          <button type="button" data-filtro-eje="Apps" aria-pressed="false">Apps</button>
+          <button type="button" data-filtro-eje="Nodos" aria-pressed="false">Nodos</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="bento bento--ideas" data-grid-ideas></div>
+
+    <div class="reveal" style="margin-top:clamp(36px,4vw,56px);display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between;padding-top:32px;border-top:1px solid var(--hairline)">
+      <div>
+        <h3 class="h3">¿No sabés por dónde empezar?</h3>
+        <p class="small" style="margin-top:6px">Relevamos tus procesos y te entregamos el mapa de qué automatizar primero, con el impacto estimado en horas.</p>
+      </div>
+      <a href="#contacto" class="btn btn--blue">Pedir diagnóstico</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     CÓMO TRABAJAMOS + PLANES
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="band band--alt bay" id="punto-de-partida">
+  <div class="shell">
+
+    <div class="split split--wide-left" style="margin-bottom:clamp(48px,6vw,88px)">
+      <div class="reveal">
+        <span class="eyebrow">Método</span>
+        <h2 class="headline" style="margin-top:18px">De la idea al<br>sistema en producción.</h2>
+        <p class="lead" style="margin-top:24px;max-width:32ch">
+          Tres etapas con entregas parciales. Ves funcionando lo que pagás, no un informe.
+        </p>
+        <a href="#contacto" class="link-inline" style="margin-top:26px">
+          Quiero mi roadmap en 48 h <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+
+      <dl class="reveal" data-delay="1" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-self:end">
+        <div class="stat"><dt class="stat__n">5–7 días</dt><dd class="stat__l">Primer flujo en producción</dd></div>
+        <div class="stat"><dt class="stat__n">2–4 sem</dt><dd class="stat__l">Web o app completa</dd></div>
+        <div class="stat"><dt class="stat__n">∞</dt><dd class="stat__l">Nodos posibles</dd></div>
+      </dl>
+    </div>
+
+    <ol class="steps reveal">
+      <li class="step">
+        <span class="step__n">01 — Diagnóstico</span>
+        <h3 class="step__t">Entendemos la operación antes de escribir código</h3>
+        <p class="step__d">Relevamos procesos, herramientas y tiempos reales. Salís con un mapa de qué automatizar primero y el impacto estimado, en horas y en plata.</p>
+      </li>
+      <li class="step">
+        <span class="step__n">02 — Construcción</span>
+        <h3 class="step__t">Un módulo funcionando en días, no en meses</h3>
+        <p class="step__d">Primer flujo en producción o primera pantalla navegable. Lo probás con tus datos reales y decidís con evidencia, no con promesa.</p>
+      </li>
+      <li class="step">
+        <span class="step__n">03 — Entrega y transferencia</span>
+        <h3 class="step__t">Lo ponemos en producción y te enseñamos a operarlo</h3>
+        <p class="step__d">Documentación, capacitación y acceso completo al código. Tu equipo puede cambiarlo sin llamarnos; si preferís, lo mantenemos nosotros.</p>
+      </li>
+    </ol>
+
+    <div class="split" style="margin-top:clamp(56px,7vw,96px);gap:clamp(20px,2.4vw,28px)">
+
+      <article class="plan reveal">
+        <span class="eyebrow">01 — Sprint de automatización</span>
+        <h3 class="h3" style="font-size:1.5rem;letter-spacing:-.03em">Un proceso, resuelto y en producción</h3>
+        <ul class="plan__list">
+          <li>1 flujo automatizado de punta a punta (ej: lead → CRM → WhatsApp)</li>
+          <li>Integración de 2–3 herramientas que ya usás</li>
+          <li>Dashboard, alertas y reintentos automáticos</li>
+          <li>Entrega documentada en 7 días</li>
+        </ul>
+        <p class="plan__price">Desde USD 400 · alcance cerrado</p>
+        <a href="#contacto" class="btn btn--ghost">Empezar un sprint</a>
+      </article>
+
+      <article class="plan plan--dark reveal" data-delay="1">
+        <span class="eyebrow">02 — Plataforma operativa</span>
+        <h3 class="h3" style="font-size:1.5rem;letter-spacing:-.03em">Tu operación, en un solo sistema</h3>
+        <ul class="plan__list">
+          <li>Web o app con panel de administración real</li>
+          <li>Nodos conectados: pagos, stock, CRM, notificaciones</li>
+          <li>Automatizaciones e integraciones donde apliquen</li>
+          <li>Capacitación, documentación y 30 días de soporte</li>
+        </ul>
+        <p class="plan__price">Desde USD 1.200 · 3–4 semanas</p>
+        <a href="#contacto" class="btn btn--blue">Empezar un proyecto</a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     ESTUDIO
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="band bay" id="sobre-nos">
+  <div class="shell split split--wide-right split--sticky">
+
+    <figure class="media reveal">
+      <div class="media-bar" aria-hidden="true"><i></i><i></i><i></i><span>arvure — nodos.deploy</span></div>
+      <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop"
+           alt="Equipo de ingeniería trabajando" loading="lazy" width="1200" height="900">
+      <div class="media-foot">
+        <div><span class="h4">100%</span><span class="stat__l">A medida</span></div>
+        <div><span class="h4">No-code + Code</span><span class="stat__l">Stack híbrido</span></div>
+        <div><span class="h4">Remoto</span><span class="stat__l">ARG → Global</span></div>
+      </div>
+    </figure>
+
+    <div class="reveal" data-delay="1">
+      <span class="eyebrow">Estudio</span>
+      <h2 class="headline" style="margin-top:18px">
+        No somos agencia.<br>
+        Somos tu <span class="accent">equipo tech</span> externo.
+      </h2>
+      <p class="lead" style="margin-top:26px">
+        Diseñamos y construimos sistemas que se usan todos los días. Cada pieza queda
+        documentada, con código, credenciales y capacitación: tu equipo lo opera sin
+        depender de nosotros.
+      </p>
+      <p class="body" style="margin-top:16px">
+        Stack: <strong class="strong">Next.js, Python, n8n, Supabase, APIs</strong> —
+        elegimos la herramienta por el problema, no al revés. Si se resuelve con una
+        plataforma madura y confiable, la usamos; si necesita código a medida, lo
+        escribimos bien y te lo entregamos.
+      </p>
+
+      <dl style="margin-top:44px;padding-top:32px;border-top:1px solid var(--hairline);display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+        <div class="stat"><dt class="figure-n">+50</dt><dd class="stat__l">Sistemas entregados</dd></div>
+        <div class="stat"><dt class="figure-n">4.9/5</dt><dd class="stat__l">Satisfacción</dd></div>
+        <div class="stat"><dt class="figure-n">∞</dt><dd class="stat__l">Nodos posibles</dd></div>
+      </dl>
+
+      <div style="margin-top:36px;display:flex;flex-wrap:wrap;gap:12px">
+        <a href="#contacto" class="btn btn--ink">Trabajar con nosotros</a>
+        <a href="#proceso-creativo" class="btn btn--ghost">Ver stack</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     STACK & MÉTODO
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="band band--alt bay" id="proceso-creativo">
+  <div class="shell">
+
+    <div style="max-width:46ch;margin-bottom:clamp(44px,5vw,72px)" class="reveal">
+      <span class="eyebrow">Stack &amp; método</span>
+      <h2 class="headline" style="margin-top:18px">Tecnología que<br>no te encierra.</h2>
+      <p class="lead" style="margin-top:22px">
+        Herramientas maduras cuando alcanzan; código a medida cuando hace falta.
+        En los dos casos: código, documentación y capacitación.
+      </p>
+    </div>
+
+    <div class="bento bento--three">
+      <article class="tile reveal">
+        <span class="tile__n">01</span>
+        <h3 class="h3">Lo que ya usás, conectado</h3>
+        <p class="body">CRM, ERP, planillas, WhatsApp, bancos y pasarelas. Si tiene API, la integramos; si no, la scrapeamos.</p>
+        <div class="card__tags">
+          <span class="chip">n8n</span><span class="chip">Webhooks</span><span class="chip">APIs</span><span class="chip">Python</span>
+        </div>
+      </article>
+
+      <article class="tile reveal" data-delay="1">
+        <span class="tile__n">02</span>
+        <h3 class="h3">Webs y apps que cargan rápido y se administran solas</h3>
+        <p class="body">Next.js, Supabase y Tailwind. SEO técnico, panel real y despliegue en un click. Sin WordPress inflado.</p>
+        <div class="card__tags">
+          <span class="chip">Next.js</span><span class="chip">Supabase</span><span class="chip">Tailwind</span><span class="chip">Vercel</span>
+        </div>
+      </article>
+
+      <article class="tile reveal" data-delay="2">
+        <span class="tile__n">03</span>
+        <h3 class="h3">Un sistema, no un montón de herramientas</h3>
+        <p class="body">Cada pieza es un nodo y los nodos se comunican por eventos: tu dato entra una vez y viaja solo hasta donde tiene que llegar.</p>
+        <div class="card__tags">
+          <span class="chip chip--blue">Event-driven</span><span class="chip">Postgres</span><span class="chip">Realtime</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="reveal" style="margin-top:clamp(32px,3.6vw,48px);padding:26px 30px;border-radius:var(--r-lg);border:1px solid var(--hairline);background:var(--surface);display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between">
+      <p style="font-size:1rem;letter-spacing:-.015em">
+        El primer flujo en producción, en 7 días.
+        <span class="ink-2">Si no lo podemos sostener con este nivel de ingeniería, te lo decimos antes de empezar.</span>
+      </p>
+      <a href="#contacto" class="btn btn--ink btn--sm">Pedir diagnóstico</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     CASOS
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="band bay" id="casos">
+  <div class="shell">
+
+    <div class="split split--wide-left" style="margin-bottom:clamp(40px,5vw,64px)">
+      <div class="reveal">
+        <span class="eyebrow">Capacidades</span>
+        <h2 class="headline" style="margin-top:18px">Cuatro frentes.<br>Un solo equipo.</h2>
+      </div>
+      <p class="lead reveal" data-delay="1" style="align-self:end">
+        Todo lo que hay en producción salió de estos cuatro frentes. Empezás por uno;
+        el resto lo conectamos después.
+      </p>
+    </div>
+
+    <div class="bento bento--caps">
+
+      <article class="card card--hover cap reveal">
+        <div class="card__media">
+          <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=900&auto=format&fit=crop" alt="" loading="lazy" width="900" height="700">
+        </div>
+        <div class="card__body">
+          <span class="eyebrow">Aplicaciones</span>
+          <h3 class="card__title">Software propio, en manos de tu equipo</h3>
+          <p class="card__desc">Cuando el proceso necesita una pantalla, no un formulario.</p>
+          <ul class="cap__list">
+            <li>iOS y iPad nativo (SwiftUI)</li>
+            <li>PWA offline-first</li>
+            <li>Panel de administración y roles</li>
+            <li>API, webhooks y Supabase</li>
+          </ul>
+          <a href="https://treetonemusic.online" target="_blank" rel="noopener" class="link-inline" style="margin-top:auto;padding-top:10px">Ejemplo en producción <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </article>
+
+      <article class="card card--hover cap reveal" data-delay="1">
+        <div class="card__media">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=900&auto=format&fit=crop" alt="" loading="lazy" width="900" height="700">
+        </div>
+        <div class="card__body">
+          <span class="eyebrow">Automatizaciones</span>
+          <h3 class="card__title">Los procesos que te consumen horas, corriendo solos</h3>
+          <p class="card__desc">La tarea que tu equipo repite doscientas veces por mes, ejecutada una vez y monitoreada.</p>
+          <ul class="cap__list">
+            <li>n8n, webhooks y APIs</li>
+            <li>Lead → CRM → WhatsApp</li>
+            <li>Scraping y sincronización de catálogos</li>
+            <li>Dashboards, alertas y reintentos</li>
+          </ul>
+          <a href="https://app-super-delta.vercel.app" target="_blank" rel="noopener" class="link-inline" style="margin-top:auto;padding-top:10px">Ejemplo en producción <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </article>
+
+      <article class="card card--hover cap reveal" data-delay="2">
+        <div class="card__media">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=900&auto=format&fit=crop" alt="" loading="lazy" width="900" height="700">
+        </div>
+        <div class="card__body">
+          <span class="eyebrow">Webs</span>
+          <h3 class="card__title">Sitios rápidos, con panel real, listos para vender</h3>
+          <p class="card__desc">No una landing más: una web que carga, ranks y se administra.</p>
+          <ul class="cap__list">
+            <li>Next.js con CMS o Supabase</li>
+            <li>SEO técnico y Core Web Vitals</li>
+            <li>E-commerce y pagos integrados</li>
+            <li>Analítica, despliegue y hosting</li>
+          </ul>
+          <a href="https://www.jcmachado.com" target="_blank" rel="noopener" class="link-inline" style="margin-top:auto;padding-top:10px">Ejemplo en producción <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </article>
+
+      <article class="card card--hover cap reveal" data-delay="3">
+        <div class="card__media">
+          <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=900&auto=format&fit=crop" alt="" loading="lazy" width="900" height="700">
+        </div>
+        <div class="card__body">
+          <span class="eyebrow">Sistemas a medida</span>
+          <h3 class="card__title">Cuando un flujo no alcanza, la arquitectura entera</h3>
+          <p class="card__desc">El proyecto donde hay que decidir, no solo ejecutar.</p>
+          <ul class="cap__list">
+            <li>Arquitectura y modelo de datos</li>
+            <li>APIs, ERPs, CRMs y pasarelas</li>
+            <li>Migración desde tus sistemas actuales</li>
+            <li>Código, documentación y capacitación</li>
+          </ul>
+          <a href="#contacto" class="link-inline" style="margin-top:auto;padding-top:10px">Te mostramos la arquitectura <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="reveal" style="margin-top:clamp(36px,4vw,56px);padding-top:32px;border-top:1px solid var(--hairline);display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between">
+      <p style="font-size:1rem;letter-spacing:-.015em">
+        Detrás de cada grupo hay un sistema en producción, con usuarios y datos reales.
+        <span class="ink-2">No maquetas.</span>
+      </p>
+      <a href="#contacto" class="btn btn--ink btn--sm">Ver un caso completo</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     PRIMER PASO
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="band band--alt bay" id="primer-paso">
+  <div class="shell">
+    <div style="max-width:42ch;margin-bottom:clamp(44px,5vw,72px)" class="reveal">
+      <span class="eyebrow">Primer paso</span>
+      <h2 class="headline" style="margin-top:18px">Empezar es<br>una charla de 20 min.</h2>
+    </div>
+
+    <ol class="steps reveal">
+      <li class="step">
+        <span class="step__n">01</span>
+        <h3 class="step__t">Nos contás el cuello de botella</h3>
+        <p class="step__d">Qué tarea te consume horas, qué sistema no se habla con otro.</p>
+      </li>
+      <li class="step">
+        <span class="step__n">02</span>
+        <h3 class="step__t">Mapa de nodos y alcance</h3>
+        <p class="step__d">Te entregamos el diagrama, el impacto estimado y el precio cerrado.</p>
+      </li>
+      <li class="step">
+        <span class="step__n">03</span>
+        <h3 class="step__t">Propuesta con alcance cerrado</h3>
+        <p class="step__d">Qué entra, en qué plazo, con qué precio. Sin sorpresas.</p>
+      </li>
+      <li class="step">
+        <span class="step__n">04</span>
+        <h3 class="step__t">Producción y transferencia</h3>
+        <p class="step__d">Demo en días, producción en semanas, con código y documentación.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     FAQ
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="band bay" id="faq">
+  <div class="shell shell--narrow">
+    <div class="center reveal" style="margin-bottom:clamp(40px,5vw,64px)">
+      <span class="eyebrow">FAQ</span>
+      <h2 class="headline" style="margin-top:18px">Preguntas frecuentes.</h2>
+    </div>
+
+    <div class="faq reveal">
+      <details>
+        <summary>¿Cuánto cuesta automatizar? <span class="faq__sign" aria-hidden="true"></span></summary>
+        <p class="faq__a">El precio se cierra contra alcance, no contra horas. Un flujo automatizado en producción: desde USD 400. Una plataforma completa (web, panel y nodos conectados): desde USD 1.200. El monto exacto se define en el diagnóstico, contra entregables y plazo.</p>
+      </details>
+      <details>
+        <summary>¿Trabajan con WordPress? <span class="faq__sign" aria-hidden="true"></span></summary>
+        <p class="faq__a">Solo si el proyecto lo justifica. Por defecto construimos con Next.js y un CMS moderno (o Supabase): más rápido, más seguro y escalable. Si tu equipo necesita WordPress por una razón concreta, lo evaluamos sin problema.</p>
+      </details>
+      <details>
+        <summary>¿Qué es un “nodo”? <span class="faq__sign" aria-hidden="true"></span></summary>
+        <p class="faq__a">Cada pieza de tu sistema: web, app, bot, planilla, CRM, pasarela. Los conectamos para que el dato fluya solo, sin copiar y pegar. Un cambio en un nodo se refleja en todos.</p>
+      </details>
+      <details>
+        <summary>¿Cuánto tarda? <span class="faq__sign" aria-hidden="true"></span></summary>
+        <p class="faq__a">Automatización: 5–7 días hasta producción. Web o app con panel: 3–4 semanas. Siempre con entregas parciales: ves funcionando lo que pagás.</p>
+      </details>
+      <details>
+        <summary>¿Y después quién lo mantiene? <span class="faq__sign" aria-hidden="true"></span></summary>
+        <p class="faq__a">Te entregamos el código, la documentación y la capacitación: sos dueño del sistema y podés operarlo sin llamarnos. Si preferís, lo mantenemos nosotros. La continuidad se cotiza según la carga operativa real, sin permanencia.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     NEWSLETTER
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="band band--alt bay--sm" id="newsletter">
+  <div class="shell shell--tight center">
+    <span class="eyebrow reveal">Antes de irte</span>
+    <h2 class="headline reveal" data-delay="1" style="margin-top:18px">Un mail al mes.<br>Cero spam.</h2>
+    <p class="lead reveal" data-delay="2" style="margin-top:20px">
+      Te mandamos un caso real: qué automatizamos, cuánto ahorró y cómo lo hicimos.
+    </p>
+    <form class="inline-form reveal" data-delay="3" data-newsletter style="margin-top:34px">
+      <label for="newsletter-email" class="visually-hidden">Tu email</label>
+      <input id="newsletter-email" type="email" required placeholder="tu@email.com" autocomplete="email">
+      <button type="submit" class="btn btn--ink">Sumarme</button>
+    </form>
+    <p class="reveal" data-delay="4" style="margin-top:16px;font-size:.8125rem;color:var(--ink-3)">
+      Te das de baja en un click.
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     CONTACTO
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="band bay" id="contacto">
+  <div class="shell split split--wide-left">
+
+    <div class="reveal">
+      <span class="eyebrow">Contacto</span>
+      <h2 class="headline" style="margin-top:18px">Hablemos de<br>tus nodos.</h2>
+      <p class="lead" style="margin-top:24px;max-width:34ch">
+        Contanos qué proceso te duele o qué producto querés lanzar.
+        En 48 h tenés un mapa, un alcance y un precio cerrado.
+      </p>
+
+      <div style="margin-top:40px">
+        <a class="contact-row" href="https://wa.me/5493534018769?text=Hola!%20Vengo%20de%20la%20web" target="_blank" rel="noopener">
+          <span>
+            <span class="contact-row__k">WhatsApp</span>
+            <span class="contact-row__v" style="display:block;margin-top:6px">+54 9 353 401-8769</span>
+          </span>
+          <span class="link-inline" style="font-size:.9375rem">Escribinos directo <span class="arrow" aria-hidden="true">→</span></span>
+        </a>
+        <a class="contact-row" href="mailto:hola@arvure.com">
+          <span>
+            <span class="contact-row__k">Email</span>
+            <span class="contact-row__v" style="display:block;margin-top:6px">hola@arvure.com</span>
+          </span>
+          <span class="link-inline" style="font-size:.9375rem"><span class="arrow" aria-hidden="true">→</span></span>
+        </a>
+      </div>
+
+      <div style="margin-top:32px;display:flex;flex-wrap:wrap;gap:10px">
+        <a href="#" class="chip">YouTube</a>
+        <a href="#" class="chip">TikTok</a>
+        <a href="blog.html" class="chip">Blog</a>
+      </div>
+    </div>
+
+    <form class="form-panel reveal" data-delay="1" data-encargo style="display:flex;flex-direction:column;gap:18px">
+      <div>
+        <h3 class="h3">Contanos tu proyecto</h3>
+        <p class="small" style="margin-top:6px">Te respondemos en menos de 48 h.</p>
+      </div>
+
+      <div class="field">
+        <label for="contacto-nombre">Tu nombre</label>
+        <input id="contacto-nombre" name="nombre" type="text" required placeholder="¿Cómo te llamás?" autocomplete="name">
+      </div>
+
+      <div class="field">
+        <label for="contacto-usuario">Email o WhatsApp</label>
+        <input id="contacto-usuario" name="contacto" type="text" required placeholder="Dónde te escribimos" autocomplete="email">
+      </div>
+
+      <div class="field">
+        <label for="tipo">¿Qué necesitás?</label>
+        <select id="tipo" name="tipo">
+          <option>Automatización</option>
+          <option>Página web</option>
+          <option>Aplicación</option>
+          <option>Integración / API</option>
+          <option>Otro / consulta</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="idea">Contanos</label>
+        <textarea id="idea" name="idea" rows="4" required placeholder="Qué proceso querés automatizar o qué producto querés construir…"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn--ink" style="width:100%">Enviar por WhatsApp</button>
+      <p style="text-align:center;font-size:.8125rem;color:var(--ink-3)">Sin sorpresas: alcance, plazo y precio cerrado antes de empezar</p>
+    </form>
+
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     FOOTER
+     ══════════════════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="shell">
+    <span class="footer__wordmark" aria-hidden="true">Arvure</span>
+
+    <div class="footer__cols">
+      <div class="footer__col">
+        <p style="font-size:1.0625rem;line-height:1.5;letter-spacing:-.02em;max-width:30ch">
+          Automatizaciones, webs y apps que conectan tu operación.
+          Argentina → Global.
+        </p>
+        <a href="#contacto" class="btn btn--blue btn--sm" style="margin-top:22px">Empezar un proyecto</a>
+      </div>
+
+      <div class="footer__col">
+        <h4>Estudio</h4>
+        <ul>
+          <li><a href="#sobre-nos">Quiénes somos</a></li>
+          <li><a href="#proceso-creativo">Stack &amp; método</a></li>
+          <li><a href="#punto-de-partida">Cómo trabajamos</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Sitio</h4>
+        <ul>
+          <li><a href="#ideas">Soluciones</a></li>
+          <li><a href="#casos">Capacidades</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bar">
+      <span>© <span data-anio>2026</span> Arvure · Estudio tech</span>
+      <span>Todos los derechos reservados</span>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/5493534018769?text=Hola!%20Vengo%20de%20la%20web"
+   class="fab" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M8.5 9.2c.2-.5.4-.5.7-.5h.5c.2 0 .4.1.5.4l.7 1.7c.1.2.1.4 0 .6l-.4.5c-.1.2-.2.3 0 .5.3.5 1 1.2 1.7 1.6.3.2.5.1.6 0l.5-.6c.2-.2.3-.2.6-.1l1.6.8c.3.1.4.3.4.5 0 .6-.6 1.3-1.2 1.4-.5.1-1.1.2-3.2-1-1.9-1.1-3.1-3-3.3-3.9-.2-.8-.1-1.5.1-2Z" fill="currentColor"/>
+  </svg>
+</a>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     DIALOG DE DETALLE
+     ══════════════════════════════════════════════════════════════════════ -->
+<dialog id="dialogo-idea">
+  <div class="dialog__bar">
+    <span class="eyebrow" id="dialogo-etiqueta"></span>
+    <button type="button" class="icon-btn" data-cerrar-idea aria-label="Cerrar">×</button>
+  </div>
+  <div class="dialog__body">
+    <img id="dialogo-imagen" class="dialog__media" src="" alt="">
+    <h3 id="dialogo-titulo" class="h3" style="font-size:1.5rem;margin-top:22px"></h3>
+    <p id="dialogo-descripcion" class="body" style="margin-top:12px"></p>
+    <div style="margin-top:26px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between">
+      <span id="dialogo-estado" class="small"></span>
+      <a href="#contacto" class="btn btn--ink btn--sm" data-cerrar-idea>Quiero esto</a>
+    </div>
+  </div>
+</dialog>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════════
+   LÓGICA — preserva el panel de administración (localStorage) y corrige
+   dos bugs de la versión anterior:
+   · el hero caía al final de la página por el reordenamiento de secciones
+   · el H1 duplicaba "lo que te frena. Construimos…"
+   ══════════════════════════════════════════════════════════════════════ */
+const load = (k, d) => { try { const v = JSON.parse(localStorage.getItem('fabrica_' + k)); return v ?? d; } catch { return d; } };
+const esc = s => (s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+/* ---------- Catálogo ---------- */
+let catalogo = load('catalogo', window.CATALOGO_DEFECTO);
+if (catalogo.some(c => c.id && c.id.startsWith('idea_'))) {
+  catalogo = window.CATALOGO_DEFECTO.slice();
+  localStorage.setItem('fabrica_catalogo', JSON.stringify(catalogo));
+}
+if (!localStorage.getItem('fabrica_catalogo')) localStorage.setItem('fabrica_catalogo', JSON.stringify(catalogo));
+{
+  const defaults = window.CATALOGO_DEFECTO;
+  const ids = new Set(catalogo.map(i => i.id));
+  defaults.forEach(d => { if (!ids.has(d.id)) catalogo.push(d); });
+  let migrated = false;
+  catalogo.forEach(i => { if (!i.eje) { i.eje = defaults.find(d => d.id === i.id)?.eje || 'Automatizaciones'; migrated = true; } });
+  if (migrated || catalogo.length !== defaults.length) localStorage.setItem('fabrica_catalogo', JSON.stringify(catalogo));
+}
+let filtroEje = 'todas';
+const dialogo = document.getElementById('dialogo-idea');
+
+function renderIdeas() {
+  const visibles = catalogo.filter(i => filtroEje === 'todas' || i.eje === filtroEje);
+  const grid = document.querySelector('[data-grid-ideas]');
+  grid.innerHTML = visibles.map(i => `
+    <article class="card card--hover">
+      <button type="button" class="card__media" data-abrir-idea="${esc(i.id)}" style="border:0;padding:0;width:100%;display:block;cursor:pointer">
+        <img src="${esc(i.imagen)}" alt="${esc(i.titulo)}" loading="lazy">
+        <span class="card__badges">
+          <span class="chip">${esc(i.eje || i.tipo)}</span>
+          <span class="chip ${i.estado === 'vendida' ? 'chip--solid' : 'chip--blue'}">${i.estado === 'vendida' ? 'En producción' : 'Disponible'}</span>
+        </span>
+      </button>
+      <div class="card__body">
+        <h3 class="card__title">
+          <button type="button" data-abrir-idea="${esc(i.id)}" style="border:0;background:none;padding:0;text-align:left;font:inherit;color:inherit;cursor:pointer">${esc(i.titulo)}</button>
+        </h3>
+        <p class="card__desc">${esc(i.descripcion)}</p>
+        <button type="button" data-abrir-idea="${esc(i.id)}" class="link-inline" style="border:0;background:none;padding:0;cursor:pointer;margin-top:auto">Ver detalle <span class="arrow" aria-hidden="true">→</span></button>
+      </div>
+    </article>`).join('') || '<p class="body" style="grid-column:1/-1;text-align:center">Sin soluciones en este filtro.</p>';
+  grid.querySelectorAll('[data-abrir-idea]').forEach(boton => {
+    boton.addEventListener('click', () => abrirIdea(boton.dataset.abrirIdea));
+  });
+  observerRefresh(grid);
+}
+
+function abrirIdea(id) {
+  const idea = catalogo.find(x => x.id === id);
+  if (!idea) return;
+  document.getElementById('dialogo-etiqueta').textContent = idea.id + ' · ' + (idea.eje || idea.tipo);
+  document.getElementById('dialogo-imagen').src = idea.imagen;
+  document.getElementById('dialogo-imagen').alt = idea.titulo;
+  document.getElementById('dialogo-titulo').textContent = idea.titulo;
+  document.getElementById('dialogo-descripcion').textContent = idea.detalle || idea.descripcion;
+  const estado = document.getElementById('dialogo-estado');
+  estado.textContent = (idea.estado === 'vendida' ? 'En producción' : 'Disponible') + (idea.precio ? ' · ' + idea.precio : '');
+  estado.style.color = idea.estado === 'vendida' ? 'var(--ink-3)' : 'var(--ink)';
+  dialogo.showModal();
+}
+
+/* ---------- Filtros ---------- */
+document.querySelectorAll('[data-filtro-eje]').forEach(boton => {
+  boton.addEventListener('click', () => {
+    const val = boton.dataset.filtroEje;
+    filtroEje = (filtroEje === val || val === 'todas') ? 'todas' : val;
+    document.querySelectorAll('[data-filtro-eje]').forEach(b => {
+      b.setAttribute('aria-pressed', String(b.dataset.filtroEje === filtroEje));
+    });
+    renderIdeas();
+  });
+});
+
+/* ---------- Modal ---------- */
+document.querySelectorAll('[data-cerrar-idea]').forEach(boton => {
+  boton.addEventListener('click', () => { if (dialogo.open) dialogo.close(); });
+});
+dialogo.addEventListener('click', e => { if (e.target === dialogo) dialogo.close(); });
+
+renderIdeas();
+
+/* ---------- Formularios ---------- */
+document.querySelectorAll('[data-encargo]').forEach(form => {
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const d = new FormData(form);
+    const mensaje = 'Hola! Soy ' + d.get('nombre') + ' (contacto: ' + d.get('contacto') + ').' +
+                    ' Necesito: ' + d.get('tipo') + '.' + ' Detalle: ' + d.get('idea');
+    window.open('https://wa.me/5493534018769?text=' + encodeURIComponent(mensaje), '_blank');
+  });
+});
+
+document.querySelectorAll('[data-newsletter]').forEach(form => {
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const email = form.querySelector('input').value.trim();
+    const lista = load('suscriptores', []);
+    if (!lista.some(s => s.email === email)) {
+      lista.push({ email, fecha: new Date().toISOString().slice(0, 10) });
+      localStorage.setItem('fabrica_suscriptores', JSON.stringify(lista));
+    }
+    const boton = form.querySelector('button');
+    boton.textContent = '¡Sumado!';
+    boton.disabled = true;
+  });
+});
+
+document.querySelectorAll('[data-anio]').forEach(el => { el.textContent = new Date().getFullYear(); });
+
+/* ══════════════════════════════════════════════════════════════════════
+   HERO — texto administrable. Divide el título en 3 partes para evitar
+   la duplicación de "lo que te frena. Construimos…" que existía antes.
+   ══════════════════════════════════════════════════════════════════════ */
+(function () {
+  const hero = load('hero', window.HERO_DEFECTO);
+  const h1 = document.querySelector('[data-hero-titulo]');
+  const badge = document.querySelector('[data-hero-badge]');
+  const parrafo = document.querySelector('[data-hero-parrafo]');
+  const b1 = document.querySelector('[data-hero-boton1]');
+  const b2 = document.querySelector('[data-hero-boton2]');
+  const img = document.querySelector('[data-hero-imagen]');
+
+  if (badge && hero.badge) {
+    badge.lastChild.textContent = ' ' + hero.badge;
+  }
+
+  if (h1) {
+    /* El campo "titulo2" del admin puede traer una o dos frases.
+       Se reparte en: frase atenuada + verbo en negra + resto. */
+    const t1 = (hero.titulo1 || 'Automatizamos').trim();
+    const t2 = (hero.titulo2 || 'lo que te frena. Construimos lo que te escala.')
+                 .replace(/\s*\.\s*$/, '');
+    const partes = t2.split(/\.\s+/);
+    const l1   = (partes[0] || 'lo que te frena').trim();
+    const resto = partes.slice(1).join('. ').trim();
+    const l2   = (hero.titulo3 || (resto ? resto.split(/\s+/)[0] : 'Construimos')).trim();
+    const l3   = (hero.titulo4 || (resto ? resto.slice(l2.length).trim() : 'lo que te escala')).trim();
+
+    if (h1.childNodes[0] && h1.childNodes[0].nodeType === 3) {
+      h1.childNodes[0].textContent = t1 + ' ';
+    }
+    const e1 = h1.querySelector('[data-hero-l1]');
+    const e2 = h1.querySelector('[data-hero-l2]');
+    const e3 = h1.querySelector('[data-hero-l3]');
+    if (e1) e1.textContent = l1 + '.';
+    if (e2) e2.textContent = l2;
+    if (e3) e3.textContent = l3 + '.';
+  }
+
+  if (parrafo && hero.parrafo) parrafo.innerHTML = hero.parrafo;
+  if (b1) {
+    if (hero.boton1) b1.textContent = hero.boton1;
+    if (hero.boton1link) b1.href = hero.boton1link;
+  }
+  if (b2) {
+    if (hero.boton2) b2.textContent = hero.boton2;
+    if (hero.boton2link) b2.href = hero.boton2link;
+  }
+  if (img && hero.imagen) img.src = hero.imagen;
+})();
+
+/* ══════════════════════════════════════════════════════════════════════
+   SECCIONES — respeta el orden del panel de administración, pero
+   FIJA el hero y la tira de capacidades al inicio (antes el hero
+   quedaba al final de la página para cualquier visitante nuevo).
+   ══════════════════════════════════════════════════════════════════════ */
+(function () {
+  const customs = (() => { try { return JSON.parse(localStorage.getItem('fabrica_custom_nombres') || '{}'); } catch { return {}; } })();
+  const main = document.querySelector('main');
+
+  Object.keys(customs).forEach(id => {
+    if (!document.getElementById(id)) {
+      const sec = document.createElement('section');
+      sec.id = id;
+      sec.className = 'band bay';
+      sec.innerHTML = '<div class="shell"><span class="eyebrow">' + esc(customs[id]) +
+        '</span><h2 class="headline" style="margin-top:18px">' + esc(customs[id]) +
+        '</h2><p class="lead" style="margin-top:18px;max-width:52ch">Sección agregada desde el admin.</p></div>';
+      main.appendChild(sec);
+    }
+  });
+
+  const orden = load('orden_secciones', window.SECCIONES_DEFECTO);
+  if (!main || !Array.isArray(orden)) return;
+
+  const secciones = {};
+  main.querySelectorAll(':scope > section[id]').forEach(s => { secciones[s.id] = s; });
+
+  const fijas = ['inicio', 'servicios'];
+  const frag = document.createDocumentFragment();
+
+  fijas.forEach(id => { if (secciones[id]) { frag.appendChild(secciones[id]); delete secciones[id]; } });
+
+  orden.forEach(o => {
+    const id = typeof o === 'string' ? o : o.id;
+    const visible = typeof o === 'string' ? true : o.visible !== false;
+    const sec = secciones[id];
+    if (!sec) return;
+    sec.style.display = visible ? '' : 'none';
+    frag.appendChild(sec);
+    delete secciones[id];
+  });
+
+  Object.keys(secciones).forEach(id => frag.appendChild(secciones[id]));
+  main.appendChild(frag);
+})();
+
+/* ══════════════════════════════════════════════════════════════════════
+   NAV — estado "stuck" al hacer scroll
+   ══════════════════════════════════════════════════════════════════════ */
+const nav = document.getElementById('nav');
+const onScroll = () => nav.classList.toggle('is-stuck', window.scrollY > 12);
+onScroll();
+window.addEventListener('scroll', onScroll, { passive: true });
+
+/* ══════════════════════════════════════════════════════════════════════
+   REVEAL — entrada al viewport
+   ══════════════════════════════════════════════════════════════════════ */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-in');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+function observerRefresh(scope) {
+  const items = (scope || document).querySelectorAll('.reveal:not(.is-in)');
+  items.forEach(el => revealObserver.observe(el));
+}
+observerRefresh(document);
+
+/* Cambia la variante "stuck" del nav al pasar el hero */
+const heroEl = document.getElementById('inicio');
+if (heroEl && 'IntersectionObserver' in window) {
+  new IntersectionObserver(([entry]) => {
+    nav.classList.toggle('is-stuck', !entry.isIntersecting || window.scrollY > 12);
+  }, { threshold: 0 }).observe(heroEl);
+}
+</script>
+
+
+<script>
+window.__errs=[];window.addEventListener('error',function(e){window.__errs.push(e.message)});
+window.addEventListener('load',function(){setTimeout(function(){
+ var d=document.createElement('pre');d.id='DIAG';
+ var t=document.body.innerText;
+ d.textContent='errores='+(window.__errs.join(' | ')||'ninguno')+
+  '\norden='+[].map.call(document.querySelectorAll('main > section[id]'),function(s){return s.id}).join(',')+
+  '\nh1='+document.querySelector('[data-hero-titulo]').innerText.replace(/\s+/g,' ')+
+  '\ncaps='+document.querySelectorAll('.bento--caps > article').length+
+  '\ngratis='+(t.match(/gratis/gi)||[]).length+' humo='+(t.match(/humo/gi)||[]).length+
+  '\nnombres_cliente_en_copy='+(t.match(/App-Super|Yoga Class|Les Tournesols|Biodescodificación|Tutor IA|jcmachado|TreeTone|Deriva/g)||[]).length;
+ document.body.appendChild(d);},1500)});
+</script>
+</body>
+</html>

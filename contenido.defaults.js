@@ -23,6 +23,7 @@ window.HERO_DEFECTO = {
    ("servicios") quedan fijados al inicio por el script de la página. */
 window.SECCIONES_DEFECTO = [
   { id: "ideas", nombre: "Soluciones" },
+  { id: "inversion", nombre: "Inversión" },
   { id: "punto-de-partida", nombre: "Cómo trabajamos" },
   { id: "sobre-nos", nombre: "Estudio" },
   { id: "proceso-creativo", nombre: "Stack & Método" },

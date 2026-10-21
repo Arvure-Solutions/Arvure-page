@@ -205,3 +205,85 @@ y quedan en un solo bloque: los 2 planes + la FAQ. El piso de la plataforma oper
    te define como pieza y no como estudio. Es un cambio de marca, no de copy.
 5. El campo `precio` del catálogo sigue editándose en el admin pero ya no se muestra
    en la grilla: se ve al abrir el detalle de cada solución.
+
+---
+
+## v3 · Escalera de precios (decisión del dueño: "bajala a precios argentinos")
+
+**Instrucción del dueño:** bajar los precios a nivel mercado argentino (en USD),
+porque *nadie compra a un estudio que no conoce*.
+
+**Diagnóstico del ejecutivo (el que manda):** bajar el precio de la **Plataforma
+Operativa** es vender pérdida. Con 1–2 personas, ese alcance son 85–120 h
+productive + 3–4 h comerciales. A USD 1.200 se pierden ~USD 360 por plataforma
+(5 al año = un mes entero de facturación). **La barrera de entrada no se baja
+bajando ese precio: se baja creando un piso nuevo.**
+
+### Escalera publicada
+
+| Plan | Precio | Horas (est.) | Costo @13 USD/h | Margen | Plazo | Garantía |
+|---|---|---|---|---|---|---|
+| 01 — Primer flujo | **USD 300** (cerrado) | 13 | 169 | 44% | 5 días | 7 días |
+| 02 — Sprint de automatización | **USD 550** (cerrado) | 25 | 325 | 41% | 7 días | 30 días |
+| 03 — Plataforma operativa | **Desde USD 1.500** | 85 | 1.105 | 26% | 3–4 semanas | 15 días de soporte |
+| Mantenimiento | **Desde USD 180/mes** | 3 h/mes | 39 | 78% | mensual | — |
+
+**Lo que cambió respecto a la versión anterior:**
+- El **piso de entrada bajó de USD 400 → USD 300** (primer flujo nuevo, sin panel
+  ni monitoreo) → ese es el cliente nuevo que no te conoce.
+- El **Sprint subió de USD 400 → USD 550** (+37%): hoy son 25 h, a USD 400 da 19% de
+  margen — o break-even si el costo real es USD 15/h. En el mercado global lo
+  mismo se cotiza a ~USD 19/h.
+- La **Plataforma subió de USD 1.200 → 1.500 nominal, con 25% menos alcance**
+  (de 4 nodos + 30 días de soporte a 3 nodos + 15 días). La versión con alcance
+  completo no baja de USD 1.900.
+
+### Mecanismo para que un precio bajo no se lea "barato"
+1. El precio **no abre la página** — el hero sigue siendo propuesta de valor.
+2. El bloque se llama **"Inversión"**, no "Planes" ni "Precios".
+3. **Publicar exclusiones** ("No incluye: panel, monitoreo, reintentos…"). Un
+   commodity no dice qué no incluye; la exclusión es la señal de rigor.
+4. **El número más bajo nunca lleva "desde"**: "USD 300" es una decisión,
+   "desde USD 300" es un anzuelo. "Desde" solo donde el alcance es variable.
+5. Una sola línea amarra precio e ingeniería: *"Si no lo podemos sostener con este
+   nivel de ingeniería, te lo decimos antes de empezar."*
+6. **No se toca el diseño.** Se baja un número y se sube la especificidad.
+7. Los precios salen de la grilla de soluciones y viven **solo** en el bloque de
+   Inversión (+ FAQ como referencia). En el admin, el campo `precio` del catálogo
+   sigue editándose y ahora es coherente con la escalera.
+
+### Afirmaciones del sitio que cambiaron
+| Afirmación | Antes | Ahora |
+|---|---|---|
+| Stats del hero | 120+ / 40+ / 24 h | **48 h / 5–7 días / 3–4 semanas** (promesa, no volumen) |
+| Stats del Estudio | +50 / 4.9/5 / ∞ | **120+ / 40+** (track record, 2 datos) |
+| Stats de Método | 5–7 d / 2–4 sem / ∞ | **5–7 días / 3–4 sem / 48 h** |
+| "2–4 semanas" (web/app) | contradicción con FAQ | **3–4 semanas** en todo |
+| Botón del modal | "Quiero esto" (e-commerce) | **"Empezar un proyecto"** |
+| Mantenimiento | sin cifra | **desde USD 180/mes**, con alcance |
+| Catálogo (precios en modal) | "desde USD 400…" | alineados a la escalera |
+
+**Se quitaron "4.9/5" y "∞ Nodos posibles"**: el primero no tiene fuente pública
+(con precio bajo, "4.9/5 de quién" es la primera pregunta de cualquiera que
+descuento) y el segundo define a Arvure como pieza en lugar de estudio.
+
+### Pendientes del dueño (bloqueantes para cerrar la escalera)
+1. **Costo real por hora** (con número, no con intuición): sueldo neto + cargas +
+   software + contabilidad + seguro + hardware, dividido por las horas que
+   facturás. Si es **USD 15/h** → la plataforma necesita **USD 1.900**; si es
+   **USD 18/h** → el plan 03 a USD 1.500 es pérdida del 14%.
+2. **Alcance exacto de la plataforma**: ¿3 nodos o 4? ¿15 o 30 días de soporte?
+   ¿Panel de una entidad o multi-entity? El precio sale del alcance, no al revés.
+3. **Confirmar que no hay cliente que haya pedido el "4.9/5"** (si lo hay, se
+   publica con nombre y proyecto).
+4. **Forma de pago**: 01 → 100% anticipado · 02 → 50/50 · 03 → 40/40/20 ·
+   mantenimiento → ¿se publica USD 180/mes o se cotiza?
+5. **Aritmética a resolver**: 2 × USD 300 > USD 550. Si el cliente compra los dos,
+   o el 01 baja a USD 280, o el 02 sube a USD 650, o el 01 no entrega monitoreo.
+
+### KPIs para reemplazar "4.9/5" (con datos reales, no testimonios)
+1. **Continuidad a 90 días**: % de automatizaciones que siguen corriendo 90 días
+   después de entregadas (sale de los logs de n8n/Make).
+2. **Tasa de entrega en plazo**: % de proyectos entregados en la fecha prometida.
+3. **Horas recuperadas por cliente** (antes/después, lo dice el cliente).
+4. **Volumen real mensual** de entregas (sostiene el "120+" con fecha).

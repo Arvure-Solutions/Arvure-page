@@ -1302,3 +1302,49 @@ html.js .reveal[data-delay="5"] { transition-delay: .35s; }
   letter-spacing: -.02em;
   font-weight: 600;
 }
+
+/* ---------------------------------------------------------------------------
+   21 · BLOQUE INVERSIÓN — 3 alcances cerrados
+   --------------------------------------------------------------------------- */
+.plans {
+  display: grid;
+  gap: clamp(16px, 1.8vw, 24px);
+  grid-template-columns: 1fr;
+  align-items: stretch;
+}
+@media (min-width: 760px)  { .plans { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1060px) { .plans { grid-template-columns: repeat(3, 1fr); } }
+
+.plans .plan { gap: 16px; }
+
+.plan__excl {
+  font-size: .8125rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+  padding-top: 12px;
+  border-top: 1px solid var(--hairline-soft);
+}
+.plan--dark .plan__excl { color: #86868b; border-top-color: rgba(255,255,255,.1); }
+
+.plan__price {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: auto;
+  padding-top: 4px;
+}
+.plan__amount {
+  font-size: 1.5rem;
+  line-height: 1.1;
+  letter-spacing: -.03em;
+  font-weight: 700;
+}
+.plan__term {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.plan--dark .plan__term { color: #86868b; }
+.plan--dark .plan__amount { color: #f5f5f7; }
