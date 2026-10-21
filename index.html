@@ -1,958 +1,1080 @@
-<!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<!doctype html>
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Arvure — estudio tech. Automatizaciones, páginas web y aplicaciones que conectan tus nodos y escalan tu operación.">
-  <title>Arvure — Estudio tech. Automatizamos. Construimos. Conectamos.</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230A0A0A'/><circle cx='30' cy='30' r='6' fill='white'/><circle cx='70' cy='32' r='5' fill='white'/><circle cx='50' cy='70' r='7' fill='white'/><path d='M30 30 L50 70 L70 32' stroke='white' stroke-width='2' fill='none' opacity='0.9'/></svg>">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <script src="catalogo.defaults.js"></script>
-  <script src="contenido.defaults.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            cream: '#FFFBF0',
-            paper: '#FFFFFF',
-            sand: '#F5EEE0',
-            line: '#E8E0D0',
-            ink: '#0A0A0A',
-            muted: '#6B6B6B',
-            dim: '#9A9A9A',
-            accent: '#0A0A0A',
-          },
-          fontFamily: {
-            sans: ['Inter', 'Space Grotesk', 'system-ui', 'sans-serif'],
-            display: ['Inter', 'system-ui', 'sans-serif'],
-            mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
-          },
-          boxShadow: {
-            card: '0 1px 3px rgba(10,10,10,0.06), 0 8px 24px rgba(10,10,10,0.04)',
-            cardHover: '0 4px 16px rgba(10,10,10,0.08), 0 16px 40px rgba(10,10,10,0.06)',
-          },
-        },
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Arvure — Automatizaciones, webs y apps que conectan tu operación</title>
+<meta name="description" content="Arvure es un estudio tech. Construimos automatizaciones, páginas web y aplicaciones a medida: sistemas que conectan tus herramientas y hacen que tu operación escale.">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Arvure — Automatizamos lo que te frena">
+<meta property="og:description" content="Automatizaciones, webs y apps a medida. Sistemas que se hablan entre sí.">
+<meta property="og:type" content="website">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%231D1D1F'/><circle cx='30' cy='31' r='6' fill='white'/><circle cx='70' cy='33' r='5' fill='white'/><circle cx='50' cy='70' r='7' fill='white'/><path d='M30 31 L50 70 L70 33' stroke='white' stroke-width='2' fill='none' opacity='.85'/></svg>">
+
+<link rel="stylesheet" href="styles.css">
+
+<script>document.documentElement.classList.add('js');</script>
+<script src="catalogo.defaults.js"></script>
+<script src="contenido.defaults.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  /* Config mínima para el markup inyectado por el panel de administración.
+     El diseño visible usa styles.css. */
+  tailwind.config = {
+    theme: { extend: {
+      colors: {
+        cream: '#ffffff', paper: '#ffffff', sand: '#f5f5f7',
+        line: 'rgba(0,0,0,.09)', ink: '#1d1d1f',
+        muted: '#6e6e73', dim: '#86868b', accent: '#0071e3'
       },
-    };
-  </script>
-  <style>
-    ::selection { background: #0A0A0A; color: #FFFBF0; }
-    .grid-dot { background-image: radial-gradient(circle at 1px 1px, #0A0A0A 1px, transparent 0); }
-    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-  </style>
+      fontFamily: {
+        sans: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'Inter', 'system-ui', 'sans-serif'],
+        mono: ['ui-monospace', 'SF Mono', 'monospace']
+      }
+    }}
+  };
+</script>
 </head>
-<body class="bg-cream text-ink font-sans antialiased">
 
-  <header class="sticky top-0 z-50 border-b border-line bg-cream/80 backdrop-blur-xl">
-    <nav class="mx-auto flex max-w-[1280px] items-center justify-between px-6 py-4 lg:px-8" aria-label="Principal">
-      <a href="#inicio" class="flex items-center gap-3">
-        <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-ink text-cream">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <circle cx="6" cy="6" r="2.5" fill="currentColor"/><circle cx="18" cy="7" r="2" fill="currentColor"/><circle cx="12" cy="18" r="2.8" fill="currentColor"/>
-            <path d="M6 6 L12 18 L18 7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
-        <span class="text-[15px] font-black tracking-[-0.02em]">ARVURE</span>
-        <span class="hidden sm:inline font-mono text-[10px] tracking-[0.2em] text-muted border-l border-line pl-3 ml-1">ESTUDIO TECH</span>
-      </a>
-      <ul class="hidden items-center gap-7 text-[13px] font-medium text-muted md:flex">
-        <li><a class="transition hover:text-ink" href="#ideas">Soluciones</a></li>
-        <li><a class="transition hover:text-ink" href="#casos">Casos</a></li>
-        <li><a class="transition hover:text-ink" href="#proceso-creativo">Stack</a></li>
-        <li><a class="transition hover:text-ink" href="#sobre-nos">Estudio</a></li>
-        <li><a class="transition hover:text-ink" href="#faq">FAQ</a></li>
-        <li><a class="transition hover:text-ink" href="blog.html">Blog</a></li>
-      </ul>
-      <div class="flex items-center gap-2">
-        <a href="#contacto" class="hidden sm:inline-flex rounded-full bg-ink px-5 py-2.5 text-[13px] font-bold text-cream transition hover:bg-black hover:scale-[1.02]">
-          Hablemos →
-        </a>
-        <a href="login.html" class="rounded-full border border-line bg-paper px-4 py-2 font-mono text-[11px] font-medium tracking-[0.15em] text-ink transition hover:border-ink">
-          LOGIN
-        </a>
-      </div>
-    </nav>
-  </header>
+<body>
 
-  <main>
+<!-- ══════════════════════════════════════════════════════════════════════
+     NAV — barra flotante translúcida
+     ══════════════════════════════════════════════════════════════════════ -->
+<header class="nav" id="nav">
+  <nav class="nav__inner" aria-label="Principal">
+    <a href="#inicio" class="nav__brand">
+      <span class="nav__mark" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <circle cx="6" cy="6" r="2.4" fill="currentColor"/>
+          <circle cx="18" cy="7" r="1.9" fill="currentColor"/>
+          <circle cx="12" cy="18" r="2.7" fill="currentColor"/>
+          <path d="M6 6 L12 18 L18 7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span>Arvure</span>
+      <span class="nav__tag">Estudio tech</span>
+    </a>
 
-    <!-- HERO -->
-    <section id="inicio" class="relative overflow-hidden border-b border-line">
-      <div class="pointer-events-none absolute inset-0 opacity-[0.03] grid-dot" style="background-size: 24px 24px;"></div>
-      <!-- nodos decorativos fondo -->
-      <svg class="pointer-events-none absolute inset-0 h-full w-full opacity-[0.06]" aria-hidden="true">
-        <g stroke="#0A0A0A" stroke-width="1" fill="none">
-          <line x1="10%" y1="20%" x2="35%" y2="45%"/><line x1="35%" y1="45%" x2="60%" y2="30%"/><line x1="60%" y1="30%" x2="85%" y2="55%"/><line x1="35%" y1="45%" x2="25%" y2="80%"/><line x1="60%" y1="30%" x2="75%" y2="85%"/>
-        </g>
-        <g fill="#0A0A0A">
-          <circle cx="10%" cy="20%" r="3"/><circle cx="35%" cy="45%" r="4"/><circle cx="60%" cy="30%" r="3"/><circle cx="85%" cy="55%" r="2.5"/><circle cx="25%" cy="80%" r="2.5"/><circle cx="75%" cy="85%" r="2.5"/>
-        </g>
-      </svg>
+    <ul class="nav__links">
+      <li><a href="#ideas">Soluciones</a></li>
+      <li><a href="#casos">Casos</a></li>
+      <li><a href="#proceso-creativo">Stack</a></li>
+      <li><a href="#sobre-nos">Estudio</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="blog.html">Blog</a></li>
+    </ul>
 
-      <div class="relative mx-auto grid max-w-[1280px] gap-10 px-6 py-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-8 lg:py-20">
+    <div class="nav__actions">
+      <a href="#contacto" class="btn btn--ink btn--sm">Hablemos</a>
+      <a href="login.html" class="btn btn--ghost btn--sm">Login</a>
+    </div>
+  </nav>
+</header>
 
-        <div>
-          <p data-hero-badge class="inline-flex items-center gap-2 rounded-full border border-line bg-paper px-3 py-1.5 font-mono text-[11px] font-medium tracking-[0.2em] text-ink">
-            <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            ESTUDIO TECH · AUTOMATIZACIÓN & PRODUCTO
-          </p>
+<main>
 
-          <h1 data-hero-titulo class="mt-6 text-[42px] font-black leading-[0.9] tracking-[-0.04em] lg:text-[64px]">
-            Automatizamos
-            <br>
-            <span class="relative inline-block">
-              lo que te frena.
-              <span class="absolute bottom-1 left-0 h-3 w-full bg-[#FFE066] -z-10 opacity-60"></span>
-            </span>
-            <br>
-            <span class="font-black text-ink">Construimos</span>
-            <em class="font-black not-italic"> lo que te escala.</em>
-          </h1>
+<!-- ══════════════════════════════════════════════════════════════════════
+     HERO
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="hero band" id="inicio">
+  <div class="shell">
 
-          <p data-hero-parrafo class="mt-6 max-w-[520px] text-[15px] leading-relaxed text-muted">
-            Somos el nodo que conecta tu operación. <strong class="text-ink font-bold">Automatizaciones, páginas web y aplicaciones</strong> a medida — sin humo, sin plantillas eternas. Sistemas que se hablan entre sí, datos que fluyen, procesos que dejan de depender de vos.
-          </p>
+    <div>
+      <p class="hero__badge" data-hero-badge>
+        <span class="live-dot" aria-hidden="true"></span>
+        Estudio tech · Automatización y producto
+      </p>
 
-          <div class="mt-8 flex flex-wrap items-center gap-3">
-            <a data-hero-boton1 href="#contacto" class="inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 text-sm font-bold text-cream shadow-card transition hover:bg-black hover:shadow-cardHover">
-              Empezar proyecto →
-            </a>
-            <a data-hero-boton2 href="#ideas" class="inline-flex items-center gap-2 rounded-full border border-line bg-paper px-6 py-3.5 text-sm font-bold text-ink transition hover:border-ink">
-              Ver soluciones
-            </a>
-          </div>
+      <h1 class="display hero__title" data-hero-titulo>
+        Automatizamos <span class="dim" data-hero-l1>lo que te frena.</span><br>
+        <span class="strong" data-hero-l2>Construimos</span> <span data-hero-l3>lo que te escala.</span>
+      </h1>
+    </div>
 
-          <div class="mt-8 flex flex-wrap gap-6 border-t border-line pt-6">
-            <div><p class="text-2xl font-black tracking-tight">120+</p><p class="font-mono text-[10px] tracking-[0.2em] text-muted">AUTOMATIZACIONES</p></div>
-            <div><p class="text-2xl font-black tracking-tight">40+</p><p class="font-mono text-[10px] tracking-[0.2em] text-muted">WEBS & APPS</p></div>
-            <div><p class="text-2xl font-black tracking-tight">24h</p><p class="font-mono text-[10px] tracking-[0.2em] text-muted">RESPUESTA PROMEDIO</p></div>
-          </div>
+    <div class="hero__grid">
 
-          <p data-hero-ejes class="mt-6 font-mono text-[11px] tracking-[0.2em] text-dim">
-            NODOS · AUTOMATIZACIONES · WEBS · APPS · INTEGRACIONES
-          </p>
-        </div>
-
-        <div class="relative lg:pl-6">
-          <!-- Card sistema nodos -->
-          <div class="relative overflow-hidden rounded-[20px] border border-line bg-paper p-6 shadow-card lg:p-7">
-            <div class="flex items-center justify-between">
-              <span class="flex items-center gap-2 font-mono text-[10px] tracking-[0.2em] text-muted"><span class="h-2 w-2 rounded-full bg-emerald-500"></span> SISTEMA OPERATIVO</span>
-              <span class="rounded-full bg-ink px-2.5 py-1 font-mono text-[10px] font-bold tracking-wide text-cream">LIVE</span>
-            </div>
-
-            <!-- Visual nodos -->
-            <div class="relative mt-6 rounded-2xl border border-line bg-cream p-5 overflow-hidden">
-              <svg viewBox="0 0 400 220" class="w-full h-auto" aria-hidden="true">
-                <!-- conexiones -->
-                <g stroke="#0A0A0A" stroke-width="1.2" opacity="0.15">
-                  <line x1="70" y1="60" x2="180" y2="50"/><line x1="180" y1="50" x2="310" y2="70"/><line x1="70" y1="60" x2="120" y2="150"/><line x1="180" y1="50" x2="200" y2="160"/><line x1="310" y1="70" x2="280" y2="155"/><line x1="120" y1="150" x2="200" y2="160"/><line x1="200" y1="160" x2="280" y2="155"/>
-                  <line x1="70" y1="60" x2="200" y2="160" opacity="0.5" stroke-dasharray="4 4"/>
-                </g>
-                <!-- nodos -->
-                <g>
-                  <g><circle cx="70" cy="60" r="28" fill="white" stroke="#0A0A0A" stroke-width="1.5"/><text x="70" y="64" text-anchor="middle" font-size="11" font-weight="800">CRM</text><text x="70" y="88" text-anchor="middle" font-size="8" fill="#6B6B6B" font-family="monospace">HubSpot</text></g>
-                  <g><circle cx="180" cy="50" r="28" fill="#0A0A0A"/><text x="180" y="54" text-anchor="middle" font-size="11" font-weight="800" fill="white">WEB</text><text x="180" y="78" text-anchor="middle" font-size="8" fill="#6B6B6B" font-family="monospace">Next.js</text></g>
-                  <g><circle cx="310" cy="70" r="28" fill="white" stroke="#0A0A0A" stroke-width="1.5"/><text x="310" y="74" text-anchor="middle" font-size="10" font-weight="800">APP</text><text x="310" y="98" text-anchor="middle" font-size="8" fill="#6B6B6B" font-family="monospace">Mobile</text></g>
-                  <g><circle cx="120" cy="150" r="26" fill="white" stroke="#0A0A0A" stroke-width="1.2"/><text x="120" y="148" text-anchor="middle" font-size="9" font-weight="700">AUTO</text><text x="120" y="158" text-anchor="middle" font-size="8" font-weight="700">MATION</text></g>
-                  <g><circle cx="200" cy="160" r="30" fill="#FFE066" stroke="#0A0A0A" stroke-width="1.5"/><text x="200" y="164" text-anchor="middle" font-size="11" font-weight="900">NODO</text></g>
-                  <g><circle cx="280" cy="155" r="26" fill="white" stroke="#0A0A0A" stroke-width="1.2"/><text x="280" y="159" text-anchor="middle" font-size="9" font-weight="700">DATA</text></g>
-                </g>
-                <!-- pulso -->
-                <circle cx="200" cy="160" r="30" fill="none" stroke="#0A0A0A" stroke-width="1" opacity="0.2">
-                  <animate attributeName="r" values="30;42;30" dur="2.5s" repeatCount="indefinite"/>
-                  <animate attributeName="opacity" values="0.2;0;0.2" dur="2.5s" repeatCount="indefinite"/>
-                </circle>
-              </svg>
-              <div class="mt-3 flex items-center justify-between font-mono text-[10px] tracking-wide text-muted">
-                <span>nodos conectados: 6</span><span class="text-emerald-600 font-bold">● todos operativos</span>
-              </div>
-            </div>
-
-            <div class="mt-5 grid grid-cols-3 gap-3">
-              <div class="rounded-xl border border-line bg-cream px-3 py-3">
-                <p class="font-mono text-[10px] tracking-[0.15em] text-muted">AHORRO</p>
-                <p class="mt-1 text-sm font-black">32h / mes</p>
-              </div>
-              <div class="rounded-xl border border-line bg-cream px-3 py-3">
-                <p class="font-mono text-[10px] tracking-[0.15em] text-muted">UPTIME</p>
-                <p class="mt-1 text-sm font-black">99.9%</p>
-              </div>
-              <div class="rounded-xl bg-ink px-3 py-3 text-cream">
-                <p class="font-mono text-[10px] tracking-[0.15em] opacity-70">INTEGRACIONES</p>
-                <p class="mt-1 text-sm font-black">50+ APIs</p>
-              </div>
-            </div>
-          </div>
-
-          <p class="mt-3 text-center font-mono text-[10px] tracking-[0.2em] text-dim">
-            <a data-hero-fig href="#contacto" class="hover:text-ink transition">ARQUITECTURA DE NODOS · VER CASOS →</a>
-          </p>
-
-          <img data-hero-imagen src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1200&auto=format&fit=crop" alt="" class="hidden" aria-hidden="true">
-        </div>
-
-      </div>
-    </section>
-
-    <!-- TICKER -->
-    <section id="servicios" class="overflow-hidden border-y border-line bg-ink py-3" aria-label="Servicios">
-      <div class="flex w-max animate-[marquee_28s_linear_infinite] gap-8 whitespace-nowrap font-mono text-xs tracking-[0.2em] text-cream">
-        <span>AUTOMATIZACIONES</span><span class="opacity-40">●</span>
-        <span>PÁGINAS WEB</span><span class="opacity-40">●</span>
-        <span>APLICACIONES</span><span class="opacity-40">●</span>
-        <span>INTEGRACIONES</span><span class="opacity-40">●</span>
-        <span>BOTS & IA</span><span class="opacity-40">●</span>
-        <span>SCRAPING</span><span class="opacity-40">●</span>
-        <span>NODOS CONECTADOS</span><span class="opacity-40">●</span>
-        <span>ARGENTINA · REMOTO GLOBAL</span><span class="opacity-40">●</span>
-        <span>AUTOMATIZACIONES</span><span class="opacity-40">●</span>
-        <span>PÁGINAS WEB</span><span class="opacity-40">●</span>
-        <span>APLICACIONES</span><span class="opacity-40">●</span>
-        <span>INTEGRACIONES</span><span class="opacity-40">●</span>
-        <span>BOTS & IA</span><span class="opacity-40">●</span>
-        <span>SCRAPING</span><span class="opacity-40">●</span>
-        <span>NODOS CONECTADOS</span>
-      </div>
-    </section>
-
-    <!-- SOLUCIONES / IDEAS -->
-    <section id="ideas" class="relative border-b border-line bg-paper">
-      <div class="mx-auto max-w-[1280px] px-6 py-16 lg:px-8 lg:py-20">
-        <header class="flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <p class="font-mono text-[11px] font-bold tracking-[0.25em] text-muted">SOLUCIONES · NODOS</p>
-            <h2 class="mt-3 text-[36px] font-black leading-[0.9] tracking-[-0.03em] lg:text-[48px]">
-              Tres formas de
-              <br>
-              <span class="bg-ink text-cream px-2">escalar tu operación.</span>
-            </h2>
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <button type="button" data-filtro-eje="Automatizaciones" class="rounded-full border border-line bg-paper px-4 py-2 font-mono text-xs font-bold tracking-wide text-muted transition hover:border-ink hover:text-ink">Automatizaciones</button>
-            <button type="button" data-filtro-eje="Webs" class="rounded-full border border-line bg-paper px-4 py-2 font-mono text-xs font-bold tracking-wide text-muted transition hover:border-ink hover:text-ink">Webs</button>
-            <button type="button" data-filtro-eje="Apps" class="rounded-full border border-line bg-paper px-4 py-2 font-mono text-xs font-bold tracking-wide text-muted transition hover:border-ink hover:text-ink">Apps</button>
-            <button type="button" data-filtro-eje="Nodos" class="rounded-full border border-line bg-paper px-4 py-2 font-mono text-xs font-bold tracking-wide text-muted transition hover:border-ink hover:text-ink">Nodos</button>
-          </div>
-        </header>
-
-        <p class="mt-6 max-w-2xl text-[15px] leading-relaxed text-muted">
-          No vendemos ideas sueltas. Conectamos nodos: tu web, tu CRM, tus planillas, tus canales. Cada proyecto es un sistema que ahorra horas y abre crecimiento.
+      <div>
+        <p class="lead hero__copy" data-hero-parrafo>
+          Somos el nodo que conecta tu operación. Automatizaciones, páginas web y
+          aplicaciones a medida — sin humo, sin plantillas eternas. Sistemas que se
+          hablan entre sí, datos que fluyen, procesos que dejan de depender de vos.
         </p>
 
-        <div class="mt-10 grid gap-6 md:grid-cols-3" data-grid-ideas></div>
-
-        <div class="mt-10 flex flex-wrap gap-3">
-          <div class="flex-1 min-w-[280px] rounded-2xl border border-line bg-cream p-6 flex items-center justify-between">
-            <div>
-              <p class="font-mono text-[11px] tracking-[0.2em] text-muted">¿NO SABÉS POR DÓNDE EMPEZAR?</p>
-              <p class="mt-1 text-lg font-black tracking-tight">Auditamos tus procesos gratis.</p>
-            </div>
-            <a href="#contacto" class="hidden sm:inline-flex rounded-full bg-ink px-5 py-2.5 text-sm font-bold text-cream">Agendar audit →</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PUNTO DE PARTIDA -> CÓMO TRABAJAMOS -->
-    <section id="punto-de-partida" class="relative border-b border-line bg-cream">
-      <div class="mx-auto grid max-w-[1280px] gap-12 px-6 py-16 lg:grid-cols-2 lg:px-8 lg:py-20">
-        <div>
-          <p class="font-mono text-[11px] font-bold tracking-[0.25em] text-muted">CÓMO TRABAJAMOS</p>
-          <h2 class="mt-3 text-[36px] font-black leading-[0.9] tracking-[-0.03em] lg:text-[44px]">
-            De la idea al
-            <br>
-            <span class="bg-[#FFE066] px-1">sistema en producción.</span>
-          </h2>
-          <p class="mt-6 text-[15px] leading-relaxed text-muted">
-            Sin cascadas eternas. Trabajamos en sprints de 1–2 semanas, con demos reales y nodos que ya funcionan. Ves valor antes de pagar el total.
-          </p>
-          <a href="#contacto" class="mt-6 inline-flex text-sm font-bold underline underline-offset-4 hover:text-muted">Quiero mi roadmap en 48h →</a>
-
-          <div class="mt-10 grid grid-cols-3 gap-4 border-t border-line pt-6">
-            <div><p class="text-xl font-black">7 días</p><p class="font-mono text-[10px] tracking-[0.15em] text-muted">MVP AUTOMATIZACIÓN</p></div>
-            <div><p class="text-xl font-black">2–4 sem</p><p class="font-mono text-[10px] tracking-[0.15em] text-muted">WEB / APP</p></div>
-            <div><p class="text-xl font-black">∞</p><p class="font-mono text-[10px] tracking-[0.15em] text-muted">SOPORTE NODOS</p></div>
-          </div>
-        </div>
-
-        <ol class="space-y-4">
-          <li class="rounded-2xl border border-line bg-paper p-6 shadow-card">
-            <div class="flex items-center gap-3"><span class="flex h-8 w-8 items-center justify-center rounded-full bg-ink text-xs font-black text-cream">01</span><span class="font-mono text-[11px] tracking-[0.2em] text-muted">DISCOVERY</span></div>
-            <h3 class="mt-3 text-lg font-black tracking-tight">Mapeamos tus nodos</h3>
-            <p class="mt-2 text-sm leading-relaxed text-muted">Relevamos procesos, herramientas y cuellos de botella. Salís con un mapa visual de qué automatizar primero y ROI estimado.</p>
-          </li>
-          <li class="rounded-2xl border border-line bg-paper p-6 shadow-card">
-            <div class="flex items-center gap-3"><span class="flex h-8 w-8 items-center justify-center rounded-full bg-ink text-xs font-black text-cream">02</span><span class="font-mono text-[11px] tracking-[0.2em] text-muted">PROTOTIPO</span></div>
-            <h3 class="mt-3 text-lg font-black tracking-tight">Construimos un nodo funcional</h3>
-            <p class="mt-2 text-sm leading-relaxed text-muted">Primer automatización o pantalla navegable en días. Validás sin comprometer todo el presupuesto.</p>
-          </li>
-          <li class="rounded-2xl border-2 border-ink bg-paper p-6 shadow-card">
-            <div class="flex items-center gap-3"><span class="flex h-8 w-8 items-center justify-center rounded-full bg-[#FFE066] text-xs font-black text-ink">03</span><span class="font-mono text-[11px] tracking-[0.2em] text-ink font-bold">ESCALADO</span></div>
-            <h3 class="mt-3 text-lg font-black tracking-tight">Conectamos todo el sistema</h3>
-            <p class="mt-2 text-sm leading-relaxed text-muted"><strong class="text-ink">La red se enciende:</strong> APIs, webhooks, base de datos y front. Entrega documentada + capacitación.</p>
-          </li>
-        </ol>
-      </div>
-
-      <div class="mx-auto grid max-w-[1280px] gap-6 px-6 pb-16 lg:grid-cols-2 lg:px-8">
-        <div class="rounded-2xl border border-line bg-paper p-7">
-          <p class="font-mono text-[11px] tracking-[0.2em] text-muted">STARTER · AUTOMATIZACIÓN</p>
-          <h3 class="mt-2 text-2xl font-black tracking-tight">Un proceso, cero fricción</h3>
-          <ul class="mt-4 space-y-2 text-sm text-muted">
-            <li>— 1 flujo automatizado (ej: leads → CRM → WhatsApp)</li>
-            <li>— Integración de 2–3 herramientas</li>
-            <li>— Dashboard + alertas</li>
-            <li>— Entrega en 7 días</li>
-          </ul>
-          <p class="mt-6 font-mono text-xs font-bold">Desde USD 400 · una vez</p>
-          <a href="#contacto" class="mt-4 inline-flex rounded-full border border-line px-5 py-2.5 text-sm font-bold hover:border-ink">Cotizar →</a>
-        </div>
-        <div class="rounded-2xl border-2 border-ink bg-ink p-7 text-cream">
-          <p class="font-mono text-[11px] tracking-[0.2em] opacity-60">SISTEMA COMPLETO · WEB + NODOS</p>
-          <h3 class="mt-2 text-2xl font-black tracking-tight text-cream">Tu operación en un solo lugar</h3>
-          <ul class="mt-4 space-y-2 text-sm opacity-80">
-            <li>— Web / App + panel admin</li>
-            <li>— Nodos: pagos, stock, CRM, notificaciones</li>
-            <li>— Automatizaciones + scraping si aplica</li>
-            <li>— Soporte 30 días incluido</li>
-          </ul>
-          <p class="mt-6 font-mono text-xs font-bold text-[#FFE066]">Desde USD 1.200 · 3–4 semanas</p>
-          <a href="#contacto" class="mt-4 inline-flex rounded-full bg-cream px-5 py-2.5 text-sm font-black text-ink hover:bg-white">Empezar ahora →</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- SOBRE NOS -> ESTUDIO -->
-    <section id="sobre-nos" class="relative border-b border-line bg-paper">
-      <div class="mx-auto grid max-w-[1280px] items-center gap-12 px-6 py-16 lg:grid-cols-2 lg:px-8 lg:py-20">
-        <figure class="relative order-2 lg:order-1">
-          <div class="overflow-hidden rounded-[20px] border border-line bg-cream">
-            <div class="flex items-center gap-2 border-b border-line bg-paper px-4 py-3">
-              <span class="h-2.5 w-2.5 rounded-full bg-red-400"></span><span class="h-2.5 w-2.5 rounded-full bg-yellow-400"></span><span class="h-2.5 w-2.5 rounded-full bg-green-400"></span>
-              <span class="ml-auto font-mono text-[10px] tracking-wide text-muted">arvure — nodos.deploy</span>
-            </div>
-            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop" alt="Equipo tech trabajando" class="aspect-[4/3] w-full object-cover">
-            <div class="grid grid-cols-3 divide-x divide-line border-t border-line bg-paper text-center">
-              <div class="py-3"><p class="text-sm font-black">100%</p><p class="font-mono text-[10px] text-muted">A MEDIDA</p></div>
-              <div class="py-3"><p class="text-sm font-black">No-code + Code</p><p class="font-mono text-[10px] text-muted">STACK HÍBRIDO</p></div>
-              <div class="py-3"><p class="text-sm font-black">Remoto</p><p class="font-mono text-[10px] text-muted">ARG → GLOBAL</p></div>
-            </div>
-          </div>
-        </figure>
-
-        <div class="order-1 lg:order-2">
-          <p class="font-mono text-[11px] font-bold tracking-[0.25em] text-muted">ESTUDIO</p>
-          <h2 class="mt-3 text-[36px] font-black leading-[0.9] tracking-[-0.03em] lg:text-[44px]">
-            No somos agencia.
-            <br>
-            Somos tu <span class="underline decoration-[#FFE066] decoration-8 underline-offset-2">equipo tech</span>
-            <br>
-            externo.
-          </h2>
-          <p class="mt-6 text-[15px] leading-relaxed text-muted">
-            Diseñamos y codeamos sistemas que se usan todos los días. Sin plantillas que se rompen al segundo cambio. Cada nodo está pensado para que tu equipo lo opere sin depender de nosotros.
-          </p>
-          <p class="mt-4 text-[15px] leading-relaxed text-muted">
-            Stack híbrido: <strong class="text-ink">Next.js, Python, n8n, Supabase, APIs</strong> — elegimos la herramienta por el problema, no al revés. Si se puede resolver sin código, mejor. Si necesita código, lo hacemos bien.
-          </p>
-          <dl class="mt-8 grid grid-cols-3 gap-4 border-t border-line pt-6">
-            <div><dd class="text-3xl font-black">+50</dd><dd class="font-mono text-[10px] tracking-[0.15em] text-muted">PROYECTOS</dd></div>
-            <div><dd class="text-3xl font-black">4.9/5</dd><dd class="font-mono text-[10px] tracking-[0.15em] text-muted">SATISFACCIÓN</dd></div>
-            <div><dd class="text-3xl font-black">∞</dd><dd class="font-mono text-[10px] tracking-[0.15em] text-muted">NODOS POSIBLES</dd></div>
-          </dl>
-          <div class="mt-8 flex gap-3">
-            <a href="#contacto" class="rounded-full bg-ink px-6 py-3 text-sm font-bold text-cream">Trabajar con nosotros</a>
-            <a href="#proceso-creativo" class="rounded-full border border-line bg-paper px-6 py-3 text-sm font-bold">Ver stack →</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROCESO / STACK -->
-    <section id="proceso-creativo" class="relative border-b border-line bg-cream">
-      <div class="mx-auto max-w-[1280px] px-6 py-16 lg:px-8 lg:py-20">
-        <header class="max-w-2xl">
-          <p class="font-mono text-[11px] font-bold tracking-[0.25em] text-muted">STACK & MÉTODO</p>
-          <h2 class="mt-3 text-[36px] font-black leading-[0.9] tracking-[-0.03em] lg:text-[44px]">
-            Tecnología que
-            <br>
-            <span class="bg-ink text-cream px-2">no te encierra.</span>
-          </h2>
-          <p class="mt-4 text-[15px] leading-relaxed text-muted">Elegimos piezas que podés mantener, escalar y entender. Nada de cajas negras.</p>
-        </header>
-
-        <div class="mt-10 grid gap-6 md:grid-cols-3">
-          <article class="rounded-2xl border border-line bg-paper p-6">
-            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-cream border border-line font-mono text-xs font-bold">01</div>
-            <p class="mt-4 font-mono text-[11px] tracking-[0.15em] text-muted">AUTOMATIZACIÓN</p>
-            <h3 class="mt-2 text-lg font-black tracking-tight">n8n · Zapier · Python · APIs</h3>
-            <p class="mt-2 text-sm leading-relaxed text-muted">Conectamos lo que ya usás. Sheets, WhatsApp, CRMs, ERPs, bancos. Si tiene API, lo integramos. Si no, lo scrapeamos.</p>
-            <div class="mt-4 flex flex-wrap gap-1.5">
-              <span class="rounded-full border border-line px-2.5 py-1 font-mono text-[10px]">n8n</span><span class="rounded-full border border-line px-2.5 py-1 font-mono text-[10px]">Python</span><span class="rounded-full border border-line px-2.5 py-1 font-mono text-[10px]">Webhooks</span>
-            </div>
-          </article>
-          <article class="rounded-2xl border border-line bg-paper p-6">
-            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-cream border border-line font-mono text-xs font-bold">02</div>
-            <p class="mt-4 font-mono text-[11px] tracking-[0.15em] text-muted">WEB & PRODUCTO</p>
-            <h3 class="mt-2 text-lg font-black tracking-tight">Next.js · Supabase · Tailwind</h3>
-            <p class="mt-2 text-sm leading-relaxed text-muted">Webs rápidas, SEO-ready, con panel admin real. No WordPress inflado. Código limpio que podés escalar mañana.</p>
-            <div class="mt-4 flex flex-wrap gap-1.5">
-              <span class="rounded-full border border-line px-2.5 py-1 font-mono text-[10px]">Next.js</span><span class="rounded-full border border-line px-2.5 py-1 font-mono text-[10px]">Supabase</span><span class="rounded-full border border-line px-2.5 py-1 font-mono text-[10px]">Vercel</span>
-            </div>
-          </article>
-          <article class="rounded-2xl border-2 border-ink bg-paper p-6">
-            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-ink text-cream font-mono text-xs font-bold">03</div>
-            <p class="mt-4 font-mono text-[11px] tracking-[0.15em] text-ink font-bold">NODOS & DATA</p>
-            <h3 class="mt-2 text-lg font-black tracking-tight">El sistema que se habla</h3>
-            <p class="mt-2 text-sm leading-relaxed text-muted">Cada pieza es un nodo. Se comunican por eventos, no por copiar y pegar. Tu dato entra una vez y viaja solo.</p>
-            <div class="mt-4 flex flex-wrap gap-1.5">
-              <span class="rounded-full bg-ink px-2.5 py-1 font-mono text-[10px] text-cream">Event-driven</span><span class="rounded-full border border-line px-2.5 py-1 font-mono text-[10px]">Postgres</span><span class="rounded-full border border-line px-2.5 py-1 font-mono text-[10px]">Realtime</span>
-            </div>
-          </article>
-        </div>
-
-        <div class="mt-6 rounded-2xl border border-line bg-paper p-6 flex flex-wrap items-center justify-between gap-4">
-          <p class="text-sm font-bold">¿Tenés un proceso manual que odiás? <span class="font-normal text-muted">Lo automatizamos en 7 días o te decimos que no se puede.</span></p>
-          <a href="#contacto" class="rounded-full bg-ink px-5 py-2.5 text-sm font-bold text-cream">Auditar mi proceso →</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- CASOS DE ÉXITO -->
-    <section id="casos" class="relative border-b border-line bg-paper">
-      <div class="mx-auto max-w-[1280px] px-6 py-16 lg:px-8 lg:py-20">
-        <header class="flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <p class="font-mono text-[11px] font-bold tracking-[0.25em] text-muted">CASOS DE ÉXITO · ARVURE</p>
-            <h2 class="mt-3 text-[36px] font-black leading-[0.9] tracking-[-0.03em] lg:text-[48px]">
-              Nodos que ya
-              <br>
-              <span class="bg-ink text-cream px-2">están en producción.</span>
-            </h2>
-          </div>
-          <p class="max-w-[420px] text-[14px] leading-relaxed text-muted">Todo lo que ves acá se shippeó desde Arvure. No son mocks: son sistemas reales, con usuarios, datos y pagos. Si funciona acá, funciona para vos.</p>
-        </header>
-
-        <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <!-- 1 — App-Super -->
-          <article class="group flex flex-col overflow-hidden rounded-2xl border border-line bg-cream transition hover:shadow-cardHover hover:border-ink/15">
-            <div class="relative h-40 overflow-hidden bg-white">
-              <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=800&auto=format&fit=crop" alt="App-Super" class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]">
-              <span class="absolute left-3 top-3 rounded-full bg-[#FFE066] px-2.5 py-1 font-mono text-[10px] font-black tracking-wide text-ink">APP · COMPARADOR</span>
-              <span class="absolute right-3 top-3 rounded-full bg-ink px-2.5 py-1 font-mono text-[10px] font-bold tracking-wide text-cream">Villa María</span>
-            </div>
-            <div class="flex flex-1 flex-col p-5">
-              <h3 class="text-[17px] font-black leading-tight tracking-tight">App-Super</h3>
-              <p class="mt-2 flex-1 text-[13px] leading-relaxed text-muted">Comparador de precios y Nutri-Score para supermercados locales. Ranking en tiempo real.</p>
-              <div class="mt-3 flex flex-wrap gap-1.5"><span class="rounded-full border border-line bg-paper px-2 py-1 font-mono text-[10px]">Python</span><span class="rounded-full border border-line bg-paper px-2 py-1 font-mono text-[10px]">Scraping</span><span class="rounded-full border border-line bg-paper px-2 py-1 font-mono text-[10px]">Nutri-Score</span></div>
-              <a href="https://app-super-delta.vercel.app" target="_blank" rel="noopener" class="mt-4 inline-flex text-[12px] font-bold underline underline-offset-4 hover:text-muted">Ver web →</a>
-            </div>
-          </article>
-
-
-          <!-- 2 — Yoga Class Organizer -->
-          <article class="group flex flex-col overflow-hidden rounded-2xl border border-line bg-cream transition hover:shadow-cardHover hover:border-ink/15">
-            <div class="relative h-40 overflow-hidden bg-white">
-              <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=800&auto=format&fit=crop" alt="App Clases Yoga" class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]">
-              <span class="absolute left-3 top-3 rounded-full bg-white/90 backdrop-blur border border-line px-2.5 py-1 font-mono text-[10px] font-black tracking-wide">iPadOS · NATIVA</span>
-            </div>
-            <div class="flex flex-1 flex-col p-5">
-              <h3 class="text-[17px] font-black leading-tight tracking-tight">Yoga Class Organizer</h3>
-              <p class="mt-2 flex-1 text-[13px] leading-relaxed text-muted">App para profesoras: planificar y dictar clases. Poses, plantillas y modo en vivo.</p>
-              <div class="mt-3 flex flex-wrap gap-1.5"><span class="rounded-full border border-line bg-paper px-2 py-1 font-mono text-[10px]">SwiftUI</span><span class="rounded-full border border-line bg-paper px-2 py-1 font-mono text-[10px]">iPadOS</span></div>
-            </div>
-          </article>
-
-          <!-- 3 — Les Tournesols -->
-          <article class="group flex flex-col overflow-hidden rounded-2xl border-2 border-ink bg-paper transition hover:shadow-cardHover">
-            <div class="relative h-40 overflow-hidden bg-cream">
-              <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=800&auto=format&fit=crop" alt="Les Tournesols" class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]">
-              <span class="absolute left-3 top-3 rounded-full bg-ink px-2.5 py-1 font-mono text-[10px] font-black tracking-wide text-cream">AUTOMATIZACIÓN · SALUD</span>
-              <span class="absolute right-3 top-3 rounded-full bg-emerald-500 px-2.5 py-1 font-mono text-[10px] font-black tracking-wide text-white">● LIVE</span>
-            </div>
-            <div class="flex flex-1 flex-col p-5">
-              <h3 class="text-[17px] font-black leading-tight tracking-tight">Les Tournesols · ePhysio</h3>
-              <p class="mt-2 flex-1 text-[13px] leading-relaxed text-muted">Agenda y turnos para centro de salud. Bot de WhatsApp y calendario sincronizado sin doble-reservas.</p>
-              <div class="mt-3 flex flex-wrap gap-1.5"><span class="rounded-full bg-ink px-2 py-1 font-mono text-[10px] text-cream">WAHA</span><span class="rounded-full border border-line bg-cream px-2 py-1 font-mono text-[10px]">Supabase</span></div>
-            </div>
-          </article>
-
-          <!-- 4 — Biodescodificación -->
-          <article class="group flex flex-col overflow-hidden rounded-2xl border border-line bg-cream transition hover:shadow-cardHover hover:border-ink/15">
-            <div class="relative h-40 overflow-hidden bg-white">
-              <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?q=80&w=800&auto=format&fit=crop" alt="Biodescodificación" class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]">
-              <span class="absolute left-3 top-3 rounded-full bg-white/90 backdrop-blur border border-line px-2.5 py-1 font-mono text-[10px] font-black tracking-wide">OFFLINE · PWA</span>
-            </div>
-            <div class="flex flex-1 flex-col p-5">
-              <h3 class="text-[17px] font-black leading-tight tracking-tight">Biodescodificación</h3>
-              <p class="mt-2 flex-1 text-[13px] leading-relaxed text-muted">App offline para consultas. Diccionario interactivo para uso en atención.</p>
-              <div class="mt-3 flex flex-wrap gap-1.5"><span class="rounded-full border border-line bg-paper px-2 py-1 font-mono text-[10px]">Offline-first</span></div>
-            </div>
-          </article>
-
-          <!-- 5 — Tutor IA -->
-          <article class="group flex flex-col overflow-hidden rounded-2xl border border-line bg-cream transition hover:shadow-cardHover hover:border-ink/15">
-            <div class="relative h-40 overflow-hidden bg-white">
-              <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=800&auto=format&fit=crop" alt="Tutor IA" class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]">
-              <span class="absolute left-3 top-3 rounded-full bg-white/90 backdrop-blur border border-line px-2.5 py-1 font-mono text-[10px] font-black tracking-wide">IA PEDAGÓGICA</span>
-            </div>
-            <div class="flex flex-1 flex-col p-5">
-              <h3 class="text-[17px] font-black leading-tight tracking-tight">Tutor IA</h3>
-              <p class="mt-2 flex-1 text-[13px] leading-relaxed text-muted">Tutor que acompaña a diario: práctica, repaso y feedback guiado. Motor pedagógico propio.</p>
-              <div class="mt-3 flex flex-wrap gap-1.5"><span class="rounded-full border border-line bg-paper px-2 py-1 font-mono text-[10px]">BKT</span><span class="rounded-full border border-line bg-paper px-2 py-1 font-mono text-[10px]">FSRS</span></div>
-            </div>
-          </article>
-
-<!-- 7 — jcmachado.com -->
-          <article class="group flex flex-col overflow-hidden rounded-2xl border border-line bg-cream transition hover:shadow-cardHover hover:border-ink/15">
-            <div class="relative h-40 overflow-hidden bg-white">
-              <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?q=80&w=800&auto=format&fit=crop" alt="jcmachado.com" class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]">
-              <span class="absolute left-3 top-3 rounded-full bg-white/90 backdrop-blur border border-line px-2.5 py-1 font-mono text-[10px] font-black tracking-wide">ECOMMERCE · ARTE</span>
-              <span class="absolute right-3 top-3 rounded-full bg-[#FFE066] px-2.5 py-1 font-mono text-[10px] font-black tracking-wide text-ink">50+ obras</span>
-            </div>
-            <div class="flex flex-1 flex-col p-5">
-              <h3 class="text-[17px] font-black leading-tight tracking-tight">jcmachado.com</h3>
-              <p class="mt-2 flex-1 text-[13px] leading-relaxed text-muted">Tienda de arte: originales, prints y encargos. Pagos y envíos integrados.</p>
-              <div class="mt-3 flex flex-wrap gap-1.5"><span class="rounded-full border border-line bg-paper px-2 py-1 font-mono text-[10px]">Ecommerce</span><span class="rounded-full border border-line bg-paper px-2 py-1 font-mono text-[10px]">QR cert</span></div>
-              <a href="https://www.jcmachado.com" target="_blank" rel="noopener" class="mt-4 inline-flex text-[12px] font-bold underline underline-offset-4 hover:text-muted">Ver web →</a>
-            </div>
-          </article>
-
-          <!-- 8 — Deriva -->
-          <article class="group flex flex-col overflow-hidden rounded-2xl border border-line bg-cream transition hover:shadow-cardHover hover:border-ink/15">
-            <div class="relative h-40 overflow-hidden bg-white">
-              <img src="https://images.unsplash.com/photo-1577083165633-14ebcdb0f658?q=80&w=800&auto=format&fit=crop" alt="Deriva Galería Nómada" class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]">
-              <span class="absolute left-3 top-3 rounded-full bg-ink px-2.5 py-1 font-mono text-[10px] font-black tracking-wide text-cream">GALERÍA NÓMADA</span>
-            </div>
-            <div class="flex flex-1 flex-col p-5">
-              <h3 class="text-[17px] font-black leading-tight tracking-tight">Deriva</h3>
-              <p class="mt-2 flex-1 text-[13px] leading-relaxed text-muted">Galería itinerante vinculada a la tienda. Obras fuera del taller, sin sede fija.</p>
-              <div class="mt-3 flex flex-wrap gap-1.5"><span class="rounded-full border border-line bg-paper px-2 py-1 font-mono text-[10px]">Itinerante</span></div>
-              <a href="https://www.jcmachado.com/deriva/" target="_blank" rel="noopener" class="mt-4 inline-flex text-[12px] font-bold underline underline-offset-4 hover:text-muted">Ver galería →</a>
-            </div>
-          </article>
-
-          <!-- 9 — TreeTone Music -->
-          <article class="group flex flex-col overflow-hidden rounded-2xl border border-line bg-cream transition hover:shadow-cardHover hover:border-ink/15">
-            <div class="relative h-40 overflow-hidden bg-white">
-              <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=800&auto=format&fit=crop" alt="TreeTone Music" class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]">
-              <span class="absolute left-3 top-3 rounded-full bg-white/90 backdrop-blur border border-line px-2.5 py-1 font-mono text-[10px] font-black tracking-wide">COLAB · MÚSICA</span>
-            </div>
-            <div class="flex flex-1 flex-col p-5">
-              <h3 class="text-[17px] font-black leading-tight tracking-tight">TreeTone Music</h3>
-              <p class="mt-2 flex-1 text-[13px] leading-relaxed text-muted">Escuela de música online 1:1 en vivo. Clases y portales para alumnos y profes.</p>
-              <div class="mt-3 flex flex-wrap gap-1.5"><span class="rounded-full border border-line bg-paper px-2 py-1 font-mono text-[10px]">Clases vivo</span></div>
-              <a href="https://treetonemusic.online" target="_blank" rel="noopener" class="mt-4 inline-flex text-[12px] font-bold underline underline-offset-4 hover:text-muted">Ver web →</a>
-            </div>
-          </article>
-        </div>
-
-        <div class="mt-10 rounded-2xl border border-line bg-cream p-6 flex flex-wrap items-center justify-between gap-4">
-          <p class="text-sm font-bold">Cada uno empezó como una idea. <span class="font-normal text-muted">Hoy es un sistema que opera solo.</span></p>
-          <a href="#contacto" class="rounded-full bg-ink px-5 py-2.5 text-sm font-bold text-cream">Quiero mi caso acá →</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- PRIMER PASO -> PLANES -->
-    <section id="primer-paso" class="relative border-b border-line bg-paper">
-      <div class="mx-auto max-w-[1280px] px-6 py-16 lg:px-8 lg:py-20">
-        <header>
-          <p class="font-mono text-[11px] font-bold tracking-[0.25em] text-muted">PRIMER PASO</p>
-          <h2 class="mt-3 text-[36px] font-black leading-[0.9] tracking-[-0.03em] lg:text-[44px]">
-            Empezar es <span class="bg-[#FFE066] px-1">una charla de 20 min.</span>
-          </h2>
-        </header>
-
-        <ol class="mt-10 grid gap-6 md:grid-cols-4">
-          <li class="rounded-2xl border border-line bg-cream p-6">
-            <span class="font-mono text-xs font-black">01</span>
-            <h3 class="mt-2 text-base font-black">Nos contás el cuello</h3>
-            <p class="mt-2 text-sm leading-relaxed text-muted">Qué tarea te consume horas, qué sistema no se habla con otro.</p>
-          </li>
-          <li class="rounded-2xl border border-line bg-cream p-6">
-            <span class="font-mono text-xs font-black">02</span>
-            <h3 class="mt-2 text-base font-black">Mapa de nodos</h3>
-            <p class="mt-2 text-sm leading-relaxed text-muted">Te devolvemos un diagrama + ROI. Sin costo.</p>
-          </li>
-          <li class="rounded-2xl border border-line bg-cream p-6">
-            <span class="font-mono text-xs font-black">03</span>
-            <h3 class="mt-2 text-base font-black">Propuesta cerrada</h3>
-            <p class="mt-2 text-sm leading-relaxed text-muted">Alcance, tiempo y precio fijo. Sin sorpresas.</p>
-          </li>
-          <li class="rounded-2xl border-2 border-ink bg-ink p-6 text-cream">
-            <span class="font-mono text-xs font-black text-[#FFE066]">04</span>
-            <h3 class="mt-2 text-base font-black text-cream">Shippeamos</h3>
-            <p class="mt-2 text-sm leading-relaxed opacity-80">Demo en días, producción en semanas. Con docs.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section id="faq" class="relative border-b border-line bg-cream">
-      <div class="mx-auto max-w-3xl px-6 py-16 lg:py-20">
-        <header class="text-center">
-          <p class="font-mono text-[11px] font-bold tracking-[0.25em] text-muted">FAQ</p>
-          <h2 class="mt-3 text-[36px] font-black leading-tight tracking-[-0.03em] lg:text-[44px]">
-            Preguntas
-            <br>
-            <span class="bg-ink text-cream px-2">frecuentes.</span>
-          </h2>
-        </header>
-
-        <div class="mt-10 space-y-3">
-          <details class="group rounded-2xl border border-line bg-paper transition open:border-ink">
-            <summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 text-base font-black tracking-tight">¿Cuánto cuesta automatizar? <span class="flex h-7 w-7 items-center justify-center rounded-full border border-line text-lg font-normal transition group-open:rotate-45 group-open:bg-ink group-open:text-cream">+</span></summary>
-            <p class="px-6 pb-6 text-sm leading-relaxed text-muted">Depende del flujo. Una automatización simple (ej: form → CRM → mail) desde USD 400. Un sistema con múltiples nodos desde USD 1.200. Siempre precio cerrado tras el discovery.</p>
-          </details>
-          <details class="group rounded-2xl border border-line bg-paper transition open:border-ink">
-            <summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 text-base font-black tracking-tight">¿Hacen páginas web con WordPress? <span class="flex h-7 w-7 items-center justify-center rounded-full border border-line text-lg font-normal transition group-open:rotate-45 group-open:bg-ink group-open:text-cream">+</span></summary>
-            <p class="px-6 pb-6 text-sm leading-relaxed text-muted">No. Construimos con Next.js + CMS moderno (o Supabase). Más rápido, más seguro y escalable. Si necesitás WordPress por algún motivo, te lo decimos honestamente.</p>
-          </details>
-          <details class="group rounded-2xl border border-line bg-paper transition open:border-ink">
-            <summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 text-base font-black tracking-tight">¿Qué es un “nodo”? <span class="flex h-7 w-7 items-center justify-center rounded-full border border-line text-lg font-normal transition group-open:rotate-45 group-open:bg-ink group-open:text-cream">+</span></summary>
-            <p class="px-6 pb-6 text-sm leading-relaxed text-muted">Cada pieza de tu sistema: web, app, bot, planilla, CRM, pasarela. Los conectamos para que el dato fluya solo, sin copiar y pegar. Un cambio en un nodo se refleja en todos.</p>
-          </details>
-          <details class="group rounded-2xl border border-line bg-paper transition open:border-ink">
-            <summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 text-base font-black tracking-tight">¿Cuánto tarda? <span class="flex h-7 w-7 items-center justify-center rounded-full border border-line text-lg font-normal transition group-open:rotate-45 group-open:bg-ink group-open:text-cream">+</span></summary>
-            <p class="px-6 pb-6 text-sm leading-relaxed text-muted">Automatización: 5–7 días. Landing + automatizaciones: 2 semanas. Web/app con panel: 3–4 semanas. Siempre con entregas parciales.</p>
-          </details>
-          <details class="group rounded-2xl border border-line bg-paper transition open:border-ink">
-            <summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 text-base font-black tracking-tight">¿Y después quién lo mantiene? <span class="flex h-7 w-7 items-center justify-center rounded-full border border-line text-lg font-normal transition group-open:rotate-45 group-open:bg-ink group-open:text-cream">+</span></summary>
-            <p class="px-6 pb-6 text-sm leading-relaxed text-muted">Te entregamos docs + video + capacitación. Podés operarlo vos o dejarnos el mantenimiento mensual (desde USD 120/mes, sin permanencia).</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <!-- NEWSLETTER -->
-    <section id="newsletter" class="relative border-b border-line bg-paper">
-      <div class="mx-auto max-w-2xl px-6 py-16 text-center lg:py-20">
-        <p class="font-mono text-[11px] font-bold tracking-[0.25em] text-muted">ANTES DE IRTE</p>
-        <h2 class="mt-3 text-[32px] font-black leading-tight tracking-[-0.03em] lg:text-[40px]">
-          Un mail al mes.
-          <br>
-          <span class="bg-[#FFE066] px-1">Cero spam.</span> Puro sistema.
-        </h2>
-        <p class="mx-auto mt-4 max-w-md text-sm leading-relaxed text-muted">
-          Te mandamos un caso real: qué automatizamos, cuánto ahorró y cómo lo hicimos. Para copiar o para pedirnos lo mismo.
-        </p>
-        <form class="mx-auto mt-8 flex max-w-md gap-2" data-newsletter>
-          <label for="newsletter-email" class="sr-only">Tu email</label>
-          <input id="newsletter-email" type="email" required placeholder="tu@email.com"
-                 class="w-full rounded-full border border-line bg-cream px-5 py-3.5 text-sm placeholder:text-dim focus:border-ink focus:outline-none">
-          <button type="submit" class="shrink-0 rounded-full bg-ink px-6 py-3.5 text-sm font-bold text-cream transition hover:bg-black">
-            Sumarme →
-          </button>
-        </form>
-        <p class="mt-3 font-mono text-[10px] tracking-wide text-dim">Sin spam. Te das de baja en un click.</p>
-      </div>
-    </section>
-
-    <!-- CONTACTO -->
-    <section id="contacto" class="relative bg-cream">
-      <div class="mx-auto grid max-w-[1280px] gap-12 px-6 py-16 lg:grid-cols-2 lg:px-8 lg:py-20">
-        <div>
-          <p class="font-mono text-[11px] font-bold tracking-[0.25em] text-muted">CONTACTO</p>
-          <h2 class="mt-3 text-[36px] font-black leading-[0.9] tracking-[-0.03em] lg:text-[48px]">
-            Hablemos de
-            <br>
-            tus <span class="bg-ink text-cream px-2">nodos.</span>
-          </h2>
-          <p class="mt-6 max-w-md text-[15px] leading-relaxed text-muted">
-            Contanos qué proceso te duele o qué producto querés lanzar. En 24h tenés un mapa y una propuesta.
-          </p>
-
-          <div class="mt-8 space-y-3">
-            <a href="https://wa.me/5493534018769?text=Hola!%20Quiero%20automatizar%20mi%20operaci%C3%B3n."
-               class="flex items-center justify-between rounded-2xl border border-line bg-paper px-5 py-4 transition hover:border-ink">
-              <span><strong class="text-sm font-black">WhatsApp</strong><span class="block text-sm text-muted">Respuesta en el día · +54 9 353 401-8769</span></span>
-              <span class="flex h-9 w-9 items-center justify-center rounded-full bg-ink text-cream">→</span>
-            </a>
-            <a href="mailto:hola@arvure.com"
-               class="flex items-center justify-between rounded-2xl border border-line bg-paper px-5 py-4 transition hover:border-ink">
-              <span><strong class="text-sm font-black">Email</strong><span class="block text-sm text-muted">hola@arvure.com</span></span>
-              <span class="flex h-9 w-9 items-center justify-center rounded-full bg-paper border border-line">→</span>
-            </a>
-            <div class="flex gap-3">
-              <a href="https://www.youtube.com/@Jcmachadoart" class="flex-1 rounded-2xl border border-line bg-paper px-5 py-3 text-center text-sm font-bold hover:border-ink">YouTube</a>
-              <a href="https://www.tiktok.com/@jcmachadoart" class="flex-1 rounded-2xl border border-line bg-paper px-5 py-3 text-center text-sm font-bold hover:border-ink">TikTok</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="rounded-[20px] border border-line bg-paper p-7 shadow-card">
-          <h3 class="text-xl font-black tracking-tight">Contanos tu proyecto</h3>
-          <p class="mt-1 text-sm text-muted">Te respondemos en menos de 24h.</p>
-          <form class="mt-6 space-y-4" data-encargo>
-            <div>
-              <label for="nombre" class="mb-1 block font-mono text-[11px] font-bold tracking-wide text-muted">TU NOMBRE</label>
-              <input id="nombre" name="nombre" type="text" required placeholder="Cómo te llamás"
-                     class="w-full rounded-xl border border-line bg-cream px-4 py-3 text-sm placeholder:text-dim focus:border-ink focus:outline-none">
-            </div>
-            <div>
-              <label for="contacto-usuario" class="mb-1 block font-mono text-[11px] font-bold tracking-wide text-muted">EMAIL O WHATSAPP</label>
-              <input id="contacto-usuario" name="contacto" type="text" required placeholder="Dónde te escribimos"
-                     class="w-full rounded-xl border border-line bg-cream px-4 py-3 text-sm placeholder:text-dim focus:border-ink focus:outline-none">
-            </div>
-            <div>
-              <label for="tipo" class="mb-1 block font-mono text-[11px] font-bold tracking-wide text-muted">¿QUÉ NECESITÁS?</label>
-              <select id="tipo" name="tipo" class="w-full rounded-xl border border-line bg-cream px-4 py-3 text-sm focus:border-ink focus:outline-none">
-                <option>Automatización</option>
-                <option>Página web</option>
-                <option>Aplicación</option>
-                <option>Integración / API</option>
-                <option>Otro / consulta</option>
-              </select>
-            </div>
-            <div>
-              <label for="idea" class="mb-1 block font-mono text-[11px] font-bold tracking-wide text-muted">CONTANOS</label>
-              <textarea id="idea" name="idea" rows="4" required placeholder="Qué proceso querés automatizar o qué producto querés construir..."
-                        class="w-full rounded-xl border border-line bg-cream px-4 py-3 text-sm placeholder:text-dim focus:border-ink focus:outline-none"></textarea>
-            </div>
-            <button type="submit" class="w-full rounded-full bg-ink px-6 py-3.5 text-sm font-black text-cream transition hover:bg-black">
-              Enviar por WhatsApp →
-            </button>
-            <p class="text-center font-mono text-[10px] tracking-wide text-dim">Sin compromiso · Propuesta en 48h</p>
-          </form>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="border-t border-line bg-paper">
-    <div class="mx-auto max-w-[1280px] px-6 py-10 lg:px-8">
-      <div class="flex flex-wrap items-start justify-between gap-8">
-        <div>
-          <a href="#inicio" class="flex items-center gap-2">
-            <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-ink text-cream">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="6" cy="6" r="2.2" fill="currentColor"/><circle cx="18" cy="7" r="1.8" fill="currentColor"/><circle cx="12" cy="18" r="2.5" fill="currentColor"/><path d="M6 6 L12 18 L18 7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-            </span>
-            <span class="text-sm font-black tracking-tight">ARVURE</span>
-            <span class="font-mono text-[10px] tracking-[0.2em] text-muted">ESTUDIO TECH</span>
+        <div class="hero__cta">
+          <a href="#contacto" class="btn btn--ink" data-hero-boton1>Empezar proyecto</a>
+          <a href="#ideas" class="link-inline" data-hero-boton2>
+            Ver soluciones <span class="arrow" aria-hidden="true">→</span>
           </a>
-          <p class="mt-2 text-sm text-muted">Automatizaciones · Webs · Apps · Argentina → Global</p>
         </div>
-        <nav aria-label="Pie">
-          <ul class="flex flex-wrap gap-6 text-sm font-medium text-muted">
-            <li><a class="hover:text-ink" href="#ideas">Soluciones</a></li>
-            <li><a class="hover:text-ink" href="#casos">Casos</a></li>
-            <li><a class="hover:text-ink" href="#proceso-creativo">Stack</a></li>
-            <li><a class="hover:text-ink" href="#sobre-nos">Estudio</a></li>
-            <li><a class="hover:text-ink" href="blog.html">Blog</a></li>
-          </ul>
-        </nav>
+
+        <dl class="hero__stats">
+          <div class="stat">
+            <dt class="stat__n">120+</dt>
+            <dd class="stat__l">Automatizaciones</dd>
+          </div>
+          <div class="stat">
+            <dt class="stat__n">40+</dt>
+            <dd class="stat__l">Webs y apps</dd>
+          </div>
+          <div class="stat">
+            <dt class="stat__n">24 h</dt>
+            <dd class="stat__l">Respuesta promedio</dd>
+          </div>
+        </dl>
+
+        <p class="hero__ejes" data-hero-ejes>Nodos · Automatizaciones · Webs · Apps</p>
+
+        <img data-hero-imagen src="" alt="" class="visually-hidden" aria-hidden="true">
       </div>
-      <p class="mt-8 border-t border-line pt-6 font-mono text-xs text-dim">
-        © <span data-anio>2026</span> Arvure · Estudio tech · Todos los derechos reservados
+
+    <div class="hero__panel-wrap">
+    <figure class="hero-panel">
+      <div class="hero-panel__bar">
+        <span class="live-dot" aria-hidden="true"></span>
+        <span>Sistema operativo</span>
+        <span class="chip chip--live">Live</span>
+      </div>
+
+      <div class="hero-panel__canvas">
+        <span class="glass-chip">
+          <span class="live-dot" aria-hidden="true"></span>
+          6 nodos conectados
+        </span>
+
+        <svg class="hero-graph" viewBox="0 0 560 430" role="img"
+             aria-label="Diagrama de seis nodos conectados: CRM, web, app y datos orbitando un nodo central.">
+          <!-- conexiones -->
+          <g class="link">
+            <line x1="280" y1="215" x2="104" y2="112"/>
+            <line x1="280" y1="215" x2="456" y2="112"/>
+            <line x1="280" y1="215" x2="112" y2="336"/>
+            <line x1="280" y1="215" x2="450" y2="336"/>
+          </g>
+
+          <!-- anillo de pulso del nodo central -->
+          <circle class="ring" cx="280" cy="215" r="56">
+            <animate attributeName="r" values="52;72;52" dur="3.4s" repeatCount="indefinite"/>
+            <animate attributeName="stroke-opacity" values=".24;0;.24" dur="3.4s" repeatCount="indefinite"/>
+          </circle>
+
+          <!-- nodos satélite -->
+          <g>
+            <circle class="node" cx="104" cy="112" r="42"/>
+            <text class="n-label" x="104" y="109" text-anchor="middle">CRM</text>
+            <text class="n-sub"   x="104" y="126" text-anchor="middle">HubSpot</text>
+          </g>
+          <g>
+            <circle class="node" cx="456" cy="112" r="42"/>
+            <text class="n-label" x="456" y="109" text-anchor="middle">Web</text>
+            <text class="n-sub"   x="456" y="126" text-anchor="middle">Next.js</text>
+          </g>
+          <g>
+            <circle class="node" cx="112" cy="336" r="40"/>
+            <text class="n-label" x="112" y="333" text-anchor="middle">App</text>
+            <text class="n-sub"   x="112" y="350" text-anchor="middle">Mobile</text>
+          </g>
+          <g>
+            <circle class="node" cx="450" cy="336" r="40"/>
+            <text class="n-label" x="450" y="333" text-anchor="middle">Datos</text>
+            <text class="n-sub"   x="450" y="350" text-anchor="middle">Postgres</text>
+          </g>
+
+          <!-- nodo central -->
+          <g>
+            <circle class="node--hub" cx="280" cy="215" r="50"/>
+            <text class="n-label n-label--on" x="280" y="212" text-anchor="middle" style="font-size:15px">Nodo</text>
+            <text class="n-sub n-sub--on"   x="280" y="232" text-anchor="middle">Arvure</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="hero-panel__foot">
+        <div class="stat"><span class="stat__n">32 h</span><span class="stat__l">Ahorro mensual</span></div>
+        <div class="stat"><span class="stat__n">99.9%</span><span class="stat__l">Uptime</span></div>
+        <div class="stat"><span class="stat__n">50+</span><span class="stat__l">APIs</span></div>
+      </div>
+    </figure>
+
+    <p class="hero__cap">
+      <a href="#casos" data-hero-fig>Arquitectura de nodos · Ver casos →</a>
+    </p>
+    </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     TIRA DE CAPACIDADES
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="strip band" id="servicios" aria-label="Capacidades">
+  <ul class="shell strip__list">
+    <li>Automatizaciones</li>
+    <li>Páginas web</li>
+    <li>Aplicaciones</li>
+    <li>Integraciones</li>
+    <li>Bots &amp; IA</li>
+    <li>Scraping</li>
+    <li>Argentina → Global</li>
+  </ul>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     SOLUCIONES
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="band bay" id="ideas">
+  <div class="shell">
+
+    <div class="split split--wide-left" style="margin-bottom:clamp(40px,5vw,64px)">
+      <div class="reveal">
+        <span class="eyebrow">Soluciones · Nodos</span>
+        <h2 class="headline" style="margin-top:18px">Tres formas de<br>escalar tu operación.</h2>
+      </div>
+      <div class="reveal" data-delay="1" style="align-self:end">
+        <p class="lead">
+          No vendemos ideas sueltas. Conectamos nodos: tu web, tu CRM, tus planillas,
+          tus canales. Cada proyecto es un sistema que ahorra horas y abre crecimiento.
+        </p>
+        <div class="filters" style="margin-top:28px" role="group" aria-label="Filtrar soluciones por eje">
+          <button type="button" data-filtro-eje="todas" aria-pressed="true">Todas</button>
+          <button type="button" data-filtro-eje="Automatizaciones" aria-pressed="false">Automatizaciones</button>
+          <button type="button" data-filtro-eje="Webs" aria-pressed="false">Webs</button>
+          <button type="button" data-filtro-eje="Apps" aria-pressed="false">Apps</button>
+          <button type="button" data-filtro-eje="Nodos" aria-pressed="false">Nodos</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="bento bento--ideas" data-grid-ideas></div>
+
+    <div class="reveal" style="margin-top:clamp(36px,4vw,56px);display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between;padding-top:32px;border-top:1px solid var(--hairline)">
+      <div>
+        <h3 class="h3">¿No sabés por dónde empezar?</h3>
+        <p class="small" style="margin-top:6px">Auditamos tus procesos gratis y te devolvemos un mapa.</p>
+      </div>
+      <a href="#contacto" class="btn btn--blue">Agendar auditoría</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     CÓMO TRABAJAMOS + PLANES
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="band band--alt bay" id="punto-de-partida">
+  <div class="shell">
+
+    <div class="split split--wide-left" style="margin-bottom:clamp(48px,6vw,88px)">
+      <div class="reveal">
+        <span class="eyebrow">Cómo trabajamos</span>
+        <h2 class="headline" style="margin-top:18px">De la idea al<br>sistema en producción.</h2>
+        <p class="lead" style="margin-top:24px;max-width:30ch">
+          Sin cascadas eternas. Sprints de 1–2 semanas, con demos reales y nodos
+          que ya funcionan. Ves valor antes de pagar el total.
+        </p>
+        <a href="#contacto" class="link-inline" style="margin-top:26px">
+          Quiero mi roadmap en 48 h <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+
+      <dl class="reveal" data-delay="1" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-self:end">
+        <div class="stat"><dt class="stat__n">7 días</dt><dd class="stat__l">MVP automatización</dd></div>
+        <div class="stat"><dt class="stat__n">2–4 sem</dt><dd class="stat__l">Web / app</dd></div>
+        <div class="stat"><dt class="stat__n">∞</dt><dd class="stat__l">Soporte nodos</dd></div>
+      </dl>
+    </div>
+
+    <ol class="steps reveal">
+      <li class="step">
+        <span class="step__n">01 — Discovery</span>
+        <h3 class="step__t">Mapeamos tus nodos</h3>
+        <p class="step__d">Relevamos procesos, herramientas y cuellos de botella. Salís con un mapa visual de qué automatizar primero y el ROI estimado.</p>
+      </li>
+      <li class="step">
+        <span class="step__n">02 — Prototipo</span>
+        <h3 class="step__t">Construimos un nodo funcional</h3>
+        <p class="step__d">Primera automatización o pantalla navegable en días. Validás sin comprometer todo el presupuesto.</p>
+      </li>
+      <li class="step">
+        <span class="step__n">03 — Escalado</span>
+        <h3 class="step__t">Conectamos todo el sistema</h3>
+        <p class="step__d">La red se enciende: APIs, webhooks, base de datos y front. Entrega documentada y capacitación.</p>
+      </li>
+    </ol>
+
+    <div class="split" style="margin-top:clamp(56px,7vw,96px);gap:clamp(20px,2.4vw,28px)">
+
+      <article class="plan reveal">
+        <span class="eyebrow">Starter · Automatización</span>
+        <h3 class="h3" style="font-size:1.5rem;letter-spacing:-.03em">Un proceso, cero fricción</h3>
+        <ul class="plan__list">
+          <li>1 flujo automatizado (ej: leads → CRM → WhatsApp)</li>
+          <li>Integración de 2–3 herramientas</li>
+          <li>Dashboard + alertas</li>
+          <li>Entrega en 7 días</li>
+        </ul>
+        <p class="plan__price">Desde USD 400 · una vez</p>
+        <a href="#contacto" class="btn btn--ghost">Cotizar</a>
+      </article>
+
+      <article class="plan plan--dark reveal" data-delay="1">
+        <span class="eyebrow">Sistema completo · Web + nodos</span>
+        <h3 class="h3" style="font-size:1.5rem;letter-spacing:-.03em">Tu operación en un solo lugar</h3>
+        <ul class="plan__list">
+          <li>Web / app + panel de administración</li>
+          <li>Nodos: pagos, stock, CRM, notificaciones</li>
+          <li>Automatizaciones y scraping si aplica</li>
+          <li>Soporte por 30 días incluido</li>
+        </ul>
+        <p class="plan__price">Desde USD 1.200 · 3–4 semanas</p>
+        <a href="#contacto" class="btn btn--blue">Empezar ahora</a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     ESTUDIO
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="band bay" id="sobre-nos">
+  <div class="shell split split--wide-right split--sticky">
+
+    <figure class="media reveal">
+      <div class="media-bar" aria-hidden="true"><i></i><i></i><i></i><span>arvure — nodos.deploy</span></div>
+      <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop"
+           alt="Equipo tech trabajando" loading="lazy" width="1200" height="900">
+      <div class="media-foot">
+        <div><span class="h4">100%</span><span class="stat__l">A medida</span></div>
+        <div><span class="h4">No-code + Code</span><span class="stat__l">Stack híbrido</span></div>
+        <div><span class="h4">Remoto</span><span class="stat__l">ARG → Global</span></div>
+      </div>
+    </figure>
+
+    <div class="reveal" data-delay="1">
+      <span class="eyebrow">Estudio</span>
+      <h2 class="headline" style="margin-top:18px">
+        No somos agencia.<br>
+        Somos tu <span class="accent">equipo tech</span> externo.
+      </h2>
+      <p class="lead" style="margin-top:26px">
+        Diseñamos y codeamos sistemas que se usan todos los días. Sin plantillas que se
+        rompen al segundo cambio. Cada nodo está pensado para que tu equipo lo opere
+        sin depender de nosotros.
+      </p>
+      <p class="body" style="margin-top:16px">
+        Stack híbrido: <strong class="strong">Next.js, Python, n8n, Supabase, APIs</strong> —
+        elegimos la herramienta por el problema, no al revés. Si se puede resolver sin
+        código, mejor. Si necesita código, lo hacemos bien.
+      </p>
+
+      <dl style="margin-top:44px;padding-top:32px;border-top:1px solid var(--hairline);display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+        <div class="stat"><dt class="figure-n">+50</dt><dd class="stat__l">Proyectos</dd></div>
+        <div class="stat"><dt class="figure-n">4.9/5</dt><dd class="stat__l">Satisfacción</dd></div>
+        <div class="stat"><dt class="figure-n">∞</dt><dd class="stat__l">Nodos posibles</dd></div>
+      </dl>
+
+      <div style="margin-top:36px;display:flex;flex-wrap:wrap;gap:12px">
+        <a href="#contacto" class="btn btn--ink">Trabajar con nosotros</a>
+        <a href="#proceso-creativo" class="btn btn--ghost">Ver stack</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     STACK & MÉTODO
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="band band--alt bay" id="proceso-creativo">
+  <div class="shell">
+
+    <div style="max-width:44ch;margin-bottom:clamp(44px,5vw,72px)" class="reveal">
+      <span class="eyebrow">Stack &amp; método</span>
+      <h2 class="headline" style="margin-top:18px">Tecnología que<br>no te encierra.</h2>
+      <p class="lead" style="margin-top:22px">
+        Elegimos piezas que podés mantener, escalar y entender. Nada de cajas negras.
       </p>
     </div>
-  </footer>
 
-  <a href="https://wa.me/5493534018769?text=Hola!%20Vengo%20de%20la%20web"
-     class="fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-ink text-xl font-bold text-cream shadow-lg transition hover:scale-105"
-     aria-label="Escribinos por WhatsApp">✆</a>
+    <div class="bento bento--three">
+      <article class="tile reveal">
+        <span class="tile__n">01</span>
+        <h3 class="h3">n8n · Zapier · Python · APIs</h3>
+        <p class="body">Conectamos lo que ya usás. Sheets, WhatsApp, CRMs, ERPs, bancos. Si tiene API, lo integramos. Si no, lo scrapeamos.</p>
+        <div class="card__tags">
+          <span class="chip">n8n</span><span class="chip">Python</span><span class="chip">Webhooks</span>
+        </div>
+      </article>
 
-  <dialog id="dialogo-idea" class="w-full max-w-2xl rounded-2xl border border-line bg-paper p-0 text-ink backdrop:bg-ink/60 backdrop:backdrop-blur-sm">
-    <div class="flex items-center justify-between border-b border-line px-6 py-4">
-      <span class="font-mono text-[11px] tracking-[0.2em] text-muted" id="dialogo-etiqueta"></span>
-      <button type="button" class="flex h-8 w-8 items-center justify-center rounded-full border border-line text-xl leading-none transition hover:bg-ink hover:text-cream" data-cerrar-idea aria-label="Cerrar">×</button>
+      <article class="tile reveal" data-delay="1">
+        <span class="tile__n">02</span>
+        <h3 class="h3">Next.js · Supabase · Tailwind</h3>
+        <p class="body">Webs rápidas, SEO-ready, con panel de administración real. No WordPress inflado. Código limpio que podés escalar mañana.</p>
+        <div class="card__tags">
+          <span class="chip">Next.js</span><span class="chip">Supabase</span><span class="chip">Vercel</span>
+        </div>
+      </article>
+
+      <article class="tile reveal" data-delay="2">
+        <span class="tile__n">03</span>
+        <h3 class="h3">El sistema que se habla</h3>
+        <p class="body">Cada pieza es un nodo. Se comunican por eventos, no por copiar y pegar. Tu dato entra una vez y viaja solo.</p>
+        <div class="card__tags">
+          <span class="chip chip--blue">Event-driven</span><span class="chip">Postgres</span><span class="chip">Realtime</span>
+        </div>
+      </article>
     </div>
-    <div class="p-6">
-      <img id="dialogo-imagen" src="" alt="" class="aspect-video w-full rounded-xl border border-line object-cover">
-      <h3 id="dialogo-titulo" class="mt-5 text-2xl font-black tracking-tight"></h3>
-      <p id="dialogo-descripcion" class="mt-3 text-sm leading-relaxed text-muted"></p>
-      <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
-        <span class="font-mono text-xs font-bold tracking-wide" id="dialogo-estado"></span>
-        <a href="#contacto" class="rounded-full bg-ink px-5 py-2.5 text-sm font-bold text-cream">Quiero esto →</a>
+
+    <div class="reveal" style="margin-top:clamp(32px,3.6vw,48px);padding:26px 30px;border-radius:var(--r-lg);border:1px solid var(--hairline);background:var(--surface);display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between">
+      <p style="font-size:1rem;letter-spacing:-.015em">
+        ¿Tenés un proceso manual que odiás?
+        <span class="ink-2">Lo automatizamos en 7 días o te decimos que no se puede.</span>
+      </p>
+      <a href="#contacto" class="btn btn--ink btn--sm">Auditar mi proceso</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     CASOS
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="band bay" id="casos">
+  <div class="shell">
+
+    <div class="split split--wide-left" style="margin-bottom:clamp(40px,5vw,64px)">
+      <div class="reveal">
+        <span class="eyebrow">Casos de éxito</span>
+        <h2 class="headline" style="margin-top:18px">Nodos que ya<br>están en producción.</h2>
+      </div>
+      <p class="lead reveal" data-delay="1" style="align-self:end">
+        Todo lo que ves acá se shippeó desde Arvure. No son mocks: son sistemas reales,
+        con usuarios, datos y pagos. Si funciona acá, funciona para vos.
+      </p>
+    </div>
+
+    <div class="bento bento--cases">
+
+      <article class="card card--hover reveal">
+        <div class="card__media">
+          <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1200&auto=format&fit=crop" alt="App-Super" loading="lazy" width="1200" height="750">
+          <div class="card__badges">
+            <span class="chip">App · Comparador</span>
+            <span class="chip chip--solid">Villa María</span>
+          </div>
+        </div>
+        <div class="card__body">
+          <h3 class="card__title">App-Super</h3>
+          <p class="card__desc">Comparador de precios y Nutri-Score para supermercados locales. Ranking en tiempo real.</p>
+          <div class="card__tags">
+            <span class="chip">Python</span><span class="chip">Scraping</span><span class="chip">Nutri-Score</span>
+          </div>
+          <a href="https://app-super-delta.vercel.app" target="_blank" rel="noopener" class="link-inline" style="margin-top:auto;padding-top:8px">Ver web <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </article>
+
+      <article class="card card--hover reveal" data-delay="1">
+        <div class="card__media card__media--tall">
+          <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=800&auto=format&fit=crop" alt="App Clases Yoga" loading="lazy" width="800" height="1000">
+          <div class="card__badges">
+            <span class="chip">iPadOS · Nativa</span>
+          </div>
+        </div>
+        <div class="card__body">
+          <h3 class="card__title">Yoga Class Organizer</h3>
+          <p class="card__desc">App para profesoras: planificar y dictar clases. Poses, plantillas y modo en vivo.</p>
+          <div class="card__tags"><span class="chip">SwiftUI</span><span class="chip">iPadOS</span></div>
+        </div>
+      </article>
+
+      <article class="card card--hover reveal" data-delay="2">
+        <div class="card__media">
+          <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=800&auto=format&fit=crop" alt="Les Tournesols" loading="lazy" width="800" height="500">
+          <div class="card__badges">
+            <span class="chip">Automatización · Salud</span>
+            <span class="chip chip--live">Live</span>
+          </div>
+        </div>
+        <div class="card__body">
+          <h3 class="card__title">Les Tournesols · ePhysio</h3>
+          <p class="card__desc">Agenda y turnos para centro de salud. Bot de WhatsApp y calendario sincronizado sin doble reserva.</p>
+          <div class="card__tags"><span class="chip chip--solid">WAHA</span><span class="chip">Supabase</span></div>
+        </div>
+      </article>
+
+      <article class="card card--hover reveal">
+        <div class="card__media">
+          <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?q=80&w=800&auto=format&fit=crop" alt="Biodescodificación" loading="lazy" width="800" height="500">
+          <div class="card__badges"><span class="chip">Offline · PWA</span></div>
+        </div>
+        <div class="card__body">
+          <h3 class="card__title">Biodescodificación</h3>
+          <p class="card__desc">App offline para consultas. Diccionario interactivo para usar en atención.</p>
+          <div class="card__tags"><span class="chip">Offline-first</span></div>
+        </div>
+      </article>
+
+      <article class="card card--hover reveal" data-delay="1">
+        <div class="card__media">
+          <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=800&auto=format&fit=crop" alt="Tutor IA" loading="lazy" width="800" height="500">
+          <div class="card__badges"><span class="chip">IA pedagógica</span></div>
+        </div>
+        <div class="card__body">
+          <h3 class="card__title">Tutor IA</h3>
+          <p class="card__desc">Tutor que acompaña a diario: práctica, repaso y feedback guiado. Motor pedagógico propio.</p>
+          <div class="card__tags"><span class="chip">BKT</span><span class="chip">FSRS</span></div>
+        </div>
+      </article>
+
+      <article class="card card--hover reveal" data-delay="2">
+        <div class="card__media">
+          <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?q=80&w=800&auto=format&fit=crop" alt="jcmachado.com" loading="lazy" width="800" height="500">
+          <div class="card__badges">
+            <span class="chip">Ecommerce · Arte</span>
+            <span class="chip chip--blue">50+ obras</span>
+          </div>
+        </div>
+        <div class="card__body">
+          <h3 class="card__title">jcmachado.com</h3>
+          <p class="card__desc">Tienda de arte: originales, prints y encargos. Pagos y envíos integrados.</p>
+          <div class="card__tags"><span class="chip">Ecommerce</span><span class="chip">QR cert</span></div>
+          <a href="https://www.jcmachado.com" target="_blank" rel="noopener" class="link-inline" style="margin-top:auto;padding-top:8px">Ver web <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </article>
+
+      <article class="card card--hover reveal">
+        <div class="card__media">
+          <img src="https://images.unsplash.com/photo-1577083165633-14ebcdb0f658?q=80&w=800&auto=format&fit=crop" alt="Deriva Galería Nómada" loading="lazy" width="800" height="500">
+          <div class="card__badges"><span class="chip">Galería nómada</span></div>
+        </div>
+        <div class="card__body">
+          <h3 class="card__title">Deriva</h3>
+          <p class="card__desc">Galería itinerante vinculada a la tienda. Obras fuera del taller, sin sede fija.</p>
+          <div class="card__tags"><span class="chip">Itinerante</span></div>
+          <a href="https://www.jcmachado.com/deriva/" target="_blank" rel="noopener" class="link-inline" style="margin-top:auto;padding-top:8px">Ver galería <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </article>
+
+      <article class="card card--hover reveal" data-delay="1">
+        <div class="card__media">
+          <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=800&auto=format&fit=crop" alt="TreeTone Music" loading="lazy" width="800" height="500">
+          <div class="card__badges"><span class="chip">Colab · Música</span></div>
+        </div>
+        <div class="card__body">
+          <h3 class="card__title">TreeTone Music</h3>
+          <p class="card__desc">Escuela de música online 1:1 en vivo. Clases y portales para alumnos y profes.</p>
+          <div class="card__tags"><span class="chip">Clases vivo</span></div>
+          <a href="https://treetonemusic.online" target="_blank" rel="noopener" class="link-inline" style="margin-top:auto;padding-top:8px">Ver web <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="reveal" style="margin-top:clamp(36px,4vw,56px);padding-top:32px;border-top:1px solid var(--hairline);display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between">
+      <p style="font-size:1rem;letter-spacing:-.015em">
+        Cada uno empezó como una idea.
+        <span class="ink-2">Hoy es un sistema que opera solo.</span>
+      </p>
+      <a href="#contacto" class="btn btn--ink btn--sm">Quiero mi caso acá</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     PRIMER PASO
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="band band--alt bay" id="primer-paso">
+  <div class="shell">
+    <div style="max-width:40ch;margin-bottom:clamp(44px,5vw,72px)" class="reveal">
+      <span class="eyebrow">Primer paso</span>
+      <h2 class="headline" style="margin-top:18px">Empezar es<br>una charla de 20 min.</h2>
+    </div>
+
+    <ol class="steps reveal">
+      <li class="step">
+        <span class="step__n">01</span>
+        <h3 class="step__t">Nos contás el cuello</h3>
+        <p class="step__d">Qué tarea te consume horas, qué sistema no se habla con otro.</p>
+      </li>
+      <li class="step">
+        <span class="step__n">02</span>
+        <h3 class="step__t">Mapa de nodos</h3>
+        <p class="step__d">Te devolvemos un diagrama y el ROI estimado. Sin costo.</p>
+      </li>
+      <li class="step">
+        <span class="step__n">03</span>
+        <h3 class="step__t">Propuesta cerrada</h3>
+        <p class="step__d">Alcance, tiempo y precio fijo. Sin sorpresas.</p>
+      </li>
+      <li class="step">
+        <span class="step__n">04</span>
+        <h3 class="step__t">Shippeamos</h3>
+        <p class="step__d">Demo en días, producción en semanas. Con documentación.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     FAQ
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="band bay" id="faq">
+  <div class="shell shell--narrow">
+    <div class="center reveal" style="margin-bottom:clamp(40px,5vw,64px)">
+      <span class="eyebrow">FAQ</span>
+      <h2 class="headline" style="margin-top:18px">Preguntas frecuentes.</h2>
+    </div>
+
+    <div class="faq reveal">
+      <details>
+        <summary>¿Cuánto cuesta automatizar? <span class="faq__sign" aria-hidden="true"></span></summary>
+        <p class="faq__a">Depende del flujo. Una automatización simple (ej: form → CRM → mail) desde USD 400. Un sistema con múltiples nodos desde USD 1.200. Siempre precio cerrado tras el discovery.</p>
+      </details>
+      <details>
+        <summary>¿Hacen páginas web con WordPress? <span class="faq__sign" aria-hidden="true"></span></summary>
+        <p class="faq__a">No. Construimos con Next.js y un CMS moderno (o Supabase). Más rápido, más seguro y escalable. Si necesitás WordPress por algún motivo, te lo decimos honestamente.</p>
+      </details>
+      <details>
+        <summary>¿Qué es un “nodo”? <span class="faq__sign" aria-hidden="true"></span></summary>
+        <p class="faq__a">Cada pieza de tu sistema: web, app, bot, planilla, CRM, pasarela. Los conectamos para que el dato fluya solo, sin copiar y pegar. Un cambio en un nodo se refleja en todos.</p>
+      </details>
+      <details>
+        <summary>¿Cuánto tarda? <span class="faq__sign" aria-hidden="true"></span></summary>
+        <p class="faq__a">Automatización: 5–7 días. Landing + automatizaciones: 2 semanas. Web o app con panel: 3–4 semanas. Siempre con entregas parciales.</p>
+      </details>
+      <details>
+        <summary>¿Y después quién lo mantiene? <span class="faq__sign" aria-hidden="true"></span></summary>
+        <p class="faq__a">Te entregamos documentación, video y capacitación. Podés operarlo vos o dejarnos el mantenimiento mensual (desde USD 120/mes, sin permanencia).</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     NEWSLETTER
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="band band--alt bay--sm" id="newsletter">
+  <div class="shell shell--tight center">
+    <span class="eyebrow reveal">Antes de irte</span>
+    <h2 class="headline reveal" data-delay="1" style="margin-top:18px">Un mail al mes.<br>Cero spam.</h2>
+    <p class="lead reveal" data-delay="2" style="margin-top:20px">
+      Te mandamos un caso real: qué automatizamos, cuánto ahorró y cómo lo hicimos.
+    </p>
+    <form class="inline-form reveal" data-delay="3" data-newsletter style="margin-top:34px">
+      <label for="newsletter-email" class="visually-hidden">Tu email</label>
+      <input id="newsletter-email" type="email" required placeholder="tu@email.com" autocomplete="email">
+      <button type="submit" class="btn btn--ink">Sumarme</button>
+    </form>
+    <p class="reveal" data-delay="4" style="margin-top:16px;font-size:.8125rem;color:var(--ink-3)">
+      Te das de baja en un click.
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     CONTACTO
+     ══════════════════════════════════════════════════════════════════════ -->
+<section class="band bay" id="contacto">
+  <div class="shell split split--wide-left">
+
+    <div class="reveal">
+      <span class="eyebrow">Contacto</span>
+      <h2 class="headline" style="margin-top:18px">Hablemos de<br>tus nodos.</h2>
+      <p class="lead" style="margin-top:24px;max-width:34ch">
+        Contanos qué proceso te duele o qué producto querés lanzar.
+        En 24 h tenés un mapa y una propuesta.
+      </p>
+
+      <div style="margin-top:40px">
+        <a class="contact-row" href="https://wa.me/5493534018769?text=Hola!%20Vengo%20de%20la%20web" target="_blank" rel="noopener">
+          <span>
+            <span class="contact-row__k">WhatsApp</span>
+            <span class="contact-row__v" style="display:block;margin-top:6px">+54 9 353 401-8769</span>
+          </span>
+          <span class="link-inline" style="font-size:.9375rem">Respuesta en el día <span class="arrow" aria-hidden="true">→</span></span>
+        </a>
+        <a class="contact-row" href="mailto:hola@arvure.com">
+          <span>
+            <span class="contact-row__k">Email</span>
+            <span class="contact-row__v" style="display:block;margin-top:6px">hola@arvure.com</span>
+          </span>
+          <span class="link-inline" style="font-size:.9375rem"><span class="arrow" aria-hidden="true">→</span></span>
+        </a>
+      </div>
+
+      <div style="margin-top:32px;display:flex;flex-wrap:wrap;gap:10px">
+        <a href="#" class="chip">YouTube</a>
+        <a href="#" class="chip">TikTok</a>
+        <a href="blog.html" class="chip">Blog</a>
       </div>
     </div>
-  </dialog>
 
-  <script>
-    const load = (k, d) => { try { const v = JSON.parse(localStorage.getItem('fabrica_' + k)); return v ?? d; } catch { return d; } };
-    const esc = s => (s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    <form class="form-panel reveal" data-delay="1" data-encargo style="display:flex;flex-direction:column;gap:18px">
+      <div>
+        <h3 class="h3">Contanos tu proyecto</h3>
+        <p class="small" style="margin-top:6px">Te respondemos en menos de 24 h.</p>
+      </div>
 
-    let catalogo = load('catalogo', window.CATALOGO_DEFECTO);
-    // Migración tech 2026-09: si el catálogo es de la era "fábrica de ideas" (ids idea_*), reemplazar por el nuevo catálogo tech
-    if (catalogo.some(c => c.id && c.id.startsWith('idea_'))) {
-      catalogo = window.CATALOGO_DEFECTO.slice();
-      localStorage.setItem('fabrica_catalogo', JSON.stringify(catalogo));
-    }
-    if (!localStorage.getItem('fabrica_catalogo')) localStorage.setItem('fabrica_catalogo', JSON.stringify(catalogo));
-    {
-      const defaults = window.CATALOGO_DEFECTO;
-      const ids = new Set(catalogo.map(i => i.id));
-      defaults.forEach(d => { if (!ids.has(d.id)) catalogo.push(d); });
-      let migrated = false;
-      catalogo.forEach(i => { if (!i.eje) { i.eje = defaults.find(d => d.id === i.id)?.eje || 'Automatizaciones'; migrated = true; } });
-      if (migrated || catalogo.length !== defaults.length) localStorage.setItem('fabrica_catalogo', JSON.stringify(catalogo));
-    }
-    let filtroEje = 'todas';
-    const dialogo = document.getElementById('dialogo-idea');
+      <div class="field">
+        <label for="contacto-nombre">Tu nombre</label>
+        <input id="contacto-nombre" name="nombre" type="text" required placeholder="¿Cómo te llamás?" autocomplete="name">
+      </div>
 
-    function renderIdeas() {
-      const visibles = catalogo.filter(i => filtroEje === 'todas' || i.eje === filtroEje);
-      const grid = document.querySelector('[data-grid-ideas]');
-      grid.innerHTML = visibles.map(i => `
-        <article class="group overflow-hidden rounded-2xl border border-line bg-paper shadow-card transition hover:shadow-cardHover hover:border-ink/20">
-          <button type="button" class="block w-full text-left" data-abrir-idea="${i.id}">
-            <div class="relative overflow-hidden">
-              <img src="${esc(i.imagen)}" alt="${esc(i.titulo)}" class="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-[1.03]">
-              <span class="absolute left-3 top-3 rounded-full bg-cream/90 backdrop-blur px-2.5 py-1 font-mono text-[10px] font-bold tracking-wide border border-line">${esc(i.eje || i.tipo)}</span>
-              <span class="absolute right-3 top-3 rounded-full ${i.estado === 'vendida' ? 'bg-ink text-cream' : 'bg-[#FFE066] text-ink'} px-2.5 py-1 font-mono text-[10px] font-bold tracking-wide">${i.estado === 'vendida' ? 'EN PRODUCCIÓN' : 'DISPONIBLE'}${i.precio ? ' · ' + esc(i.precio) : ''}</span>
-            </div>
-          </button>
-          <div class="p-5">
-            <h3 class="text-lg font-black leading-tight tracking-tight">
-              <button type="button" data-abrir-idea="${i.id}" class="text-left hover:text-muted transition">${esc(i.titulo)}</button>
-            </h3>
-            <p class="mt-2 text-sm leading-relaxed text-muted">${esc(i.descripcion)}</p>
-            <p class="mt-4">
-              <button type="button" data-abrir-idea="${i.id}" class="inline-flex items-center gap-1 rounded-full border border-line px-3 py-1.5 font-mono text-[11px] font-bold tracking-wide hover:border-ink hover:bg-ink hover:text-cream transition">Ver detalle →</button>
-            </p>
-          </div>
-        </article>`).join('') || '<p class="col-span-full text-center text-sm text-muted">Sin soluciones en este filtro.</p>';
-      grid.querySelectorAll('[data-abrir-idea]').forEach(boton => {
-        boton.addEventListener('click', () => abrirIdea(boton.dataset.abrirIdea));
-      });
-    }
+      <div class="field">
+        <label for="contacto-usuario">Email o WhatsApp</label>
+        <input id="contacto-usuario" name="contacto" type="text" required placeholder="Dónde te escribimos" autocomplete="email">
+      </div>
 
-    function abrirIdea(id) {
-      const idea = catalogo.find(x => x.id === id);
-      if (!idea) return;
-      document.getElementById('dialogo-etiqueta').textContent = idea.id + ' · ' + (idea.eje || idea.tipo);
-      document.getElementById('dialogo-imagen').src = idea.imagen;
-      document.getElementById('dialogo-imagen').alt = idea.titulo;
-      document.getElementById('dialogo-titulo').textContent = idea.titulo;
-      document.getElementById('dialogo-descripcion').textContent = idea.detalle || idea.descripcion;
-      const estado = document.getElementById('dialogo-estado');
-      estado.textContent = (idea.estado === 'vendida' ? 'En producción' : 'Disponible') + (idea.precio ? ' · ' + idea.precio : '');
-      estado.className = 'font-mono text-xs font-bold tracking-wide ' + (idea.estado === 'vendida' ? 'text-muted' : 'text-ink');
-      dialogo.showModal();
-    }
+      <div class="field">
+        <label for="tipo">¿Qué necesitás?</label>
+        <select id="tipo" name="tipo">
+          <option>Automatización</option>
+          <option>Página web</option>
+          <option>Aplicación</option>
+          <option>Integración / API</option>
+          <option>Otro / consulta</option>
+        </select>
+      </div>
 
-    document.querySelectorAll('[data-filtro-eje]').forEach(boton => {
-      boton.addEventListener('click', () => {
-        filtroEje = filtroEje === boton.dataset.filtroEje ? 'todas' : boton.dataset.filtroEje;
-        document.querySelectorAll('[data-filtro-eje]').forEach(b => {
-          const activo = b.dataset.filtroEje === filtroEje;
-          b.classList.toggle('bg-ink', activo);
-          b.classList.toggle('text-cream', activo);
-          b.classList.toggle('border-ink', activo);
-          b.classList.toggle('bg-paper', !activo);
-          b.classList.toggle('text-muted', !activo);
-          b.classList.toggle('border-line', !activo);
-        });
-        renderIdeas();
-      });
+      <div class="field">
+        <label for="idea">Contanos</label>
+        <textarea id="idea" name="idea" rows="4" required placeholder="Qué proceso querés automatizar o qué producto querés construir…"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn--ink" style="width:100%">Enviar por WhatsApp</button>
+      <p style="text-align:center;font-size:.8125rem;color:var(--ink-3)">Sin compromiso · Propuesta en 48 h</p>
+    </form>
+
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     FOOTER
+     ══════════════════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="shell">
+    <span class="footer__wordmark" aria-hidden="true">Arvure</span>
+
+    <div class="footer__cols">
+      <div class="footer__col">
+        <p style="font-size:1.0625rem;line-height:1.5;letter-spacing:-.02em;max-width:30ch">
+          Automatizaciones, webs y apps que conectan tu operación.
+          Argentina → Global.
+        </p>
+        <a href="#contacto" class="btn btn--blue btn--sm" style="margin-top:22px">Empezar un proyecto</a>
+      </div>
+
+      <div class="footer__col">
+        <h4>Estudio</h4>
+        <ul>
+          <li><a href="#sobre-nos">Quiénes somos</a></li>
+          <li><a href="#proceso-creativo">Stack &amp; método</a></li>
+          <li><a href="#punto-de-partida">Cómo trabajamos</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Sitio</h4>
+        <ul>
+          <li><a href="#ideas">Soluciones</a></li>
+          <li><a href="#casos">Casos</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bar">
+      <span>© <span data-anio>2026</span> Arvure · Estudio tech</span>
+      <span>Todos los derechos reservados</span>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/5493534018769?text=Hola!%20Vengo%20de%20la%20web"
+   class="fab" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M8.5 9.2c.2-.5.4-.5.7-.5h.5c.2 0 .4.1.5.4l.7 1.7c.1.2.1.4 0 .6l-.4.5c-.1.2-.2.3 0 .5.3.5 1 1.2 1.7 1.6.3.2.5.1.6 0l.5-.6c.2-.2.3-.2.6-.1l1.6.8c.3.1.4.3.4.5 0 .6-.6 1.3-1.2 1.4-.5.1-1.1.2-3.2-1-1.9-1.1-3.1-3-3.3-3.9-.2-.8-.1-1.5.1-2Z" fill="currentColor"/>
+  </svg>
+</a>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     DIALOG DE DETALLE
+     ══════════════════════════════════════════════════════════════════════ -->
+<dialog id="dialogo-idea">
+  <div class="dialog__bar">
+    <span class="eyebrow" id="dialogo-etiqueta"></span>
+    <button type="button" class="icon-btn" data-cerrar-idea aria-label="Cerrar">×</button>
+  </div>
+  <div class="dialog__body">
+    <img id="dialogo-imagen" class="dialog__media" src="" alt="">
+    <h3 id="dialogo-titulo" class="h3" style="font-size:1.5rem;margin-top:22px"></h3>
+    <p id="dialogo-descripcion" class="body" style="margin-top:12px"></p>
+    <div style="margin-top:26px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between">
+      <span id="dialogo-estado" class="small"></span>
+      <a href="#contacto" class="btn btn--ink btn--sm" data-cerrar-idea>Quiero esto</a>
+    </div>
+  </div>
+</dialog>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════════
+   LÓGICA — preserva el panel de administración (localStorage) y corrige
+   dos bugs de la versión anterior:
+   · el hero caía al final de la página por el reordenamiento de secciones
+   · el H1 duplicaba "lo que te frena. Construimos…"
+   ══════════════════════════════════════════════════════════════════════ */
+const load = (k, d) => { try { const v = JSON.parse(localStorage.getItem('fabrica_' + k)); return v ?? d; } catch { return d; } };
+const esc = s => (s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+/* ---------- Catálogo ---------- */
+let catalogo = load('catalogo', window.CATALOGO_DEFECTO);
+if (catalogo.some(c => c.id && c.id.startsWith('idea_'))) {
+  catalogo = window.CATALOGO_DEFECTO.slice();
+  localStorage.setItem('fabrica_catalogo', JSON.stringify(catalogo));
+}
+if (!localStorage.getItem('fabrica_catalogo')) localStorage.setItem('fabrica_catalogo', JSON.stringify(catalogo));
+{
+  const defaults = window.CATALOGO_DEFECTO;
+  const ids = new Set(catalogo.map(i => i.id));
+  defaults.forEach(d => { if (!ids.has(d.id)) catalogo.push(d); });
+  let migrated = false;
+  catalogo.forEach(i => { if (!i.eje) { i.eje = defaults.find(d => d.id === i.id)?.eje || 'Automatizaciones'; migrated = true; } });
+  if (migrated || catalogo.length !== defaults.length) localStorage.setItem('fabrica_catalogo', JSON.stringify(catalogo));
+}
+let filtroEje = 'todas';
+const dialogo = document.getElementById('dialogo-idea');
+
+function renderIdeas() {
+  const visibles = catalogo.filter(i => filtroEje === 'todas' || i.eje === filtroEje);
+  const grid = document.querySelector('[data-grid-ideas]');
+  grid.innerHTML = visibles.map(i => `
+    <article class="card card--hover">
+      <button type="button" class="card__media" data-abrir-idea="${esc(i.id)}" style="border:0;padding:0;width:100%;display:block;cursor:pointer">
+        <img src="${esc(i.imagen)}" alt="${esc(i.titulo)}" loading="lazy">
+        <span class="card__badges">
+          <span class="chip">${esc(i.eje || i.tipo)}</span>
+          <span class="chip ${i.estado === 'vendida' ? 'chip--solid' : 'chip--blue'}">${i.estado === 'vendida' ? 'En producción' : 'Disponible'}</span>
+        </span>
+      </button>
+      <div class="card__body">
+        <h3 class="card__title">
+          <button type="button" data-abrir-idea="${esc(i.id)}" style="border:0;background:none;padding:0;text-align:left;font:inherit;color:inherit;cursor:pointer">${esc(i.titulo)}</button>
+        </h3>
+        <p class="card__desc">${esc(i.descripcion)}</p>
+        <p class="small" style="font-weight:550;color:var(--ink)">${esc(i.precio || '')}</p>
+        <button type="button" data-abrir-idea="${esc(i.id)}" class="link-inline" style="border:0;background:none;padding:0;cursor:pointer;margin-top:auto">Ver detalle <span class="arrow" aria-hidden="true">→</span></button>
+      </div>
+    </article>`).join('') || '<p class="body" style="grid-column:1/-1;text-align:center">Sin soluciones en este filtro.</p>';
+  grid.querySelectorAll('[data-abrir-idea]').forEach(boton => {
+    boton.addEventListener('click', () => abrirIdea(boton.dataset.abrirIdea));
+  });
+  observerRefresh(grid);
+}
+
+function abrirIdea(id) {
+  const idea = catalogo.find(x => x.id === id);
+  if (!idea) return;
+  document.getElementById('dialogo-etiqueta').textContent = idea.id + ' · ' + (idea.eje || idea.tipo);
+  document.getElementById('dialogo-imagen').src = idea.imagen;
+  document.getElementById('dialogo-imagen').alt = idea.titulo;
+  document.getElementById('dialogo-titulo').textContent = idea.titulo;
+  document.getElementById('dialogo-descripcion').textContent = idea.detalle || idea.descripcion;
+  const estado = document.getElementById('dialogo-estado');
+  estado.textContent = (idea.estado === 'vendida' ? 'En producción' : 'Disponible') + (idea.precio ? ' · ' + idea.precio : '');
+  dialogo.showModal();
+}
+
+/* ---------- Filtros ---------- */
+document.querySelectorAll('[data-filtro-eje]').forEach(boton => {
+  boton.addEventListener('click', () => {
+    const val = boton.dataset.filtroEje;
+    filtroEje = (filtroEje === val || val === 'todas') ? 'todas' : val;
+    document.querySelectorAll('[data-filtro-eje]').forEach(b => {
+      b.setAttribute('aria-pressed', String(b.dataset.filtroEje === filtroEje));
     });
-
-    document.querySelectorAll('[data-cerrar-idea]').forEach(boton => {
-      boton.addEventListener('click', () => dialogo.close());
-    });
-    dialogo.addEventListener('click', e => {
-      if (e.target === dialogo) dialogo.close();
-    });
-
     renderIdeas();
+  });
+});
 
-    document.querySelectorAll('[data-encargo]').forEach(form => {
-      form.addEventListener('submit', e => {
-        e.preventDefault();
-        const datos = new FormData(form);
-        const mensaje =
-          'Hola! Soy ' + datos.get('nombre') +
-          ' (contacto: ' + datos.get('contacto') + ').' +
-          ' Necesito: ' + datos.get('tipo') + '.' +
-          ' Detalle: ' + datos.get('idea');
-        window.open('https://wa.me/5493534018769?text=' + encodeURIComponent(mensaje), '_blank');
-      });
-    });
+/* ---------- Modal ---------- */
+document.querySelectorAll('[data-cerrar-idea]').forEach(boton => {
+  boton.addEventListener('click', () => { if (dialogo.open) dialogo.close(); });
+});
+dialogo.addEventListener('click', e => { if (e.target === dialogo) dialogo.close(); });
 
-    document.querySelectorAll('[data-newsletter]').forEach(form => {
-      form.addEventListener('submit', e => {
-        e.preventDefault();
-        const email = form.querySelector('input').value.trim();
-        const lista = load('suscriptores', []);
-        if (!lista.some(s => s.email === email)) {
-          lista.push({ email, fecha: new Date().toISOString().slice(0, 10) });
-          localStorage.setItem('fabrica_suscriptores', JSON.stringify(lista));
-        }
-        const boton = form.querySelector('button');
-        boton.textContent = '¡Sumado! ✓';
-        boton.disabled = true;
-      });
-    });
+renderIdeas();
 
-    document.querySelectorAll('[data-anio]').forEach(el => {
-      el.textContent = new Date().getFullYear();
-    });
+/* ---------- Formularios ---------- */
+document.querySelectorAll('[data-encargo]').forEach(form => {
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const d = new FormData(form);
+    const mensaje = 'Hola! Soy ' + d.get('nombre') + ' (contacto: ' + d.get('contacto') + ').' +
+                    ' Necesito: ' + d.get('tipo') + '.' + ' Detalle: ' + d.get('idea');
+    window.open('https://wa.me/5493534018769?text=' + encodeURIComponent(mensaje), '_blank');
+  });
+});
 
-    (function(){
-      const load2 = (k, d) => { try { const v = JSON.parse(localStorage.getItem('fabrica_' + k)); return v ?? d; } catch { return d; } };
-      const hero = load2('hero', window.HERO_DEFECTO);
-      const b = document.querySelector('[data-hero-badge]');
-      if (b && hero.badge) b.lastChild.textContent = ' ' + hero.badge;
-      const h1 = document.querySelector('[data-hero-titulo]');
-      if (h1 && hero.titulo1) {
-        const em = h1.querySelector('em');
-        // keep bold structure
-        if (h1.childNodes[0]) h1.childNodes[0].textContent = hero.titulo1 + '\n';
-        if (em) em.textContent = hero.titulo2;
-      }
-      const pa = document.querySelector('[data-hero-parrafo]');
-      if (pa && hero.parrafo) pa.innerHTML = hero.parrafo;
-      const b1 = document.querySelector('[data-hero-boton1]');
-      if (b1) { if (hero.boton1) b1.textContent = hero.boton1; if (hero.boton1link) b1.href = hero.boton1link; }
-      const b2 = document.querySelector('[data-hero-boton2]');
-      if (b2) { if (hero.boton2) b2.textContent = hero.boton2; if (hero.boton2link) b2.href = hero.boton2link; }
-      const ej = document.querySelector('[data-hero-ejes]');
-      if (ej && hero.ejes) ej.textContent = hero.ejes;
-      const img = document.querySelector('[data-hero-imagen]');
-      if (img && hero.imagen) img.src = hero.imagen;
-      const fig = document.querySelector('[data-hero-fig]');
-      if (fig) { if (hero.figcaption) fig.textContent = hero.figcaption; if (hero.figlink) fig.href = hero.figlink; }
+document.querySelectorAll('[data-newsletter]').forEach(form => {
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const email = form.querySelector('input').value.trim();
+    const lista = load('suscriptores', []);
+    if (!lista.some(s => s.email === email)) {
+      lista.push({ email, fecha: new Date().toISOString().slice(0, 10) });
+      localStorage.setItem('fabrica_suscriptores', JSON.stringify(lista));
+    }
+    const boton = form.querySelector('button');
+    boton.textContent = '¡Sumado!';
+    boton.disabled = true;
+  });
+});
 
-      const customs = (() => { try { return JSON.parse(localStorage.getItem('fabrica_custom_nombres')||'{}'); } catch { return {}; } })();
-      Object.keys(customs).forEach(id => {
-        if (!document.getElementById(id)) {
-          const sec = document.createElement('section');
-          sec.id = id;
-          sec.className = 'border-b border-line bg-cream relative';
-          sec.innerHTML = `<div class="mx-auto max-w-[1280px] px-6 py-16 lg:px-8"><p class="font-mono text-[11px] font-bold tracking-[0.2em] text-muted">${customs[id]}</p><h2 class="mt-2 text-3xl font-black tracking-tight">${customs[id]}</h2><p class="mt-4 max-w-xl text-sm leading-relaxed text-muted">Sección agregada desde el admin.</p></div>`;
-          document.querySelector('main').appendChild(sec);
-        }
-      });
-      const orden = load2('orden_secciones', window.SECCIONES_DEFECTO);
-      const main = document.querySelector('main');
-      if (main && Array.isArray(orden)) {
-        const secciones = {};
-        main.querySelectorAll(':scope > section[id]').forEach(s => { secciones[s.id] = s; });
-        const frag = document.createDocumentFragment();
-        orden.forEach(o => {
-          const id = typeof o === 'string' ? o : o.id;
-          const visible = typeof o === 'string' ? true : o.visible !== false;
-          const sec = secciones[id];
-          if (!sec) return;
-          sec.style.display = visible ? '' : 'none';
-          frag.appendChild(sec);
-        });
-        Object.keys(secciones).forEach(id => {
-          if (!orden.some(o => (typeof o === 'string' ? o : o.id) === id)) {
-            frag.appendChild(secciones[id]);
-          }
-        });
-        main.appendChild(frag);
-      }
-    })();
-  </script>
+document.querySelectorAll('[data-anio]').forEach(el => { el.textContent = new Date().getFullYear(); });
+
+/* ══════════════════════════════════════════════════════════════════════
+   HERO — texto administrable. Divide el título en 3 partes para evitar
+   la duplicación de "lo que te frena. Construimos…" que existía antes.
+   ══════════════════════════════════════════════════════════════════════ */
+(function () {
+  const hero = load('hero', window.HERO_DEFECTO);
+  const h1 = document.querySelector('[data-hero-titulo]');
+  const badge = document.querySelector('[data-hero-badge]');
+  const parrafo = document.querySelector('[data-hero-parrafo]');
+  const b1 = document.querySelector('[data-hero-boton1]');
+  const b2 = document.querySelector('[data-hero-boton2]');
+  const img = document.querySelector('[data-hero-imagen]');
+
+  if (badge && hero.badge) {
+    badge.lastChild.textContent = ' ' + hero.badge;
+  }
+
+  if (h1) {
+    /* El campo "titulo2" del admin puede traer una o dos frases.
+       Se reparte en: frase atenuada + verbo en negra + resto. */
+    const t1 = (hero.titulo1 || 'Automatizamos').trim();
+    const t2 = (hero.titulo2 || 'lo que te frena. Construimos lo que te escala.')
+                 .replace(/\s*\.\s*$/, '');
+    const partes = t2.split(/\.\s+/);
+    const l1   = (partes[0] || 'lo que te frena').trim();
+    const resto = partes.slice(1).join('. ').trim();
+    const l2   = (hero.titulo3 || (resto ? resto.split(/\s+/)[0] : 'Construimos')).trim();
+    const l3   = (hero.titulo4 || (resto ? resto.slice(l2.length).trim() : 'lo que te escala')).trim();
+
+    if (h1.childNodes[0] && h1.childNodes[0].nodeType === 3) {
+      h1.childNodes[0].textContent = t1 + ' ';
+    }
+    const e1 = h1.querySelector('[data-hero-l1]');
+    const e2 = h1.querySelector('[data-hero-l2]');
+    const e3 = h1.querySelector('[data-hero-l3]');
+    if (e1) e1.textContent = l1 + '.';
+    if (e2) e2.textContent = l2;
+    if (e3) e3.textContent = l3 + '.';
+  }
+
+  if (parrafo && hero.parrafo) parrafo.innerHTML = hero.parrafo;
+  if (b1) {
+    if (hero.boton1) b1.textContent = hero.boton1;
+    if (hero.boton1link) b1.href = hero.boton1link;
+  }
+  if (b2) {
+    if (hero.boton2) b2.textContent = hero.boton2;
+    if (hero.boton2link) b2.href = hero.boton2link;
+  }
+  if (img && hero.imagen) img.src = hero.imagen;
+})();
+
+/* ══════════════════════════════════════════════════════════════════════
+   SECCIONES — respeta el orden del panel de administración, pero
+   FIJA el hero y la tira de capacidades al inicio (antes el hero
+   quedaba al final de la página para cualquier visitante nuevo).
+   ══════════════════════════════════════════════════════════════════════ */
+(function () {
+  const customs = (() => { try { return JSON.parse(localStorage.getItem('fabrica_custom_nombres') || '{}'); } catch { return {}; } })();
+  const main = document.querySelector('main');
+
+  Object.keys(customs).forEach(id => {
+    if (!document.getElementById(id)) {
+      const sec = document.createElement('section');
+      sec.id = id;
+      sec.className = 'band bay';
+      sec.innerHTML = '<div class="shell"><span class="eyebrow">' + esc(customs[id]) +
+        '</span><h2 class="headline" style="margin-top:18px">' + esc(customs[id]) +
+        '</h2><p class="lead" style="margin-top:18px;max-width:52ch">Sección agregada desde el admin.</p></div>';
+      main.appendChild(sec);
+    }
+  });
+
+  const orden = load('orden_secciones', window.SECCIONES_DEFECTO);
+  if (!main || !Array.isArray(orden)) return;
+
+  const secciones = {};
+  main.querySelectorAll(':scope > section[id]').forEach(s => { secciones[s.id] = s; });
+
+  const fijas = ['inicio', 'servicios'];
+  const frag = document.createDocumentFragment();
+
+  fijas.forEach(id => { if (secciones[id]) { frag.appendChild(secciones[id]); delete secciones[id]; } });
+
+  orden.forEach(o => {
+    const id = typeof o === 'string' ? o : o.id;
+    const visible = typeof o === 'string' ? true : o.visible !== false;
+    const sec = secciones[id];
+    if (!sec) return;
+    sec.style.display = visible ? '' : 'none';
+    frag.appendChild(sec);
+    delete secciones[id];
+  });
+
+  Object.keys(secciones).forEach(id => frag.appendChild(secciones[id]));
+  main.appendChild(frag);
+})();
+
+/* ══════════════════════════════════════════════════════════════════════
+   NAV — estado "stuck" al hacer scroll
+   ══════════════════════════════════════════════════════════════════════ */
+const nav = document.getElementById('nav');
+const onScroll = () => nav.classList.toggle('is-stuck', window.scrollY > 12);
+onScroll();
+window.addEventListener('scroll', onScroll, { passive: true });
+
+/* ══════════════════════════════════════════════════════════════════════
+   REVEAL — entrada al viewport
+   ══════════════════════════════════════════════════════════════════════ */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-in');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+function observerRefresh(scope) {
+  const items = (scope || document).querySelectorAll('.reveal:not(.is-in)');
+  items.forEach(el => revealObserver.observe(el));
+}
+observerRefresh(document);
+
+/* Cambia la variante "stuck" del nav al pasar el hero */
+const heroEl = document.getElementById('inicio');
+if (heroEl && 'IntersectionObserver' in window) {
+  new IntersectionObserver(([entry]) => {
+    nav.classList.toggle('is-stuck', !entry.isIntersecting || window.scrollY > 12);
+  }, { threshold: 0 }).observe(heroEl);
+}
+</script>
 
 </body>
 </html>
