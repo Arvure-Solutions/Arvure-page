@@ -1245,3 +1245,60 @@ html.js .reveal[data-delay="5"] { transition-delay: .35s; }
   .plan--dark .btn--blue { background: #0071e3; color: #ffffff; }
   .plan--dark .btn--blue:hover { background: #0077ed; }
 }
+
+/* ---------------------------------------------------------------------------
+   20 · CAPACIDADES — bento editorial con media alternada
+   --------------------------------------------------------------------------- */
+@media (min-width: 860px) {
+  .bento.bento--caps { grid-template-columns: repeat(2, 1fr); }
+  .bento.bento--caps > * { grid-column: span 1; }
+}
+
+.bento--caps .card { flex-direction: row; }
+.bento--caps .card__media { flex: 0 0 40%; }
+.bento--caps .card__media img { height: 100%; aspect-ratio: auto; min-height: 260px; }
+.bento--caps .card__body { padding: 26px 26px 28px; }
+.bento--caps .cap__title { font-size: 1.15rem; }
+
+@media (min-width: 860px) {
+  .bento--caps .cap:nth-child(even) { flex-direction: row-reverse; }
+  .bento--caps .cap:nth-child(even) .card__body { padding-right: 30px; }
+}
+
+@media (max-width: 640px) {
+  .bento--caps .card { flex-direction: column; }
+  .bento--caps .card__media { flex: none; }
+  .bento--caps .card__media img { aspect-ratio: 16 / 10; min-height: 0; height: auto; }
+}
+
+/* Lista de specs de cada capacidad */
+.cap__list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-top: 4px;
+  font-size: .875rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.cap__list li {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+}
+.cap__list li::before {
+  content: "";
+  flex: none;
+  width: 4px;
+  height: 4px;
+  margin-top: .55em;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* Stats conceptuales del panel del hero (sin números inventados) */
+.stat--concept .stat__n {
+  font-size: 1.05rem;
+  letter-spacing: -.02em;
+  font-weight: 600;
+}

@@ -60,7 +60,7 @@
 
     <ul class="nav__links">
       <li><a href="#ideas">Soluciones</a></li>
-      <li><a href="#casos">Casos</a></li>
+      <li><a href="#casos">Capacidades</a></li>
       <li><a href="#proceso-creativo">Stack</a></li>
       <li><a href="#sobre-nos">Estudio</a></li>
       <li><a href="#faq">FAQ</a></li>
@@ -85,7 +85,7 @@
     <div>
       <p class="hero__badge" data-hero-badge>
         <span class="live-dot" aria-hidden="true"></span>
-        Estudio tech · Automatización y producto
+        Estudio de ingeniería de software · Automatización, web y apps
       </p>
 
       <h1 class="display hero__title" data-hero-titulo>
@@ -95,12 +95,12 @@
     </div>
 
     <div class="hero__grid">
-
       <div>
         <p class="lead hero__copy" data-hero-parrafo>
-          Somos el nodo que conecta tu operación. Automatizaciones, páginas web y
-          aplicaciones a medida — sin humo, sin plantillas eternas. Sistemas que se
-          hablan entre sí, datos que fluyen, procesos que dejan de depender de vos.
+          Automatizaciones, webs y apps a medida, integradas en un solo sistema.
+          Diseñamos la arquitectura, escribimos el código y te entregamos todo:
+          credenciales, documentación y capacitación. Tu operación sigue funcionando
+          aunque nosotros no estemos.
         </p>
 
         <div class="hero__cta">
@@ -120,91 +120,86 @@
             <dd class="stat__l">Webs y apps</dd>
           </div>
           <div class="stat">
-            <dt class="stat__n">24 h</dt>
-            <dd class="stat__l">Respuesta promedio</dd>
+            <dt class="stat__n">48 h</dt>
+            <dd class="stat__l">De diagnóstico a propuesta</dd>
           </div>
         </dl>
 
-        <p class="hero__ejes" data-hero-ejes>Nodos · Automatizaciones · Webs · Apps</p>
+        <p class="hero__ejes" data-hero-ejes>Nodos · Eventos · APIs · Sistemas conectados</p>
 
         <img data-hero-imagen src="" alt="" class="visually-hidden" aria-hidden="true">
       </div>
 
-    <div class="hero__panel-wrap">
-    <figure class="hero-panel">
-      <div class="hero-panel__bar">
-        <span class="live-dot" aria-hidden="true"></span>
-        <span>Sistema operativo</span>
-        <span class="chip chip--live">Live</span>
+      <div class="hero__panel-wrap">
+        <figure class="hero-panel">
+          <div class="hero-panel__bar">
+            <span class="live-dot" aria-hidden="true"></span>
+            <span>Arquitectura de referencia</span>
+            <span class="chip chip--live">En vivo</span>
+          </div>
+
+          <div class="hero-panel__canvas">
+            <span class="glass-chip">
+              <span class="live-dot" aria-hidden="true"></span>
+              6 nodos conectados
+            </span>
+
+            <svg class="hero-graph" viewBox="0 0 560 430" role="img"
+                 aria-label="Diagrama de seis nodos conectados: CRM, web, app y datos orbitando un nodo central.">
+              <g class="link">
+                <line x1="280" y1="215" x2="104" y2="112"/>
+                <line x1="280" y1="215" x2="456" y2="112"/>
+                <line x1="280" y1="215" x2="112" y2="336"/>
+                <line x1="280" y1="215" x2="450" y2="336"/>
+              </g>
+
+              <circle class="ring" cx="280" cy="215" r="56">
+                <animate attributeName="r" values="52;72;52" dur="3.4s" repeatCount="indefinite"/>
+                <animate attributeName="stroke-opacity" values=".24;0;.24" dur="3.4s" repeatCount="indefinite"/>
+              </circle>
+
+              <g>
+                <circle class="node" cx="104" cy="112" r="42"/>
+                <text class="n-label" x="104" y="109" text-anchor="middle">CRM</text>
+                <text class="n-sub"   x="104" y="126" text-anchor="middle">HubSpot</text>
+              </g>
+              <g>
+                <circle class="node" cx="456" cy="112" r="42"/>
+                <text class="n-label" x="456" y="109" text-anchor="middle">Web</text>
+                <text class="n-sub"   x="456" y="126" text-anchor="middle">Next.js</text>
+              </g>
+              <g>
+                <circle class="node" cx="112" cy="336" r="40"/>
+                <text class="n-label" x="112" y="333" text-anchor="middle">App</text>
+                <text class="n-sub"   x="112" y="350" text-anchor="middle">Mobile</text>
+              </g>
+              <g>
+                <circle class="node" cx="450" cy="336" r="40"/>
+                <text class="n-label" x="450" y="333" text-anchor="middle">Datos</text>
+                <text class="n-sub"   x="450" y="350" text-anchor="middle">Postgres</text>
+              </g>
+
+              <g>
+                <circle class="node--hub" cx="280" cy="215" r="50"/>
+                <text class="n-label n-label--on" x="280" y="212" text-anchor="middle" style="font-size:15px">Nodo</text>
+                <text class="n-sub n-sub--on"   x="280" y="232" text-anchor="middle">Arvure</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="hero-panel__foot">
+            <div class="stat stat--concept"><span class="stat__n">Nodos</span><span class="stat__l">Cada pieza, un sistema</span></div>
+            <div class="stat stat--concept"><span class="stat__n">Eventos</span><span class="stat__l">El dato viaja solo</span></div>
+            <div class="stat stat--concept"><span class="stat__n">APIs</span><span class="stat__l">Lo que ya usás, conectado</span></div>
+          </div>
+        </figure>
+
+        <p class="hero__cap">
+          <a href="#casos" data-hero-fig>Arquitectura de nodos · Ver capacidades →</a>
+        </p>
       </div>
-
-      <div class="hero-panel__canvas">
-        <span class="glass-chip">
-          <span class="live-dot" aria-hidden="true"></span>
-          6 nodos conectados
-        </span>
-
-        <svg class="hero-graph" viewBox="0 0 560 430" role="img"
-             aria-label="Diagrama de seis nodos conectados: CRM, web, app y datos orbitando un nodo central.">
-          <!-- conexiones -->
-          <g class="link">
-            <line x1="280" y1="215" x2="104" y2="112"/>
-            <line x1="280" y1="215" x2="456" y2="112"/>
-            <line x1="280" y1="215" x2="112" y2="336"/>
-            <line x1="280" y1="215" x2="450" y2="336"/>
-          </g>
-
-          <!-- anillo de pulso del nodo central -->
-          <circle class="ring" cx="280" cy="215" r="56">
-            <animate attributeName="r" values="52;72;52" dur="3.4s" repeatCount="indefinite"/>
-            <animate attributeName="stroke-opacity" values=".24;0;.24" dur="3.4s" repeatCount="indefinite"/>
-          </circle>
-
-          <!-- nodos satélite -->
-          <g>
-            <circle class="node" cx="104" cy="112" r="42"/>
-            <text class="n-label" x="104" y="109" text-anchor="middle">CRM</text>
-            <text class="n-sub"   x="104" y="126" text-anchor="middle">HubSpot</text>
-          </g>
-          <g>
-            <circle class="node" cx="456" cy="112" r="42"/>
-            <text class="n-label" x="456" y="109" text-anchor="middle">Web</text>
-            <text class="n-sub"   x="456" y="126" text-anchor="middle">Next.js</text>
-          </g>
-          <g>
-            <circle class="node" cx="112" cy="336" r="40"/>
-            <text class="n-label" x="112" y="333" text-anchor="middle">App</text>
-            <text class="n-sub"   x="112" y="350" text-anchor="middle">Mobile</text>
-          </g>
-          <g>
-            <circle class="node" cx="450" cy="336" r="40"/>
-            <text class="n-label" x="450" y="333" text-anchor="middle">Datos</text>
-            <text class="n-sub"   x="450" y="350" text-anchor="middle">Postgres</text>
-          </g>
-
-          <!-- nodo central -->
-          <g>
-            <circle class="node--hub" cx="280" cy="215" r="50"/>
-            <text class="n-label n-label--on" x="280" y="212" text-anchor="middle" style="font-size:15px">Nodo</text>
-            <text class="n-sub n-sub--on"   x="280" y="232" text-anchor="middle">Arvure</text>
-          </g>
-        </svg>
-      </div>
-
-      <div class="hero-panel__foot">
-        <div class="stat"><span class="stat__n">32 h</span><span class="stat__l">Ahorro mensual</span></div>
-        <div class="stat"><span class="stat__n">99.9%</span><span class="stat__l">Uptime</span></div>
-        <div class="stat"><span class="stat__n">50+</span><span class="stat__l">APIs</span></div>
-      </div>
-    </figure>
-
-    <p class="hero__cap">
-      <a href="#casos" data-hero-fig>Arquitectura de nodos · Ver casos →</a>
-    </p>
-    </div>
 
     </div>
-
   </div>
 </section>
 
@@ -231,13 +226,14 @@
 
     <div class="split split--wide-left" style="margin-bottom:clamp(40px,5vw,64px)">
       <div class="reveal">
-        <span class="eyebrow">Soluciones · Nodos</span>
-        <h2 class="headline" style="margin-top:18px">Tres formas de<br>escalar tu operación.</h2>
+        <span class="eyebrow">Soluciones</span>
+        <h2 class="headline" style="margin-top:18px">Problemas concretos,<br>resueltos por completo.</h2>
       </div>
       <div class="reveal" data-delay="1" style="align-self:end">
         <p class="lead">
-          No vendemos ideas sueltas. Conectamos nodos: tu web, tu CRM, tus planillas,
-          tus canales. Cada proyecto es un sistema que ahorra horas y abre crecimiento.
+          Cada proyecto es un sistema, no un entregable suelto: tu web, tu CRM, tus
+          planillas y tus canales hablando entre sí, con datos que fluyen sin copiar
+          y pegar.
         </p>
         <div class="filters" style="margin-top:28px" role="group" aria-label="Filtrar soluciones por eje">
           <button type="button" data-filtro-eje="todas" aria-pressed="true">Todas</button>
@@ -254,9 +250,9 @@
     <div class="reveal" style="margin-top:clamp(36px,4vw,56px);display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between;padding-top:32px;border-top:1px solid var(--hairline)">
       <div>
         <h3 class="h3">¿No sabés por dónde empezar?</h3>
-        <p class="small" style="margin-top:6px">Auditamos tus procesos gratis y te devolvemos un mapa.</p>
+        <p class="small" style="margin-top:6px">Relevamos tus procesos y te entregamos el mapa de qué automatizar primero, con el impacto estimado en horas.</p>
       </div>
-      <a href="#contacto" class="btn btn--blue">Agendar auditoría</a>
+      <a href="#contacto" class="btn btn--blue">Pedir diagnóstico</a>
     </div>
 
   </div>
@@ -270,11 +266,10 @@
 
     <div class="split split--wide-left" style="margin-bottom:clamp(48px,6vw,88px)">
       <div class="reveal">
-        <span class="eyebrow">Cómo trabajamos</span>
+        <span class="eyebrow">Método</span>
         <h2 class="headline" style="margin-top:18px">De la idea al<br>sistema en producción.</h2>
-        <p class="lead" style="margin-top:24px;max-width:30ch">
-          Sin cascadas eternas. Sprints de 1–2 semanas, con demos reales y nodos
-          que ya funcionan. Ves valor antes de pagar el total.
+        <p class="lead" style="margin-top:24px;max-width:32ch">
+          Tres etapas con entregas parciales. Ves funcionando lo que pagás, no un informe.
         </p>
         <a href="#contacto" class="link-inline" style="margin-top:26px">
           Quiero mi roadmap en 48 h <span class="arrow" aria-hidden="true">→</span>
@@ -282,56 +277,56 @@
       </div>
 
       <dl class="reveal" data-delay="1" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-self:end">
-        <div class="stat"><dt class="stat__n">7 días</dt><dd class="stat__l">MVP automatización</dd></div>
-        <div class="stat"><dt class="stat__n">2–4 sem</dt><dd class="stat__l">Web / app</dd></div>
-        <div class="stat"><dt class="stat__n">∞</dt><dd class="stat__l">Soporte nodos</dd></div>
+        <div class="stat"><dt class="stat__n">5–7 días</dt><dd class="stat__l">Primer flujo en producción</dd></div>
+        <div class="stat"><dt class="stat__n">2–4 sem</dt><dd class="stat__l">Web o app completa</dd></div>
+        <div class="stat"><dt class="stat__n">∞</dt><dd class="stat__l">Nodos posibles</dd></div>
       </dl>
     </div>
 
     <ol class="steps reveal">
       <li class="step">
-        <span class="step__n">01 — Discovery</span>
-        <h3 class="step__t">Mapeamos tus nodos</h3>
-        <p class="step__d">Relevamos procesos, herramientas y cuellos de botella. Salís con un mapa visual de qué automatizar primero y el ROI estimado.</p>
+        <span class="step__n">01 — Diagnóstico</span>
+        <h3 class="step__t">Entendemos la operación antes de escribir código</h3>
+        <p class="step__d">Relevamos procesos, herramientas y tiempos reales. Salís con un mapa de qué automatizar primero y el impacto estimado, en horas y en plata.</p>
       </li>
       <li class="step">
-        <span class="step__n">02 — Prototipo</span>
-        <h3 class="step__t">Construimos un nodo funcional</h3>
-        <p class="step__d">Primera automatización o pantalla navegable en días. Validás sin comprometer todo el presupuesto.</p>
+        <span class="step__n">02 — Construcción</span>
+        <h3 class="step__t">Un módulo funcionando en días, no en meses</h3>
+        <p class="step__d">Primer flujo en producción o primera pantalla navegable. Lo probás con tus datos reales y decidís con evidencia, no con promesa.</p>
       </li>
       <li class="step">
-        <span class="step__n">03 — Escalado</span>
-        <h3 class="step__t">Conectamos todo el sistema</h3>
-        <p class="step__d">La red se enciende: APIs, webhooks, base de datos y front. Entrega documentada y capacitación.</p>
+        <span class="step__n">03 — Entrega y transferencia</span>
+        <h3 class="step__t">Lo ponemos en producción y te enseñamos a operarlo</h3>
+        <p class="step__d">Documentación, capacitación y acceso completo al código. Tu equipo puede cambiarlo sin llamarnos; si preferís, lo mantenemos nosotros.</p>
       </li>
     </ol>
 
     <div class="split" style="margin-top:clamp(56px,7vw,96px);gap:clamp(20px,2.4vw,28px)">
 
       <article class="plan reveal">
-        <span class="eyebrow">Starter · Automatización</span>
-        <h3 class="h3" style="font-size:1.5rem;letter-spacing:-.03em">Un proceso, cero fricción</h3>
+        <span class="eyebrow">01 — Sprint de automatización</span>
+        <h3 class="h3" style="font-size:1.5rem;letter-spacing:-.03em">Un proceso, resuelto y en producción</h3>
         <ul class="plan__list">
-          <li>1 flujo automatizado (ej: leads → CRM → WhatsApp)</li>
-          <li>Integración de 2–3 herramientas</li>
-          <li>Dashboard + alertas</li>
-          <li>Entrega en 7 días</li>
+          <li>1 flujo automatizado de punta a punta (ej: lead → CRM → WhatsApp)</li>
+          <li>Integración de 2–3 herramientas que ya usás</li>
+          <li>Dashboard, alertas y reintentos automáticos</li>
+          <li>Entrega documentada en 7 días</li>
         </ul>
-        <p class="plan__price">Desde USD 400 · una vez</p>
-        <a href="#contacto" class="btn btn--ghost">Cotizar</a>
+        <p class="plan__price">Desde USD 400 · alcance cerrado</p>
+        <a href="#contacto" class="btn btn--ghost">Empezar un sprint</a>
       </article>
 
       <article class="plan plan--dark reveal" data-delay="1">
-        <span class="eyebrow">Sistema completo · Web + nodos</span>
-        <h3 class="h3" style="font-size:1.5rem;letter-spacing:-.03em">Tu operación en un solo lugar</h3>
+        <span class="eyebrow">02 — Plataforma operativa</span>
+        <h3 class="h3" style="font-size:1.5rem;letter-spacing:-.03em">Tu operación, en un solo sistema</h3>
         <ul class="plan__list">
-          <li>Web / app + panel de administración</li>
-          <li>Nodos: pagos, stock, CRM, notificaciones</li>
-          <li>Automatizaciones y scraping si aplica</li>
-          <li>Soporte por 30 días incluido</li>
+          <li>Web o app con panel de administración real</li>
+          <li>Nodos conectados: pagos, stock, CRM, notificaciones</li>
+          <li>Automatizaciones e integraciones donde apliquen</li>
+          <li>Capacitación, documentación y 30 días de soporte</li>
         </ul>
         <p class="plan__price">Desde USD 1.200 · 3–4 semanas</p>
-        <a href="#contacto" class="btn btn--blue">Empezar ahora</a>
+        <a href="#contacto" class="btn btn--blue">Empezar un proyecto</a>
       </article>
 
     </div>
@@ -347,7 +342,7 @@
     <figure class="media reveal">
       <div class="media-bar" aria-hidden="true"><i></i><i></i><i></i><span>arvure — nodos.deploy</span></div>
       <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop"
-           alt="Equipo tech trabajando" loading="lazy" width="1200" height="900">
+           alt="Equipo de ingeniería trabajando" loading="lazy" width="1200" height="900">
       <div class="media-foot">
         <div><span class="h4">100%</span><span class="stat__l">A medida</span></div>
         <div><span class="h4">No-code + Code</span><span class="stat__l">Stack híbrido</span></div>
@@ -362,18 +357,19 @@
         Somos tu <span class="accent">equipo tech</span> externo.
       </h2>
       <p class="lead" style="margin-top:26px">
-        Diseñamos y codeamos sistemas que se usan todos los días. Sin plantillas que se
-        rompen al segundo cambio. Cada nodo está pensado para que tu equipo lo opere
-        sin depender de nosotros.
+        Diseñamos y construimos sistemas que se usan todos los días. Cada pieza queda
+        documentada, con código, credenciales y capacitación: tu equipo lo opera sin
+        depender de nosotros.
       </p>
       <p class="body" style="margin-top:16px">
-        Stack híbrido: <strong class="strong">Next.js, Python, n8n, Supabase, APIs</strong> —
-        elegimos la herramienta por el problema, no al revés. Si se puede resolver sin
-        código, mejor. Si necesita código, lo hacemos bien.
+        Stack: <strong class="strong">Next.js, Python, n8n, Supabase, APIs</strong> —
+        elegimos la herramienta por el problema, no al revés. Si se resuelve con una
+        plataforma madura y confiable, la usamos; si necesita código a medida, lo
+        escribimos bien y te lo entregamos.
       </p>
 
       <dl style="margin-top:44px;padding-top:32px;border-top:1px solid var(--hairline);display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
-        <div class="stat"><dt class="figure-n">+50</dt><dd class="stat__l">Proyectos</dd></div>
+        <div class="stat"><dt class="figure-n">+50</dt><dd class="stat__l">Sistemas entregados</dd></div>
         <div class="stat"><dt class="figure-n">4.9/5</dt><dd class="stat__l">Satisfacción</dd></div>
         <div class="stat"><dt class="figure-n">∞</dt><dd class="stat__l">Nodos posibles</dd></div>
       </dl>
@@ -393,37 +389,38 @@
 <section class="band band--alt bay" id="proceso-creativo">
   <div class="shell">
 
-    <div style="max-width:44ch;margin-bottom:clamp(44px,5vw,72px)" class="reveal">
+    <div style="max-width:46ch;margin-bottom:clamp(44px,5vw,72px)" class="reveal">
       <span class="eyebrow">Stack &amp; método</span>
       <h2 class="headline" style="margin-top:18px">Tecnología que<br>no te encierra.</h2>
       <p class="lead" style="margin-top:22px">
-        Elegimos piezas que podés mantener, escalar y entender. Nada de cajas negras.
+        Herramientas maduras cuando alcanzan; código a medida cuando hace falta.
+        En los dos casos: código, documentación y capacitación.
       </p>
     </div>
 
     <div class="bento bento--three">
       <article class="tile reveal">
         <span class="tile__n">01</span>
-        <h3 class="h3">n8n · Zapier · Python · APIs</h3>
-        <p class="body">Conectamos lo que ya usás. Sheets, WhatsApp, CRMs, ERPs, bancos. Si tiene API, lo integramos. Si no, lo scrapeamos.</p>
+        <h3 class="h3">Lo que ya usás, conectado</h3>
+        <p class="body">CRM, ERP, planillas, WhatsApp, bancos y pasarelas. Si tiene API, la integramos; si no, la scrapeamos.</p>
         <div class="card__tags">
-          <span class="chip">n8n</span><span class="chip">Python</span><span class="chip">Webhooks</span>
+          <span class="chip">n8n</span><span class="chip">Webhooks</span><span class="chip">APIs</span><span class="chip">Python</span>
         </div>
       </article>
 
       <article class="tile reveal" data-delay="1">
         <span class="tile__n">02</span>
-        <h3 class="h3">Next.js · Supabase · Tailwind</h3>
-        <p class="body">Webs rápidas, SEO-ready, con panel de administración real. No WordPress inflado. Código limpio que podés escalar mañana.</p>
+        <h3 class="h3">Webs y apps que cargan rápido y se administran solas</h3>
+        <p class="body">Next.js, Supabase y Tailwind. SEO técnico, panel real y despliegue en un click. Sin WordPress inflado.</p>
         <div class="card__tags">
-          <span class="chip">Next.js</span><span class="chip">Supabase</span><span class="chip">Vercel</span>
+          <span class="chip">Next.js</span><span class="chip">Supabase</span><span class="chip">Tailwind</span><span class="chip">Vercel</span>
         </div>
       </article>
 
       <article class="tile reveal" data-delay="2">
         <span class="tile__n">03</span>
-        <h3 class="h3">El sistema que se habla</h3>
-        <p class="body">Cada pieza es un nodo. Se comunican por eventos, no por copiar y pegar. Tu dato entra una vez y viaja solo.</p>
+        <h3 class="h3">Un sistema, no un montón de herramientas</h3>
+        <p class="body">Cada pieza es un nodo y los nodos se comunican por eventos: tu dato entra una vez y viaja solo hasta donde tiene que llegar.</p>
         <div class="card__tags">
           <span class="chip chip--blue">Event-driven</span><span class="chip">Postgres</span><span class="chip">Realtime</span>
         </div>
@@ -432,10 +429,10 @@
 
     <div class="reveal" style="margin-top:clamp(32px,3.6vw,48px);padding:26px 30px;border-radius:var(--r-lg);border:1px solid var(--hairline);background:var(--surface);display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between">
       <p style="font-size:1rem;letter-spacing:-.015em">
-        ¿Tenés un proceso manual que odiás?
-        <span class="ink-2">Lo automatizamos en 7 días o te decimos que no se puede.</span>
+        El primer flujo en producción, en 7 días.
+        <span class="ink-2">Si no lo podemos sostener con este nivel de ingeniería, te lo decimos antes de empezar.</span>
       </p>
-      <a href="#contacto" class="btn btn--ink btn--sm">Auditar mi proceso</a>
+      <a href="#contacto" class="btn btn--ink btn--sm">Pedir diagnóstico</a>
     </div>
 
   </div>
@@ -449,138 +446,97 @@
 
     <div class="split split--wide-left" style="margin-bottom:clamp(40px,5vw,64px)">
       <div class="reveal">
-        <span class="eyebrow">Casos de éxito</span>
-        <h2 class="headline" style="margin-top:18px">Nodos que ya<br>están en producción.</h2>
+        <span class="eyebrow">Capacidades</span>
+        <h2 class="headline" style="margin-top:18px">Cuatro frentes.<br>Un solo equipo.</h2>
       </div>
       <p class="lead reveal" data-delay="1" style="align-self:end">
-        Todo lo que ves acá se shippeó desde Arvure. No son mocks: son sistemas reales,
-        con usuarios, datos y pagos. Si funciona acá, funciona para vos.
+        Todo lo que hay en producción salió de estos cuatro frentes. Empezás por uno;
+        el resto lo conectamos después.
       </p>
     </div>
 
-    <div class="bento bento--cases">
+    <div class="bento bento--caps">
 
-      <article class="card card--hover reveal">
+      <article class="card card--hover cap reveal">
         <div class="card__media">
-          <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1200&auto=format&fit=crop" alt="App-Super" loading="lazy" width="1200" height="750">
-          <div class="card__badges">
-            <span class="chip">App · Comparador</span>
-            <span class="chip chip--solid">Villa María</span>
-          </div>
+          <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=900&auto=format&fit=crop" alt="" loading="lazy" width="900" height="700">
         </div>
         <div class="card__body">
-          <h3 class="card__title">App-Super</h3>
-          <p class="card__desc">Comparador de precios y Nutri-Score para supermercados locales. Ranking en tiempo real.</p>
-          <div class="card__tags">
-            <span class="chip">Python</span><span class="chip">Scraping</span><span class="chip">Nutri-Score</span>
-          </div>
-          <a href="https://app-super-delta.vercel.app" target="_blank" rel="noopener" class="link-inline" style="margin-top:auto;padding-top:8px">Ver web <span class="arrow" aria-hidden="true">→</span></a>
+          <span class="eyebrow">Aplicaciones</span>
+          <h3 class="card__title">Software propio, en manos de tu equipo</h3>
+          <p class="card__desc">Cuando el proceso necesita una pantalla, no un formulario.</p>
+          <ul class="cap__list">
+            <li>iOS y iPad nativo (SwiftUI)</li>
+            <li>PWA offline-first</li>
+            <li>Panel de administración y roles</li>
+            <li>API, webhooks y Supabase</li>
+          </ul>
+          <a href="https://treetonemusic.online" target="_blank" rel="noopener" class="link-inline" style="margin-top:auto;padding-top:10px">Ejemplo en producción <span class="arrow" aria-hidden="true">→</span></a>
         </div>
       </article>
 
-      <article class="card card--hover reveal" data-delay="1">
-        <div class="card__media card__media--tall">
-          <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=800&auto=format&fit=crop" alt="App Clases Yoga" loading="lazy" width="800" height="1000">
-          <div class="card__badges">
-            <span class="chip">iPadOS · Nativa</span>
-          </div>
+      <article class="card card--hover cap reveal" data-delay="1">
+        <div class="card__media">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=900&auto=format&fit=crop" alt="" loading="lazy" width="900" height="700">
         </div>
         <div class="card__body">
-          <h3 class="card__title">Yoga Class Organizer</h3>
-          <p class="card__desc">App para profesoras: planificar y dictar clases. Poses, plantillas y modo en vivo.</p>
-          <div class="card__tags"><span class="chip">SwiftUI</span><span class="chip">iPadOS</span></div>
+          <span class="eyebrow">Automatizaciones</span>
+          <h3 class="card__title">Los procesos que te consumen horas, corriendo solos</h3>
+          <p class="card__desc">La tarea que tu equipo repite doscientas veces por mes, ejecutada una vez y monitoreada.</p>
+          <ul class="cap__list">
+            <li>n8n, webhooks y APIs</li>
+            <li>Lead → CRM → WhatsApp</li>
+            <li>Scraping y sincronización de catálogos</li>
+            <li>Dashboards, alertas y reintentos</li>
+          </ul>
+          <a href="https://app-super-delta.vercel.app" target="_blank" rel="noopener" class="link-inline" style="margin-top:auto;padding-top:10px">Ejemplo en producción <span class="arrow" aria-hidden="true">→</span></a>
         </div>
       </article>
 
-      <article class="card card--hover reveal" data-delay="2">
+      <article class="card card--hover cap reveal" data-delay="2">
         <div class="card__media">
-          <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=800&auto=format&fit=crop" alt="Les Tournesols" loading="lazy" width="800" height="500">
-          <div class="card__badges">
-            <span class="chip">Automatización · Salud</span>
-            <span class="chip chip--live">Live</span>
-          </div>
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=900&auto=format&fit=crop" alt="" loading="lazy" width="900" height="700">
         </div>
         <div class="card__body">
-          <h3 class="card__title">Les Tournesols · ePhysio</h3>
-          <p class="card__desc">Agenda y turnos para centro de salud. Bot de WhatsApp y calendario sincronizado sin doble reserva.</p>
-          <div class="card__tags"><span class="chip chip--solid">WAHA</span><span class="chip">Supabase</span></div>
+          <span class="eyebrow">Webs</span>
+          <h3 class="card__title">Sitios rápidos, con panel real, listos para vender</h3>
+          <p class="card__desc">No una landing más: una web que carga, ranks y se administra.</p>
+          <ul class="cap__list">
+            <li>Next.js con CMS o Supabase</li>
+            <li>SEO técnico y Core Web Vitals</li>
+            <li>E-commerce y pagos integrados</li>
+            <li>Analítica, despliegue y hosting</li>
+          </ul>
+          <a href="https://www.jcmachado.com" target="_blank" rel="noopener" class="link-inline" style="margin-top:auto;padding-top:10px">Ejemplo en producción <span class="arrow" aria-hidden="true">→</span></a>
         </div>
       </article>
 
-      <article class="card card--hover reveal">
+      <article class="card card--hover cap reveal" data-delay="3">
         <div class="card__media">
-          <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?q=80&w=800&auto=format&fit=crop" alt="Biodescodificación" loading="lazy" width="800" height="500">
-          <div class="card__badges"><span class="chip">Offline · PWA</span></div>
+          <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=900&auto=format&fit=crop" alt="" loading="lazy" width="900" height="700">
         </div>
         <div class="card__body">
-          <h3 class="card__title">Biodescodificación</h3>
-          <p class="card__desc">App offline para consultas. Diccionario interactivo para usar en atención.</p>
-          <div class="card__tags"><span class="chip">Offline-first</span></div>
-        </div>
-      </article>
-
-      <article class="card card--hover reveal" data-delay="1">
-        <div class="card__media">
-          <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=800&auto=format&fit=crop" alt="Tutor IA" loading="lazy" width="800" height="500">
-          <div class="card__badges"><span class="chip">IA pedagógica</span></div>
-        </div>
-        <div class="card__body">
-          <h3 class="card__title">Tutor IA</h3>
-          <p class="card__desc">Tutor que acompaña a diario: práctica, repaso y feedback guiado. Motor pedagógico propio.</p>
-          <div class="card__tags"><span class="chip">BKT</span><span class="chip">FSRS</span></div>
-        </div>
-      </article>
-
-      <article class="card card--hover reveal" data-delay="2">
-        <div class="card__media">
-          <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?q=80&w=800&auto=format&fit=crop" alt="jcmachado.com" loading="lazy" width="800" height="500">
-          <div class="card__badges">
-            <span class="chip">Ecommerce · Arte</span>
-            <span class="chip chip--blue">50+ obras</span>
-          </div>
-        </div>
-        <div class="card__body">
-          <h3 class="card__title">jcmachado.com</h3>
-          <p class="card__desc">Tienda de arte: originales, prints y encargos. Pagos y envíos integrados.</p>
-          <div class="card__tags"><span class="chip">Ecommerce</span><span class="chip">QR cert</span></div>
-          <a href="https://www.jcmachado.com" target="_blank" rel="noopener" class="link-inline" style="margin-top:auto;padding-top:8px">Ver web <span class="arrow" aria-hidden="true">→</span></a>
-        </div>
-      </article>
-
-      <article class="card card--hover reveal">
-        <div class="card__media">
-          <img src="https://images.unsplash.com/photo-1577083165633-14ebcdb0f658?q=80&w=800&auto=format&fit=crop" alt="Deriva Galería Nómada" loading="lazy" width="800" height="500">
-          <div class="card__badges"><span class="chip">Galería nómada</span></div>
-        </div>
-        <div class="card__body">
-          <h3 class="card__title">Deriva</h3>
-          <p class="card__desc">Galería itinerante vinculada a la tienda. Obras fuera del taller, sin sede fija.</p>
-          <div class="card__tags"><span class="chip">Itinerante</span></div>
-          <a href="https://www.jcmachado.com/deriva/" target="_blank" rel="noopener" class="link-inline" style="margin-top:auto;padding-top:8px">Ver galería <span class="arrow" aria-hidden="true">→</span></a>
-        </div>
-      </article>
-
-      <article class="card card--hover reveal" data-delay="1">
-        <div class="card__media">
-          <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=800&auto=format&fit=crop" alt="TreeTone Music" loading="lazy" width="800" height="500">
-          <div class="card__badges"><span class="chip">Colab · Música</span></div>
-        </div>
-        <div class="card__body">
-          <h3 class="card__title">TreeTone Music</h3>
-          <p class="card__desc">Escuela de música online 1:1 en vivo. Clases y portales para alumnos y profes.</p>
-          <div class="card__tags"><span class="chip">Clases vivo</span></div>
-          <a href="https://treetonemusic.online" target="_blank" rel="noopener" class="link-inline" style="margin-top:auto;padding-top:8px">Ver web <span class="arrow" aria-hidden="true">→</span></a>
+          <span class="eyebrow">Sistemas a medida</span>
+          <h3 class="card__title">Cuando un flujo no alcanza, la arquitectura entera</h3>
+          <p class="card__desc">El proyecto donde hay que decidir, no solo ejecutar.</p>
+          <ul class="cap__list">
+            <li>Arquitectura y modelo de datos</li>
+            <li>APIs, ERPs, CRMs y pasarelas</li>
+            <li>Migración desde tus sistemas actuales</li>
+            <li>Código, documentación y capacitación</li>
+          </ul>
+          <a href="#contacto" class="link-inline" style="margin-top:auto;padding-top:10px">Te mostramos la arquitectura <span class="arrow" aria-hidden="true">→</span></a>
         </div>
       </article>
 
     </div>
 
-    <div class="reveal" style="margin-top:clamp(36px,4vw,56px);padding-top:32px;border-top:1px solid var(--hairline);display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between">
+    <div class="reveal" style="margin-top:clamp(36px,4vw,56px);padding-top:32px;border-top:1px solid var(--hairline);display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between">
       <p style="font-size:1rem;letter-spacing:-.015em">
-        Cada uno empezó como una idea.
-        <span class="ink-2">Hoy es un sistema que opera solo.</span>
+        Detrás de cada grupo hay un sistema en producción, con usuarios y datos reales.
+        <span class="ink-2">No maquetas.</span>
       </p>
-      <a href="#contacto" class="btn btn--ink btn--sm">Quiero mi caso acá</a>
+      <a href="#contacto" class="btn btn--ink btn--sm">Ver un caso completo</a>
     </div>
 
   </div>
@@ -591,7 +547,7 @@
      ══════════════════════════════════════════════════════════════════════ -->
 <section class="band band--alt bay" id="primer-paso">
   <div class="shell">
-    <div style="max-width:40ch;margin-bottom:clamp(44px,5vw,72px)" class="reveal">
+    <div style="max-width:42ch;margin-bottom:clamp(44px,5vw,72px)" class="reveal">
       <span class="eyebrow">Primer paso</span>
       <h2 class="headline" style="margin-top:18px">Empezar es<br>una charla de 20 min.</h2>
     </div>
@@ -599,23 +555,23 @@
     <ol class="steps reveal">
       <li class="step">
         <span class="step__n">01</span>
-        <h3 class="step__t">Nos contás el cuello</h3>
+        <h3 class="step__t">Nos contás el cuello de botella</h3>
         <p class="step__d">Qué tarea te consume horas, qué sistema no se habla con otro.</p>
       </li>
       <li class="step">
         <span class="step__n">02</span>
-        <h3 class="step__t">Mapa de nodos</h3>
-        <p class="step__d">Te devolvemos un diagrama y el ROI estimado. Sin costo.</p>
+        <h3 class="step__t">Mapa de nodos y alcance</h3>
+        <p class="step__d">Te entregamos el diagrama, el impacto estimado y el precio cerrado.</p>
       </li>
       <li class="step">
         <span class="step__n">03</span>
-        <h3 class="step__t">Propuesta cerrada</h3>
-        <p class="step__d">Alcance, tiempo y precio fijo. Sin sorpresas.</p>
+        <h3 class="step__t">Propuesta con alcance cerrado</h3>
+        <p class="step__d">Qué entra, en qué plazo, con qué precio. Sin sorpresas.</p>
       </li>
       <li class="step">
         <span class="step__n">04</span>
-        <h3 class="step__t">Shippeamos</h3>
-        <p class="step__d">Demo en días, producción en semanas. Con documentación.</p>
+        <h3 class="step__t">Producción y transferencia</h3>
+        <p class="step__d">Demo en días, producción en semanas, con código y documentación.</p>
       </li>
     </ol>
   </div>
@@ -634,11 +590,11 @@
     <div class="faq reveal">
       <details>
         <summary>¿Cuánto cuesta automatizar? <span class="faq__sign" aria-hidden="true"></span></summary>
-        <p class="faq__a">Depende del flujo. Una automatización simple (ej: form → CRM → mail) desde USD 400. Un sistema con múltiples nodos desde USD 1.200. Siempre precio cerrado tras el discovery.</p>
+        <p class="faq__a">El precio se cierra contra alcance, no contra horas. Un flujo automatizado en producción: desde USD 400. Una plataforma completa (web, panel y nodos conectados): desde USD 1.200. El monto exacto se define en el diagnóstico, contra entregables y plazo.</p>
       </details>
       <details>
-        <summary>¿Hacen páginas web con WordPress? <span class="faq__sign" aria-hidden="true"></span></summary>
-        <p class="faq__a">No. Construimos con Next.js y un CMS moderno (o Supabase). Más rápido, más seguro y escalable. Si necesitás WordPress por algún motivo, te lo decimos honestamente.</p>
+        <summary>¿Trabajan con WordPress? <span class="faq__sign" aria-hidden="true"></span></summary>
+        <p class="faq__a">Solo si el proyecto lo justifica. Por defecto construimos con Next.js y un CMS moderno (o Supabase): más rápido, más seguro y escalable. Si tu equipo necesita WordPress por una razón concreta, lo evaluamos sin problema.</p>
       </details>
       <details>
         <summary>¿Qué es un “nodo”? <span class="faq__sign" aria-hidden="true"></span></summary>
@@ -646,11 +602,11 @@
       </details>
       <details>
         <summary>¿Cuánto tarda? <span class="faq__sign" aria-hidden="true"></span></summary>
-        <p class="faq__a">Automatización: 5–7 días. Landing + automatizaciones: 2 semanas. Web o app con panel: 3–4 semanas. Siempre con entregas parciales.</p>
+        <p class="faq__a">Automatización: 5–7 días hasta producción. Web o app con panel: 3–4 semanas. Siempre con entregas parciales: ves funcionando lo que pagás.</p>
       </details>
       <details>
         <summary>¿Y después quién lo mantiene? <span class="faq__sign" aria-hidden="true"></span></summary>
-        <p class="faq__a">Te entregamos documentación, video y capacitación. Podés operarlo vos o dejarnos el mantenimiento mensual (desde USD 120/mes, sin permanencia).</p>
+        <p class="faq__a">Te entregamos el código, la documentación y la capacitación: sos dueño del sistema y podés operarlo sin llamarnos. Si preferís, lo mantenemos nosotros. La continuidad se cotiza según la carga operativa real, sin permanencia.</p>
       </details>
     </div>
   </div>
@@ -688,7 +644,7 @@
       <h2 class="headline" style="margin-top:18px">Hablemos de<br>tus nodos.</h2>
       <p class="lead" style="margin-top:24px;max-width:34ch">
         Contanos qué proceso te duele o qué producto querés lanzar.
-        En 24 h tenés un mapa y una propuesta.
+        En 48 h tenés un mapa, un alcance y un precio cerrado.
       </p>
 
       <div style="margin-top:40px">
@@ -697,7 +653,7 @@
             <span class="contact-row__k">WhatsApp</span>
             <span class="contact-row__v" style="display:block;margin-top:6px">+54 9 353 401-8769</span>
           </span>
-          <span class="link-inline" style="font-size:.9375rem">Respuesta en el día <span class="arrow" aria-hidden="true">→</span></span>
+          <span class="link-inline" style="font-size:.9375rem">Escribinos directo <span class="arrow" aria-hidden="true">→</span></span>
         </a>
         <a class="contact-row" href="mailto:hola@arvure.com">
           <span>
@@ -718,7 +674,7 @@
     <form class="form-panel reveal" data-delay="1" data-encargo style="display:flex;flex-direction:column;gap:18px">
       <div>
         <h3 class="h3">Contanos tu proyecto</h3>
-        <p class="small" style="margin-top:6px">Te respondemos en menos de 24 h.</p>
+        <p class="small" style="margin-top:6px">Te respondemos en menos de 48 h.</p>
       </div>
 
       <div class="field">
@@ -748,7 +704,7 @@
       </div>
 
       <button type="submit" class="btn btn--ink" style="width:100%">Enviar por WhatsApp</button>
-      <p style="text-align:center;font-size:.8125rem;color:var(--ink-3)">Sin compromiso · Propuesta en 48 h</p>
+      <p style="text-align:center;font-size:.8125rem;color:var(--ink-3)">Sin sorpresas: alcance, plazo y precio cerrado antes de empezar</p>
     </form>
 
   </div>
@@ -786,7 +742,7 @@
         <h4>Sitio</h4>
         <ul>
           <li><a href="#ideas">Soluciones</a></li>
-          <li><a href="#casos">Casos</a></li>
+          <li><a href="#casos">Capacidades</a></li>
           <li><a href="#faq">FAQ</a></li>
           <li><a href="login.html">Login</a></li>
         </ul>
@@ -872,7 +828,6 @@ function renderIdeas() {
           <button type="button" data-abrir-idea="${esc(i.id)}" style="border:0;background:none;padding:0;text-align:left;font:inherit;color:inherit;cursor:pointer">${esc(i.titulo)}</button>
         </h3>
         <p class="card__desc">${esc(i.descripcion)}</p>
-        <p class="small" style="font-weight:550;color:var(--ink)">${esc(i.precio || '')}</p>
         <button type="button" data-abrir-idea="${esc(i.id)}" class="link-inline" style="border:0;background:none;padding:0;cursor:pointer;margin-top:auto">Ver detalle <span class="arrow" aria-hidden="true">→</span></button>
       </div>
     </article>`).join('') || '<p class="body" style="grid-column:1/-1;text-align:center">Sin soluciones en este filtro.</p>';
@@ -892,6 +847,7 @@ function abrirIdea(id) {
   document.getElementById('dialogo-descripcion').textContent = idea.detalle || idea.descripcion;
   const estado = document.getElementById('dialogo-estado');
   estado.textContent = (idea.estado === 'vendida' ? 'En producción' : 'Disponible') + (idea.precio ? ' · ' + idea.precio : '');
+  estado.style.color = idea.estado === 'vendida' ? 'var(--ink-3)' : 'var(--ink)';
   dialogo.showModal();
 }
 
